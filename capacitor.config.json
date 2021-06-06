@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "meet-goal-project",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}

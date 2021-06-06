@@ -1,0 +1,7 @@
+{
+  "name": "meet-goal-project",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
