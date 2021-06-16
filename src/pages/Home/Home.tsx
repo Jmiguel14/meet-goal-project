@@ -6,8 +6,8 @@ import {
   IonCol,
   IonButton,
 } from "@ionic/react";
-import MeetGoal from "../../icons/MeetGoal";
-import Carousel from "../../components/Carousel/Carousel";
+import MeetGoal from "icons/MeetGoal";
+import Carousel from "components/Carousel/Carousel";
 import "./Home.css";
 
 const Home: React.FC = () => {
