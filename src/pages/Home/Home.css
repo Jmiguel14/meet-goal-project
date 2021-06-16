@@ -1,0 +1,20 @@
+.button {
+  --border-radius: 10px;
+  text-transform: none;
+}
+
+.login-button {
+  --border-radius: 10px;
+  text-transform: none;
+  --background: #ffffff;
+}
+
+.logo {
+  padding: 20px;
+  justify-content: center;
+}
+
+.row {
+  padding-top: 70px;
+  justify-content: center;
+}
