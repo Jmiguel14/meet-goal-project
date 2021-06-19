@@ -21,6 +21,7 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import { SignUp } from "pages/SignUp";
 
 const App = () => (
   <IonApp>
@@ -31,6 +32,9 @@ const App = () => (
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
+        </Route>
+        <Route exact path="/registrarse">
+          <SignUp />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
