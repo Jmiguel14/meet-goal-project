@@ -1,4 +1,5 @@
 import {
+  IonBackButton,
   IonButton,
   IonButtons,
   IonContent,
@@ -19,9 +20,9 @@ const PlayerProfile: React.FC = () => (
   <IonPage>
     <IonHeader>
       <IonToolbar class="regresar">
-        <IonButton slot="start" fill="clear">
-          <IonIcon icon={arrowBackOutline} />
-        </IonButton>
+        <IonButtons slot="start">
+          <IonBackButton defaultHref="/perfil-jugador" className="icon-back" />
+        </IonButtons>
         <IonTitle>Perfil</IonTitle>
       </IonToolbar>
     </IonHeader>

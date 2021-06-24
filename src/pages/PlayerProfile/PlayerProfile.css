@@ -1,3 +1,6 @@
 .regresar {
   --background: #fafafa;
 }
+.icon-back {
+  --icon-font-size: 30px;
+}
