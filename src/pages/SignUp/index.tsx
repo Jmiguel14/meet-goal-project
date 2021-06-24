@@ -7,28 +7,31 @@ import {
   IonBackButton,
   IonRow,
   IonCol,
-  IonItem,
   IonLabel,
+  IonItem,
   IonSelect,
   IonSelectOption,
+  IonNote,
   IonInput,
   IonButton,
-  IonNote,
+  IonToast,
 } from "@ionic/react";
 import MeetGoal from "icons/MeetGoal";
-import { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { register } from "serviceWorkerRegistration";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import "./styles.css";
+import { useAuth } from "contexts/AuthContext";
+import { useEffect, useState } from "react";
 
-enum userTypeEnum {
+export enum userTypeEnum {
   club = "Club",
   jugador = "Jugador",
   academia = "Académia",
   tecnico = "Técnico",
 }
 
-interface IFormInput {
+export interface IForm {
   userType: userTypeEnum;
   name: string;
   phone: number;
@@ -36,7 +39,34 @@ interface IFormInput {
   password: string;
 }
 
+const ERROR_MESSAGES = {
+  required: "Este campo es requerido",
+  positive: "Debe ser un número positivo",
+  email: "Email no válido",
+  number: "Debe especificar un número",
+};
+
+const schema = yup.object().shape({
+  userType: yup.string().required(ERROR_MESSAGES.required),
+  name: yup.string().required(ERROR_MESSAGES.required),
+  phone: yup
+    .number()
+    .typeError(ERROR_MESSAGES.number)
+    .positive(ERROR_MESSAGES.positive)
+    .required(ERROR_MESSAGES.required),
+  email: yup
+    .string()
+    .required(ERROR_MESSAGES.required)
+    .email(ERROR_MESSAGES.email),
+  password: yup.string().required(ERROR_MESSAGES.required),
+});
+
 export const SignUp: React.FC = () => {
+  const [hasError, setHasError] = useState(false);
+  const { signUp, currentUser, createUserDocument } = useAuth();
+  const [dataUser, setDataUser] = useState<any>(null);
+  console.log(currentUser);
+
   const initialValues = {
     name: "",
     email: "",
@@ -45,29 +75,34 @@ export const SignUp: React.FC = () => {
 
   const {
     register,
+    reset,
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<IFormInput>({ defaultValues: initialValues });
+  } = useForm<IForm>({
+    defaultValues: initialValues,
+    resolver: yupResolver(schema),
+  });
 
-  const { onChange, ...rest } = register("name");
+  const onSubmit = async (data: any) => {
+    const { email, password } = data;
 
-  //useEffect(() => {
-  //  setError("name", {
-  //      type: "focus",
-  //      message: "Dont Forget Your Username Should Be Cool!"
-  //    });
-  //}, [setError])
-
-  const onSubmit = (data: IFormInput) => {
-    alert(JSON.stringify(data, null, 2));
-    //setData(data);
-    console.log(data);
+    try {
+      setHasError(false);
+      await signUp(email, password);
+      setDataUser(data);
+      reset(undefined);
+    } catch {
+      setHasError(true);
+    }
   };
 
-  const registerUser = (data: any) => {
-    console.log("creating a new user account with", data);
-  };
+  useEffect(() => {
+    if (dataUser) {
+      const { name, phone, userType } = dataUser;
+      createUserDocument(currentUser, { name, phone, userType });
+    }
+  }, [currentUser, dataUser]);
 
   return (
     <IonPage>
@@ -97,8 +132,8 @@ export const SignUp: React.FC = () => {
                 <IonSelect
                   okText="Okay"
                   cancelText="Cerrar"
-                  {...register("userType", { required: true })}
-                  onIonChange={(e) => {
+                  {...register("userType")}
+                  onIonChange={() => {
                     clearErrors("userType");
                   }}
                 >
@@ -109,7 +144,7 @@ export const SignUp: React.FC = () => {
                 </IonSelect>
               </IonItem>
               {errors.userType && (
-                <IonNote color="danger">Este campo es requerido</IonNote>
+                <IonNote color="danger">{errors.userType?.message}</IonNote>
               )}
             </IonCol>
             <IonCol size="12">
@@ -120,14 +155,14 @@ export const SignUp: React.FC = () => {
                 <IonInput
                   type="text"
                   clearInput={true}
-                  {...register("name", { required: true })}
-                  onIonChange={(e) => {
+                  {...register("name")}
+                  onIonChange={() => {
                     clearErrors("name");
                   }}
                 />
               </IonItem>
-              {errors.name && (
-                <IonNote color="danger">Este campo es requerido</IonNote>
+              {errors.name?.message && (
+                <IonNote color="danger">{errors.name?.message}</IonNote>
               )}
             </IonCol>
             <IonCol size="12">
@@ -136,16 +171,16 @@ export const SignUp: React.FC = () => {
                   Teléfono
                 </IonLabel>
                 <IonInput
-                  type="tel"
+                  type="number"
                   clearInput={true}
-                  {...register("phone", { required: true })}
-                  onIonChange={(e) => {
+                  {...register("phone")}
+                  onIonChange={() => {
                     clearErrors("phone");
                   }}
                 />
               </IonItem>
-              {errors.phone && (
-                <IonNote color="danger">Este campo es requerido</IonNote>
+              {errors.phone?.message && (
+                <IonNote color="danger">{errors.phone?.message}</IonNote>
               )}
             </IonCol>
             <IonCol size="12">
@@ -154,16 +189,15 @@ export const SignUp: React.FC = () => {
                   Correo
                 </IonLabel>
                 <IonInput
-                  type="email"
                   clearInput={true}
-                  {...register("email", { required: true })}
-                  onIonChange={(e) => {
+                  {...register("email")}
+                  onIonChange={() => {
                     clearErrors("email");
                   }}
                 />
               </IonItem>
               {errors.email && (
-                <IonNote color="danger">Este campo es requerido</IonNote>
+                <IonNote color="danger">{errors.email?.message}</IonNote>
               )}
             </IonCol>
             <IonCol size="12">
@@ -173,14 +207,14 @@ export const SignUp: React.FC = () => {
                 </IonLabel>
                 <IonInput
                   type="password"
-                  {...register("password", { required: true })}
-                  onIonChange={(e) => {
-                    clearErrors('password')
+                  {...register("password", { pattern: /^[A-Za-z]+$/i })}
+                  onIonChange={() => {
+                    clearErrors("password");
                   }}
                 />
               </IonItem>
               {errors.password && (
-                <IonNote color="danger">Este campo es requerido</IonNote>
+                <IonNote color="danger">{errors.password?.message}</IonNote>
               )}
             </IonCol>
           </IonRow>
@@ -192,6 +226,13 @@ export const SignUp: React.FC = () => {
             </IonCol>
           </IonRow>
         </form>
+        <IonToast
+          isOpen={hasError}
+          message="No se pudo crear la cuenta"
+          position="top"
+          duration={3000}
+          color="danger"
+        />
       </IonContent>
     </IonPage>
   );
