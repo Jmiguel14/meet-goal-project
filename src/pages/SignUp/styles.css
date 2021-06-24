@@ -1,0 +1,25 @@
+.icon-back {
+  --icon-font-size: 30px;
+}
+
+.icon-header {
+  padding-left: 38%;
+}
+
+.sign-up-text {
+  padding: 25px;
+}
+
+.sign-up-text ion-label {
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.sign-up-button {
+  justify-content: center;
+  padding-top: 30px;
+}
+
+ion-note {
+  padding: 16px;
+}
