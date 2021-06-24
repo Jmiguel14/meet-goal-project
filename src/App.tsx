@@ -37,20 +37,24 @@ const App = () => (
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
-        <Route exact path="/home/player/profile" component={PlayerProfile} />
-        <Route exact path="/home/player" component={PlayerDashboard} />
-        <Route exact path="/home/player/search" component={SearchForPlayer} />
-        <Route
-          exact
-          path="/home/player/notifications"
-          component={Notifications}
-        />
-        <Route exact path="/home/player/messages" component={Messages} />
-        <Route
-          exact
-          path="/home/player/profile/personal-info"
-          component={EditPersonalInfo}
-        />
+        <Route exact path="/home/player/profile">
+          <PlayerProfile />
+        </Route>
+        <Route exact path="/home/player">
+          <PlayerDashboard />
+        </Route>
+        <Route exact path="/home/player/search">
+          <SearchForPlayer />
+        </Route>
+        <Route exact path="/home/player/notifications">
+          <Notifications />
+        </Route>
+        <Route exact path="/home/player/messages">
+          <Messages />
+        </Route>
+        <Route exact path="/home/player/profile/personal-info">
+          <EditPersonalInfo />
+        </Route>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
