@@ -21,7 +21,12 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-
+import PlayerProfile from "pages/PlayerProfile/PlayerProfile";
+import PlayerDashboard from "pages/PlayerDashboard/PlayerDashboard";
+import SearchForPlayer from "pages/SearchForPlayer/SearchForPlayer";
+import Notifications from "pages/Notifications/Notifications";
+import Messages from "pages/Messages/Messages";
+import EditPersonalInfo from "pages/PlayerProfile/EditPersonalInfo/EditPersonalInfo";
 const App = () => (
   <IonApp>
     <IonReactRouter>
@@ -32,6 +37,20 @@ const App = () => (
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
+        <Route exact path="/home/player/profile" component={PlayerProfile} />
+        <Route exact path="/home/player" component={PlayerDashboard} />
+        <Route exact path="/home/player/search" component={SearchForPlayer} />
+        <Route
+          exact
+          path="/home/player/notifications"
+          component={Notifications}
+        />
+        <Route exact path="/home/player/messages" component={Messages} />
+        <Route
+          exact
+          path="/home/player/profile/personal-info"
+          component={EditPersonalInfo}
+        />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
