@@ -21,40 +21,24 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import PlayerProfile from "pages/PlayerProfile/PlayerProfile";
-import PlayerDashboard from "pages/PlayerDashboard/PlayerDashboard";
-import SearchForPlayer from "pages/SearchForPlayer/SearchForPlayer";
-import Notifications from "pages/Notifications/Notifications";
-import Messages from "pages/Messages/Messages";
-import EditPersonalInfo from "pages/PlayerProfile/EditPersonalInfo/EditPersonalInfo";
+import { SignUp } from "pages/SignUp";
+import { AuthProvider } from "contexts/AuthContext";
+
 const App = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-        <Route exact path="/home/player/profile">
-          <PlayerProfile />
-        </Route>
-        <Route exact path="/home/player">
-          <PlayerDashboard />
-        </Route>
-        <Route exact path="/home/player/search">
-          <SearchForPlayer />
-        </Route>
-        <Route exact path="/home/player/notifications">
-          <Notifications />
-        </Route>
-        <Route exact path="/home/player/messages">
-          <Messages />
-        </Route>
-        <Route exact path="/home/player/profile/personal-info">
-          <EditPersonalInfo />
-        </Route>
+        <AuthProvider>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
+          <Route exact path="/registrarse">
+            <SignUp />
+          </Route>
+        </AuthProvider>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

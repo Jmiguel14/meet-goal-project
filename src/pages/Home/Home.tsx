@@ -17,7 +17,7 @@ const Home: React.FC = () => {
         <IonGrid>
           <IonRow className="logo">
             <IonCol size="auto">
-              <MeetGoal width={200} heigth={200} />
+              <MeetGoal width={150} height={150} />
             </IonCol>
           </IonRow>
           <IonRow>
@@ -27,7 +27,12 @@ const Home: React.FC = () => {
           </IonRow>
           <IonRow className="row">
             <IonCol size="11">
-              <IonButton className="button" strong={true} expand="block">
+              <IonButton
+                className="button"
+                strong={true}
+                expand="block"
+                routerLink={"registrarse"}
+              >
                 Registrarse
               </IonButton>
             </IonCol>
