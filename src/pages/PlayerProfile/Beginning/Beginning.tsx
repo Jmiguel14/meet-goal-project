@@ -23,32 +23,21 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 
-import "./EditAttributes.css";
+import "./Beginning.css";
 const checkboxList = [
-  { val: "Fuerza", isChecked: false },
-  { val: "Entradas precisas", isChecked: false },
-  { val: "Capitán", isChecked: false },
-  { val: "Marcaje", isChecked: false },
-  { val: "Ritmo", isChecked: false },
-  { val: "Centros", isChecked: false },
-  { val: "Reacción", isChecked: false },
-  { val: "Destructor", isChecked: false },
-  { val: "Interceptor", isChecked: false },
-  { val: "Pases largos", isChecked: false },
-  { val: "Todocampista", isChecked: false },
-  { val: "Regateador", isChecked: false },
-  { val: "Control del balón", isChecked: false },
-  { val: "Tiro lejano", isChecked: false },
-  { val: "Contraataques", isChecked: false },
-  { val: "Ofensivo", isChecked: false },
-  { val: "Velocidad", isChecked: false },
-  { val: "Agilidad", isChecked: false },
-  { val: "Tiros", isChecked: false },
-  { val: "Finalización", isChecked: false },
-  { val: "Segundo Delantero", isChecked: false },
-  { val: "Referencia", isChecked: false },
+  { val: "Juego Limpio", isChecked: false },
+  { val: "Respeto", isChecked: false },
+  { val: "Compañerismo", isChecked: false },
+  { val: "Disciplina", isChecked: false },
+  { val: "Asumir Frustraciones", isChecked: false },
+  { val: "Esfuerzo", isChecked: false },
+  { val: "Ssaber disfrutar", isChecked: false },
+  { val: "Humildad", isChecked: false },
+  { val: "Amistad", isChecked: false },
+  { val: "Unidad y liderazgo", isChecked: false },
+  { val: "Solidaridad", isChecked: false },
 ];
-const EditAttributes: React.FC = () => {
+const Beginning: React.FC = () => {
   const [checked, setChecked] = useState(false);
 
   return (
@@ -62,7 +51,7 @@ const EditAttributes: React.FC = () => {
             />
           </IonButtons>
           <IonTitle color="primary" class="titulo">
-            Atributos
+            Valores
           </IonTitle>
           <IonButton fill="clear" slot="end" color="tertiary">
             Guardar
@@ -71,7 +60,7 @@ const EditAttributes: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonItemDivider color="primary">
-          <div className="subtitulo">Atributos</div>
+          <div className="subtitulo">Selecciona tus valores</div>
         </IonItemDivider>
         <IonList class="atributos">
           {checkboxList.map(({ val, isChecked }, i) => (
@@ -86,4 +75,4 @@ const EditAttributes: React.FC = () => {
   );
 };
 
-export default EditAttributes;
+export default Beginning;

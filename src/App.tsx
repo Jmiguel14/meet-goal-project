@@ -32,6 +32,10 @@ import SearchForPlayer from "pages/SearchForPlayer/SearchForPlayer";
 import EditTacticalInfo from "pages/PlayerProfile/EditTacticalInfo/EditTacticalInfo";
 import EditAttributes from "pages/PlayerProfile/EditAttributes/EditAttributes";
 import AddClub from "pages/PlayerProfile/AddClub/AddClub";
+import AddInjury from "pages/PlayerProfile/AddInjury/AddInjury";
+import EditPsycoInfo from "pages/PlayerProfile/EditPsycoInfo/EditPsycoInfo";
+import Beginning from "pages/PlayerProfile/Beginning/Beginning";
+import AddChannels from "pages/PlayerProfile/AddChannels/AddChannels";
 
 const App = () => (
   <IonApp>
@@ -73,6 +77,18 @@ const App = () => (
           </Route>
           <Route exact path="/agregar-experiencia">
             <AddClub />
+          </Route>
+          <Route exact path="/agregar-lesiones-jugador">
+            <AddInjury />
+          </Route>
+          <Route exact path="/editar-info-psicologica-jugador">
+            <EditPsycoInfo />
+          </Route>
+          <Route exact path="/editar-valores-jugador">
+            <Beginning />
+          </Route>
+          <Route exact path="/canales-jugador">
+            <AddChannels />
           </Route>
         </AuthProvider>
       </IonRouterOutlet>

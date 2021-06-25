@@ -44,13 +44,13 @@ const EditPersonalInfo: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonItem class="elemento">
-          <IonInput>Correo Electrónico</IonInput>
+          <IonInput placeholder="Correo Electrónico"></IonInput>
         </IonItem>
         <IonItem class="elemento">
-          <IonInput>País</IonInput>
+          <IonInput placeholder="País"></IonInput>
         </IonItem>
         <IonItem class="elemento">
-          <IonInput>Ciudad</IonInput>
+          <IonInput placeholder="Ciudad"></IonInput>
         </IonItem>
         <IonItem class="elemento">
           <IonLabel>F. Nacimiento (Mes/Día/Año)</IonLabel>
@@ -61,7 +61,7 @@ const EditPersonalInfo: React.FC = () => {
           ></IonDatetime>
         </IonItem>
         <IonItem class="elemento">
-          <IonInput>Estado Contractual</IonInput>
+          <IonInput placeholder="Estado Contractual"></IonInput>
         </IonItem>
       </IonContent>
     </IonPage>

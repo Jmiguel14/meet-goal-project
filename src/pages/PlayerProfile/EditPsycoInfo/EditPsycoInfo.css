@@ -15,3 +15,11 @@
 .acciones {
   text-align: center;
 }
+.notas {
+  background: #677656;
+  text-align: center;
+  border-radius: 25px;
+}
+.nota {
+  color: #ffffff;
+}

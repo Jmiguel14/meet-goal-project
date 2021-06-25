@@ -71,7 +71,7 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
         shape="round"
         expand="full"
         className="ion-padding-horizontal"
-        href="/editar-info-personal-jugador"
+        routerLink="/editar-info-personal-jugador"
       >
         Editar
       </IonButton>

@@ -21,10 +21,18 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import {
+  logoFacebook,
+  logoInstagram,
+  logoTwitter,
+  logoVimeo,
+  logoYoutube,
+} from "ionicons/icons";
 import { useState } from "react";
 
-import "./AddClub.css";
-const AddClub: React.FC = () => {
+import "./AddChannels.css";
+
+const AddChannels: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -36,7 +44,7 @@ const AddClub: React.FC = () => {
             />
           </IonButtons>
           <IonTitle color="primary" class="titulo">
-            Añadir Club
+            Redes Sociales
           </IonTitle>
           <IonButton fill="clear" slot="end" color="tertiary">
             Guardar
@@ -45,41 +53,41 @@ const AddClub: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonItemDivider color="primary">
-          <div className="subtitulo">Información del Club y temporada</div>
+          <div className="subtitulo">Pega aquí tus redes sociales</div>
         </IonItemDivider>
         <IonItem class="elemento">
-          <IonInput placeholder="Ingrese el nombre del club"></IonInput>
+          <IonButton slot="start" fill="clear">
+            <IonIcon icon={logoFacebook}></IonIcon>
+          </IonButton>
+          <IonInput placeholder="facebook"></IonInput>
         </IonItem>
         <IonItem class="elemento">
-          <IonInput placeholder="Pais"></IonInput>
+          <IonButton slot="start" fill="clear">
+            <IonIcon icon={logoTwitter}></IonIcon>
+          </IonButton>
+          <IonInput placeholder="twitter"></IonInput>
         </IonItem>
         <IonItem class="elemento">
-          <IonInput placeholder="Año de temporada"></IonInput>
+          <IonButton slot="start" fill="clear">
+            <IonIcon icon={logoInstagram}></IonIcon>
+          </IonButton>
+          <IonInput placeholder="instagram"></IonInput>
         </IonItem>
         <IonItem class="elemento">
-          <IonInput placeholder="Categoria del jugador"></IonInput>
+          <IonButton slot="start" fill="clear">
+            <IonIcon icon={logoYoutube}></IonIcon>
+          </IonButton>
+          <IonInput placeholder="youtube"></IonInput>
         </IonItem>
         <IonItem class="elemento">
-          <IonInput placeholder="Nivel de la competencia"></IonInput>
-        </IonItem>
-        <IonItem class="elemento">
-          <IonInput placeholder="Total partidos jugados"></IonInput>
-        </IonItem>
-        <IonItem class="elemento">
-          <IonInput placeholder="Total de goles"></IonInput>
-        </IonItem>
-        <IonItem class="elemento">
-          <IonInput placeholder="Total de asistencias"></IonInput>
-        </IonItem>
-        <IonItem class="elemento">
-          <IonInput placeholder="Tarjetas amarillas"></IonInput>
-        </IonItem>
-        <IonItem class="elemento">
-          <IonInput placeholder="Tarjetas Rojas"></IonInput>
+          <IonButton slot="start" fill="clear">
+            <IonIcon icon={logoVimeo}></IonIcon>
+          </IonButton>
+          <IonInput placeholder="vimeo"></IonInput>
         </IonItem>
       </IonContent>
     </IonPage>
   );
 };
 
-export default AddClub;
+export default AddChannels;
