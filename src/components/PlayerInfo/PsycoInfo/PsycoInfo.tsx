@@ -12,33 +12,33 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
   return (
     <>
       <IonCard>
-        <IonItem class='titulo'>
+        <IonItem class="titulo">
           <IonLabel>Parametros psicologicos</IonLabel>
         </IonItem>
-        <IonItem class='elemento'>
+        <IonItem class="elemento">
           <IonIcon icon={happyOutline} slot="start"></IonIcon>
           <IonText>Caracter</IonText>
         </IonItem>
-        <IonItem class='elemento'>
+        <IonItem class="elemento">
           <IonIcon icon={heartCircleOutline} slot="start"></IonIcon>
           <IonText>Personalidad</IonText>
         </IonItem>
-        <IonItem class='elemento'>
+        <IonItem class="elemento">
           <IonIcon icon={thumbsUpOutline} slot="start"></IonIcon>
           <IonText>Actitud</IonText>
         </IonItem>
       </IonCard>
       <IonCard>
-        <IonItem class='titulo'>
+        <IonItem class="titulo">
           <IonLabel>Valores</IonLabel>
         </IonItem>
-        <IonItem class='elemento'>
+        <IonItem class="elemento">
           <IonText>Valor1</IonText>
         </IonItem>
-        <IonItem class='elemento'>
+        <IonItem class="elemento">
           <IonText>Valor2</IonText>
         </IonItem>
-        <IonItem class='elemento'>
+        <IonItem class="elemento">
           <IonText>Valor3</IonText>
         </IonItem>
       </IonCard>

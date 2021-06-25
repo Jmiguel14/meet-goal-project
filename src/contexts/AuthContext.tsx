@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth, firestore } from "firebase/client";
 import firebase from "firebase/app";
-
+import { useIonToast } from "@ionic/react";
 import { userTypeEnum } from "pages/SignUp/index";
 
 export type user = {
@@ -30,6 +30,7 @@ export function useAuth() {
 
 export const AuthProvider: React.FC = ({ children }: any) => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
+  const [present] = useIonToast();
 
   const signUp = (email: string, password: string) => {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -64,7 +65,12 @@ export const AuthProvider: React.FC = ({ children }: any) => {
           createAt: firebase.firestore.Timestamp.fromDate(new Date()),
         });
       } catch (error) {
-        console.log("Error al crear un usuario", error);
+        present({
+          message: "Ocurrió un error al crear la cuenta",
+          duration: 3000,
+          position: "top",
+          color: "danger",
+        });
       }
     }
   };
