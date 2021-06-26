@@ -1,5 +1,4 @@
 import {
-  IonAvatar,
   IonContent,
   IonIcon,
   IonItem,
@@ -23,54 +22,56 @@ export const PlayerInfo: React.FC = () => {
   return (
     <IonContent>
       <AvatarPlayer />
-      <IonItem className="ion-text-center" lines="none">
-        <IonLabel class="nombre">PlayerName</IonLabel>
-      </IonItem>
-      <IonItem className="ion-text-center" lines="none">
-        <IonLabel class="locacion">
-          <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
-        </IonLabel>
-      </IonItem>
+      <div className="nombre-pais">
+        <IonItem className="ion-text-center" lines="none">
+          <IonLabel className="nombre">PlayerName</IonLabel>
+        </IonItem>
+        <IonItem className="ion-text-center" lines="none">
+          <IonLabel className="locacion">
+            <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
+          </IonLabel>
+        </IonItem>
+      </div>
       {/*-- Scrollable Segment --*/}
-      <IonSegment scrollable value="personal">
+      <IonSegment scrollable value="personal" className="menu-horizontal">
         <IonSegmentButton
           value="personal"
-          class="segments"
+          className="segments"
           onClick={() => setInfo("personal")}
         >
           <IonLabel>Datos Personales</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="tactica"
-          class="segments"
+          className="segments"
           onClick={() => setInfo("tactica")}
         >
           <IonLabel>Datos tacticos</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="carrera"
-          class="segments"
+          className="segments"
           onClick={() => setInfo("carrera")}
         >
           <IonLabel>Experiencia</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="medica"
-          class="segments"
+          className="segments"
           onClick={() => setInfo("medica")}
         >
           <IonLabel>Datos medicos</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="psico"
-          class="segments"
+          className="segments"
           onClick={() => setInfo("psico")}
         >
           <IonLabel>Datos psicologicos</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="canales"
-          class="segments"
+          className="segments"
           onClick={() => setInfo("canales")}
         >
           <IonLabel>Canales</IonLabel>

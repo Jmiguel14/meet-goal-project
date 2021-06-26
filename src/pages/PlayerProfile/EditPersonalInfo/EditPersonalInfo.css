@@ -11,3 +11,11 @@
 .acciones {
   text-align: center;
 }
+.dato-personal {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  --ion-background-color: #ffffff;
+}
+.fondo {
+  --ion-background-color: #ffffff;
+}

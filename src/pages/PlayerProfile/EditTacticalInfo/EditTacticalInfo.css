@@ -14,3 +14,14 @@
 .acciones {
   text-align: center;
 }
+.datos-tacticos {
+  --ion-background-color: #ffffff;
+}
+.campo-tactico {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.subtitulo {
+  text-align: center;
+  width: 100%;
+}

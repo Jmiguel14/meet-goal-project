@@ -27,10 +27,6 @@ const PlayerProfile: React.FC = () => (
       </IonToolbar>
     </IonHeader>
     <IonContent fullscreen>
-      <IonImg
-        class="portada"
-        src="https://i.pinimg.com/originals/b5/7b/09/b57b09183ff3815986c2130808af06c1.jpg"
-      ></IonImg>
       <PlayerInfo />
     </IonContent>
   </IonPage>

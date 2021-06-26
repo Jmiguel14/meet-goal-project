@@ -23,3 +23,10 @@
 .nota {
   color: #ffffff;
 }
+.datos-psyco {
+  --ion-background-color: #ffffff;
+}
+.campo-psyco {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}

@@ -2,41 +2,32 @@ import {
   IonBackButton,
   IonButton,
   IonButtons,
-  IonCheckbox,
   IonContent,
-  IonDatetime,
   IonHeader,
-  IonIcon,
-  IonImg,
-  IonInput,
   IonItem,
   IonItemDivider,
   IonLabel,
-  IonList,
-  IonMenuButton,
   IonNote,
   IonPage,
   IonSelect,
   IonSelectOption,
-  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useState } from "react";
 
 import "./EditPsycoInfo.css";
 const EditPsycoInfo: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" class="acciones">
+        <IonToolbar color="light" className="acciones">
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/perfil-jugador"
               className="icon-back"
             />
           </IonButtons>
-          <IonTitle color="primary" class="titulo">
+          <IonTitle color="primary" className="titulo">
             Param. Psicológicos
           </IonTitle>
           <IonButton fill="clear" slot="end" color="tertiary">
@@ -44,11 +35,11 @@ const EditPsycoInfo: React.FC = () => {
           </IonButton>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className="ion-padding-vertical">
+      <IonContent fullscreen className="datos-psyco">
         <IonItemDivider color="primary">
           <div className="subtitulo">Selecciona tu Carácter</div>
         </IonItemDivider>
-        <IonItem class="elemento">
+        <IonItem className="campo-psyco">
           <IonLabel>Carácter</IonLabel>
           <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
             <IonSelectOption value="flematico">Flemático</IonSelectOption>
@@ -64,21 +55,20 @@ const EditPsycoInfo: React.FC = () => {
             <IonSelectOption value="sensible">Sensible</IonSelectOption>
           </IonSelect>
         </IonItem>
-        <br />
         <IonItemDivider color="primary">
           <div className="subtitulo">Parametros de Personalidad</div>
         </IonItemDivider>
         <div className="notas">
-          <IonNote class="nota">E:Extrovertido - I: Introvertido</IonNote>
+          <IonNote className="nota">E:Extrovertido - I: Introvertido</IonNote>
           <br />
-          <IonNote class="nota">N:Intuitivo - S: Sensitivo</IonNote>
+          <IonNote className="nota">N:Intuitivo - S: Sensitivo</IonNote>
           <br />
-          <IonNote class="nota">T:Pensador - F:Sentimental</IonNote>
+          <IonNote className="nota">T:Pensador - F:Sentimental</IonNote>
           <br />
-          <IonNote class="nota">J:Juicioso - P: Perceptivo</IonNote>
+          <IonNote className="nota">J:Juicioso - P: Perceptivo</IonNote>
           <br />
         </div>
-        <IonItem class="elemento">
+        <IonItem className="campo-psyco">
           <IonLabel>Personalidad</IonLabel>
           <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
             <IonSelectOption value="ESTJ">ESTJ</IonSelectOption>
@@ -99,11 +89,10 @@ const EditPsycoInfo: React.FC = () => {
             <IonSelectOption value="INFP">INFP</IonSelectOption>
           </IonSelect>
         </IonItem>
-        <br />
         <IonItemDivider color="primary">
           <div className="subtitulo">Selecciona tu Actitud</div>
         </IonItemDivider>
-        <IonItem class="elemento">
+        <IonItem className="campo-psyco">
           <IonLabel>Actitud</IonLabel>
           <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
             <IonSelectOption value="positiva">POSITIVA</IonSelectOption>

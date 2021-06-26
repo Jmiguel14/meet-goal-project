@@ -1,18 +1,21 @@
 .cajas {
   --ion-background-color: #ffffff;
   padding-bottom: 5px;
-}
-.etiqueta {
-  font-style: normal;
-  font-weight: normal;
+  border-radius: 25px;
   font-size: 18px;
-  line-height: 24px;
-  color: #3c3c3c;
 }
+
 .texto {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
   color: #adadad;
+}
+.info {
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 18px !important;
+  line-height: 24px !important;
+  color: #3c3c3c;
 }

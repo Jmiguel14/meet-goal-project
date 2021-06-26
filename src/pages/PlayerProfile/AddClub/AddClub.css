@@ -15,3 +15,10 @@
 .acciones {
   text-align: center;
 }
+.campo-club {
+  padding-bottom: 3px;
+  padding-top: 3px;
+}
+.nuevo-club {
+  --ion-background-color: #ffffff;
+}

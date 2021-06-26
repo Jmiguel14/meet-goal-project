@@ -5,18 +5,14 @@ import {
   IonContent,
   IonDatetime,
   IonHeader,
-  IonIcon,
-  IonImg,
   IonInput,
   IonItem,
+  IonItemDivider,
   IonLabel,
-  IonMenuButton,
   IonPage,
-  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { arrowBackCircleOutline, arrowBackOutline } from "ionicons/icons";
 import { useState } from "react";
 import "./EditPersonalInfo.css";
 
@@ -27,14 +23,14 @@ const EditPersonalInfo: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" class="acciones">
+        <IonToolbar color="light" className="acciones">
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/perfil-jugador"
               className="icon-back"
             />
           </IonButtons>
-          <IonTitle color="primary" className="ion-padding" class="titulo">
+          <IonTitle color="primary" className="ion-padding titulo">
             Editar I. Personal
           </IonTitle>
           <IonButton fill="clear" slot="end" color="tertiary">
@@ -42,17 +38,20 @@ const EditPersonalInfo: React.FC = () => {
           </IonButton>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonItem class="elemento">
+      <IonContent fullscreen className="fondo">
+        <IonItemDivider color="primary">
+          <div className="subtitulo">Edita aquí tu Información Personal</div>
+        </IonItemDivider>
+        <IonItem className="dato-personal">
           <IonInput placeholder="Correo Electrónico"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="dato-personal">
           <IonInput placeholder="País"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="dato-personal">
           <IonInput placeholder="Ciudad"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="dato-personal">
           <IonLabel>F. Nacimiento (Mes/Día/Año)</IonLabel>
           <IonDatetime
             displayFormat="MMM/DD/YY"
@@ -60,7 +59,7 @@ const EditPersonalInfo: React.FC = () => {
             onIonChange={(e) => setSelectedDate(e.detail.value!)}
           ></IonDatetime>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="dato-personal">
           <IonInput placeholder="Estado Contractual"></IonInput>
         </IonItem>
       </IonContent>

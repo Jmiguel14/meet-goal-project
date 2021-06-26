@@ -1,7 +1,6 @@
 import {
   IonButton,
   IonCard,
-  IonCardHeader,
   IonIcon,
   IonItem,
   IonLabel,
@@ -21,49 +20,49 @@ interface ContainerProps {}
 const PersonalInfo: React.FC<ContainerProps> = () => {
   return (
     <>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
           <IonIcon icon={mail} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
+          <IonLabel position="stacked" className="info">
             Correo
           </IonLabel>
-          <IonText class="texto">Correo</IonText>
+          <IonText className="texto">Correo</IonText>
         </IonItem>
       </IonCard>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
           <IonIcon icon={callOutline} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
+          <IonLabel position="stacked" className="info">
             Telefono
           </IonLabel>
-          <IonText class="texto">Telefono</IonText>
+          <IonText className="texto">Telefono</IonText>
         </IonItem>
       </IonCard>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
           <IonIcon icon={calendarOutline} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
+          <IonLabel position="stacked" className="info">
             Fecha de Nacimiento
           </IonLabel>
-          <IonText class="texto">Fecha de Nacimiento</IonText>
+          <IonText className="texto">Fecha de Nacimiento</IonText>
         </IonItem>
       </IonCard>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
           <IonIcon icon={documentTextOutline} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
+          <IonLabel position="stacked" className="info">
             Estado Contractual
           </IonLabel>
-          <IonText class="texto">Estado contractual</IonText>
+          <IonText className="texto">Estado contractual</IonText>
         </IonItem>
       </IonCard>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
           <IonIcon icon={globeOutline} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
+          <IonLabel position="stacked" className="info">
             Link MarketTransfer
           </IonLabel>
-          <IonText class="texto">Link MarketTransfer</IonText>
+          <IonText className="texto">Link MarketTransfer</IonText>
         </IonItem>
       </IonCard>
       <IonButton

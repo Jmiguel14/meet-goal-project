@@ -2,40 +2,29 @@ import {
   IonBackButton,
   IonButton,
   IonButtons,
-  IonCheckbox,
   IonContent,
-  IonDatetime,
   IonHeader,
-  IonIcon,
-  IonImg,
   IonInput,
   IonItem,
   IonItemDivider,
-  IonLabel,
-  IonList,
-  IonMenuButton,
   IonPage,
-  IonSelect,
-  IonSelectOption,
-  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useState } from "react";
 
 import "./AddClub.css";
 const AddClub: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" class="acciones">
+        <IonToolbar color="light" className="acciones">
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/perfil-jugador"
               className="icon-back"
             />
           </IonButtons>
-          <IonTitle color="primary" class="titulo">
+          <IonTitle color="primary" className="titulo">
             Añadir Club
           </IonTitle>
           <IonButton fill="clear" slot="end" color="tertiary">
@@ -43,38 +32,38 @@ const AddClub: React.FC = () => {
           </IonButton>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen class="nuevo-club">
         <IonItemDivider color="primary">
           <div className="subtitulo">Información del Club y temporada</div>
         </IonItemDivider>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Ingrese el nombre del club"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Pais"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Año de temporada"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Categoria del jugador"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Nivel de la competencia"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Total partidos jugados"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Total de goles"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Total de asistencias"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Tarjetas amarillas"></IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-club">
           <IonInput placeholder="Tarjetas Rojas"></IonInput>
         </IonItem>
       </IonContent>

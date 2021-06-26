@@ -24,14 +24,14 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
         Agregar informes medicos
       </IonButton>
       <IonCard>
-        <IonItem class="titulo">
+        <IonItem className="titulo">
           <IonLabel>Lesion o enfermedad</IonLabel>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="elemento">
           <IonIcon icon={timeOutline} slot="start"></IonIcon>
           <IonText>Tiempo de recuperacion</IonText>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="elemento">
           <IonIcon icon={medkitOutline} slot="start"></IonIcon>
           <IonText>Operacion</IonText>
         </IonItem>

@@ -20,3 +20,9 @@
   line-height: 14px;
   font-weight: 400;
 }
+.nombre-pais {
+  position: relative;
+}
+.menu-horizontal {
+  position: relative;
+}

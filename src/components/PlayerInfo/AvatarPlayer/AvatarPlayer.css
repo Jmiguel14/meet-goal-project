@@ -10,3 +10,18 @@
   border-radius: 99px;
   margin: 0 auto;
 }
+.imagenes {
+  position: relative;
+  height: 300px;
+}
+.portada {
+  width: 100%;
+}
+.contenedor {
+  position: absolute;
+  top: 63%;
+  left: 39%;
+}
+.avatar {
+  border: 0;
+}

@@ -4,20 +4,12 @@ import {
   IonButtons,
   IonCheckbox,
   IonContent,
-  IonDatetime,
   IonHeader,
-  IonIcon,
-  IonImg,
-  IonInput,
   IonItem,
   IonItemDivider,
   IonLabel,
   IonList,
-  IonMenuButton,
   IonPage,
-  IonSelect,
-  IonSelectOption,
-  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -54,14 +46,14 @@ const EditAttributes: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" class="acciones">
+        <IonToolbar color="light" className="acciones">
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/perfil-jugador"
               className="icon-back"
             />
           </IonButtons>
-          <IonTitle color="primary" class="titulo">
+          <IonTitle color="primary" className="titulo">
             Atributos
           </IonTitle>
           <IonButton fill="clear" slot="end" color="tertiary">
@@ -73,7 +65,7 @@ const EditAttributes: React.FC = () => {
         <IonItemDivider color="primary">
           <div className="subtitulo">Atributos</div>
         </IonItemDivider>
-        <IonList class="atributos">
+        <IonList className="atributos">
           {checkboxList.map(({ val, isChecked }, i) => (
             <IonItem key={i}>
               <IonLabel>{val}</IonLabel>
