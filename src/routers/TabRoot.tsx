@@ -1,7 +1,7 @@
 import { IonTabs, IonTabBar, IonTabButton, IonLabel } from "@ionic/react";
 import React from "react";
 import { IonRouterOutlet } from "@ionic/react";
-import { PrivateRoutes } from "routes/PrivateRoutes";
+import { PrivateRoutes } from "routers/PrivateRoutes";
 import PlayerDashboard from "pages/PlayerDashboard/PlayerDashboard";
 import SearchForPlayer from "pages/SearchForPlayer/SearchForPlayer";
 import Notifications from "pages/Notifications/Notifications";
