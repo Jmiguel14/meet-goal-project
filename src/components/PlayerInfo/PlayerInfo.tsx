@@ -33,7 +33,7 @@ export const PlayerInfo: React.FC = () => {
         </IonItem>
       </div>
       {/*-- Scrollable Segment --*/}
-      <IonSegment scrollable value="personal" className="menu-horizontal">
+      <IonSegment scrollable value={info} className="menu-horizontal">
         <IonSegmentButton
           value="personal"
           className="segments"
@@ -46,7 +46,7 @@ export const PlayerInfo: React.FC = () => {
           className="segments"
           onClick={() => setInfo("tactica")}
         >
-          <IonLabel>Datos tacticos</IonLabel>
+          <IonLabel>Datos tácticos</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="carrera"
@@ -67,7 +67,7 @@ export const PlayerInfo: React.FC = () => {
           className="segments"
           onClick={() => setInfo("psico")}
         >
-          <IonLabel>Datos psicologicos</IonLabel>
+          <IonLabel>Datos psicológicos</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="canales"

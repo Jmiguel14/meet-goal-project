@@ -14,8 +14,6 @@
 }
 .info {
   font-style: normal !important;
-  font-weight: normal !important;
-  font-size: 18px !important;
+  font-weight: bold !important;
   line-height: 24px !important;
-  color: #3c3c3c;
 }

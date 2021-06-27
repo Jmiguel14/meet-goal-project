@@ -2,6 +2,7 @@ import {
   IonButton,
   IonCard,
   IonIcon,
+  IonImg,
   IonItem,
   IonLabel,
   IonText,
@@ -13,33 +14,48 @@ import {
   thumbsUpOutline,
 } from "ionicons/icons";
 import "./PsycoInfo.css";
+import AttitudeIcon from "icons/attitudeIcon.png";
+import PersonalityIcon from "icons/personalityIcon.png";
+import CharacterIcon from "icons/characterIcon.png";
 
 interface ContainerProps {}
 
 const PsycoInfo: React.FC<ContainerProps> = () => {
   return (
     <>
-      <IonCard>
+      <IonCard className="datos-psicologicos">
         <IonItem className="titulo">
-          <IonLabel>Parametros psicologicos</IonLabel>
+          <IonLabel>Parámetros Psicológicos</IonLabel>
           <IonButton fill="clear" routerLink="/editar-info-psicologica-jugador">
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
         <IonItem className="elemento">
-          <IonIcon icon={happyOutline} slot="start"></IonIcon>
+          <IonImg
+            src={CharacterIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Caracter</IonText>
         </IonItem>
         <IonItem className="elemento">
-          <IonIcon icon={heartCircleOutline} slot="start"></IonIcon>
+          <IonImg
+            src={PersonalityIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Personalidad</IonText>
         </IonItem>
         <IonItem className="elemento">
-          <IonIcon icon={thumbsUpOutline} slot="start"></IonIcon>
+          <IonImg
+            src={AttitudeIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Actitud</IonText>
         </IonItem>
       </IonCard>
-      <IonCard>
+      <IonCard className="datos-psicologicos">
         <IonItem className="titulo">
           <IonLabel>Valores</IonLabel>
           <IonButton fill="clear" routerLink="/editar-valores-jugador">
