@@ -42,6 +42,7 @@ const Home: React.FC = () => {
                 expand="block"
                 fill="outline"
                 strong={true}
+                routerLink='iniciar-sesion'
               >
                 Iniciar Sesión
               </IonButton>

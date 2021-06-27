@@ -1,0 +1,25 @@
+.header-icon {
+  padding-right: 20px;
+  justify-content: flex-end;
+}
+
+.header-icon ion-label {
+  font-weight: bold;
+}
+
+.header-icon ion-col {
+    align-self: center
+}
+
+.icon-back {
+  --icon-font-size: 30px;
+}
+
+.sign-in-text {
+  padding: 35px 0px 35px 10px;
+}
+
+.sign-in-text ion-label {
+  font-size: 26px;
+  font-weight: bold;
+}

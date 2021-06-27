@@ -50,7 +50,7 @@ const schema = yup.object().shape({
   password: yup.string().required(ERROR_MESSAGES.required),
 });
 
-export const SignUpForm = ({ onSubmit, isReset }: any) => {
+export const SignUpForm = ({ onSubmit }: any) => {
   const initialValues = {
     name: "",
     email: "",
@@ -59,7 +59,6 @@ export const SignUpForm = ({ onSubmit, isReset }: any) => {
 
   const {
     register,
-    reset,
     handleSubmit,
     clearErrors,
     formState: { errors },
@@ -67,8 +66,6 @@ export const SignUpForm = ({ onSubmit, isReset }: any) => {
     defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
-
-  isReset && reset();
 
   return (
     <>

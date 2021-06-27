@@ -1,7 +1,5 @@
-import { Redirect, Route } from "react-router-dom";
-import { IonApp, IonRouterOutlet } from "@ionic/react";
+import { IonApp } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import Home from "./pages/Home/Home";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -21,61 +19,15 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import { SignUp } from "pages/SignUp";
 import { AuthProvider } from "contexts/AuthContext";
-import PlayerProfile from "pages/PlayerProfile/PlayerProfile";
-import PlayerDashboard from "pages/PlayerDashboard/PlayerDashboard";
-import Notifications from "pages/Notifications/Notifications";
-import Messages from "pages/Messages/Messages";
-import EditPersonalInfo from "pages/PlayerProfile/EditPersonalInfo/EditPersonalInfo";
-import SearchForPlayer from "pages/SearchForPlayer/SearchForPlayer";
-import EditTacticalInfo from "pages/PlayerProfile/EditTacticalInfo/EditTacticalInfo";
-import EditAttributes from "pages/PlayerProfile/EditAttributes/EditAttributes";
-import AddClub from "pages/PlayerProfile/AddClub/AddClub";
+import { AppRouter } from "routes/AppRouter";
 
 const App = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <AuthProvider>
-          <Route exact path="/home">
-            <Home />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-          <Route exact path="/registrarse">
-            <SignUp />
-          </Route>
-          <Route exact path="/perfil-jugador">
-            <PlayerProfile />
-          </Route>
-          <Route exact path="/inicio-jugador">
-            <PlayerDashboard />
-          </Route>
-          <Route exact path="/busqueda">
-            <SearchForPlayer />
-          </Route>
-          <Route exact path="/notificaciones-jugador">
-            <Notifications />
-          </Route>
-          <Route exact path="mensajes-jugador">
-            <Messages />
-          </Route>
-          <Route exact path="/editar-info-personal-jugador">
-            <EditPersonalInfo />
-          </Route>
-          <Route exact path="/editar-info-tactica-jugador">
-            <EditTacticalInfo />
-          </Route>
-          <Route exact path="/editar-info-atributos-jugador">
-            <EditAttributes />
-          </Route>
-          <Route exact path="/agregar-experiencia">
-            <AddClub />
-          </Route>
-        </AuthProvider>
-      </IonRouterOutlet>
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
     </IonReactRouter>
   </IonApp>
 );

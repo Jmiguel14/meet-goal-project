@@ -15,35 +15,28 @@ import { SignUpForm } from "components/SignUpForm";
 import "./styles.css";
 import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";
-
-export enum userTypeEnum {
-  club = "Club",
-  jugador = "Jugador",
-  academia = "Académia",
-  tecnico = "Técnico",
-}
-
-export interface IForm {
-  userType: userTypeEnum;
-  name: string;
-  phone: number;
-  email: string;
-  password: string;
-}
+import { useHistory } from "react-router-dom";
 
 export const SignUp: React.FC = () => {
   const { signUp, currentUser, createUserDocument } = useAuth();
   const [dataUser, setDataUser] = useState<any>(null);
-  const [reset, setReset] = useState(false);
   const [present] = useIonToast();
+  const history = useHistory()
 
   const onSubmit = async (data: any) => {
     const { email, password } = data;
 
+    if(currentUser) return present({
+      message: 'Ya tiene una sesión activa',
+      duration: 3000,
+      position: 'top',
+      color:'danger'
+    })
+    
     try {
       await signUp(email, password);
       setDataUser(data);
-      setReset(true);
+      history.push('/inicio-jugador')
     } catch {
       present({
         message: "Ocurrió un error al crear la cuenta",
@@ -81,7 +74,7 @@ export const SignUp: React.FC = () => {
             <IonLabel position="fixed">Crear una cuenta</IonLabel>
           </IonCol>
         </IonRow>
-        <SignUpForm onSubmit={onSubmit} isReset={reset} />
+        <SignUpForm onSubmit={onSubmit}/>
       </IonContent>
     </IonPage>
   );

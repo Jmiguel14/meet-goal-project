@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth, firestore } from "firebase/client";
 import firebase from "firebase/app";
-import { useIonToast } from "@ionic/react";
-import { userTypeEnum } from "pages/SignUp/index";
+import { useIonToast, IonLoading } from "@ionic/react";
+import { userTypeEnum } from "components/SignUpForm";
 
 export type user = {
   name: string;
@@ -31,6 +31,7 @@ export function useAuth() {
 export const AuthProvider: React.FC = ({ children }: any) => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [present] = useIonToast();
+  const [loading, setLoading] = useState(true);
 
   const signUp = (email: string, password: string) => {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -39,6 +40,7 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
       setCurrentUser(firebaseUser);
+      setLoading(false)
     });
     return unsubscribe;
   }, []);
@@ -83,7 +85,10 @@ export const AuthProvider: React.FC = ({ children }: any) => {
 
   return (
     <>
-      <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+      {console.log(loading)}
+      <AuthContext.Provider value={value}>
+        {loading ? <IonLoading isOpen={loading}/> : children}
+      </AuthContext.Provider>
     </>
   );
 };
