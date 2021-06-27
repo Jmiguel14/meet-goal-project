@@ -2,43 +2,33 @@ import {
   IonBackButton,
   IonButton,
   IonButtons,
-  IonCheckbox,
   IonContent,
-  IonDatetime,
   IonHeader,
-  IonIcon,
-  IonImg,
   IonInput,
   IonItem,
   IonItemDivider,
   IonLabel,
-  IonList,
-  IonMenuButton,
   IonPage,
   IonSelect,
   IonSelectOption,
-  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useState } from "react";
 
 import "./EditTacticalInfo.css";
 
 const EditTacticalInfo: React.FC = () => {
-  const [checked, setChecked] = useState(false);
-
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" class="acciones">
+        <IonToolbar color="light" className="acciones">
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/perfil-jugador"
               className="icon-back"
             />
           </IonButtons>
-          <IonTitle color="primary" class="titulo">
+          <IonTitle color="primary" className="titulo">
             Editar I. Táctica
           </IonTitle>
           <IonButton fill="clear" slot="end" color="tertiary">
@@ -46,8 +36,11 @@ const EditTacticalInfo: React.FC = () => {
           </IonButton>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className="ion-padding-vertical">
-        <IonItem class="elemento">
+      <IonContent fullscreen className="datos-tacticos">
+        <IonItemDivider color="primary">
+          <div className="subtitulo">Editar tu Información Táctica</div>
+        </IonItemDivider>
+        <IonItem className="campo-tactico">
           <IonLabel>Posición Principal</IonLabel>
           <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
             <IonSelectOption value="POR">Portero</IonSelectOption>
@@ -67,7 +60,7 @@ const EditTacticalInfo: React.FC = () => {
             <IonSelectOption value="ED">Ext.Derecho</IonSelectOption>
           </IonSelect>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-tactico">
           <IonLabel>Posición Secundaria</IonLabel>
           <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
             <IonSelectOption value="POR">Portero</IonSelectOption>
@@ -87,7 +80,7 @@ const EditTacticalInfo: React.FC = () => {
             <IonSelectOption value="ED">Ext.Derecho</IonSelectOption>
           </IonSelect>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="campo-tactico">
           <IonInput placeholder="Logros"></IonInput>
         </IonItem>
       </IonContent>

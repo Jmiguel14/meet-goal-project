@@ -1,44 +1,74 @@
-import { IonCard, IonIcon, IonItem, IonLabel, IonText } from "@ionic/react";
+import {
+  IonButton,
+  IonCard,
+  IonIcon,
+  IonImg,
+  IonItem,
+  IonLabel,
+  IonText,
+} from "@ionic/react";
 import {
   happyOutline,
   heartCircleOutline,
+  pencilOutline,
   thumbsUpOutline,
 } from "ionicons/icons";
 import "./PsycoInfo.css";
+import AttitudeIcon from "icons/attitudeIcon.png";
+import PersonalityIcon from "icons/personalityIcon.png";
+import CharacterIcon from "icons/characterIcon.png";
 
 interface ContainerProps {}
 
 const PsycoInfo: React.FC<ContainerProps> = () => {
   return (
     <>
-      <IonCard>
-        <IonItem class="titulo">
-          <IonLabel>Parametros psicologicos</IonLabel>
+      <IonCard className="datos-psicologicos">
+        <IonItem className="titulo">
+          <IonLabel>Parámetros Psicológicos</IonLabel>
+          <IonButton fill="clear" routerLink="/editar-info-psicologica-jugador">
+            <IonIcon icon={pencilOutline} />
+          </IonButton>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={happyOutline} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={CharacterIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Caracter</IonText>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={heartCircleOutline} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={PersonalityIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Personalidad</IonText>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={thumbsUpOutline} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={AttitudeIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Actitud</IonText>
         </IonItem>
       </IonCard>
-      <IonCard>
-        <IonItem class="titulo">
+      <IonCard className="datos-psicologicos">
+        <IonItem className="titulo">
           <IonLabel>Valores</IonLabel>
+          <IonButton fill="clear" routerLink="/editar-valores-jugador">
+            <IonIcon icon={pencilOutline} />
+          </IonButton>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="elemento">
           <IonText>Valor1</IonText>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="elemento">
           <IonText>Valor2</IonText>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="elemento">
           <IonText>Valor3</IonText>
         </IonItem>
       </IonCard>

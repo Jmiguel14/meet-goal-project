@@ -1,0 +1,11 @@
+.subtitulo {
+  text-align: center;
+  width: 100%;
+}
+.red {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.redes {
+  --ion-background-color: #ffffff;
+}

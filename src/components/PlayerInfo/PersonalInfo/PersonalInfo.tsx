@@ -1,12 +1,13 @@
 import {
   IonButton,
   IonCard,
-  IonCardHeader,
   IonIcon,
+  IonImg,
   IonItem,
   IonLabel,
   IonText,
 } from "@ionic/react";
+import { useAuth } from "contexts/AuthContext";
 import {
   calendarOutline,
   callOutline,
@@ -15,55 +16,80 @@ import {
   mail,
 } from "ionicons/icons";
 import "./PersonalInfo.css";
-
+import React from "react";
+import MailIcon from "icons/emailIcon.png";
+import BirthdayIcon from "icons/birthdayIcon.png";
+import ContractIcon from "icons/contractIcon.png";
+import MarketIcon from "icons/marketIcon.png";
+import TelephoneIcon from "icons/telephoneIcon.png";
 interface ContainerProps {}
 
 const PersonalInfo: React.FC<ContainerProps> = () => {
   return (
     <>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
-          <IonIcon icon={mail} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
-            Correo
+          <IonImg
+            src={MailIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonLabel position="stacked">
+            <h1 className="info">Correo</h1>
           </IonLabel>
-          <IonText class="texto">Correo</IonText>
+          <IonText className="texto">Correo</IonText>
         </IonItem>
       </IonCard>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
-          <IonIcon icon={callOutline} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
-            Telefono
+          <IonImg
+            src={TelephoneIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonLabel position="stacked">
+            <h1 className="info">Teléfono</h1>
           </IonLabel>
-          <IonText class="texto">Telefono</IonText>
+          <IonText className="texto">Teléfono</IonText>
         </IonItem>
       </IonCard>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
-          <IonIcon icon={calendarOutline} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
-            Fecha de Nacimiento
+          <IonImg
+            src={BirthdayIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonLabel position="stacked">
+            <h1 className="info">Fec. de Nacimiento</h1>
           </IonLabel>
-          <IonText class="texto">Fecha de Nacimiento</IonText>
+          <IonText className="texto">Fecha de Nacimiento</IonText>
         </IonItem>
       </IonCard>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
-          <IonIcon icon={documentTextOutline} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
-            Estado Contractual
+          <IonImg
+            src={ContractIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonLabel position="stacked">
+            <h1 className="info">Est. Contractual</h1>
           </IonLabel>
-          <IonText class="texto">Estado contractual</IonText>
+          <IonText className="texto">Estado contractual</IonText>
         </IonItem>
       </IonCard>
-      <IonCard class="cajas">
+      <IonCard className="cajas">
         <IonItem>
-          <IonIcon icon={globeOutline} slot="start" />
-          <IonLabel position="stacked" class="etiqueta">
-            Link MarketTransfer
+          <IonImg
+            src={MarketIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonLabel position="stacked">
+            <h1 className="info">MarketTransfer</h1>
           </IonLabel>
-          <IonText class="texto">Link MarketTransfer</IonText>
+          <IonText className="texto">Link MarketTransfer</IonText>
         </IonItem>
       </IonCard>
       <IonButton
@@ -71,7 +97,7 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
         shape="round"
         expand="full"
         className="ion-padding-horizontal"
-        href="/editar-info-personal-jugador"
+        routerLink="/editar-info-personal-jugador"
       >
         Editar
       </IonButton>

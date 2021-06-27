@@ -1,5 +1,6 @@
-.atributos {
-  --ion-background-color: #ffffff;
+.subtitulo {
+  text-align: center;
+  width: 100%;
 }
 .icon-back {
   --icon-font-size: 30px;
@@ -14,14 +15,10 @@
 .acciones {
   text-align: center;
 }
-.datos-tacticos {
+.nueva-lesion {
   --ion-background-color: #ffffff;
 }
-.campo-tactico {
+.campo-lesion {
   padding-top: 10px;
   padding-bottom: 10px;
-}
-.subtitulo {
-  text-align: center;
-  width: 100%;
 }

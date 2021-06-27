@@ -2,6 +2,7 @@ import {
   IonButton,
   IonCard,
   IonIcon,
+  IonImg,
   IonInput,
   IonItem,
   IonLabel,
@@ -9,45 +10,55 @@ import {
 } from "@ionic/react";
 import { footstepsOutline, medalOutline, pencilOutline } from "ionicons/icons";
 import "./TacticalInfo.css";
+import MedalIcon from "icons/medalIcon.png";
+import PlayerIcon from "icons/playerIcon.png";
 
 interface ContainerProps {}
 
 const TacticalInfo: React.FC<ContainerProps> = () => {
   return (
     <>
-      <IonCard>
-        <IonItem class="titulo">
-          <IonLabel>Posicion principal</IonLabel>
-          <IonButton fill="clear" href="/editar-info-tactica-jugador">
+      <IonCard className="datos-posicionales">
+        <IonItem className="titulo">
+          <IonLabel>Posición principal</IonLabel>
+          <IonButton fill="clear" routerLink="/editar-info-tactica-jugador">
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={footstepsOutline} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={PlayerIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Posicion secundaria</IonText>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={medalOutline} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={MedalIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Logros</IonText>
         </IonItem>
       </IonCard>
-      <IonCard>
-        <IonItem class="titulo">
+      <IonCard className="datos-tacticos">
+        <IonItem className="titulo">
           <IonLabel>Atributos</IonLabel>
-          <IonButton fill="clear" href="/editar-info-atributos-jugador">
+          <IonButton fill="clear" routerLink="/editar-info-atributos-jugador">
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="elemento">
           <IonInput disabled={true}>Atributo 1</IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="elemento">
           <IonInput disabled={true}>Atributo 2</IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="elemento">
           <IonInput disabled={true}>Atributo 3</IonInput>
         </IonItem>
-        <IonItem class="elemento">
+        <IonItem className="elemento">
           <IonInput disabled={true}>Atributo 4</IonInput>
         </IonItem>
       </IonCard>

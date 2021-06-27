@@ -1,5 +1,6 @@
-.atributos {
-  --ion-background-color: #ffffff;
+.subtitulo {
+  text-align: center;
+  width: 100%;
 }
 .icon-back {
   --icon-font-size: 30px;
@@ -14,14 +15,18 @@
 .acciones {
   text-align: center;
 }
-.datos-tacticos {
+.notas {
+  background: #677656;
+  text-align: center;
+  border-radius: 25px;
+}
+.nota {
+  color: #ffffff;
+}
+.datos-psyco {
   --ion-background-color: #ffffff;
 }
-.campo-tactico {
-  padding-top: 10px;
+.campo-psyco {
   padding-bottom: 10px;
-}
-.subtitulo {
-  text-align: center;
-  width: 100%;
+  padding-top: 10px;
 }

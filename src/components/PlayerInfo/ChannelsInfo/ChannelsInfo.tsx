@@ -1,4 +1,12 @@
-import { IonCard, IonIcon, IonItem, IonLabel, IonText } from "@ionic/react";
+import {
+  IonButton,
+  IonCard,
+  IonIcon,
+  IonImg,
+  IonItem,
+  IonLabel,
+  IonText,
+} from "@ionic/react";
 import {
   logoFacebook,
   logoInstagram,
@@ -8,35 +16,62 @@ import {
   pencilOutline,
 } from "ionicons/icons";
 import "./ChannelsInfo.css";
+import FacebookIcon from "icons/FacebookIcon.png";
+import InstagramIcon from "icons/InstagramIcon.png";
+import TwitterIcon from "icons/TwitterIcon.png";
+import YoutubeIcon from "icons/YouTubeIcon.png";
+import VimeoIcon from "icons/VimeoIcon.png";
 
 interface ContainerProps {}
 
 const ChannelsInfo: React.FC<ContainerProps> = () => {
   return (
     <>
-      <IonCard>
-        <IonItem class="titulo">
+      <IonCard className="redes-sociales">
+        <IonItem className="titulo">
           <IonLabel>Canales y Redes Sociales</IonLabel>
-          <IonIcon icon={pencilOutline} />
+          <IonButton fill="clear" routerLink="/canales-jugador">
+            <IonIcon icon={pencilOutline} />
+          </IonButton>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={logoFacebook} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={FacebookIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Facebook</IonText>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={logoTwitter} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={TwitterIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Twitter</IonText>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={logoInstagram} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={InstagramIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Instagram</IonText>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={logoYoutube} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={YoutubeIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Youtube</IonText>
         </IonItem>
-        <IonItem class="elemento">
-          <IonIcon icon={logoVimeo} slot="start"></IonIcon>
+        <IonItem className="elemento">
+          <IonImg
+            src={VimeoIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
           <IonText>Vimeo</IonText>
         </IonItem>
       </IonCard>

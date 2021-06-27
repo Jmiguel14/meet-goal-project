@@ -13,3 +13,9 @@
   color: rgba(0, 0, 0, 0.87);
   --ion-background-color: #ffffff;
 }
+.datos-posicionales {
+  border-radius: 10px;
+}
+.datos-tacticos {
+  border-radius: 10px;
+}
