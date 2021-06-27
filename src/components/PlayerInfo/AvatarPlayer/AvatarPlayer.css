@@ -1,0 +1,12 @@
+.portaAvatar {
+  align-items: center;
+}
+.avatar {
+  width: 99px;
+  height: 97px;
+  left: 150px;
+  top: 184px;
+  background: #ffffff;
+  border-radius: 99px;
+  margin: 0 auto;
+}

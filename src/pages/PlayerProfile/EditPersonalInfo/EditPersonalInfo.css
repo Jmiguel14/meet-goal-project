@@ -1,0 +1,13 @@
+.icon-back {
+  --icon-font-size: 30px;
+}
+.titulo {
+  text-align: center;
+  font-weight: 700;
+  box-shadow: none;
+  color: #000000;
+  font-style: normal;
+}
+.acciones {
+  text-align: center;
+}
