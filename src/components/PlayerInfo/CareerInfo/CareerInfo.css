@@ -17,3 +17,9 @@
   color: #444;
   --ion-background-color: #ffffff;
 }
+.ion-padding-horizontal {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50px;
+  z-index: 3;
+}

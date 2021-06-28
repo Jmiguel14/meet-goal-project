@@ -1,8 +1,10 @@
 import {
+  IonCol,
   IonContent,
   IonIcon,
   IonItem,
   IonLabel,
+  IonRow,
   IonSegment,
   IonSegmentButton,
 } from "@ionic/react";
@@ -22,16 +24,22 @@ export const PlayerInfo: React.FC = () => {
   return (
     <IonContent>
       <AvatarPlayer />
-      <div className="nombre-pais">
-        <IonItem className="ion-text-center" lines="none">
-          <IonLabel className="nombre">PlayerName</IonLabel>
-        </IonItem>
-        <IonItem className="ion-text-center" lines="none">
-          <IonLabel className="locacion">
-            <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
-          </IonLabel>
-        </IonItem>
-      </div>
+      <IonRow>
+        <IonCol>
+          <IonItem className="ion-text-center" lines="none">
+            <IonLabel className="nombre">PlayerName</IonLabel>
+          </IonItem>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol>
+          <IonItem className="ion-text-center" lines="none">
+            <IonLabel className="locacion">
+              <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
+            </IonLabel>
+          </IonItem>
+        </IonCol>
+      </IonRow>
       {/*-- Scrollable Segment --*/}
       <IonSegment scrollable value={info} className="menu-horizontal">
         <IonSegmentButton

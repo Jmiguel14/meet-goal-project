@@ -22,7 +22,12 @@
 }
 .nombre-pais {
   position: relative;
+  height: auto;
 }
 .menu-horizontal {
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  --background: #d0dde1;
 }
