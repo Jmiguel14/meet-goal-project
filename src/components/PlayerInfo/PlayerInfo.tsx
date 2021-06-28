@@ -24,20 +24,16 @@ export const PlayerInfo: React.FC = () => {
   return (
     <IonContent>
       <AvatarPlayer />
-      <IonRow>
-        <IonCol>
-          <IonItem className="ion-text-center" lines="none">
-            <IonLabel className="nombre">PlayerName</IonLabel>
-          </IonItem>
+      <IonRow className='ion-justify-content-center'>
+        <IonCol size='auto'>
+          <IonLabel className="nombre">PlayerName</IonLabel>
         </IonCol>
       </IonRow>
-      <IonRow>
-        <IonCol>
-          <IonItem className="ion-text-center" lines="none">
-            <IonLabel className="locacion">
-              <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
-            </IonLabel>
-          </IonItem>
+      <IonRow className='ion-justify-content-center'>
+        <IonCol size='auto'>
+          <IonLabel className="locacion">
+            <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
+          </IonLabel>
         </IonCol>
       </IonRow>
       {/*-- Scrollable Segment --*/}
