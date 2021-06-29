@@ -16,3 +16,9 @@
 .datos-medicos {
   border-radius: 10px;
 }
+.ion-padding-horizontal {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50px;
+  z-index: 3;
+}

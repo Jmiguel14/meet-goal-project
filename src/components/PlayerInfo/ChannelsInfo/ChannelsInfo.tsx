@@ -30,7 +30,7 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
       <IonCard className="redes-sociales">
         <IonItem className="titulo">
           <IonLabel>Canales y Redes Sociales</IonLabel>
-          <IonButton fill="clear" routerLink="/canales-jugador">
+          <IonButton fill="clear" routerLink="/tabs/canales-jugador">
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>

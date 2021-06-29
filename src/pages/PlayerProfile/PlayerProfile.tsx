@@ -21,7 +21,10 @@ const PlayerProfile: React.FC = () => (
     <IonHeader>
       <IonToolbar class="regresar">
         <IonButtons slot="start">
-          <IonBackButton defaultHref="/perfil-jugador" className="icon-back" />
+          <IonBackButton
+            defaultHref="/tabs/inicio-jugador"
+            className="icon-back"
+          />
         </IonButtons>
         <IonTitle>Perfil</IonTitle>
       </IonToolbar>

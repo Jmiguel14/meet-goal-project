@@ -11,7 +11,7 @@ import {
   useIonToast,
 } from "@ionic/react";
 import MeetGoal from "icons/MeetGoal";
-import { SignUpForm } from "components/SignUpForm";
+import { SignUpForm } from "components/SignUpForm/index";
 import "./styles.css";
 import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";

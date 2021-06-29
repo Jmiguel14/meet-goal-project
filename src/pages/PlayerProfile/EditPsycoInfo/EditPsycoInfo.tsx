@@ -23,7 +23,7 @@ const EditPsycoInfo: React.FC = () => {
         <IonToolbar color="light" className="acciones">
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/perfil-jugador"
+              defaultHref="/tabs/perfil-jugador"
               className="icon-back"
             />
           </IonButtons>
@@ -95,18 +95,18 @@ const EditPsycoInfo: React.FC = () => {
         <IonItem className="campo-psyco">
           <IonLabel>Actitud</IonLabel>
           <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
-            <IonSelectOption value="positiva">POSITIVA</IonSelectOption>
-            <IonSelectOption value="derrotista">DERROTISTA</IonSelectOption>
-            <IonSelectOption value="pasiva">PASIVA</IonSelectOption>
-            <IonSelectOption value="altruista">ALTRUISTA</IonSelectOption>
-            <IonSelectOption value="neutra">NEUTRA</IonSelectOption>
-            <IonSelectOption value="agresiva">AGRESIVA</IonSelectOption>
-            <IonSelectOption value="empatica">EMPÁTICA</IonSelectOption>
-            <IonSelectOption value="flexible">FLEXIBLE</IonSelectOption>
-            <IonSelectOption value="inflexible">INFLEXIBLE</IonSelectOption>
-            <IonSelectOption value="moralista">MORALISTA</IonSelectOption>
-            <IonSelectOption value="nihilista">NIHILISTA</IonSelectOption>
-            <IonSelectOption value="suspicaz">SUSPICAZ</IonSelectOption>
+            <IonSelectOption value="positiva">Positiva</IonSelectOption>
+            <IonSelectOption value="derrotista">Derrotista</IonSelectOption>
+            <IonSelectOption value="pasiva">Pasiva</IonSelectOption>
+            <IonSelectOption value="altruista">Altruista</IonSelectOption>
+            <IonSelectOption value="neutra">Neutra</IonSelectOption>
+            <IonSelectOption value="agresiva">Agresiva</IonSelectOption>
+            <IonSelectOption value="empatica">Empática</IonSelectOption>
+            <IonSelectOption value="flexible">Flexible</IonSelectOption>
+            <IonSelectOption value="inflexible">Inflexible</IonSelectOption>
+            <IonSelectOption value="moralista">Moralista</IonSelectOption>
+            <IonSelectOption value="nihilista">Nihilista</IonSelectOption>
+            <IonSelectOption value="suspicaz">Suspicaz</IonSelectOption>
           </IonSelect>
         </IonItem>
       </IonContent>

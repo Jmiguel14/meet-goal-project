@@ -21,7 +21,10 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
       <IonCard className="datos-posicionales">
         <IonItem className="titulo">
           <IonLabel>Posición principal</IonLabel>
-          <IonButton fill="clear" routerLink="/editar-info-tactica-jugador">
+          <IonButton
+            fill="clear"
+            routerLink="/tabs/editar-info-tactica-jugador"
+          >
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
@@ -45,7 +48,10 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
       <IonCard className="datos-tacticos">
         <IonItem className="titulo">
           <IonLabel>Atributos</IonLabel>
-          <IonButton fill="clear" routerLink="/editar-info-atributos-jugador">
+          <IonButton
+            fill="clear"
+            routerLink="/tabs/editar-info-atributos-jugador"
+          >
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
