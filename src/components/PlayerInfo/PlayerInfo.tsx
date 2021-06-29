@@ -9,7 +9,7 @@ import {
   IonSegmentButton,
 } from "@ionic/react";
 import { locationOutline } from "ionicons/icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CareerInfo from "./CareerInfo/CareerInfo";
 import ChannelsInfo from "./ChannelsInfo/ChannelsInfo";
 import MedicalInfo from "./MedicalInfo/MedicalInfo";
@@ -18,19 +18,37 @@ import PsycoInfo from "./PsycoInfo/PsycoInfo";
 import TacticalInfo from "./TacticalInfo/TacticalInfo";
 import "./PlayerInfo.css";
 import AvatarPlayer from "./AvatarPlayer/AvatarPlayer";
+import { firestore } from "firebase/client";
+import { useAuth } from "contexts/AuthContext";
 
 export const PlayerInfo: React.FC = () => {
-  const [info, setInfo] = useState("");
+  const [info, setInfo] = useState("personal");
+
+  //const [datos, setDatos] = useState(null);
+
+  //const { currentUser } = useAuth();
+
+  /*useEffect(() => {
+    let id = currentUser.uid;
+    console.log(id);
+    const res = firestore.collection("users").doc(id);
+    res.get().then((doc) => {
+      let data = doc.data();
+      if (data) {
+        console.log(data);
+      }
+    });
+  }, []);*/
   return (
     <IonContent>
       <AvatarPlayer />
-      <IonRow className='ion-justify-content-center'>
-        <IonCol size='auto'>
+      <IonRow className="ion-justify-content-center">
+        <IonCol size="auto">
           <IonLabel className="nombre">PlayerName</IonLabel>
         </IonCol>
       </IonRow>
-      <IonRow className='ion-justify-content-center'>
-        <IonCol size='auto'>
+      <IonRow className="ion-justify-content-center">
+        <IonCol size="auto">
           <IonLabel className="locacion">
             <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
           </IonLabel>

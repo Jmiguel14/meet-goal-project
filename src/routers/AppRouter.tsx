@@ -24,40 +24,7 @@ export const AppRouter: React.FC = () => {
         <Route path="/tabs" component={TabRoot}></Route>
         <PublicRoutes exact path="/home" component={Home} />
         <PublicRoutes exact path="/iniciar-sesion" component={SignIn} />
-        <PublicRoutes exact path="/registrarse/:name" component={SignUp} />
-        <PrivateRoutes exact path="/perfil-jugador" component={PlayerProfile} />
-        <PrivateRoutes
-          exact
-          path="/editar-info-personal-jugador"
-          component={EditPersonalInfo}
-        />
-        <PrivateRoutes
-          exact
-          path="/editar-info-tactica-jugador"
-          component={EditTacticalInfo}
-        />
-        <PrivateRoutes
-          exact
-          path="/editar-info-atributos-jugador"
-          component={EditAttributes}
-        />
-        <PrivateRoutes exact path="/agregar-experiencia" component={AddClub} />
-        <PrivateRoutes
-          exact
-          path="/agregar-lesiones-jugador"
-          component={AddInjury}
-        />
-        <PrivateRoutes
-          exact
-          path="/editar-info-psicologica-jugador"
-          component={EditPsycoInfo}
-        />
-        <PrivateRoutes
-          exact
-          path="/editar-valores-jugador"
-          component={Beginning}
-        />
-        <PrivateRoutes exact path="/canales-jugador" component={AddChannels} />
+        <PublicRoutes exact path="/registrarse" component={SignUp} />
         <Route exact path="/">
           <Redirect to="/tabs" />
         </Route>
