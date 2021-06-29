@@ -20,17 +20,17 @@ import "./PlayerInfo.css";
 import AvatarPlayer from "./AvatarPlayer/AvatarPlayer";
 
 export const PlayerInfo: React.FC = () => {
-  const [info, setInfo] = useState("");
+  const [info, setInfo] = useState("personal");
   return (
     <IonContent>
       <AvatarPlayer />
-      <IonRow className='ion-justify-content-center'>
-        <IonCol size='auto'>
+      <IonRow className="ion-justify-content-center">
+        <IonCol size="auto">
           <IonLabel className="nombre">PlayerName</IonLabel>
         </IonCol>
       </IonRow>
-      <IonRow className='ion-justify-content-center'>
-        <IonCol size='auto'>
+      <IonRow className="ion-justify-content-center">
+        <IonCol size="auto">
           <IonLabel className="locacion">
             <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
           </IonLabel>

@@ -26,7 +26,10 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
       <IonCard className="datos-psicologicos">
         <IonItem className="titulo">
           <IonLabel>Parámetros Psicológicos</IonLabel>
-          <IonButton fill="clear" routerLink="/editar-info-psicologica-jugador">
+          <IonButton
+            fill="clear"
+            routerLink="/tabs/editar-info-psicologica-jugador"
+          >
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
@@ -58,7 +61,7 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
       <IonCard className="datos-psicologicos">
         <IonItem className="titulo">
           <IonLabel>Valores</IonLabel>
-          <IonButton fill="clear" routerLink="/editar-valores-jugador">
+          <IonButton fill="clear" routerLink="/tabs/editar-valores-jugador">
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>

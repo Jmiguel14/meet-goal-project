@@ -29,7 +29,7 @@ const AddChannels: React.FC = () => {
         <IonToolbar color="light" className="acciones">
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/perfil-jugador"
+              defaultHref="/tabs/perfil-jugador"
               className="icon-back"
             />
           </IonButtons>
