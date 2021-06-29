@@ -34,6 +34,7 @@ import EditPsycoInfo from "pages/PlayerProfile/EditPsycoInfo/EditPsycoInfo";
 import Beginning from "pages/PlayerProfile/Beginning/Beginning";
 import AddChannels from "pages/PlayerProfile/AddChannels/AddChannels";
 import { AppRouter } from "routers/AppRouter";
+import {IonSplitPane} from '@ionic/react'
 
 const App = () => (
   <IonApp>

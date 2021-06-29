@@ -7,6 +7,7 @@ import {
   IonPage,
   IonRow,
   IonToolbar,
+  IonMenuButton,
 } from "@ionic/react";
 import MeetGoal from "icons/MeetGoal";
 import "./PlayerDashboard.css";
@@ -15,7 +16,10 @@ const PlayerDashboard: React.FC = () => (
   <IonPage>
     <IonHeader>
       <IonToolbar color="light">
-        <IonRow className='ion-justify-content-center'>
+        <IonButtons slot="start">
+          <IonMenuButton />
+        </IonButtons>
+        <IonRow className="ion-justify-content-center">
           <IonCol size="auto">
             <MeetGoal width={40} height={40} />
           </IonCol>

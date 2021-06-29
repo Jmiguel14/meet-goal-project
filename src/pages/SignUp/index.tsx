@@ -60,10 +60,10 @@ export const SignUp: React.FC = () => {
         <IonHeader>
           <IonToolbar color="light">
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" className="icon-back" />
+              <IonBackButton defaultHref="/"/>
             </IonButtons>
-            <IonRow>
-              <IonCol size="auto" className="icon-header">
+            <IonRow className='icon'>
+              <IonCol size="auto">
                 <MeetGoal width={40} height={40} />
               </IonCol>
             </IonRow>

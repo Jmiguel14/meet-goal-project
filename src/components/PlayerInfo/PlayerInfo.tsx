@@ -37,7 +37,7 @@ export const PlayerInfo: React.FC = () => {
         </IonCol>
       </IonRow>
       {/*-- Scrollable Segment --*/}
-      <IonSegment scrollable value={info} className="menu-horizontal">
+      <IonSegment value={info} className="menu-horizontal">
         <IonSegmentButton
           value="personal"
           className="segments"
