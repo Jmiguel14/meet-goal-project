@@ -4,3 +4,8 @@
 .icon-back {
   --icon-font-size: 30px;
 }
+
+.title {
+  justify-content: flex-start;
+}
+

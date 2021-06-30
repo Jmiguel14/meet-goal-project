@@ -24,21 +24,6 @@ import { useAuth } from "contexts/AuthContext";
 export const PlayerInfo: React.FC = () => {
   const [info, setInfo] = useState("personal");
 
-  //const [datos, setDatos] = useState(null);
-
-  //const { currentUser } = useAuth();
-
-  /*useEffect(() => {
-    let id = currentUser.uid;
-    console.log(id);
-    const res = firestore.collection("users").doc(id);
-    res.get().then((doc) => {
-      let data = doc.data();
-      if (data) {
-        console.log(data);
-      }
-    });
-  }, []);*/
   return (
     <IonContent>
       <AvatarPlayer />
@@ -50,12 +35,11 @@ export const PlayerInfo: React.FC = () => {
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
           <IonLabel className="locacion">
-            <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
+            <IonIcon icon={locationOutline} size='small'></IonIcon> Ciudad/País
           </IonLabel>
         </IonCol>
       </IonRow>
-      {/*-- Scrollable Segment --*/}
-      <IonSegment value={info} className="menu-horizontal">
+      <IonSegment scrollable value={info} className="menu-horizontal">
         <IonSegmentButton
           value="personal"
           className="segments"

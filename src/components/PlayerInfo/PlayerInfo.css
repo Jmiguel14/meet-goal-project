@@ -26,7 +26,6 @@
 }
 .menu-horizontal {
   size: auto;
-  overflow: auto;
   display: flex;
   position: -webkit-sticky;
   position: sticky;

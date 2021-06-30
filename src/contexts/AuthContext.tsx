@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { auth, firestore } from "firebase/client";
 import firebase from "firebase/app";
 import { useIonToast, IonLoading } from "@ionic/react";
-import { userTypeEnum } from "components/SignUpForm";
+import { userTypeEnum } from 'components/SignUpForm'
 
 export type user = {
   name: string;
@@ -20,6 +20,7 @@ interface IAuthProvider {
     currentUser: firebase.User,
     userProperties: user
   ) => Promise<void>;
+  logout: () => Promise<void>
 }
 
 const AuthContext = React.createContext<IAuthProvider>({} as IAuthProvider);
@@ -36,6 +37,10 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   const signUp = (email: string, password: string) => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
+
+  function logout() {
+    return auth.signOut()
+  }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
@@ -81,13 +86,14 @@ export const AuthProvider: React.FC = ({ children }: any) => {
     currentUser,
     signUp,
     createUserDocument,
+    logout,
   } as IAuthProvider;
 
   return (
     <>
       {console.log(loading)}
       <AuthContext.Provider value={value}>
-        {loading ? <IonLoading isOpen={loading}/> : children}
+        {loading ? <IonLoading isOpen={loading} message='Cargando...'/> : children}
       </AuthContext.Provider>
     </>
   );

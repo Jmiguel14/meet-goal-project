@@ -11,6 +11,8 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  IonRow,
+  IonCol,
 } from "@ionic/react";
 import { PlayerInfo } from "components/PlayerInfo/PlayerInfo";
 import { arrowBackCircleOutline, arrowBackOutline } from "ionicons/icons";
@@ -19,14 +21,18 @@ import "./PlayerProfile.css";
 const PlayerProfile: React.FC = () => (
   <IonPage>
     <IonHeader>
-      <IonToolbar class="regresar">
+      <IonToolbar className="regresar">
         <IonButtons slot="start">
           <IonBackButton
             defaultHref="/tabs/inicio-jugador"
             className="icon-back"
           />
         </IonButtons>
-        <IonTitle>Perfil</IonTitle>
+        <IonRow className="title">
+          <IonCol size="auto">
+            <IonTitle>UserName</IonTitle>
+          </IonCol>
+        </IonRow>
       </IonToolbar>
     </IonHeader>
     <IonContent fullscreen>

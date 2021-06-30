@@ -36,7 +36,7 @@ export const SignUp: React.FC = () => {
     try {
       await signUp(email, password);
       setDataUser(data);
-      history.push('/inicio-jugador')
+      history.push('/tabs/inicio-jugador')
     } catch {
       present({
         message: "Ocurrió un error al crear la cuenta",
@@ -59,7 +59,7 @@ export const SignUp: React.FC = () => {
       <IonContent>
         <IonHeader>
           <IonToolbar color="light">
-            <IonButtons slot="start">
+            <IonButtons slot="start" className='back-button'>
               <IonBackButton defaultHref="/"/>
             </IonButtons>
             <IonRow className='icon'>

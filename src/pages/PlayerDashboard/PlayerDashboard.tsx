@@ -16,7 +16,7 @@ const PlayerDashboard: React.FC = () => (
   <IonPage>
     <IonHeader>
       <IonToolbar color="light">
-        <IonButtons slot="start">
+        <IonButtons slot="start" className='menu-icon'>
           <IonMenuButton />
         </IonButtons>
         <IonRow className="ion-justify-content-center">

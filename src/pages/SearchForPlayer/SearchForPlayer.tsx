@@ -18,7 +18,7 @@ import "./SearchForPlayer.css";
 const SearchForPlayer: React.FC = () => (
   <IonPage>
     <IonHeader>
-      <IonToolbar class="regresar">
+      <IonToolbar className="regresar">
         <IonButton slot="start" fill="clear">
           <IonIcon icon={arrowBackOutline} />
         </IonButton>
