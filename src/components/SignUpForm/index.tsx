@@ -68,7 +68,6 @@ export const SignUpForm = ({ onSubmit }: any) => {
   });
 
   return (
-    <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <IonRow>
           <IonCol size="12">
@@ -171,6 +170,5 @@ export const SignUpForm = ({ onSubmit }: any) => {
           </IonCol>
         </IonRow>
       </form>
-    </>
   );
 };

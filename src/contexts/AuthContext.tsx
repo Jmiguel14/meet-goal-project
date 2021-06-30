@@ -20,6 +20,7 @@ interface IAuthProvider {
     currentUser: firebase.User,
     userProperties: user
   ) => Promise<void>;
+  login: (email: string, password: string) => Promise<firebase.auth.UserCredential>
   logout: () => Promise<void>
 }
 
@@ -37,6 +38,10 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   const signUp = (email: string, password: string) => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
+
+  const login = (email: string, password: string) => {
+    return auth.signInWithEmailAndPassword(email, password)
+  }
 
   function logout() {
     return auth.signOut()
@@ -86,6 +91,7 @@ export const AuthProvider: React.FC = ({ children }: any) => {
     currentUser,
     signUp,
     createUserDocument,
+    login,
     logout,
   } as IAuthProvider;
 
