@@ -12,7 +12,7 @@ export const PrivateRoutes: React.FC<PrivateRouteProps> = (props) => {
     return currentUser ? (
       <Component {...props} />
     ) : (
-      <Redirect to="/home" />
+      <Redirect to={{pathname: "/home"}} />
     );
   };
 

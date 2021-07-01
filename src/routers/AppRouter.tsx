@@ -1,5 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
-import { IonRouterOutlet, IonSplitPane } from "@ionic/react";
+import { IonRouterOutlet } from "@ionic/react";
 import Home from "pages/Home/Home";
 import { SignUp } from "pages/SignUp";
 import { SignIn } from "pages/SignIn";

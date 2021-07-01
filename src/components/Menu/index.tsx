@@ -12,7 +12,7 @@ import {
   IonIcon,
   useIonToast,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React from "react";
 import "./styles.css";
 import { Avatar } from "components/Avatar";
 import {
@@ -23,7 +23,7 @@ import {
   personOutline,
   shieldHalf,
 } from "ionicons/icons";
-import { useHistory, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { useAuth } from "contexts/AuthContext";
 
 interface AppPage {
@@ -102,7 +102,6 @@ export const Menu: React.FC = () => {
           {appPages.map((appPage, key) => {
             return (
               <IonMenuToggle key={key} autoHide={false}>
-                {console.log(location.pathname, appPage.url)}
                 <IonItem
                   className={
                     location.pathname === appPage.url ? "selected" : ""

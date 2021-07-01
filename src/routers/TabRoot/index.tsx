@@ -100,12 +100,12 @@ export const TabRoot: React.FC = () => {
           />
             <Route
               path="/tabs"
-              render={() => <Redirect to="/tabs/inicio-jugador" />}
+              render={() => <Redirect to={{pathname: "/tabs/inicio-jugador"}} />}
               exact={true}
             />
             <Route
               path="/"
-              render={() => <Redirect to="/tabs/inicio-jugador" />}
+              render={() => <Redirect to={{pathname: "/tabs/inicio-jugador"}} />}
               exact={true}
             />
           </IonRouterOutlet>

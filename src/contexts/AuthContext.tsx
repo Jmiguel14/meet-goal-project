@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { auth, firestore } from "firebase/client";
 import firebase from "firebase/app";
 import { useIonToast, IonLoading } from "@ionic/react";
-import { userTypeEnum } from 'components/SignUpForm'
+import { userTypeEnum } from "pages/SignUp";
 
 export type user = {
   name: string;
@@ -97,7 +97,6 @@ export const AuthProvider: React.FC = ({ children }: any) => {
 
   return (
     <>
-      {console.log(loading)}
       <AuthContext.Provider value={value}>
         {loading ? <IonLoading isOpen={loading} message='Cargando...'/> : children}
       </AuthContext.Provider>

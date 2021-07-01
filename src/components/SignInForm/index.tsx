@@ -1,7 +1,4 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import {
   IonRow,
   IonCol,
@@ -9,54 +6,24 @@ import {
   IonItem,
   IonNote,
   IonInput,
-  IonFooter,
-  IonToolbar,
-  IonButton,
 } from "@ionic/react";
-import './styles.css'
-
-export interface IForm {
-  email: string;
-  password: string;
-}
-
-const ERROR_MESSAGES = {
-  required: "Este campo es requerido",
-  positive: "Debe ser un número positivo",
-  email: "Email no válido",
-  number: "Debe especificar un número",
-};
-
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .required(ERROR_MESSAGES.required)
-    .email(ERROR_MESSAGES.email),
-  password: yup.string().required(ERROR_MESSAGES.required),
-});
+import "./styles.css";
 
 interface ISignInForm {
-    onSubmit: (data: any) => Promise<void>
+  register: any;
+  handleSubmit: any;
+  clearErrors: any;
+  errors: any;
 }
 
-export const SignInForm: React.FC<ISignInForm> = ({ onSubmit }) => {
-  const initialValues = {
-    email: "",
-    password: "",
-  };
-
-  const {
-    register,
-    handleSubmit,
-    clearErrors,
-    formState: { errors },
-  } = useForm<IForm>({
-    defaultValues: initialValues,
-    resolver: yupResolver(schema),
-  });
-
+export const SignInForm: React.FC<ISignInForm> = ({
+  register,
+  handleSubmit,
+  clearErrors,
+  errors,
+}) => {
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit} id="sign-in-form">
       <IonRow>
         <IonCol size="12">
           <IonItem>
@@ -92,17 +59,6 @@ export const SignInForm: React.FC<ISignInForm> = ({ onSubmit }) => {
             <IonNote color="danger">{errors.password?.message}</IonNote>
           )}
         </IonCol>
-        <IonFooter>
-          <IonToolbar color='light'>
-            <IonRow className='ion-justify-content-end'>
-              <IonCol size='auto'>
-                <IonButton type='submit'>
-                  Iniciar sesión
-                </IonButton>
-              </IonCol>
-            </IonRow>
-          </IonToolbar>
-        </IonFooter>
       </IonRow>
     </form>
   );
