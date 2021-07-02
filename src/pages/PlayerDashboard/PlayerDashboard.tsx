@@ -25,7 +25,7 @@ const PlayerDashboard: React.FC = () => (
         </IonRow>
       </IonToolbar>
     </IonHeader>
-    <IonContent fullscreen className="ion-padding">hello word I'm sad cause a can't find the problem :'c</IonContent>
+    <IonContent fullscreen className="ion-padding"></IonContent>
   </IonPage>
 );
 
