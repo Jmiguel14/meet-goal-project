@@ -13,11 +13,18 @@ import {
   IonToggle,
   IonToolbar,
 } from "@ionic/react";
+import { AddInjuryExperienced } from "firebase/client";
 import { useState } from "react";
 
 import "./AddInjury.css";
 const AddInjury: React.FC = () => {
+  const [injuryName, setInjuryName] = useState("");
+  const [recoveryTime, setRecoveryTime] = useState("");
   const [checked, setChecked] = useState(false);
+
+  const onSubmit = async () => {
+    AddInjuryExperienced(injuryName, recoveryTime, checked);
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -31,7 +38,13 @@ const AddInjury: React.FC = () => {
           <IonTitle color="primary" className="titulo">
             Añadir Lesión
           </IonTitle>
-          <IonButton fill="clear" slot="end" color="tertiary">
+          <IonButton
+            fill="clear"
+            slot="end"
+            color="tertiary"
+            onClick={onSubmit}
+            routerLink="/tabs/perfil-jugador"
+          >
             Guardar
           </IonButton>
         </IonToolbar>
@@ -41,10 +54,16 @@ const AddInjury: React.FC = () => {
           <div className="subtitulo">Detalles de la lesión</div>
         </IonItemDivider>
         <IonItem className="campo-lesion">
-          <IonInput placeholder="Nombre de la lesión"></IonInput>
+          <IonInput
+            placeholder="Nombre de la lesión"
+            onIonChange={(e: any) => setInjuryName(e.currentTarget.value)}
+          ></IonInput>
         </IonItem>
         <IonItem className="campo-lesion">
-          <IonInput placeholder="Tiempo de recuperación"></IonInput>
+          <IonInput
+            placeholder="Tiempo de recuperación"
+            onIonChange={(e: any) => setRecoveryTime(e.currentTarget.value)}
+          ></IonInput>
         </IonItem>
         <IonItem className="campo-lesion">
           <IonLabel color="medium">Proceso Quirúrgico</IonLabel>

@@ -18,6 +18,8 @@ import "./AddClub.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { AddCubExperience } from "firebase/client";
 
 export interface IIIForm {
   clubName: string;
@@ -75,26 +77,54 @@ const schema = yup.object().shape({
     .required(ERROR_MESSAGES.required),
 });
 
-export const AddClub = ({ onSubmit }: any) => {
+export const AddClub: React.FC = () => {
   const initialValues = {
     clubName: "",
     country: "",
-    season: "",
+    season: 0,
     subPlayer: "",
     catTournament: "",
-    PJ: "",
-    G: "",
-    A: "",
-    TA: "",
-    TR: "",
+    PJ: 0,
+    G: 0,
+    A: 0,
+    TA: 0,
+    TR: 0,
   };
-
+  const [dataClub, setDataClub] = useState<any>(null);
   const {
     register,
     handleSubmit,
     clearErrors,
     formState: { errors },
   } = useForm<IIIForm>({ resolver: yupResolver(schema) });
+
+  const onSubmit = async (data: any) => {
+    const {
+      clubName,
+      country,
+      season,
+      subPlayer,
+      catTournament,
+      PJ,
+      G,
+      A,
+      TA,
+      TR,
+    } = data;
+    AddCubExperience(
+      clubName,
+      country,
+      season,
+      subPlayer,
+      catTournament,
+      PJ,
+      G,
+      A,
+      TA,
+      TR
+    );
+    console.log("data", data);
+  };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <IonPage>
@@ -109,14 +139,20 @@ export const AddClub = ({ onSubmit }: any) => {
             <IonTitle color="primary" className="titulo">
               Añadir Club
             </IonTitle>
-            <IonButton fill="clear" slot="end" color="tertiary" type="submit">
+            <IonButton
+              fill="clear"
+              slot="end"
+              color="tertiary"
+              type="submit"
+              routerLink="/tabs/perfil-jugador"
+            >
               Guardar
             </IonButton>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen class="nuevo-club">
           <IonItemDivider color="primary">
-            <div className="subtitulo">Información del Club y temporada</div>
+            <div className="divisor">Información del Club y temporada</div>
           </IonItemDivider>
           <IonItem className="campo-club">
             <IonInput

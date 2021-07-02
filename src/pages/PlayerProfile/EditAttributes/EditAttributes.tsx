@@ -41,8 +41,6 @@ const checkboxList = [
   { val: "Referencia", isChecked: false },
 ];
 const EditAttributes: React.FC = () => {
-  const [checked, setChecked] = useState(false);
-
   return (
     <IonPage>
       <IonHeader>

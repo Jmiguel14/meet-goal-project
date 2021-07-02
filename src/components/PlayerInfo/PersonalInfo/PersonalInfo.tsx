@@ -1,30 +1,37 @@
 import {
   IonButton,
   IonCard,
-  IonIcon,
   IonImg,
   IonItem,
   IonLabel,
   IonText,
 } from "@ionic/react";
-import { useAuth } from "contexts/AuthContext";
-import {
-  calendarOutline,
-  callOutline,
-  documentTextOutline,
-  globeOutline,
-  mail,
-} from "ionicons/icons";
 import "./PersonalInfo.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MailIcon from "icons/emailIcon.png";
 import BirthdayIcon from "icons/birthdayIcon.png";
 import ContractIcon from "icons/contractIcon.png";
 import MarketIcon from "icons/marketIcon.png";
 import TelephoneIcon from "icons/telephoneIcon.png";
+import firebase from "firebase/app";
+import { useAuth } from "contexts/AuthContext";
+import { getUserDoc } from "firebase/client";
 interface ContainerProps {}
 
 const PersonalInfo: React.FC<ContainerProps> = () => {
+  const [datos, setDatos] = useState<
+    firebase.firestore.DocumentData | undefined
+  >();
+
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    getUserDoc(currentUser.uid).then((doc) => {
+      if (doc.exists) {
+        setDatos(doc.data());
+      }
+    });
+  }, []);
   return (
     <>
       <IonCard className="cajas">
@@ -35,7 +42,9 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">Correo</h1>
+            <h1 className="info">
+              {datos?.email !== undefined ? datos?.email : "Correo"}
+            </h1>
           </IonLabel>
           <IonText className="texto">Correo</IonText>
         </IonItem>
@@ -48,7 +57,9 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">Teléfono</h1>
+            <h1 className="info">
+              {datos?.phone !== undefined ? datos?.phone : "Teléfono"}
+            </h1>
           </IonLabel>
           <IonText className="texto">Teléfono</IonText>
         </IonItem>
@@ -61,7 +72,9 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">Fec. de Nacimiento</h1>
+            <h1 className="info">
+              {datos?.birth !== undefined ? datos?.birth : "F. de Nacimiento"}
+            </h1>
           </IonLabel>
           <IonText className="texto">Fecha de Nacimiento</IonText>
         </IonItem>
@@ -74,7 +87,11 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">Est. Contractual</h1>
+            <h1 className="info">
+              {datos?.contract !== undefined
+                ? datos?.contract
+                : "Est. Contractual"}
+            </h1>
           </IonLabel>
           <IonText className="texto">Estado contractual</IonText>
         </IonItem>
@@ -87,7 +104,9 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">MarketTransfer</h1>
+            <h1 className="info">
+              {datos?.market !== undefined ? datos?.market : "MarketTransfer"}
+            </h1>
           </IonLabel>
           <IonText className="texto">Link MarketTransfer</IonText>
         </IonItem>

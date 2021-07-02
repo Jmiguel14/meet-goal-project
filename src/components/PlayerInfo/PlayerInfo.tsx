@@ -2,7 +2,6 @@ import {
   IonCol,
   IonContent,
   IonIcon,
-  IonItem,
   IonLabel,
   IonRow,
   IonSegment,
@@ -18,39 +17,41 @@ import PsycoInfo from "./PsycoInfo/PsycoInfo";
 import TacticalInfo from "./TacticalInfo/TacticalInfo";
 import "./PlayerInfo.css";
 import AvatarPlayer from "./AvatarPlayer/AvatarPlayer";
-import { firestore } from "firebase/client";
+import { getUserDoc } from "firebase/client";
+import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
-
 export const PlayerInfo: React.FC = () => {
   const [info, setInfo] = useState("personal");
 
-  //const [datos, setDatos] = useState(null);
+  const [datos, setDatos] = useState<
+    firebase.firestore.DocumentData | undefined
+  >();
 
-  //const { currentUser } = useAuth();
+  const { currentUser } = useAuth();
 
-  /*useEffect(() => {
-    let id = currentUser.uid;
-    console.log(id);
-    const res = firestore.collection("users").doc(id);
-    res.get().then((doc) => {
-      let data = doc.data();
-      if (data) {
-        console.log(data);
+  useEffect(() => {
+    getUserDoc(currentUser.uid).then((doc) => {
+      if (doc.exists) {
+        setDatos(doc.data());
       }
     });
-  }, []);*/
+  }, []);
+  console.log(datos);
   return (
     <IonContent>
       <AvatarPlayer />
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
-          <IonLabel className="nombre">PlayerName</IonLabel>
+          <IonLabel className="nombre">{datos?.name}</IonLabel>
         </IonCol>
       </IonRow>
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
           <IonLabel className="locacion">
-            <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
+            <IonIcon icon={locationOutline}></IonIcon>{" "}
+            {datos?.city || datos?.country !== undefined
+              ? "" + datos?.city + "/" + datos?.country
+              : "Ciudad/Pais"}
           </IonLabel>
         </IonCol>
       </IonRow>

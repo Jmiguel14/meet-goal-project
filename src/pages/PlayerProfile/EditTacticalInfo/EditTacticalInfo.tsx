@@ -14,10 +14,19 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { EditPositionData } from "firebase/client";
+import { useState } from "react";
 
 import "./EditTacticalInfo.css";
 
 const EditTacticalInfo: React.FC = () => {
+  const [pospri, setPospri] = useState<string>("");
+  const [possec, setPossec] = useState<string>("");
+  const [goals, setGoals] = useState<string>("");
+
+  const onSubmit = async () => {
+    EditPositionData(pospri, possec, goals);
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -31,7 +40,13 @@ const EditTacticalInfo: React.FC = () => {
           <IonTitle color="primary" className="titulo">
             Editar I. Táctica
           </IonTitle>
-          <IonButton fill="clear" slot="end" color="tertiary">
+          <IonButton
+            fill="clear"
+            slot="end"
+            color="tertiary"
+            onClick={onSubmit}
+            routerLink="/tabs/perfil-jugador"
+          >
             Guardar
           </IonButton>
         </IonToolbar>
@@ -42,7 +57,12 @@ const EditTacticalInfo: React.FC = () => {
         </IonItemDivider>
         <IonItem className="campo-tactico">
           <IonLabel>Posición Principal</IonLabel>
-          <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
+          <IonSelect
+            okText="Listo"
+            cancelText="Cerrar"
+            slot="end"
+            onIonChange={(e: any) => setPospri(e.currentTarget.value)}
+          >
             <IonSelectOption value="POR">Portero</IonSelectOption>
             <IonSelectOption value="CAI">Carrilero Izq.</IonSelectOption>
             <IonSelectOption value="CAD">Carrilero Der.</IonSelectOption>
@@ -62,7 +82,12 @@ const EditTacticalInfo: React.FC = () => {
         </IonItem>
         <IonItem className="campo-tactico">
           <IonLabel>Posición Secundaria</IonLabel>
-          <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
+          <IonSelect
+            okText="Listo"
+            cancelText="Cerrar"
+            slot="end"
+            onIonChange={(e: any) => setPossec(e.currentTarget.value)}
+          >
             <IonSelectOption value="POR">Portero</IonSelectOption>
             <IonSelectOption value="CAI">Carrilero Izq.</IonSelectOption>
             <IonSelectOption value="CAD">Carrilero Der.</IonSelectOption>
@@ -81,7 +106,10 @@ const EditTacticalInfo: React.FC = () => {
           </IonSelect>
         </IonItem>
         <IonItem className="campo-tactico">
-          <IonInput placeholder="Logros"></IonInput>
+          <IonInput
+            placeholder="Logros"
+            onIonChange={(e: any) => setGoals(e.currentTarget.value)}
+          ></IonInput>
         </IonItem>
       </IonContent>
     </IonPage>
