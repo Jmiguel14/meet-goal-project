@@ -14,9 +14,18 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { EditPsycoParameters } from "firebase/client";
+import { useState } from "react";
 
 import "./EditPsycoInfo.css";
 const EditPsycoInfo: React.FC = () => {
+  const [character, setCharacter] = useState<string>("");
+  const [personality, setPersonality] = useState<string>("");
+  const [attitude, setAttitude] = useState<string>("");
+
+  const onSubmit = async () => {
+    EditPsycoParameters(character, personality, attitude);
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -30,7 +39,13 @@ const EditPsycoInfo: React.FC = () => {
           <IonTitle color="primary" className="titulo">
             Param. Psicológicos
           </IonTitle>
-          <IonButton fill="clear" slot="end" color="tertiary">
+          <IonButton
+            fill="clear"
+            slot="end"
+            color="tertiary"
+            onClick={onSubmit}
+            routerLink="/tabs/perfil-jugador"
+          >
             Guardar
           </IonButton>
         </IonToolbar>
@@ -41,7 +56,12 @@ const EditPsycoInfo: React.FC = () => {
         </IonItemDivider>
         <IonItem className="campo-psyco">
           <IonLabel>Carácter</IonLabel>
-          <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
+          <IonSelect
+            okText="Listo"
+            cancelText="Cerrar"
+            slot="end"
+            onIonChange={(e: any) => setCharacter(e.currentTarget.value)}
+          >
             <IonSelectOption value="flematico">Flemático</IonSelectOption>
             <IonSelectOption value="colerico">Colérico</IonSelectOption>
             <IonSelectOption value="seunguineo">Senguíneo</IonSelectOption>
@@ -70,7 +90,12 @@ const EditPsycoInfo: React.FC = () => {
         </div>
         <IonItem className="campo-psyco">
           <IonLabel>Personalidad</IonLabel>
-          <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
+          <IonSelect
+            okText="Listo"
+            cancelText="Cerrar"
+            slot="end"
+            onIonChange={(e: any) => setPersonality(e.currentTarget.value)}
+          >
             <IonSelectOption value="ESTJ">ESTJ</IonSelectOption>
             <IonSelectOption value="ESTP">ESTP</IonSelectOption>
             <IonSelectOption value="ESFJ">ESFJ</IonSelectOption>
@@ -94,7 +119,12 @@ const EditPsycoInfo: React.FC = () => {
         </IonItemDivider>
         <IonItem className="campo-psyco">
           <IonLabel>Actitud</IonLabel>
-          <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
+          <IonSelect
+            okText="Listo"
+            cancelText="Cerrar"
+            slot="end"
+            onIonChange={(e: any) => setAttitude(e.currentTarget.value)}
+          >
             <IonSelectOption value="positiva">Positiva</IonSelectOption>
             <IonSelectOption value="derrotista">Derrotista</IonSelectOption>
             <IonSelectOption value="pasiva">Pasiva</IonSelectOption>

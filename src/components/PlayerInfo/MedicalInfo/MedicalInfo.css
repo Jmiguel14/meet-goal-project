@@ -22,3 +22,13 @@
   top: 50px;
   z-index: 3;
 }
+.message-not-found {
+  font-size: 12px;
+  --ion-background-color: #d0dde1;
+  color: #444;
+  opacity: 80%;
+}
+.container-message {
+  text-align: center;
+  padding-top: 20px;
+}

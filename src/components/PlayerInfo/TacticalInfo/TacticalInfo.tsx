@@ -8,19 +8,38 @@ import {
   IonLabel,
   IonText,
 } from "@ionic/react";
-import { footstepsOutline, medalOutline, pencilOutline } from "ionicons/icons";
+import { pencilOutline } from "ionicons/icons";
 import "./TacticalInfo.css";
 import MedalIcon from "icons/medalIcon.png";
 import PlayerIcon from "icons/playerIcon.png";
+import { useEffect, useState } from "react";
+import firebase from "firebase/app";
+import { useAuth } from "contexts/AuthContext";
+import { getUserDoc } from "firebase/client";
 
 interface ContainerProps {}
 
 const TacticalInfo: React.FC<ContainerProps> = () => {
+  const [datos, setDatos] = useState<
+    firebase.firestore.DocumentData | undefined
+  >();
+
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    getUserDoc(currentUser.uid).then((doc) => {
+      if (doc.exists) {
+        setDatos(doc.data());
+      }
+    });
+  }, []);
   return (
     <>
       <IonCard className="datos-posicionales">
         <IonItem className="titulo">
-          <IonLabel>Posición principal</IonLabel>
+          <IonLabel>
+            {datos?.pospri !== undefined ? datos?.pospri : "Posición Principal"}
+          </IonLabel>
           <IonButton
             fill="clear"
             routerLink="/tabs/editar-info-tactica-jugador"
@@ -34,7 +53,11 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonText>Posicion secundaria</IonText>
+          <IonText>
+            {datos?.possec !== undefined
+              ? datos?.possec
+              : "Posición Secundaria"}
+          </IonText>
         </IonItem>
         <IonItem className="elemento">
           <IonImg
@@ -42,7 +65,9 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonText>Logros</IonText>
+          <IonText>
+            {datos?.goals !== undefined ? datos?.goals : "Logros"}
+          </IonText>
         </IonItem>
       </IonCard>
       <IonCard className="datos-tacticos">

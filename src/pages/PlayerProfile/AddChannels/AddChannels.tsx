@@ -12,6 +12,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { EditChannelsLinks } from "firebase/client";
 import {
   logoFacebook,
   logoInstagram,
@@ -19,10 +20,19 @@ import {
   logoVimeo,
   logoYoutube,
 } from "ionicons/icons";
+import { useState } from "react";
 
 import "./AddChannels.css";
 
 const AddChannels: React.FC = () => {
+  const [facebook, setFacebook] = useState<string>("");
+  const [twitter, setTwitter] = useState<string>("");
+  const [instagram, setInstagram] = useState<string>("");
+  const [vimeo, setVimeo] = useState<string>("");
+  const [youtube, setYoutube] = useState<string>("");
+  const onSubmit = async () => {
+    EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo);
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -36,7 +46,13 @@ const AddChannels: React.FC = () => {
           <IonTitle color="primary" className="titulo">
             Redes Sociales
           </IonTitle>
-          <IonButton fill="clear" slot="end" color="tertiary">
+          <IonButton
+            fill="clear"
+            slot="end"
+            color="tertiary"
+            onClick={onSubmit}
+            routerLink="/tabs/perfil-jugador"
+          >
             Guardar
           </IonButton>
         </IonToolbar>
@@ -49,31 +65,46 @@ const AddChannels: React.FC = () => {
           <IonButton slot="start" fill="clear">
             <IonIcon icon={logoFacebook}></IonIcon>
           </IonButton>
-          <IonInput placeholder="facebook"></IonInput>
+          <IonInput
+            placeholder="facebook"
+            onIonChange={(e: any) => setFacebook(e.currentTarget.value)}
+          ></IonInput>
         </IonItem>
         <IonItem className="red">
           <IonButton slot="start" fill="clear">
             <IonIcon icon={logoTwitter}></IonIcon>
           </IonButton>
-          <IonInput placeholder="twitter"></IonInput>
+          <IonInput
+            placeholder="twitter"
+            onIonChange={(e: any) => setTwitter(e.currentTarget.value)}
+          ></IonInput>
         </IonItem>
         <IonItem className="red">
           <IonButton slot="start" fill="clear">
             <IonIcon icon={logoInstagram}></IonIcon>
           </IonButton>
-          <IonInput placeholder="instagram"></IonInput>
+          <IonInput
+            placeholder="instagram"
+            onIonChange={(e: any) => setInstagram(e.currentTarget.value)}
+          ></IonInput>
         </IonItem>
         <IonItem className="red">
           <IonButton slot="start" fill="clear">
             <IonIcon icon={logoYoutube}></IonIcon>
           </IonButton>
-          <IonInput placeholder="youtube"></IonInput>
+          <IonInput
+            placeholder="youtube"
+            onIonChange={(e: any) => setYoutube(e.currentTarget.value)}
+          ></IonInput>
         </IonItem>
         <IonItem className="red">
           <IonButton slot="start" fill="clear">
             <IonIcon icon={logoVimeo}></IonIcon>
           </IonButton>
-          <IonInput placeholder="vimeo"></IonInput>
+          <IonInput
+            placeholder="vimeo"
+            onIonChange={(e: any) => setVimeo(e.currentTarget.value)}
+          ></IonInput>
         </IonItem>
       </IonContent>
     </IonPage>

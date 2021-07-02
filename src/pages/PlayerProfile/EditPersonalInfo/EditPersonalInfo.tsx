@@ -16,11 +16,12 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useState } from "react";
+import React, { useState } from "react";
 import "./EditPersonalInfo.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { setPersonalData } from "firebase/client";
 
 export enum ContractTypeEnum {
   libre = "libre",
@@ -32,6 +33,7 @@ export interface IIForm {
   mail: string;
   country: string;
   city: string;
+  phone: number;
   birth: string;
   contract: ContractTypeEnum;
 }
@@ -52,21 +54,30 @@ const schema = yup.object().shape({
   contract: yup.string().required(ERROR_MESSAGES.required),
 });
 
-export const EditPersonalInfo = ({ onSubmit }: any) => {
+export const EditPersonalInfo: React.FC = () => {
   const initialValues = {
-    mail: "",
     country: "",
     city: "",
-    birth: "",
-    contract: "",
   };
+
+  const [dataUser, setDataUser] = useState<any>(null);
 
   const {
     register,
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<IIForm>({ resolver: yupResolver(schema) });
+  } = useForm<IIForm>({
+    defaultValues: initialValues,
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (data: any) => {
+    setDataUser(data);
+    const { mail, phone, country, city, birth, contract } = data;
+    setPersonalData(mail, country, city, birth, contract, phone);
+    console.log("data", data);
+  };
 
   const [selectedDate, setSelectedDate] = useState<string>(
     "2012-12-15T13:47:20.789"
@@ -130,7 +141,7 @@ export const EditPersonalInfo = ({ onSubmit }: any) => {
               placeholder="Ciudad"
               type="text"
               clearInput={true}
-              {...register("country")}
+              {...register("city")}
               onIonChange={() => {
                 clearErrors("city");
               }}
@@ -139,11 +150,29 @@ export const EditPersonalInfo = ({ onSubmit }: any) => {
           {errors.city?.message && (
             <IonNote color="danger">{errors.city?.message}</IonNote>
           )}
+
+          <IonItem className="dato-personal">
+            <IonInput
+              placeholder="Teléfono"
+              type="text"
+              clearInput={true}
+              {...register("phone")}
+              onIonChange={() => {
+                clearErrors("phone");
+              }}
+            ></IonInput>
+          </IonItem>
+          {errors.mail?.message && (
+            <IonNote color="danger">{errors.mail?.message}</IonNote>
+          )}
+
           <IonItem className="dato-personal">
             <IonLabel>F. Nacimiento (Mes/Día/Año)</IonLabel>
             <IonDatetime
+              itemType="text"
               displayFormat="MMM/DD/YY"
-              monthShortNames="JAN, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DEC"
+              monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
+              {...register("birth")}
               onIonChange={(e) => setSelectedDate(e.detail.value!)}
             ></IonDatetime>
           </IonItem>
@@ -158,8 +187,8 @@ export const EditPersonalInfo = ({ onSubmit }: any) => {
               }}
             >
               <IonSelectOption value="libre">Libre</IonSelectOption>
-              <IonSelectOption value="prestamo">prestamo</IonSelectOption>
-              <IonSelectOption value="contratado">contratado</IonSelectOption>
+              <IonSelectOption value="prestamo">Prestamo</IonSelectOption>
+              <IonSelectOption value="contratado">Contratado</IonSelectOption>
             </IonSelect>
           </IonItem>
           {errors.contract && (
