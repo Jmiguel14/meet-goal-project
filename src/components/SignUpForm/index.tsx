@@ -48,7 +48,6 @@ export const SignUpForm = ({
               </IonLabel>
               <IonInput
                 type="text"
-                clearInput={true}
                 {...register("name")}
                 onIonChange={() => {
                   clearErrors("name");
@@ -66,7 +65,6 @@ export const SignUpForm = ({
               </IonLabel>
               <IonInput
                 type="number"
-                clearInput={true}
                 {...register("phone")}
                 onIonChange={() => {
                   clearErrors("phone");
@@ -83,7 +81,6 @@ export const SignUpForm = ({
                 Correo
               </IonLabel>
               <IonInput
-                clearInput={true}
                 {...register("email")}
                 onIonChange={() => {
                   clearErrors("email");

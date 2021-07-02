@@ -73,14 +73,13 @@ export const SignUp: React.FC = () => {
     register,
     handleSubmit,
     clearErrors,
-    reset,
     formState: { errors },
   } = useForm<IForm>({
     defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: any, e: any) => {
     const { email, password } = data;
 
     if(currentUser) return present({
@@ -94,7 +93,7 @@ export const SignUp: React.FC = () => {
       await signUp(email, password);
       setDataUser(data);
       history.push('/tabs/inicio-jugador')
-      reset()
+      e.targert.reset()
     } catch {
       present({
         message: "Ocurrió un error al crear la cuenta",

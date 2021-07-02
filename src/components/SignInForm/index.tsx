@@ -31,7 +31,6 @@ export const SignInForm: React.FC<ISignInForm> = ({
               Correo
             </IonLabel>
             <IonInput
-              clearInput={true}
               {...register("email")}
               onIonChange={() => {
                 clearErrors("email");

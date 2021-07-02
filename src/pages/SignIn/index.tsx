@@ -64,13 +64,13 @@ export const SignIn: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: any, e: any) => {
     const { email, password } = data;
 
     try {
       await login(email, password);
       history.push("/tabs/inicio-jugador");
-      reset()
+      e.target.reset()
     } catch {
       present({
         message: "Ocurrió un error al iniciar sesión",
@@ -111,13 +111,22 @@ export const SignIn: React.FC = () => {
             <Login width="350" height="200" />
           </IonCol>
         </IonRow>
-        <SignInForm handleSubmit={handleSubmit(onSubmit)} register={register} clearErrors={clearErrors} errors={errors}/>
+        <SignInForm
+          handleSubmit={handleSubmit(onSubmit)}
+          register={register}
+          clearErrors={clearErrors}
+          errors={errors}
+        />
       </IonContent>
       <IonFooter>
         <IonToolbar color="light">
           <IonRow className="ion-justify-content-end">
             <IonCol size="auto" className="ion-align-items-center">
-              <button type="submit" form="sign-in-form" className='signin-button'>
+              <button
+                type="submit"
+                form="sign-in-form"
+                className="signin-button"
+              >
                 Iniciar sesión
               </button>
             </IonCol>
