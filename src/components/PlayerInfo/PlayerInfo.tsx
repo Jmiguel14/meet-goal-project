@@ -36,6 +36,7 @@ export const PlayerInfo: React.FC = () => {
       }
     });
   }, []);
+  
   console.log(datos);
   return (
     <IonContent>
@@ -48,8 +49,7 @@ export const PlayerInfo: React.FC = () => {
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
           <IonLabel className="locacion">
-            <IonIcon icon={locationOutline} size='small'></IonIcon> Ciudad/País
-            <IonIcon icon={locationOutline}></IonIcon>{" "}
+            <IonIcon icon={locationOutline} size='small'></IonIcon>{" "}
             {datos?.city || datos?.country !== undefined
               ? "" + datos?.city + "/" + datos?.country
               : "Ciudad/Pais"}
