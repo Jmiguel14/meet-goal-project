@@ -93,7 +93,7 @@ export const SignUp: React.FC = () => {
       await signUp(email, password);
       setDataUser(data);
       history.push('/tabs/inicio-jugador')
-      e.targert.reset()
+      e.target.reset()
     } catch {
       present({
         message: "Ocurrió un error al crear la cuenta",

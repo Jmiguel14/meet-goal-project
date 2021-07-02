@@ -115,7 +115,7 @@ export const Menu: React.FC = () => {
             );
           })}
           <IonMenuToggle autoHide={false}>
-            <IonItem onClick={handleLogout} routerLink='/home'>
+            <IonItem onClick={handleLogout}>
               <IonIcon slot="start" icon={logOutOutline} size="large" />
               <IonLabel>Cerrar sesión</IonLabel>
             </IonItem>

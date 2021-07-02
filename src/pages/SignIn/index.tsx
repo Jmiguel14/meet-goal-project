@@ -56,7 +56,6 @@ export const SignIn: React.FC = () => {
   const {
     register,
     handleSubmit,
-    reset,
     clearErrors,
     formState: { errors },
   } = useForm<IForm>({
