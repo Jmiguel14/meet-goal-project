@@ -61,14 +61,14 @@ export const SignUp: React.FC = () => {
   const { signUp, currentUser, createUserDocument } = useAuth();
   const [dataUser, setDataUser] = useState<any>(null);
   const [present] = useIonToast();
-  const history = useHistory()
+  const history = useHistory();
 
   const initialValues = {
     name: "",
     email: "",
     password: "",
   };
-  
+
   const {
     register,
     handleSubmit,
@@ -82,18 +82,19 @@ export const SignUp: React.FC = () => {
   const onSubmit = async (data: any, e: any) => {
     const { email, password } = data;
 
-    if(currentUser) return present({
-      message: 'Ya tiene una sesión activa',
-      duration: 3000,
-      position: 'top',
-      color:'danger'
-    })
-    
+    if (currentUser)
+      return present({
+        message: "Ya tiene una sesión activa",
+        duration: 3000,
+        position: "top",
+        color: "danger",
+      });
+
     try {
       await signUp(email, password);
       setDataUser(data);
-      history.push('/tabs/inicio-jugador')
-      e.target.reset()
+      history.push("/tabs/inicio-jugador");
+      e.target.reset();
     } catch {
       present({
         message: "Ocurrió un error al crear la cuenta",
@@ -116,10 +117,10 @@ export const SignUp: React.FC = () => {
       <IonContent>
         <IonHeader>
           <IonToolbar color="light">
-            <IonButtons slot="start" className='back-button'>
-              <IonBackButton defaultHref="/"/>
+            <IonButtons slot="start" className="back-button">
+              <IonBackButton defaultHref="/" />
             </IonButtons>
-            <IonRow className='icon'>
+            <IonRow className="meet-goal-icon">
               <IonCol size="auto">
                 <MeetGoal width={40} height={40} />
               </IonCol>
@@ -131,7 +132,12 @@ export const SignUp: React.FC = () => {
             <IonLabel position="fixed">Crear una cuenta</IonLabel>
           </IonCol>
         </IonRow>
-        <SignUpForm register={register} handleSubmit={handleSubmit(onSubmit)} clearErrors={clearErrors} errors={errors}/>
+        <SignUpForm
+          register={register}
+          handleSubmit={handleSubmit(onSubmit)}
+          clearErrors={clearErrors}
+          errors={errors}
+        />
       </IonContent>
     </IonPage>
   );

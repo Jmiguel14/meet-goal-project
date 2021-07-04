@@ -20,8 +20,12 @@ interface IAuthProvider {
     currentUser: firebase.User,
     userProperties: user
   ) => Promise<void>;
-  login: (email: string, password: string) => Promise<firebase.auth.UserCredential>
-  logout: () => Promise<void>
+  login: (
+    email: string,
+    password: string
+  ) => Promise<firebase.auth.UserCredential>;
+  logout: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
 }
 
 const AuthContext = React.createContext<IAuthProvider>({} as IAuthProvider);
@@ -40,17 +44,21 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   };
 
   const login = (email: string, password: string) => {
-    return auth.signInWithEmailAndPassword(email, password)
-  }
+    return auth.signInWithEmailAndPassword(email, password);
+  };
 
   function logout() {
-    return auth.signOut()
+    return auth.signOut();
+  }
+
+  function resetPassword(email: string) {
+    return auth.sendPasswordResetEmail(email);
   }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
       setCurrentUser(firebaseUser);
-      setLoading(false)
+      setLoading(false);
     });
     return unsubscribe;
   }, []);
@@ -93,12 +101,17 @@ export const AuthProvider: React.FC = ({ children }: any) => {
     createUserDocument,
     login,
     logout,
+    resetPassword,
   } as IAuthProvider;
 
   return (
     <>
       <AuthContext.Provider value={value}>
-        {loading ? <IonLoading isOpen={loading} message='Cargando...'/> : children}
+        {loading ? (
+          <IonLoading isOpen={loading} message="Cargando..." />
+        ) : (
+          children
+        )}
       </AuthContext.Provider>
     </>
   );

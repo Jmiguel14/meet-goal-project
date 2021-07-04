@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 
 function Login(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -79,7 +79,7 @@ function Login(props: React.SVGProps<SVGSVGElement>) {
       <path fill="#ccc" d="M332.5 201.39h143v2h-143zM333 315.5h143v2H333z" />
       <path fill="#ccc" d="M377.5 107.5h2v304h-2zM427.5 107.5h2v304h-2z" />
     </svg>
-  )
+  );
 }
 
-export default Login
+export default Login;

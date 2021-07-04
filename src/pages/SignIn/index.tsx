@@ -69,7 +69,7 @@ export const SignIn: React.FC = () => {
     try {
       await login(email, password);
       history.push("/tabs/inicio-jugador");
-      e.target.reset()
+      e.target.reset();
     } catch {
       present({
         message: "Ocurrió un error al iniciar sesión",

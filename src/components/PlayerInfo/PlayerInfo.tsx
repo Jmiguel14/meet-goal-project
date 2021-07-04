@@ -2,14 +2,13 @@ import {
   IonCol,
   IonContent,
   IonIcon,
-  IonItem,
   IonLabel,
   IonRow,
   IonSegment,
   IonSegmentButton,
 } from "@ionic/react";
 import { locationOutline } from "ionicons/icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CareerInfo from "./CareerInfo/CareerInfo";
 import ChannelsInfo from "./ChannelsInfo/ChannelsInfo";
 import MedicalInfo from "./MedicalInfo/MedicalInfo";
@@ -18,8 +17,6 @@ import PsycoInfo from "./PsycoInfo/PsycoInfo";
 import TacticalInfo from "./TacticalInfo/TacticalInfo";
 import "./PlayerInfo.css";
 import AvatarPlayer from "./AvatarPlayer/AvatarPlayer";
-import { firestore } from "firebase/client";
-import { useAuth } from "contexts/AuthContext";
 
 export const PlayerInfo: React.FC = () => {
   const [info, setInfo] = useState("personal");
@@ -35,7 +32,7 @@ export const PlayerInfo: React.FC = () => {
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
           <IonLabel className="locacion">
-            <IonIcon icon={locationOutline} size='small'></IonIcon> Ciudad/País
+            <IonIcon icon={locationOutline} size="small"></IonIcon> Ciudad/País
           </IonLabel>
         </IonCol>
       </IonRow>

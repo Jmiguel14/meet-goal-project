@@ -6,6 +6,7 @@ import {
   IonItem,
   IonNote,
   IonInput,
+  IonRouterLink,
 } from "@ionic/react";
 import "./styles.css";
 
@@ -57,6 +58,13 @@ export const SignInForm: React.FC<ISignInForm> = ({
           {errors.password && (
             <IonNote color="danger">{errors.password?.message}</IonNote>
           )}
+        </IonCol>
+      </IonRow>
+      <IonRow className="forgot-password">
+        <IonCol size="auto">
+          <IonRouterLink routerLink="/restablecer-contrasena">
+            <IonNote color="primary">¿Olvidó su contraseña?</IonNote>
+          </IonRouterLink>
         </IonCol>
       </IonRow>
     </form>
