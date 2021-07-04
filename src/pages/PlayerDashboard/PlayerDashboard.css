@@ -1,3 +1,7 @@
-.icon-header {
-  padding-left: 38%;
+ion-menu-button {
+  font-size: 35px;
+}
+
+.menu-icon {
+  position: absolute;
 }

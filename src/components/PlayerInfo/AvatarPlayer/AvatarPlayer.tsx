@@ -1,4 +1,4 @@
-import { IonAvatar, IonImg, IonItem, IonCol, IonRow } from "@ionic/react";
+import { IonAvatar, IonImg, IonCol, IonRow } from "@ionic/react";
 import {} from "ionicons/icons";
 import "./AvatarPlayer.css";
 

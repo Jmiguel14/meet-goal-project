@@ -7,14 +7,7 @@ import {
   IonLabel,
   IonText,
 } from "@ionic/react";
-import {
-  logoFacebook,
-  logoInstagram,
-  logoTwitter,
-  logoVimeo,
-  logoYoutube,
-  pencilOutline,
-} from "ionicons/icons";
+import { pencilOutline } from "ionicons/icons";
 import "./ChannelsInfo.css";
 import FacebookIcon from "icons/FacebookIcon.png";
 import InstagramIcon from "icons/InstagramIcon.png";

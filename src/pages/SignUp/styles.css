@@ -1,9 +1,13 @@
-.icon-back {
+.back-button {
+  position: absolute;
+}
+
+ion-buttons ion-back-button {
   --icon-font-size: 30px;
 }
 
-.icon-header {
-  padding-left: 38%;
+.meet-goal-icon {
+  justify-content: center;
 }
 
 .sign-up-text {
