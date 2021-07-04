@@ -17,7 +17,7 @@ import PsycoInfo from "./PsycoInfo/PsycoInfo";
 import TacticalInfo from "./TacticalInfo/TacticalInfo";
 import "./PlayerInfo.css";
 import AvatarPlayer from "./AvatarPlayer/AvatarPlayer";
-import { getUserDoc } from "firebase/client";
+import { firestore, getUserDoc } from "firebase/client";
 import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
 export const PlayerInfo: React.FC = () => {
@@ -30,13 +30,20 @@ export const PlayerInfo: React.FC = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    getUserDoc(currentUser.uid).then((doc) => {
+    const res = firestore.collection("users").doc(currentUser.uid);
+    res.get().then((doc) => {
       if (doc.exists) {
-        setDatos(doc.data());
+        if (
+          datos?.email !== doc.data()?.email ||
+          datos?.city !== doc.data()?.city ||
+          datos?.country !== doc.data()?.country
+        ) {
+          setDatos(doc.data());
+          console.log(datos);
+        }
       }
     });
-  }, []);
-  console.log(datos);
+  }, [datos]);
   return (
     <IonContent>
       <AvatarPlayer />

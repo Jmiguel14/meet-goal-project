@@ -41,6 +41,18 @@ const checkboxList = [
   { val: "Referencia", isChecked: false },
 ];
 const EditAttributes: React.FC = () => {
+  const [check, setCheck] = useState(false);
+
+  var values: string[] = [];
+  function setAttributesValues(value: string) {
+    if (values.length <= 3) {
+      values.push(value);
+      console.log(values);
+    } else {
+      return console.log("solo selecciona 4 atributos");
+    }
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -67,7 +79,12 @@ const EditAttributes: React.FC = () => {
           {checkboxList.map(({ val, isChecked }, i) => (
             <IonItem key={i}>
               <IonLabel>{val}</IonLabel>
-              <IonCheckbox slot="end" value={val} checked={isChecked} />
+              <IonCheckbox
+                slot="end"
+                value={val}
+                checked={isChecked}
+                onIonChange={(e) => setAttributesValues(e.detail.value!)}
+              />
             </IonItem>
           ))}
         </IonList>

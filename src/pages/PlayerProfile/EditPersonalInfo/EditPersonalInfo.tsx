@@ -60,8 +60,6 @@ export const EditPersonalInfo: React.FC = () => {
     city: "",
   };
 
-  const [dataUser, setDataUser] = useState<any>(null);
-
   const {
     register,
     handleSubmit,
@@ -73,9 +71,9 @@ export const EditPersonalInfo: React.FC = () => {
   });
 
   const onSubmit = async (data: any) => {
-    setDataUser(data);
     const { mail, phone, country, city, birth, contract } = data;
-    setPersonalData(mail, country, city, birth, contract, phone);
+    let birthDate = birth.split("T");
+    setPersonalData(mail, country, city, birthDate[0], contract, phone);
     console.log("data", data);
   };
 
@@ -96,7 +94,13 @@ export const EditPersonalInfo: React.FC = () => {
             <IonTitle color="primary" className="ion-padding titulo">
               Editar I. Personal
             </IonTitle>
-            <IonButton fill="clear" slot="end" color="tertiary" type="submit">
+            <IonButton
+              fill="clear"
+              slot="end"
+              color="tertiary"
+              type="submit"
+              routerLink="/tabs/perfil-jugador"
+            >
               Guardar
             </IonButton>
           </IonToolbar>
