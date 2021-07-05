@@ -24,7 +24,7 @@ const EditPsycoInfo: React.FC = () => {
   const [attitude, setAttitude] = useState<string>("");
 
   const onSubmit = async () => {
-    EditPsycoParameters(character, personality, attitude);
+    await EditPsycoParameters(character, personality, attitude);
   };
   return (
     <IonPage>

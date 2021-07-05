@@ -31,7 +31,7 @@ const AddChannels: React.FC = () => {
   const [vimeo, setVimeo] = useState<string>("");
   const [youtube, setYoutube] = useState<string>("");
   const onSubmit = async () => {
-    EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo);
+    await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo);
   };
   return (
     <IonPage>

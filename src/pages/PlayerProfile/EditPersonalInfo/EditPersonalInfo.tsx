@@ -73,7 +73,7 @@ export const EditPersonalInfo: React.FC = () => {
   const onSubmit = async (data: any) => {
     const { mail, phone, country, city, birth, contract } = data;
     let birthDate = birth.split("T");
-    setPersonalData(mail, country, city, birthDate[0], contract, phone);
+    await setPersonalData(mail, country, city, birthDate[0], contract, phone);
     console.log("data", data);
   };
 

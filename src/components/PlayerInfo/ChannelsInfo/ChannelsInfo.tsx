@@ -7,14 +7,7 @@ import {
   IonLabel,
   IonText,
 } from "@ionic/react";
-import {
-  logoFacebook,
-  logoInstagram,
-  logoTwitter,
-  logoVimeo,
-  logoYoutube,
-  pencilOutline,
-} from "ionicons/icons";
+import { pencilOutline } from "ionicons/icons";
 import "./ChannelsInfo.css";
 import FacebookIcon from "icons/FacebookIcon.png";
 import InstagramIcon from "icons/InstagramIcon.png";
@@ -36,12 +29,12 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    getUserDoc(currentUser.uid).then((doc) => {
-      if (doc.exists) {
-        setDatos(doc.data());
-      }
-    });
-  }, []);
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setDatos);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
   return (
     <>
       <IonCard className="redes-sociales">

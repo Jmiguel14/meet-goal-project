@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
 import { getUserDoc } from "firebase/client";
+import SkillIcon from "icons/skillIcon.png";
 
 interface ContainerProps {}
 
@@ -27,12 +28,12 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    getUserDoc(currentUser.uid).then((doc) => {
-      if (doc.exists) {
-        setDatos(doc.data());
-      }
-    });
-  }, []);
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setDatos);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
   return (
     <>
       <IonCard className="datos-posicionales">
@@ -80,17 +81,53 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
-        <IonItem className="elemento">
-          <IonInput disabled={true}>Atributo 1</IonInput>
+        <IonItem>
+          <IonImg
+            src={SkillIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonText className="atributos">
+            {datos?.firstAttribute !== undefined
+              ? datos?.firstAttribute
+              : "Aquí se mostrarán tus atributos"}
+          </IonText>
         </IonItem>
-        <IonItem className="elemento">
-          <IonInput disabled={true}>Atributo 2</IonInput>
+        <IonItem>
+          <IonImg
+            src={SkillIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonText className="atributos">
+            {datos?.secondAttribute !== undefined
+              ? datos?.secondAttribute
+              : "Aquí se mostrarán tus atributos"}
+          </IonText>
         </IonItem>
-        <IonItem className="elemento">
-          <IonInput disabled={true}>Atributo 3</IonInput>
+        <IonItem>
+          <IonImg
+            src={SkillIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonText className="atributos">
+            {datos?.thirdAttribute !== undefined
+              ? datos?.thirdAttribute
+              : "Aquí se mostrarán tus atributos"}
+          </IonText>
         </IonItem>
-        <IonItem className="elemento">
-          <IonInput disabled={true}>Atributo 4</IonInput>
+        <IonItem>
+          <IonImg
+            src={SkillIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonText className="atributos">
+            {datos?.fourthAttribute !== undefined
+              ? datos?.fourthAttribute
+              : "Aquí se mostrarán tus atributos"}
+          </IonText>
         </IonItem>
       </IonCard>
     </>

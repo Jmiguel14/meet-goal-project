@@ -25,7 +25,7 @@ const EditTacticalInfo: React.FC = () => {
   const [goals, setGoals] = useState<string>("");
 
   const onSubmit = async () => {
-    EditPositionData(pospri, possec, goals);
+    await EditPositionData(pospri, possec, goals);
   };
   return (
     <IonPage>

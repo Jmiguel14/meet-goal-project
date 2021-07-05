@@ -5,6 +5,7 @@ import {
   IonCheckbox,
   IonContent,
   IonHeader,
+  IonIcon,
   IonItem,
   IonItemDivider,
   IonLabel,
@@ -13,6 +14,8 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { EditTacticalAttributes } from "firebase/client";
+import { warningSharp } from "ionicons/icons";
 import { useState } from "react";
 
 import "./EditAttributes.css";
@@ -41,17 +44,23 @@ const checkboxList = [
   { val: "Referencia", isChecked: false },
 ];
 const EditAttributes: React.FC = () => {
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState(true);
 
   var values: string[] = [];
   function setAttributesValues(value: string) {
     if (values.length <= 3) {
       values.push(value);
+      setCheck(true);
+      console.log(check);
       console.log(values);
     } else {
-      return console.log("solo selecciona 4 atributos");
+      setCheck(false);
+      values = [];
     }
   }
+  const onSubmit = async () => {
+    await EditTacticalAttributes(values[0], values[1], values[2], values[3]);
+  };
 
   return (
     <IonPage>
@@ -66,7 +75,13 @@ const EditAttributes: React.FC = () => {
           <IonTitle color="primary" className="titulo">
             Atributos
           </IonTitle>
-          <IonButton fill="clear" slot="end" color="tertiary">
+          <IonButton
+            fill="clear"
+            slot="end"
+            color="tertiary"
+            onClick={onSubmit}
+            routerLink="/tabs/perfil-jugador"
+          >
             Guardar
           </IonButton>
         </IonToolbar>
@@ -74,6 +89,12 @@ const EditAttributes: React.FC = () => {
       <IonContent fullscreen>
         <IonItemDivider color="primary">
           <div className="subtitulo">Atributos</div>
+        </IonItemDivider>
+        <IonItemDivider color="medium">
+          <div className="mensaje">
+            <IonIcon icon={warningSharp} size="small"></IonIcon>
+            {" " + "Seleccione solo 4 atributos"}
+          </div>
         </IonItemDivider>
         <IonList className="atributos">
           {checkboxList.map(({ val, isChecked }, i) => (

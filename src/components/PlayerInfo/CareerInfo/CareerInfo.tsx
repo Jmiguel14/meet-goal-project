@@ -26,12 +26,12 @@ const CareerInfo: React.FC<ContainerProps> = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    getUserDoc(currentUser.uid).then((doc) => {
-      if (doc.exists) {
-        setDatos(doc.data()?.clubs);
-      }
-    });
-  }, []);
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setDatos);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
   return (
     <>
       <IonButton
@@ -52,7 +52,7 @@ const CareerInfo: React.FC<ContainerProps> = () => {
           </div>
         </>
       ) : (
-        datos?.map((club: any) => (
+        datos?.clubs.map((club: any) => (
           <IonCard className="caja" key={club?.clubName}>
             <IonItem className="titulo">
               <IonLabel>{club.clubName}</IonLabel>

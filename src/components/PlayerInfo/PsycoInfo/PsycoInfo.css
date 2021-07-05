@@ -11,6 +11,7 @@
 }
 .datos-psicologicos {
   border-radius: 10px;
+  --ion-background-color: #ffffff;
 }
 .detalle-dato {
   font-style: normal !important;
@@ -21,4 +22,9 @@
   color: #315c79;
   font-size: 14px;
   opacity: 75%;
+}
+.valores {
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 400;
 }

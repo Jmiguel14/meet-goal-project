@@ -22,6 +22,7 @@ import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
 export const PlayerInfo: React.FC = () => {
   const [info, setInfo] = useState("personal");
+  const [busy, setBusy] = useState(true);
 
   const [datos, setDatos] = useState<
     firebase.firestore.DocumentData | undefined
@@ -30,20 +31,14 @@ export const PlayerInfo: React.FC = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    const res = firestore.collection("users").doc(currentUser.uid);
-    res.get().then((doc) => {
-      if (doc.exists) {
-        if (
-          datos?.email !== doc.data()?.email ||
-          datos?.city !== doc.data()?.city ||
-          datos?.country !== doc.data()?.country
-        ) {
-          setDatos(doc.data());
-          console.log(datos);
-        }
-      }
-    });
-  }, [datos]);
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setDatos);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
+
+  console.log(datos);
   return (
     <IonContent>
       <AvatarPlayer />
@@ -55,14 +50,13 @@ export const PlayerInfo: React.FC = () => {
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
           <IonLabel className="locacion">
-            <IonIcon icon={locationOutline}></IonIcon>{" "}
+            <IonIcon icon={locationOutline} size="small"></IonIcon>{" "}
             {datos?.city || datos?.country !== undefined
               ? "" + datos?.city + "/" + datos?.country
               : "Ciudad/Pais"}
           </IonLabel>
         </IonCol>
       </IonRow>
-      {/*-- Scrollable Segment --*/}
       <IonSegment scrollable value={info} className="menu-horizontal">
         <IonSegmentButton
           value="personal"

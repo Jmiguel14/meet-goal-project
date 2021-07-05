@@ -1,4 +1,4 @@
-import { IonTabs, IonTabBar, IonTabButton, IonLabel } from "@ionic/react";
+import { IonTabBar, IonTabs, IonTabButton, IonIcon } from "@ionic/react";
 import React from "react";
 import { IonRouterOutlet } from "@ionic/react";
 import { PrivateRoutes } from "routers/PrivateRoutes";
@@ -7,6 +7,14 @@ import SearchForPlayer from "pages/SearchForPlayer/SearchForPlayer";
 import Notifications from "pages/Notifications/Notifications";
 import Messages from "pages/Messages/Messages";
 import { Route, Redirect } from "react-router";
+import {
+  homeOutline,
+  mailOutline,
+  notificationsOutline,
+  searchOutline,
+} from "ionicons/icons";
+import "./styles.css";
+import { Menu } from "components/Menu";
 import PlayerProfile from "pages/PlayerProfile/PlayerProfile";
 import EditPersonalInfo from "pages/PlayerProfile/EditPersonalInfo/EditPersonalInfo";
 import EditTacticalInfo from "pages/PlayerProfile/EditTacticalInfo/EditTacticalInfo";
@@ -20,8 +28,9 @@ import AddChannels from "pages/PlayerProfile/AddChannels/AddChannels";
 export const TabRoot: React.FC = () => {
   return (
     <>
+      <Menu />
       <IonTabs>
-        <IonRouterOutlet>
+        <IonRouterOutlet id="main">
           <PrivateRoutes
             exact
             path="/tabs/inicio-jugador"
@@ -89,30 +98,34 @@ export const TabRoot: React.FC = () => {
           />
           <Route
             path="/tabs"
-            render={() => <Redirect to="/tabs/inicio-jugador" />}
+            render={() => (
+              <Redirect to={{ pathname: "/tabs/inicio-jugador" }} />
+            )}
             exact={true}
           />
           <Route
             path="/"
-            render={() => <Redirect to="/tabs/inicio-jugador" />}
+            render={() => (
+              <Redirect to={{ pathname: "/tabs/inicio-jugador" }} />
+            )}
             exact={true}
           />
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+        <IonTabBar slot="bottom" color="light">
           <IonTabButton tab="inicio-jugador" href="/tabs/inicio-jugador">
-            <IonLabel>Home</IonLabel>
+            <IonIcon icon={homeOutline} />
           </IonTabButton>
           <IonTabButton tab="busqueda" href="/tabs/busqueda">
-            <IonLabel>Busqueda</IonLabel>
+            <IonIcon icon={searchOutline}></IonIcon>
           </IonTabButton>
           <IonTabButton
             tab="notificaciones-jugador"
             href="/tabs/notificaciones-jugador"
           >
-            <IonLabel>Notificaciones</IonLabel>
+            <IonIcon icon={notificationsOutline}></IonIcon>
           </IonTabButton>
           <IonTabButton tab="mensajes-jugador" href="/tabs/mensajes-jugador">
-            <IonLabel>Mensajes</IonLabel>
+            <IonIcon icon={mailOutline}></IonIcon>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

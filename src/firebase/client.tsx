@@ -18,8 +18,31 @@ export const auth = firebase.auth();
 
 export const firestore = firebase.firestore();
 
-export async function getUserDoc(id: string) {
-  return await firestore.collection("users").doc(id).get();
+const getDataToUserDoc = (doc: any) => {
+  const data = doc.data();
+  return data;
+};
+
+export const getUserDoc = (callback: any) => {
+  return firestore
+    .collection("users")
+    .doc(auth.currentUser?.uid)
+    .onSnapshot((snapshot) => {
+      const newData = getDataToUserDoc(snapshot);
+      callback(newData);
+    });
+};
+
+export async function fetchUserDoc() {
+  return await firestore
+    .collection("users")
+    .doc(auth.currentUser?.uid)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        return getDataToUserDoc(doc);
+      }
+    });
 }
 
 export async function setPersonalData(
@@ -58,7 +81,7 @@ export async function EditPositionData(
       possec: possec,
       goals: goals,
     });
-    console.log("club Registrado");
+    console.log("posicion editada");
   } catch (e) {
     console.log(e);
   }
@@ -193,6 +216,42 @@ export async function AddInjuryExperienced(
           console.log("lesion agregada");
         }
       }
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function EditTacticalAttributes(
+  att1: string,
+  att2: string,
+  att3: string,
+  att4: string
+) {
+  let id = auth.currentUser?.uid;
+  try {
+    const save = await firestore.collection("users").doc(id).update({
+      firstAttribute: att1,
+      secondAttribute: att2,
+      thirdAttribute: att3,
+      fourthAttribute: att4,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function EditPersonalValues(
+  value1: string,
+  value2: string,
+  value3: string
+) {
+  let id = auth.currentUser?.uid;
+  try {
+    const save = await firestore.collection("users").doc(id).update({
+      value1: value1,
+      value2: value2,
+      value3: value3,
     });
   } catch (e) {
     console.log(e);

@@ -7,12 +7,7 @@ import {
   IonLabel,
   IonText,
 } from "@ionic/react";
-import {
-  happyOutline,
-  heartCircleOutline,
-  pencilOutline,
-  thumbsUpOutline,
-} from "ionicons/icons";
+import { pencilOutline } from "ionicons/icons";
 import "./PsycoInfo.css";
 import AttitudeIcon from "icons/attitudeIcon.png";
 import PersonalityIcon from "icons/personalityIcon.png";
@@ -21,6 +16,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "contexts/AuthContext";
 import { getUserDoc } from "firebase/client";
 import firebase from "firebase/app";
+import ValueIcon from "icons/valueIcon.png";
 
 interface ContainerProps {}
 
@@ -32,12 +28,12 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    getUserDoc(currentUser.uid).then((doc) => {
-      if (doc.exists) {
-        setDatos(doc.data());
-      }
-    });
-  }, []);
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setDatos);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
   return (
     <>
       <IonCard className="datos-psicologicos">
@@ -99,14 +95,41 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
-        <IonItem className="dato-psyco">
-          <IonText>Valor1</IonText>
+        <IonItem>
+          <IonImg
+            src={ValueIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonText className="valores">
+            {datos?.value1 !== undefined
+              ? datos?.value1
+              : "Aquí se mostrarán los valores seleccionados"}
+          </IonText>
         </IonItem>
-        <IonItem className="dato-psyco">
-          <IonText>Valor2</IonText>
+        <IonItem>
+          <IonImg
+            src={ValueIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonText className="valores">
+            {datos?.value2 !== undefined
+              ? datos?.value2
+              : "Aquí se mostrarán los valores seleccionados"}
+          </IonText>
         </IonItem>
-        <IonItem className="dato-psyco">
-          <IonText>Valor3</IonText>
+        <IonItem>
+          <IonImg
+            src={ValueIcon}
+            slot="start"
+            className="ion-padding-vertical"
+          ></IonImg>
+          <IonText className="valores">
+            {datos?.value3 !== undefined
+              ? datos?.value3
+              : "Aquí se mostrarán los valores seleccionados"}
+          </IonText>
         </IonItem>
       </IonCard>
     </>

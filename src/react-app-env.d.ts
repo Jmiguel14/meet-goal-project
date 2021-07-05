@@ -1,2 +1,2 @@
 /// <reference types="react-scripts" />
-export import loadable from '@loadable/component'
+import loadable from "@loadable/component";

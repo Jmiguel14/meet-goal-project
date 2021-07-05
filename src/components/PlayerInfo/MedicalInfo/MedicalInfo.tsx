@@ -26,12 +26,12 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    getUserDoc(currentUser.uid).then((doc) => {
-      if (doc.exists) {
-        setDatos(doc.data()?.injuries);
-      }
-    });
-  }, []);
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setDatos);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
   return (
     <>
       <IonButton
@@ -52,7 +52,7 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
           </div>
         </>
       ) : (
-        datos?.map((injury: any) => (
+        datos?.injuries.map((injury: any) => (
           <IonCard className="datos-medicos" key={injury.injuryName}>
             <IonItem className="titulo">
               <IonLabel>{injury.injuryName}</IonLabel>

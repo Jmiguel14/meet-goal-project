@@ -23,7 +23,7 @@ const AddInjury: React.FC = () => {
   const [checked, setChecked] = useState(false);
 
   const onSubmit = async () => {
-    AddInjuryExperienced(injuryName, recoveryTime, checked);
+    await AddInjuryExperienced(injuryName, recoveryTime, checked);
   };
   return (
     <IonPage>

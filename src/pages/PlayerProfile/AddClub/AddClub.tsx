@@ -111,7 +111,7 @@ export const AddClub: React.FC = () => {
       TA,
       TR,
     } = data;
-    AddCubExperience(
+    await AddCubExperience(
       clubName,
       country,
       season,

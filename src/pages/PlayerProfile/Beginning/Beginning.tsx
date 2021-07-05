@@ -13,6 +13,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { EditPersonalValues } from "firebase/client";
 import { useState } from "react";
 
 import "./Beginning.css";
@@ -31,6 +32,23 @@ const checkboxList = [
 ];
 const Beginning: React.FC = () => {
   const [checked, setChecked] = useState(false);
+  const [check, setCheck] = useState(true);
+
+  var values: string[] = [];
+  function setAttributesValues(value: string) {
+    if (values.length <= 2) {
+      values.push(value);
+      setCheck(true);
+      console.log(check);
+      console.log(values);
+    } else {
+      setCheck(false);
+      values = [];
+    }
+  }
+  const onSubmit = async () => {
+    await EditPersonalValues(values[0], values[1], values[2]);
+  };
 
   return (
     <IonPage>
@@ -45,7 +63,13 @@ const Beginning: React.FC = () => {
           <IonTitle color="primary" className="titulo">
             Valores
           </IonTitle>
-          <IonButton fill="clear" slot="end" color="tertiary">
+          <IonButton
+            fill="clear"
+            slot="end"
+            color="tertiary"
+            onClick={onSubmit}
+            routerLink="/tabs/perfil-jugador"
+          >
             Guardar
           </IonButton>
         </IonToolbar>
@@ -58,7 +82,12 @@ const Beginning: React.FC = () => {
           {checkboxList.map(({ val, isChecked }, i) => (
             <IonItem key={i}>
               <IonLabel>{val}</IonLabel>
-              <IonCheckbox slot="end" value={val} checked={isChecked} />
+              <IonCheckbox
+                slot="end"
+                value={val}
+                checked={isChecked}
+                onIonChange={(e) => setAttributesValues(e.detail.value!)}
+              />
             </IonItem>
           ))}
         </IonList>
