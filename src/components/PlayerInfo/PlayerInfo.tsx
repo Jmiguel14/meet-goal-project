@@ -84,7 +84,7 @@ export const PlayerInfo: React.FC = () => {
           className="segments"
           onClick={() => setInfo("medica")}
         >
-          <IonLabel>Datos medicos</IonLabel>
+          <IonLabel>Datos médicos</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="psico"

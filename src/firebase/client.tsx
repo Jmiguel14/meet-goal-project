@@ -51,7 +51,8 @@ export async function setPersonalData(
   city: string,
   birth: string,
   contract: string,
-  phone: number
+  phone: number,
+  marketTransfer: string
 ) {
   let id = auth.currentUser?.uid;
   try {
@@ -62,6 +63,7 @@ export async function setPersonalData(
       city: city,
       contract: contract,
       birth: birth,
+      marketTransfer: marketTransfer,
     });
     console.log("Registro actualizado");
   } catch (e) {

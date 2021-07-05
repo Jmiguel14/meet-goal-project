@@ -97,16 +97,14 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
         </IonItem>
       </IonCard>
       <IonCard className="cajas">
-        <IonItem>
+        <IonItem href={datos?.marketTransfer}>
           <IonImg
             src={MarketIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">
-              {datos?.market !== undefined ? datos?.market : "MarketTransfer"}
-            </h1>
+            <h1 className="info">MarketTransfer</h1>
           </IonLabel>
           <IonText className="texto">Link MarketTransfer</IonText>
         </IonItem>

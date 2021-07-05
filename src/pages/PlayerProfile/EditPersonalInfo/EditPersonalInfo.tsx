@@ -22,6 +22,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { setPersonalData } from "firebase/client";
+import { contract } from "ionicons/icons";
 
 export enum ContractTypeEnum {
   libre = "libre",
@@ -36,6 +37,7 @@ export interface IIForm {
   phone: number;
   birth: string;
   contract: ContractTypeEnum;
+  marketTransfer: string;
 }
 
 const ERROR_MESSAGES = {
@@ -56,8 +58,11 @@ const schema = yup.object().shape({
 
 export const EditPersonalInfo: React.FC = () => {
   const initialValues = {
+    mail: "",
     country: "",
     city: "",
+    birth: "",
+    marketTransfer: "",
   };
 
   const {
@@ -70,11 +75,21 @@ export const EditPersonalInfo: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: any) => {
-    const { mail, phone, country, city, birth, contract } = data;
+  const onSubmit = async (data: any, e: any) => {
+    const { mail, phone, country, city, birth, contract, marketTransfer } =
+      data;
     let birthDate = birth.split("T");
-    await setPersonalData(mail, country, city, birthDate[0], contract, phone);
+    await setPersonalData(
+      mail,
+      country,
+      city,
+      birthDate[0],
+      contract,
+      phone,
+      marketTransfer
+    );
     console.log("data", data);
+    e.target.reset();
   };
 
   const [selectedDate, setSelectedDate] = useState<string>(
@@ -166,8 +181,8 @@ export const EditPersonalInfo: React.FC = () => {
               }}
             ></IonInput>
           </IonItem>
-          {errors.mail?.message && (
-            <IonNote color="danger">{errors.mail?.message}</IonNote>
+          {errors.phone?.message && (
+            <IonNote color="danger">{errors.phone?.message}</IonNote>
           )}
 
           <IonItem className="dato-personal">
@@ -191,13 +206,25 @@ export const EditPersonalInfo: React.FC = () => {
               }}
             >
               <IonSelectOption value="libre">Libre</IonSelectOption>
-              <IonSelectOption value="prestamo">Prestamo</IonSelectOption>
+              <IonSelectOption value="prestamo">Préstamo</IonSelectOption>
               <IonSelectOption value="contratado">Contratado</IonSelectOption>
             </IonSelect>
           </IonItem>
           {errors.contract && (
             <IonNote color="danger">{errors.contract?.message}</IonNote>
           )}
+
+          <IonItem className="dato-personal">
+            <IonInput
+              placeholder="Pega aquí tu link de MarketTransfer"
+              type="text"
+              clearInput={true}
+              {...register("marketTransfer")}
+              onIonChange={() => {
+                clearErrors("marketTransfer");
+              }}
+            ></IonInput>
+          </IonItem>
         </IonContent>
       </IonPage>{" "}
     </form>

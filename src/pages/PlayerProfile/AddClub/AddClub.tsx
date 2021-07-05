@@ -170,7 +170,7 @@ export const AddClub: React.FC = () => {
           )}
           <IonItem className="campo-club">
             <IonInput
-              placeholder="Pais"
+              placeholder="País del club"
               type="text"
               clearInput={true}
               {...register("country")}

@@ -54,10 +54,10 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className="detalle-dato">
-              {datos?.character !== undefined ? datos?.character : "Caracter"}
+              {datos?.character !== undefined ? datos?.character : "Carácter"}
             </h1>
           </IonLabel>
-          <IonText className="descripcion">Caracter</IonText>
+          <IonText className="descripcion">Carácter</IonText>
         </IonItem>
         <IonItem className="dato-psyco">
           <IonImg

@@ -5,6 +5,7 @@ import {
   IonCheckbox,
   IonContent,
   IonHeader,
+  IonIcon,
   IonItem,
   IonItemDivider,
   IonLabel,
@@ -14,6 +15,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { EditPersonalValues } from "firebase/client";
+import { warningSharp } from "ionicons/icons";
 import { useState } from "react";
 
 import "./Beginning.css";
@@ -77,6 +79,12 @@ const Beginning: React.FC = () => {
       <IonContent fullscreen>
         <IonItemDivider color="primary">
           <div className="subtitulo">Selecciona tus valores</div>
+        </IonItemDivider>
+        <IonItemDivider color="medium">
+          <div className="advertencia">
+            <IonIcon icon={warningSharp} size="small"></IonIcon>
+            {" " + "Seleccione solo 3 valores"}
+          </div>
         </IonItemDivider>
         <IonList className="atributos">
           {checkboxList.map(({ val, isChecked }, i) => (

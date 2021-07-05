@@ -41,13 +41,13 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
         routerLink="/tabs/agregar-lesiones-jugador"
       >
         <IonIcon icon={addCircleOutline}></IonIcon>
-        Agregar informes medicos
+        Agregar informes médicos
       </IonButton>
       {datos === undefined ? (
         <>
           <div className="container-message">
             <IonLabel className="message-not-found">
-              Registra aqui todos las lesiones experimentadas
+              Registra aquí todos las lesiones experimentadas
             </IonLabel>
           </div>
         </>

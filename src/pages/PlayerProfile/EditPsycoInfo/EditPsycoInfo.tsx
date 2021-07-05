@@ -76,7 +76,7 @@ const EditPsycoInfo: React.FC = () => {
           </IonSelect>
         </IonItem>
         <IonItemDivider color="primary">
-          <div className="subtitulo">Parametros de Personalidad</div>
+          <div className="subtitulo">Parámetros de Personalidad</div>
         </IonItemDivider>
         <div className="notas">
           <IonNote className="nota">E:Extrovertido - I: Introvertido</IonNote>
