@@ -43,7 +43,7 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
         <IonIcon icon={addCircleOutline}></IonIcon>
         Agregar informes médicos
       </IonButton>
-      {datos === undefined ? (
+      {datos?.injuries === undefined ? (
         <>
           <div className="container-message">
             <IonLabel className="message-not-found">

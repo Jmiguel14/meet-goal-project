@@ -43,7 +43,7 @@ const CareerInfo: React.FC<ContainerProps> = () => {
         <IonIcon icon={addCircleOutline}></IonIcon>
         Agregar club a tu experiencia
       </IonButton>
-      {datos === undefined ? (
+      {datos?.clubs === undefined ? (
         <>
           <div className="container-message">
             <IonLabel className="message-not-found">
