@@ -13,6 +13,7 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import { EditPositionData } from "firebase/client";
 import { useState } from "react";
@@ -20,12 +21,20 @@ import { useState } from "react";
 import "./EditTacticalInfo.css";
 
 const EditTacticalInfo: React.FC = () => {
+  const [present] = useIonToast();
   const [pospri, setPospri] = useState<string>("");
   const [possec, setPossec] = useState<string>("");
   const [goals, setGoals] = useState<string>("");
 
   const onSubmit = async () => {
-    await EditPositionData(pospri, possec, goals);
+    if (await EditPositionData(pospri, possec, goals)) {
+      present({
+        message: "Se actualizó la información exitosamente",
+        duration: 1000,
+        position: "top",
+        color: "primary",
+      });
+    }
   };
   return (
     <IonPage>
@@ -75,7 +84,7 @@ const EditTacticalInfo: React.FC = () => {
             <IonSelectOption value="MI">Medio Izquierdo</IonSelectOption>
             <IonSelectOption value="MD">Medio Derecho</IonSelectOption>
             <IonSelectOption value="SD">Segundo Delantero</IonSelectOption>
-            <IonSelectOption value="DC">Cnetro Delantero</IonSelectOption>
+            <IonSelectOption value="DC">Centro Delantero</IonSelectOption>
             <IonSelectOption value="EI">Ext. Izquierdo</IonSelectOption>
             <IonSelectOption value="ED">Ext.Derecho</IonSelectOption>
           </IonSelect>
@@ -100,7 +109,7 @@ const EditTacticalInfo: React.FC = () => {
             <IonSelectOption value="MI">Medio Izquierdo</IonSelectOption>
             <IonSelectOption value="MD">Medio Derecho</IonSelectOption>
             <IonSelectOption value="SD">Segundo Delantero</IonSelectOption>
-            <IonSelectOption value="DC">Cnetro Delantero</IonSelectOption>
+            <IonSelectOption value="DC">Centro Delantero</IonSelectOption>
             <IonSelectOption value="EI">Ext. Izquierdo</IonSelectOption>
             <IonSelectOption value="ED">Ext.Derecho</IonSelectOption>
           </IonSelect>

@@ -1,3 +1,4 @@
+import { useIonToast } from "@ionic/react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
@@ -45,7 +46,7 @@ export async function fetchUserDoc() {
     });
 }
 
-export async function setPersonalData(
+export async function SetPersonalData(
   email: string,
   country: string,
   city: string,
@@ -65,9 +66,9 @@ export async function setPersonalData(
       birth: birth,
       marketTransfer: marketTransfer,
     });
-    console.log("Registro actualizado");
+    return true;
   } catch (e) {
-    console.log(e);
+    return false;
   }
 }
 
@@ -83,9 +84,9 @@ export async function EditPositionData(
       possec: possec,
       goals: goals,
     });
-    console.log("posicion editada");
+    return true;
   } catch (e) {
-    console.log(e);
+    return false;
   }
 }
 export async function EditPsycoParameters(
@@ -100,9 +101,9 @@ export async function EditPsycoParameters(
       personality: personality,
       attitude: attitude,
     });
-    console.log("datos psyco editados");
+    return true;
   } catch (e) {
-    console.log(e);
+    return false;
   }
 }
 export async function EditChannelsLinks(
@@ -121,8 +122,9 @@ export async function EditChannelsLinks(
       youtube: youtube,
       vimeo: vimeo,
     });
+    return true;
   } catch (e) {
-    console.log(e);
+    return false;
   }
 }
 export async function AddCubExperience(
@@ -159,7 +161,6 @@ export async function AddCubExperience(
               },
             ],
           });
-          console.log("lista de club creado y club agregado");
         } else {
           res.update({
             clubs: firebase.firestore.FieldValue.arrayUnion({
@@ -175,14 +176,12 @@ export async function AddCubExperience(
               TR: TR,
             }),
           });
-          console.log("club agregado");
         }
-      } else {
-        console.log("error al cargar el documento");
       }
     });
+    return true;
   } catch (e) {
-    console.log(e);
+    return false;
   }
 }
 
@@ -206,7 +205,6 @@ export async function AddInjuryExperienced(
               },
             ],
           });
-          console.log("lesiones creadas y lesion agregada");
         } else {
           res.update({
             injuries: firebase.firestore.FieldValue.arrayUnion({
@@ -215,12 +213,12 @@ export async function AddInjuryExperienced(
               surgery: surgery,
             }),
           });
-          console.log("lesion agregada");
         }
       }
     });
+    return true;
   } catch (e) {
-    console.log(e);
+    return false;
   }
 }
 
@@ -238,8 +236,9 @@ export async function EditTacticalAttributes(
       thirdAttribute: att3,
       fourthAttribute: att4,
     });
+    return true;
   } catch (e) {
-    console.log(e);
+    return false;
   }
 }
 
@@ -255,7 +254,8 @@ export async function EditPersonalValues(
       value2: value2,
       value3: value3,
     });
+    return true;
   } catch (e) {
-    console.log(e);
+    return false;
   }
 }

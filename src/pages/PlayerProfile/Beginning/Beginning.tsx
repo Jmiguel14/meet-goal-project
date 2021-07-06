@@ -13,6 +13,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import { EditPersonalValues } from "firebase/client";
 import { warningSharp } from "ionicons/icons";
@@ -33,6 +34,7 @@ const checkboxList = [
   { val: "Solidaridad", isChecked: false },
 ];
 const Beginning: React.FC = () => {
+  const [present] = useIonToast();
   const [checked, setChecked] = useState(false);
   const [check, setCheck] = useState(true);
 
@@ -49,7 +51,14 @@ const Beginning: React.FC = () => {
     }
   }
   const onSubmit = async () => {
-    await EditPersonalValues(values[0], values[1], values[2]);
+    if (await EditPersonalValues(values[0], values[1], values[2])) {
+      present({
+        message: "Se actualizó la información exitosamente",
+        duration: 1000,
+        position: "top",
+        color: "primary",
+      });
+    }
   };
 
   return (

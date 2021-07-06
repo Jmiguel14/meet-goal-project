@@ -15,13 +15,14 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import React, { useState } from "react";
 import "./EditPersonalInfo.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { setPersonalData } from "firebase/client";
+import { SetPersonalData } from "firebase/client";
 import { contract } from "ionicons/icons";
 
 export enum ContractTypeEnum {
@@ -57,11 +58,13 @@ const schema = yup.object().shape({
 });
 
 export const EditPersonalInfo: React.FC = () => {
+  const [present] = useIonToast();
+  const [selectedDate, setSelectedDate] = useState<string>("");
   const initialValues = {
     mail: "",
     country: "",
     city: "",
-    birth: "",
+    birth: selectedDate,
     marketTransfer: "",
   };
 
@@ -69,6 +72,7 @@ export const EditPersonalInfo: React.FC = () => {
     register,
     handleSubmit,
     clearErrors,
+    reset,
     formState: { errors },
   } = useForm<IIForm>({
     defaultValues: initialValues,
@@ -78,23 +82,27 @@ export const EditPersonalInfo: React.FC = () => {
   const onSubmit = async (data: any, e: any) => {
     const { mail, phone, country, city, birth, contract, marketTransfer } =
       data;
-    let birthDate = birth.split("T");
-    await setPersonalData(
-      mail,
-      country,
-      city,
-      birthDate[0],
-      contract,
-      phone,
-      marketTransfer
-    );
-    console.log("data", data);
+    if (
+      await SetPersonalData(
+        mail,
+        country,
+        city,
+        birth,
+        contract,
+        phone,
+        marketTransfer
+      )
+    ) {
+      present({
+        message: "Se actualizó la información exitosamente",
+        duration: 1000,
+        position: "top",
+        color: "primary",
+      });
+    }
     e.target.reset();
   };
 
-  const [selectedDate, setSelectedDate] = useState<string>(
-    "2012-12-15T13:47:20.789"
-  );
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <IonPage>
@@ -198,6 +206,7 @@ export const EditPersonalInfo: React.FC = () => {
           <IonItem className="dato-personal">
             <IonLabel color="medium">Estado Contractual</IonLabel>
             <IonSelect
+              itemType="text"
               okText="okay"
               cancelText="Cerrar"
               {...register("contract")}

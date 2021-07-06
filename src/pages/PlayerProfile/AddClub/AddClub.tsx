@@ -11,6 +11,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 
 import "./AddClub.css";
@@ -91,14 +92,16 @@ export const AddClub: React.FC = () => {
     TR: 0,
   };
   const [dataClub, setDataClub] = useState<any>(null);
+  const [present] = useIonToast();
   const {
     register,
     handleSubmit,
     clearErrors,
+    reset,
     formState: { errors },
   } = useForm<IIIForm>({ resolver: yupResolver(schema) });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: any, e: any) => {
     const {
       clubName,
       country,
@@ -111,19 +114,29 @@ export const AddClub: React.FC = () => {
       TA,
       TR,
     } = data;
-    await AddCubExperience(
-      clubName,
-      country,
-      season,
-      subPlayer,
-      catTournament,
-      PJ,
-      G,
-      A,
-      TA,
-      TR
-    );
+    if (
+      await AddCubExperience(
+        clubName,
+        country,
+        season,
+        subPlayer,
+        catTournament,
+        PJ,
+        G,
+        A,
+        TA,
+        TR
+      )
+    ) {
+      present({
+        message: "Se agrego el club a tu experiencia",
+        duration: 1000,
+        position: "top",
+        color: "primary",
+      });
+    }
     console.log("data", data);
+    e.target.reset();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -12,18 +12,28 @@ import {
   IonTitle,
   IonToggle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import { AddInjuryExperienced } from "firebase/client";
 import { useState } from "react";
 
 import "./AddInjury.css";
 const AddInjury: React.FC = () => {
+  const [present] = useIonToast();
   const [injuryName, setInjuryName] = useState("");
   const [recoveryTime, setRecoveryTime] = useState("");
   const [checked, setChecked] = useState(false);
 
-  const onSubmit = async () => {
-    await AddInjuryExperienced(injuryName, recoveryTime, checked);
+  const onSubmit = async (e: any) => {
+    if (await AddInjuryExperienced(injuryName, recoveryTime, checked)) {
+      present({
+        message: "Se ha registrado la inforamción ha tu historial médico",
+        duration: 1000,
+        position: "top",
+        color: "primary",
+      });
+    }
+    e.target.reset();
   };
   return (
     <IonPage>

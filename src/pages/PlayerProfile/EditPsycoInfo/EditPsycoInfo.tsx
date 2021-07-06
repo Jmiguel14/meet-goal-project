@@ -13,9 +13,11 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import { EditPsycoParameters } from "firebase/client";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 import "./EditPsycoInfo.css";
 const EditPsycoInfo: React.FC = () => {
@@ -24,8 +26,16 @@ const EditPsycoInfo: React.FC = () => {
   const [attitude, setAttitude] = useState<string>("");
 
   const onSubmit = async () => {
-    await EditPsycoParameters(character, personality, attitude);
+    if (await EditPsycoParameters(character, personality, attitude)) {
+      present({
+        message: "Se actualizó la información exitosamente",
+        duration: 1000,
+        position: "top",
+        color: "primary",
+      });
+    }
   };
+
   return (
     <IonPage>
       <IonHeader>

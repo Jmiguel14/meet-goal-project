@@ -11,6 +11,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import { EditChannelsLinks } from "firebase/client";
 import {
@@ -30,8 +31,16 @@ const AddChannels: React.FC = () => {
   const [instagram, setInstagram] = useState<string>("");
   const [vimeo, setVimeo] = useState<string>("");
   const [youtube, setYoutube] = useState<string>("");
+  const [present] = useIonToast();
   const onSubmit = async () => {
-    await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo);
+    if (await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo)) {
+      present({
+        message: "Se ha actualizado la inforamción de tus redes",
+        duration: 1000,
+        position: "top",
+        color: "primary",
+      });
+    }
   };
   return (
     <IonPage>

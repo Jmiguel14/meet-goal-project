@@ -13,6 +13,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import { EditTacticalAttributes } from "firebase/client";
 import { warningSharp } from "ionicons/icons";
@@ -44,6 +45,7 @@ const checkboxList = [
   { val: "Referencia", isChecked: false },
 ];
 const EditAttributes: React.FC = () => {
+  const [present] = useIonToast();
   const [check, setCheck] = useState(true);
 
   var values: string[] = [];
@@ -59,7 +61,16 @@ const EditAttributes: React.FC = () => {
     }
   }
   const onSubmit = async () => {
-    await EditTacticalAttributes(values[0], values[1], values[2], values[3]);
+    if (
+      await EditTacticalAttributes(values[0], values[1], values[2], values[3])
+    ) {
+      present({
+        message: "Se actualizó la información exitosamente",
+        duration: 1000,
+        position: "top",
+        color: "primary",
+      });
+    }
   };
 
   return (

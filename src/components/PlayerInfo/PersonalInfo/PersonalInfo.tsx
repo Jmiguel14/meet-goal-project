@@ -32,6 +32,10 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
+  function converterDate() {
+    let birth = datos?.birth.split("T");
+    return birth[0];
+  }
   return (
     <>
       <IonCard className="cajas">
@@ -73,7 +77,9 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className="info">
-              {datos?.birth !== undefined ? datos?.birth : "F. de Nacimiento"}
+              {datos?.birth !== undefined
+                ? converterDate()
+                : "F. de Nacimiento"}
             </h1>
           </IonLabel>
           <IonText className="texto">Fecha de Nacimiento</IonText>
