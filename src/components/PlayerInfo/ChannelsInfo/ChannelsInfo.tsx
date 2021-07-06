@@ -1,10 +1,13 @@
 import {
   IonButton,
   IonCard,
+  IonCol,
+  IonGrid,
   IonIcon,
   IonImg,
   IonItem,
   IonLabel,
+  IonRow,
   IonText,
 } from "@ionic/react";
 import { pencilOutline } from "ionicons/icons";
@@ -44,57 +47,91 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
-        <IonItem className="elemento">
-          <IonImg
-            src={FacebookIcon}
-            slot="start"
-            className="ion-padding-vertical"
-          ></IonImg>
-          <IonText>
-            {datos?.facebook !== undefined ? datos?.facebook : "Facebook"}
-          </IonText>
-        </IonItem>
-        <IonItem className="elemento">
-          <IonImg
-            src={TwitterIcon}
-            slot="start"
-            className="ion-padding-vertical"
-          ></IonImg>
-          <IonText>
-            {datos?.twitter !== undefined ? datos?.twitter : "Twitter"}
-          </IonText>
-        </IonItem>
-        <IonItem className="elemento">
-          <IonImg
-            src={InstagramIcon}
-            slot="start"
-            className="ion-padding-vertical"
-          ></IonImg>
-          <IonText>
-            {datos?.instagram !== undefined ? datos?.instagram : "Instagram"}
-          </IonText>
-        </IonItem>
-        <IonItem className="elemento">
-          <IonImg
-            src={YoutubeIcon}
-            slot="start"
-            className="ion-padding-vertical"
-          ></IonImg>
-          <IonText>
-            {datos?.youtube !== undefined ? datos?.youtube : "YouTube"}
-          </IonText>
-        </IonItem>
-        <IonItem className="elemento">
-          <IonImg
-            src={VimeoIcon}
-            slot="start"
-            className="ion-padding-vertical"
-          ></IonImg>
-          <IonText>
-            {datos?.vimeo !== undefined ? datos?.vimeo : "Vimeo"}
-          </IonText>
-        </IonItem>
       </IonCard>
+
+      <IonGrid className="logos">
+        <IonRow>
+          <IonCol>
+            {datos?.facebook !== undefined && datos?.facebook !== "" ? (
+              <IonCard href={datos?.facebook} className="channel-logo-facebook">
+                <IonButton size="large" fill="clear">
+                  <IonImg src={FacebookIcon} slot="start"></IonImg>
+                </IonButton>
+              </IonCard>
+            ) : (
+              <div></div>
+            )}
+          </IonCol>
+
+          <IonCol>
+            {datos?.twitter !== undefined && datos?.twitter !== "" ? (
+              <IonCard href={datos?.twitter} className="channel-logo-twitter">
+                <IonButton size="large" fill="clear">
+                  <IonImg
+                    src={TwitterIcon}
+                    slot="start"
+                    className="ion-padding-vertical"
+                  ></IonImg>
+                </IonButton>
+              </IonCard>
+            ) : (
+              <div></div>
+            )}
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+            {datos?.instagram !== undefined && datos?.instagram !== "" ? (
+              <IonCard
+                href={datos?.instagram}
+                className="channel-logo-instagram"
+              >
+                <IonButton size="large" fill="clear">
+                  <IonImg
+                    src={InstagramIcon}
+                    slot="start"
+                    className="ion-padding-vertical"
+                  ></IonImg>
+                </IonButton>
+              </IonCard>
+            ) : (
+              <div></div>
+            )}
+          </IonCol>
+          <IonCol>
+            {datos?.youtube !== undefined && datos?.youtube !== "" ? (
+              <IonCard href={datos?.youtube} className="channel-logo-youtube">
+                <IonButton size="large" fill="clear">
+                  <IonImg
+                    src={YoutubeIcon}
+                    slot="start"
+                    className="ion-padding-vertical"
+                  ></IonImg>
+                </IonButton>
+              </IonCard>
+            ) : (
+              <div></div>
+            )}
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+            {datos?.vimeo !== undefined && datos?.vimeo !== "" ? (
+              <IonCard href={datos?.vimeo} className="channel-logo-vimeo">
+                <IonButton size="large" fill="clear">
+                  <IonImg
+                    src={VimeoIcon}
+                    slot="start"
+                    className="ion-padding-vertical"
+                  ></IonImg>
+                </IonButton>
+              </IonCard>
+            ) : (
+              <div></div>
+            )}
+          </IonCol>
+        </IonRow>
+      </IonGrid>
     </>
   );
 };

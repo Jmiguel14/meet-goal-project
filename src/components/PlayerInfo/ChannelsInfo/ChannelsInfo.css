@@ -19,4 +19,36 @@
 }
 .redes-sociales {
   border-radius: 10px;
+  --ion-backgroud-color: #ffffff;
+}
+.channel-logo {
+  text-align: center;
+}
+.logos {
+  background-color: #d0dde1;
+}
+.channel-logo-facebook {
+  text-align: center;
+  background-color: #3e7ed6;
+  border-radius: 10px;
+}
+.channel-logo-twitter {
+  text-align: center;
+  background-color: #66e5e3;
+  border-radius: 10px;
+}
+.channel-logo-instagram {
+  text-align: center;
+  background-color: #c85e66;
+  border-radius: 10px;
+}
+.channel-logo-youtube {
+  text-align: center;
+  background-color: #ee6e51;
+  border-radius: 10px;
+}
+.channel-logo-vimeo {
+  text-align: center;
+  background-color: #b8df6f;
+  border-radius: 10px;
 }

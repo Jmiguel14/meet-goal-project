@@ -75,7 +75,7 @@ const AddChannels: React.FC = () => {
             <IonIcon icon={logoFacebook}></IonIcon>
           </IonButton>
           <IonInput
-            placeholder="Facebook"
+            placeholder="Facebook: Ej. www.facebook.com/meet-goal-official-page"
             onIonChange={(e: any) => setFacebook(e.currentTarget.value)}
           ></IonInput>
         </IonItem>
@@ -84,7 +84,7 @@ const AddChannels: React.FC = () => {
             <IonIcon icon={logoTwitter}></IonIcon>
           </IonButton>
           <IonInput
-            placeholder="Twitter"
+            placeholder="Twitter: Ej. www.twitter.com/MeetGoalOfficial"
             onIonChange={(e: any) => setTwitter(e.currentTarget.value)}
           ></IonInput>
         </IonItem>
@@ -93,7 +93,7 @@ const AddChannels: React.FC = () => {
             <IonIcon icon={logoInstagram}></IonIcon>
           </IonButton>
           <IonInput
-            placeholder="Instagram"
+            placeholder="Instagram: Ej. www.instagram.com/MeetGoalOfficial"
             onIonChange={(e: any) => setInstagram(e.currentTarget.value)}
           ></IonInput>
         </IonItem>
@@ -102,7 +102,7 @@ const AddChannels: React.FC = () => {
             <IonIcon icon={logoYoutube}></IonIcon>
           </IonButton>
           <IonInput
-            placeholder="Youtube"
+            placeholder="Youtube: Ej. www.youtube.com/channel/UcsqpqcxtErZpw"
             onIonChange={(e: any) => setYoutube(e.currentTarget.value)}
           ></IonInput>
         </IonItem>
@@ -111,7 +111,7 @@ const AddChannels: React.FC = () => {
             <IonIcon icon={logoVimeo}></IonIcon>
           </IonButton>
           <IonInput
-            placeholder="Vimeo"
+            placeholder="Vimeo: Ej. www.vimeo.com/userZZZZZZZZ"
             onIonChange={(e: any) => setVimeo(e.currentTarget.value)}
           ></IonInput>
         </IonItem>
