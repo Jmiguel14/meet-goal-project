@@ -43,7 +43,7 @@ const schema = yup.object().shape({
   password: yup.string().required(ERROR_MESSAGES.required),
 });
 
-export const SignIn: React.FC = () => {
+const SignIn: React.FC = () => {
   const { login } = useAuth();
   const history = useHistory();
   const [present] = useIonToast();
@@ -135,3 +135,5 @@ export const SignIn: React.FC = () => {
     </IonPage>
   );
 };
+
+export default SignIn;

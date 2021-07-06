@@ -13,7 +13,7 @@ import MeetGoal from "icons/MeetGoal";
 import CheckEmailIcon from "icons/CheckEmailIcon";
 import "./styles.css";
 
-export const CheckEmail: React.FC = () => {
+const CheckEmail: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
@@ -55,3 +55,5 @@ export const CheckEmail: React.FC = () => {
     </IonPage>
   );
 };
+
+export default CheckEmail;

@@ -57,7 +57,7 @@ const schema = yup.object().shape({
   password: yup.string().required(ERROR_MESSAGES.required),
 });
 
-export const SignUp: React.FC = () => {
+const SignUp: React.FC = () => {
   const { signUp, currentUser, createUserDocument } = useAuth();
   const [dataUser, setDataUser] = useState<any>(null);
   const [present] = useIonToast();
@@ -142,3 +142,5 @@ export const SignUp: React.FC = () => {
     </IonPage>
   );
 };
+
+export default SignUp;
