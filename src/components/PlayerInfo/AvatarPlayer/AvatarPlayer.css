@@ -10,16 +10,15 @@
 }
 .imagenes {
   position: relative;
-  height: 46.87%;
-  width: 100%;
+  padding: 0;
 }
 .portada {
+  display: flex;
   width: 100%;
 }
 .contenedor {
   position: absolute;
   top: 66%;
-  left: 36.25%;
 }
 .fotos-jugador {
   align-items: center;

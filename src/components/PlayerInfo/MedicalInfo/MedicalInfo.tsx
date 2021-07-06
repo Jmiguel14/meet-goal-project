@@ -21,7 +21,7 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
         shape="round"
         expand="block"
         className="ion-padding-horizontal"
-        routerLink="/agregar-lesiones-jugador"
+        routerLink="/tabs/agregar-lesiones-jugador"
       >
         <IonIcon icon={addCircleOutline}></IonIcon>
         Agregar informes medicos

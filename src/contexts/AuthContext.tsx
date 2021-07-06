@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { auth, firestore } from "firebase/client";
 import firebase from "firebase/app";
 import { useIonToast, IonLoading } from "@ionic/react";
-import { userTypeEnum } from "components/SignUpForm";
+import { userTypeEnum } from "pages/SignUp";
 
 export type user = {
   name: string;
@@ -20,6 +20,12 @@ interface IAuthProvider {
     currentUser: firebase.User,
     userProperties: user
   ) => Promise<void>;
+  login: (
+    email: string,
+    password: string
+  ) => Promise<firebase.auth.UserCredential>;
+  logout: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
 }
 
 const AuthContext = React.createContext<IAuthProvider>({} as IAuthProvider);
@@ -37,10 +43,22 @@ export const AuthProvider: React.FC = ({ children }: any) => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
 
+  const login = (email: string, password: string) => {
+    return auth.signInWithEmailAndPassword(email, password);
+  };
+
+  function logout() {
+    return auth.signOut();
+  }
+
+  function resetPassword(email: string) {
+    return auth.sendPasswordResetEmail(email);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
       setCurrentUser(firebaseUser);
-      setLoading(false)
+      setLoading(false);
     });
     return unsubscribe;
   }, []);
@@ -81,13 +99,19 @@ export const AuthProvider: React.FC = ({ children }: any) => {
     currentUser,
     signUp,
     createUserDocument,
+    login,
+    logout,
+    resetPassword,
   } as IAuthProvider;
 
   return (
     <>
-      {console.log(loading)}
       <AuthContext.Provider value={value}>
-        {loading ? <IonLoading isOpen={loading}/> : children}
+        {loading ? (
+          <IonLoading isOpen={loading} message="Cargando..." />
+        ) : (
+          children
+        )}
       </AuthContext.Provider>
     </>
   );

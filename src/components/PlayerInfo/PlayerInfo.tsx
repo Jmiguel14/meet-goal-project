@@ -2,7 +2,6 @@ import {
   IonCol,
   IonContent,
   IonIcon,
-  IonItem,
   IonLabel,
   IonRow,
   IonSegment,
@@ -20,27 +19,23 @@ import "./PlayerInfo.css";
 import AvatarPlayer from "./AvatarPlayer/AvatarPlayer";
 
 export const PlayerInfo: React.FC = () => {
-  const [info, setInfo] = useState("");
+  const [info, setInfo] = useState("personal");
+
   return (
     <IonContent>
       <AvatarPlayer />
-      <IonRow>
-        <IonCol>
-          <IonItem className="ion-text-center" lines="none">
-            <IonLabel className="nombre">PlayerName</IonLabel>
-          </IonItem>
+      <IonRow className="ion-justify-content-center">
+        <IonCol size="auto">
+          <IonLabel className="nombre">PlayerName</IonLabel>
         </IonCol>
       </IonRow>
-      <IonRow>
-        <IonCol>
-          <IonItem className="ion-text-center" lines="none">
-            <IonLabel className="locacion">
-              <IonIcon icon={locationOutline}></IonIcon> Ciudad/País
-            </IonLabel>
-          </IonItem>
+      <IonRow className="ion-justify-content-center">
+        <IonCol size="auto">
+          <IonLabel className="locacion">
+            <IonIcon icon={locationOutline} size="small"></IonIcon> Ciudad/País
+          </IonLabel>
         </IonCol>
       </IonRow>
-      {/*-- Scrollable Segment --*/}
       <IonSegment scrollable value={info} className="menu-horizontal">
         <IonSegmentButton
           value="personal"

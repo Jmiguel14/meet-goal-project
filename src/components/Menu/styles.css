@@ -1,0 +1,33 @@
+ion-menu {
+  --ion-background-color: #ffffff;
+}
+
+.unique-user-name {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.user-name ion-label {
+  font-weight: bold;
+}
+
+.unique-user-name ion-label {
+  color: #a1a1a1;
+  font-size: 12px;
+}
+
+ion-item-divider {
+  position: relative;
+}
+
+ion-menu ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb), 0.14);
+}
+
+ion-menu ion-item.selected ion-icon {
+  color: var(--ion-color-primary);
+}
+
+ion-item.selected {
+  --color: var(--ion-color-primary);
+}

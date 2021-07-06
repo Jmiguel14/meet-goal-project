@@ -22,7 +22,7 @@ const CareerInfo: React.FC<ContainerProps> = () => {
         shape="round"
         expand="block"
         className="ion-padding-horizontal"
-        routerLink="/agregar-experiencia"
+        routerLink="/tabs/agregar-experiencia"
       >
         <IonIcon icon={addCircleOutline}></IonIcon>
         Agregar club a tu experiencia

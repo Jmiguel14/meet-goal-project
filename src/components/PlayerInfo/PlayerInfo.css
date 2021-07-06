@@ -1,7 +1,7 @@
 .segments {
   font-style: normal;
   font-weight: normal;
-  size: 12px;
+  size: auto;
   line-height: 20px;
   display: flex;
   align-items: center;
@@ -25,6 +25,8 @@
   height: auto;
 }
 .menu-horizontal {
+  size: auto;
+  display: flex;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
