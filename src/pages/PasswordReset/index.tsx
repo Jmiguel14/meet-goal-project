@@ -41,7 +41,7 @@ const schema = yup.object().shape({
     .email(ERROR_MESSAGES.email),
 });
 
-export const PasswordReset: React.FC = () => {
+const PasswordReset: React.FC = () => {
   const { resetPassword } = useAuth();
   const [loading, setLoading] = useState(false);
   const [present] = useIonToast();
@@ -137,3 +137,5 @@ export const PasswordReset: React.FC = () => {
     </IonPage>
   );
 };
+
+export default PasswordReset;
