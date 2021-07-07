@@ -13,7 +13,7 @@ import MeetGoal from "icons/MeetGoal";
 import CheckEmailIcon from "icons/CheckEmailIcon";
 import "./styles.css";
 
-export const CheckEmail: React.FC = () => {
+const CheckEmail: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
@@ -46,7 +46,12 @@ export const CheckEmail: React.FC = () => {
         </IonRow>
         <IonRow className="ion-justify-content-center">
           <IonCol size="11">
-            <IonButton routerLink="/home" expand="block">
+            <IonButton
+              routerLink="/home"
+              expand="block"
+              className="button"
+              strong={true}
+            >
               Regresar al inicio
             </IonButton>
           </IonCol>
@@ -55,3 +60,5 @@ export const CheckEmail: React.FC = () => {
     </IonPage>
   );
 };
+
+export default CheckEmail;
