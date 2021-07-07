@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { auth, firestore } from "firebase/client";
 import firebase from "firebase/app";
 import { useIonToast, IonLoading } from "@ionic/react";
-import { userTypeEnum } from "pages/SignUp";
+import { userTypeEnum } from "types";
 
-export type user = {
+type user = {
   name: string;
   phone: number;
   userType: userTypeEnum;
@@ -34,7 +34,7 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-export const AuthProvider: React.FC = ({ children }: any) => {
+export const AuthProvider: React.FC = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [present] = useIonToast();
   const [loading, setLoading] = useState(true);

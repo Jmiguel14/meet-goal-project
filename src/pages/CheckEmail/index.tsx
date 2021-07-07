@@ -46,7 +46,12 @@ const CheckEmail: React.FC = () => {
         </IonRow>
         <IonRow className="ion-justify-content-center">
           <IonCol size="11">
-            <IonButton routerLink="/home" expand="block">
+            <IonButton
+              routerLink="/home"
+              expand="block"
+              className="button"
+              strong={true}
+            >
               Regresar al inicio
             </IonButton>
           </IonCol>

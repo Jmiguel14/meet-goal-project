@@ -22,25 +22,15 @@ import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-export interface IForm {
-  email: string;
-  password: string;
-}
-
-const ERROR_MESSAGES = {
-  required: "Este campo es requerido",
-  positive: "Debe ser un número positivo",
-  email: "Email no válido",
-  number: "Debe especificar un número",
-};
+import { SigninFormInputs } from "types";
+import { ERROR_MESSAGES } from "constants/errorMessages";
 
 const schema = yup.object().shape({
   email: yup
     .string()
-    .required(ERROR_MESSAGES.required)
-    .email(ERROR_MESSAGES.email),
-  password: yup.string().required(ERROR_MESSAGES.required),
+    .required(ERROR_MESSAGES.REQUIRED)
+    .email(ERROR_MESSAGES.EMAIL),
+  password: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
 
 const SignIn: React.FC = () => {
@@ -58,18 +48,21 @@ const SignIn: React.FC = () => {
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<IForm>({
+  } = useForm<SigninFormInputs>({
     defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: any, e: any) => {
+  const onSubmit = async (
+    data: SigninFormInputs,
+    e: React.BaseSyntheticEvent<object, any, any> | undefined
+  ) => {
     const { email, password } = data;
 
     try {
       await login(email, password);
       history.push("/tabs/inicio-jugador");
-      e.target.reset();
+      e?.target.reset();
     } catch {
       present({
         message: "Ocurrió un error al iniciar sesión",

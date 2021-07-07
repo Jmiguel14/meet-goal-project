@@ -20,16 +20,28 @@ import AddInjury from "pages/PlayerProfile/AddInjury/AddInjury";
 import EditPsycoInfo from "pages/PlayerProfile/EditPsycoInfo/EditPsycoInfo";
 import Beginning from "pages/PlayerProfile/Beginning/Beginning";
 import AddChannels from "pages/PlayerProfile/AddChannels/AddChannels";
-import loadable from '@loadable/component';
+import loadable from "@loadable/component";
 import { IonLoading } from "@ionic/react";
+import { Routes } from "constants/routes";
 
-const loadableOptions = {fallback: <IonLoading isOpen={true}/>}
+const loadableOptions = { fallback: <IonLoading isOpen={true} /> };
 
-const AsyncDashboard = loadable(() => import('pages/PlayerDashboard/PlayerDashboard'), loadableOptions)
-const AsyncSearchForPlayer = loadable(() => import('pages/SearchForPlayer/SearchForPlayer'), loadableOptions)
-const AsyncNotifications = loadable(() => import('pages/Notifications/Notifications'), loadableOptions)
-const AsyncMessages = loadable(() => import('pages/Messages/Messages'), loadableOptions)
-const AsyncPasswordReset = loadable(() => import('pages/PasswordReset'), loadableOptions)
+const AsyncDashboard = loadable(
+  () => import("pages/PlayerDashboard/PlayerDashboard"),
+  loadableOptions
+);
+const AsyncSearchForPlayer = loadable(
+  () => import("pages/SearchForPlayer/SearchForPlayer"),
+  loadableOptions
+);
+const AsyncNotifications = loadable(
+  () => import("pages/Notifications/Notifications"),
+  loadableOptions
+);
+const AsyncMessages = loadable(
+  () => import("pages/Messages/Messages"),
+  loadableOptions
+);
 
 export const TabRoot: React.FC = () => {
   return (
@@ -39,22 +51,22 @@ export const TabRoot: React.FC = () => {
         <IonRouterOutlet id="main">
           <PrivateRoutes
             exact
-            path="/tabs/inicio-jugador"
+            path={Routes.DASHBOARD}
             component={AsyncDashboard}
           />
           <PrivateRoutes
             exact
-            path="/tabs/busqueda"
+            path={Routes.SEARCH}
             component={AsyncSearchForPlayer}
           />
           <PrivateRoutes
             exact
-            path="/tabs/notificaciones-jugador"
+            path={Routes.NOTIFICATIONS}
             component={AsyncNotifications}
           />
           <PrivateRoutes
             exact
-            path="/tabs/mensajes-jugador"
+            path={Routes.MESSAGES}
             component={AsyncMessages}
           />
           <PrivateRoutes

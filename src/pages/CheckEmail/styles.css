@@ -16,3 +16,8 @@
   font-size: 14px;
   color: var(--ion-color-medium);
 }
+
+.button {
+  --border-radius: 10px;
+  text-transform: none;
+}
