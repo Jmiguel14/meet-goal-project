@@ -8,7 +8,7 @@ import {
   IonText,
 } from "@ionic/react";
 import { pencilOutline } from "ionicons/icons";
-import "./PsycoInfo.css";
+import styles from "./styles.module.css";
 import AttitudeIcon from "icons/attitudeIcon.png";
 import PersonalityIcon from "icons/personalityIcon.png";
 import CharacterIcon from "icons/characterIcon.png";
@@ -36,8 +36,8 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
   }, [currentUser]);
   return (
     <>
-      <IonCard className="datos-psicologicos">
-        <IonItem className="titulo">
+      <IonCard className={styles.psycology_data}>
+        <IonItem className={styles.title}>
           <IonLabel>Parámetros Psicológicos</IonLabel>
           <IonButton
             fill="clear"
@@ -46,50 +46,50 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
-        <IonItem className="dato-psyco">
+        <IonItem className={styles.data_psyco}>
           <IonImg
             src={CharacterIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="detalle-dato">
+            <h1 className={styles.data_detail}>
               {datos?.character !== undefined ? datos?.character : "Carácter"}
             </h1>
           </IonLabel>
-          <IonText className="descripcion">Carácter</IonText>
+          <IonText className={styles.descripcion}>Carácter</IonText>
         </IonItem>
-        <IonItem className="dato-psyco">
+        <IonItem className={styles.data_psyco}>
           <IonImg
             src={PersonalityIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="detalle-dato">
+            <h1 className={styles.data_detail}>
               {datos?.personality !== undefined
                 ? datos?.personality
                 : "Personalidad"}
             </h1>
           </IonLabel>
-          <IonText className="descripcion">Personalidad</IonText>
+          <IonText className={styles.descripcion}>Personalidad</IonText>
         </IonItem>
-        <IonItem className="dato-psyco">
+        <IonItem className={styles.data_psyco}>
           <IonImg
             src={AttitudeIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="detalle-dato">
+            <h1 className={styles.data_detail}>
               {datos?.attitude !== undefined ? datos?.attitude : "Actitud"}
             </h1>
           </IonLabel>
-          <IonText className="descripcion">Actitud</IonText>
+          <IonText className={styles.descripcion}>Actitud</IonText>
         </IonItem>
       </IonCard>
-      <IonCard className="datos-psicologicos">
-        <IonItem className="titulo">
+      <IonCard className={styles.psycology_data}>
+        <IonItem className={styles.title}>
           <IonLabel>Valores</IonLabel>
           <IonButton fill="clear" routerLink="/tabs/editar-valores-jugador">
             <IonIcon icon={pencilOutline} />
@@ -101,7 +101,7 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonText className="valores">
+          <IonText className={styles.values}>
             {datos?.value1 !== undefined
               ? datos?.value1
               : "Aquí se mostrarán los valores seleccionados"}
@@ -113,7 +113,7 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonText className="valores">
+          <IonText className={styles.values}>
             {datos?.value2 !== undefined
               ? datos?.value2
               : "Aquí se mostrarán los valores seleccionados"}
@@ -125,7 +125,7 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonText className="valores">
+          <IonText className={styles.values}>
             {datos?.value3 !== undefined
               ? datos?.value3
               : "Aquí se mostrarán los valores seleccionados"}

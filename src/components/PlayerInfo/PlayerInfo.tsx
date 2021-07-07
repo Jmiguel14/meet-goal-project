@@ -15,11 +15,12 @@ import MedicalInfo from "./MedicalInfo/MedicalInfo";
 import PersonalInfo from "./PersonalInfo/PersonalInfo";
 import PsycoInfo from "./PsycoInfo/PsycoInfo";
 import TacticalInfo from "./TacticalInfo/TacticalInfo";
-import "./PlayerInfo.css";
+import styles from "./styles.module.css";
 import AvatarPlayer from "./AvatarPlayer/AvatarPlayer";
-import { firestore, getUserDoc } from "firebase/client";
+import { getUserDoc } from "firebase/client";
 import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
+
 export const PlayerInfo: React.FC = () => {
   const [info, setInfo] = useState("personal");
   const [busy, setBusy] = useState(true);
@@ -44,12 +45,12 @@ export const PlayerInfo: React.FC = () => {
       <AvatarPlayer />
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
-          <IonLabel className="nombre">{datos?.name}</IonLabel>
+          <IonLabel className={styles.name}>{datos?.name}</IonLabel>
         </IonCol>
       </IonRow>
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
-          <IonLabel className="locacion">
+          <IonLabel className={styles.location}>
             <IonIcon icon={locationOutline} size="small"></IonIcon>{" "}
             {datos?.city || datos?.country !== undefined
               ? "" + datos?.city + "/" + datos?.country
@@ -57,45 +58,45 @@ export const PlayerInfo: React.FC = () => {
           </IonLabel>
         </IonCol>
       </IonRow>
-      <IonSegment scrollable value={info} className="menu-horizontal">
+      <IonSegment scrollable value={info} className={styles.menu_horizontal}>
         <IonSegmentButton
           value="personal"
-          className="segments"
+          className={styles.segments}
           onClick={() => setInfo("personal")}
         >
           <IonLabel>Datos Personales</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="tactica"
-          className="segments"
+          className={styles.segments}
           onClick={() => setInfo("tactica")}
         >
           <IonLabel>Datos tácticos</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="carrera"
-          className="segments"
+          className={styles.segments}
           onClick={() => setInfo("carrera")}
         >
           <IonLabel>Experiencia</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="medica"
-          className="segments"
+          className={styles.segments}
           onClick={() => setInfo("medica")}
         >
           <IonLabel>Datos médicos</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="psico"
-          className="segments"
+          className={styles.segments}
           onClick={() => setInfo("psico")}
         >
           <IonLabel>Datos psicológicos</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="canales"
-          className="segments"
+          className={styles.segments}
           onClick={() => setInfo("canales")}
         >
           <IonLabel>Canales</IonLabel>

@@ -3,13 +3,12 @@ import {
   IonCard,
   IonIcon,
   IonImg,
-  IonInput,
   IonItem,
   IonLabel,
   IonText,
 } from "@ionic/react";
 import { pencilOutline } from "ionicons/icons";
-import "./TacticalInfo.css";
+import styles from "./styles.module.css";
 import MedalIcon from "icons/medalIcon.png";
 import PlayerIcon from "icons/playerIcon.png";
 import { useEffect, useState } from "react";
@@ -36,8 +35,8 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
   }, [currentUser]);
   return (
     <>
-      <IonCard className="datos-posicionales">
-        <IonItem className="titulo">
+      <IonCard className={styles.positional_data}>
+        <IonItem className={styles.title}>
           <IonLabel>
             {datos?.pospri !== undefined ? datos?.pospri : "Posición Principal"}
           </IonLabel>
@@ -48,7 +47,7 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
-        <IonItem className="elemento">
+        <IonItem className={styles.element}>
           <IonImg
             src={PlayerIcon}
             slot="start"
@@ -60,7 +59,7 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
               : "Posición Secundaria"}
           </IonText>
         </IonItem>
-        <IonItem className="elemento">
+        <IonItem className={styles.element}>
           <IonImg
             src={MedalIcon}
             slot="start"
@@ -71,8 +70,8 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
           </IonText>
         </IonItem>
       </IonCard>
-      <IonCard className="datos-tacticos">
-        <IonItem className="titulo">
+      <IonCard className={styles.tactical_data}>
+        <IonItem className={styles.title}>
           <IonLabel>Atributos</IonLabel>
           <IonButton
             fill="clear"
@@ -81,49 +80,49 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             <IonIcon icon={pencilOutline} />
           </IonButton>
         </IonItem>
-        <IonItem>
+        <IonItem className={styles.element}>
           <IonImg
             src={SkillIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonText className="atributos">
+          <IonText className={styles.attribute}>
             {datos?.firstAttribute !== undefined
               ? datos?.firstAttribute
               : "Aquí se mostrarán tus atributos"}
           </IonText>
         </IonItem>
-        <IonItem>
+        <IonItem className={styles.element}>
           <IonImg
             src={SkillIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonText className="atributos">
+          <IonText className={styles.attribute}>
             {datos?.secondAttribute !== undefined
               ? datos?.secondAttribute
               : "Aquí se mostrarán tus atributos"}
           </IonText>
         </IonItem>
-        <IonItem>
+        <IonItem className={styles.element}>
           <IonImg
             src={SkillIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonText className="atributos">
+          <IonText className={styles.attribute}>
             {datos?.thirdAttribute !== undefined
               ? datos?.thirdAttribute
               : "Aquí se mostrarán tus atributos"}
           </IonText>
         </IonItem>
-        <IonItem>
+        <IonItem className={styles.element}>
           <IonImg
             src={SkillIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonText className="atributos">
+          <IonText className={styles.attribute}>
             {datos?.fourthAttribute !== undefined
               ? datos?.fourthAttribute
               : "Aquí se mostrarán tus atributos"}

@@ -2,23 +2,35 @@
   text-align: center;
   width: 100%;
 }
-.icon-back {
+.icon_back {
   --icon-font-size: 30px;
 }
-.titulo {
+.titles {
   text-align: center;
   font-weight: 700;
   box-shadow: none;
   color: #000000;
   font-style: normal;
 }
-.acciones {
+.subtitle {
+  text-align: center;
+  width: 100%;
+}
+.acts {
   text-align: center;
 }
-.nueva-lesion {
+.new_injury {
   --ion-background-color: #ffffff;
 }
-.campo-lesion {
+.injury_field {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.save_injury_info {
+  height: 16px;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 10px;
+  color: #5ab3ef;
+  background-color: #f4f5f8;
 }

@@ -1,4 +1,4 @@
-.titulo {
+.title {
   --ion-background-color: rgba(173, 173, 173, 0.38);
   border-radius: 10px 10px 0px 0px;
   font-weight: 700;
@@ -6,48 +6,48 @@
   line-height: 22px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.elemento {
+.element {
   font-weight: 400;
   size: 16px;
   line-height: 22px;
   color: #444;
   --ion-background-color: #ffffff;
 }
-.-ion-padding-vertical {
+.-ion_padding_vertical {
   width: 50px;
   height: 50px;
 }
-.redes-sociales {
+.social_networks {
   border-radius: 10px;
   --ion-backgroud-color: #ffffff;
 }
-.channel-logo {
+.channel_logo {
   text-align: center;
 }
 .logos {
   background-color: #d0dde1;
 }
-.channel-logo-facebook {
+.channel_logo_facebook {
   text-align: center;
   background-color: #3e7ed6;
   border-radius: 10px;
 }
-.channel-logo-twitter {
+.channel_logo_twitter {
   text-align: center;
   background-color: #66e5e3;
   border-radius: 10px;
 }
-.channel-logo-instagram {
+.channel_logo_instagram {
   text-align: center;
   background-color: #c85e66;
   border-radius: 10px;
 }
-.channel-logo-youtube {
+.channel_logo_youtube {
   text-align: center;
   background-color: #ee6e51;
   border-radius: 10px;
 }
-.channel-logo-vimeo {
+.channel_logo_vimeo {
   text-align: center;
   background-color: #b8df6f;
   border-radius: 10px;

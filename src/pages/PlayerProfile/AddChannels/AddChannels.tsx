@@ -22,8 +22,9 @@ import {
   logoYoutube,
 } from "ionicons/icons";
 import { useState } from "react";
-
-import "./AddChannels.css";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
+import styles from "./styles.module.css";
 
 const AddChannels: React.FC = () => {
   const [facebook, setFacebook] = useState<string>("");
@@ -31,7 +32,10 @@ const AddChannels: React.FC = () => {
   const [instagram, setInstagram] = useState<string>("");
   const [vimeo, setVimeo] = useState<string>("");
   const [youtube, setYoutube] = useState<string>("");
+  const { reset, handleSubmit } = useForm();
   const [present] = useIonToast();
+  const history = useHistory();
+
   const onSubmit = async () => {
     if (await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo)) {
       present({
@@ -41,80 +45,83 @@ const AddChannels: React.FC = () => {
         color: "primary",
       });
     }
+    reset();
+    history.push("/tabs/perfil-jugador");
   };
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" className="acciones">
+        <IonToolbar color="light">
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/tabs/perfil-jugador"
-              className="icon-back"
+              className={styles.icon_back}
             />
           </IonButtons>
-          <IonTitle color="primary" className="titulo">
+          <IonTitle color="primary" className={styles.title}>
             Redes Sociales
           </IonTitle>
-          <IonButton
-            fill="clear"
+          <button
+            type="submit"
+            form="add-channels-info-form"
             slot="end"
-            color="tertiary"
-            onClick={onSubmit}
-            routerLink="/tabs/perfil-jugador"
+            className={styles.save_channels_info}
           >
             Guardar
-          </IonButton>
+          </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className="redes">
+      <IonContent fullscreen className={styles.networks}>
         <IonItemDivider color="primary">
-          <div className="subtitulo">Pega aquí tus redes sociales</div>
+          <div className={styles.subtitle}>Pega aquí tus redes sociales</div>
         </IonItemDivider>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoFacebook}></IonIcon>
-          </IonButton>
-          <IonInput
-            placeholder="Facebook: Ej. www.facebook.com/meet-goal-official-page"
-            onIonChange={(e: any) => setFacebook(e.currentTarget.value)}
-          ></IonInput>
-        </IonItem>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoTwitter}></IonIcon>
-          </IonButton>
-          <IonInput
-            placeholder="Twitter: Ej. www.twitter.com/MeetGoalOfficial"
-            onIonChange={(e: any) => setTwitter(e.currentTarget.value)}
-          ></IonInput>
-        </IonItem>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoInstagram}></IonIcon>
-          </IonButton>
-          <IonInput
-            placeholder="Instagram: Ej. www.instagram.com/MeetGoalOfficial"
-            onIonChange={(e: any) => setInstagram(e.currentTarget.value)}
-          ></IonInput>
-        </IonItem>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoYoutube}></IonIcon>
-          </IonButton>
-          <IonInput
-            placeholder="Youtube: Ej. www.youtube.com/channel/UcsqpqcxtErZpw"
-            onIonChange={(e: any) => setYoutube(e.currentTarget.value)}
-          ></IonInput>
-        </IonItem>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoVimeo}></IonIcon>
-          </IonButton>
-          <IonInput
-            placeholder="Vimeo: Ej. www.vimeo.com/userZZZZZZZZ"
-            onIonChange={(e: any) => setVimeo(e.currentTarget.value)}
-          ></IonInput>
-        </IonItem>
+        <form onSubmit={handleSubmit(onSubmit)} id="add-channels-info-form">
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoFacebook}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Facebook: Ej. www.facebook.com/meet-goal-official-page"
+              onIonChange={(e: any) => setFacebook(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoTwitter}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Twitter: Ej. www.twitter.com/MeetGoalOfficial"
+              onIonChange={(e: any) => setTwitter(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoInstagram}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Instagram: Ej. www.instagram.com/MeetGoalOfficial"
+              onIonChange={(e: any) => setInstagram(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoYoutube}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Youtube: Ej. www.youtube.com/channel/UcsqpqcxtErZpw"
+              onIonChange={(e: any) => setYoutube(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoVimeo}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Vimeo: Ej. www.vimeo.com/userZZZZZZZZ"
+              onIonChange={(e: any) => setVimeo(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+        </form>
       </IonContent>
     </IonPage>
   );

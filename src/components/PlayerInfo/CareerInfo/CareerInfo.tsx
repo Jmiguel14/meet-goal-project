@@ -12,7 +12,7 @@ import {
   speedometerOutline,
 } from "ionicons/icons";
 import { useEffect, useState } from "react";
-import "./CareerInfo.css";
+import styles from "./styles.module.css";
 import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
 import { getUserDoc } from "firebase/client";
@@ -45,22 +45,22 @@ const CareerInfo: React.FC<ContainerProps> = () => {
       </IonButton>
       {datos?.clubs === undefined ? (
         <>
-          <div className="container-message">
-            <IonLabel className="message-not-found">
+          <div className={styles.container_message}>
+            <IonLabel className={styles.message_not_found}>
               Registra aqui todos los clubes en los cuales has jugado
             </IonLabel>
           </div>
         </>
       ) : (
         datos?.clubs.map((club: any) => (
-          <IonCard className="caja" key={club?.clubName}>
-            <IonItem className="titulo">
+          <IonCard className={styles.box} key={club?.clubName}>
+            <IonItem className={styles.title}>
               <IonLabel>{club.clubName}</IonLabel>
             </IonItem>
-            <IonItem className="elemento">
+            <IonItem className={styles.element}>
               <IonText>{club.countryClub + "-" + club.season}</IonText>
             </IonItem>
-            <IonCard className="elemento">
+            <IonCard className={styles.element}>
               <IonItem>
                 <IonIcon icon={barChartOutline} slot="start"></IonIcon>
                 <IonText>{club.subPlayer}</IonText>

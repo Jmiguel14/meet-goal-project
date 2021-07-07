@@ -18,8 +18,9 @@ import {
 import { EditPersonalValues } from "firebase/client";
 import { warningSharp } from "ionicons/icons";
 import { useState } from "react";
+import { useHistory } from "react-router";
+import styles from "./styles.module.css";
 
-import "./Beginning.css";
 const checkboxList = [
   { val: "Juego Limpio", isChecked: false },
   { val: "Respeto", isChecked: false },
@@ -37,6 +38,7 @@ const Beginning: React.FC = () => {
   const [present] = useIonToast();
   const [checked, setChecked] = useState(false);
   const [check, setCheck] = useState(true);
+  const history = useHistory();
 
   var values: string[] = [];
   function setAttributesValues(value: string) {
@@ -59,43 +61,42 @@ const Beginning: React.FC = () => {
         color: "primary",
       });
     }
+    history.push("/tabs/perfil-jugador");
   };
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" className="acciones">
+        <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/tabs/perfil-jugador"
-              className="icon-back"
+              className={styles.icon_back}
             />
           </IonButtons>
-          <IonTitle color="primary" className="titulo">
+          <IonTitle color="primary" className={styles.title}>
             Valores
           </IonTitle>
-          <IonButton
-            fill="clear"
+          <button
+            className={styles.save_values_info}
             slot="end"
-            color="tertiary"
             onClick={onSubmit}
-            routerLink="/tabs/perfil-jugador"
           >
             Guardar
-          </IonButton>
+          </button>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonItemDivider color="primary">
-          <div className="subtitulo">Selecciona tus valores</div>
+          <div className={styles.subtitle}>Selecciona tus valores</div>
         </IonItemDivider>
         <IonItemDivider color="medium">
-          <div className="advertencia">
+          <div className={styles.warning}>
             <IonIcon icon={warningSharp} size="small"></IonIcon>
             {" " + "Seleccione solo 3 valores"}
           </div>
         </IonItemDivider>
-        <IonList className="atributos">
+        <IonList className={styles.atribute}>
           {checkboxList.map(({ val, isChecked }, i) => (
             <IonItem key={i}>
               <IonLabel>{val}</IonLabel>

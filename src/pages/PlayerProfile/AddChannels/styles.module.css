@@ -1,0 +1,31 @@
+.title {
+  --ion-background-color: rgba(173, 173, 173, 0.38);
+  border-radius: 10px 10px 0px 0px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: black;
+}
+.subtitle {
+  text-align: center;
+  width: 100%;
+}
+.network {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.networks {
+  --ion-background-color: #ffffff;
+}
+.save_channels_info {
+  height: 16px;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 10px;
+  color: #5ab3ef;
+  background-color: #f4f5f8;
+}
+.icon_back {
+  --icon-font-size: 30px;
+}

@@ -1,6 +1,5 @@
 import {
   IonBackButton,
-  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
@@ -13,14 +12,14 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-
-import "./AddClub.css";
-
+import { ERROR_MESSAGES } from "constants/errorMessages";
+import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { AddCubExperience } from "firebase/client";
+import { useHistory } from "react-router";
 
 export interface IIIForm {
   clubName: string;
@@ -35,47 +34,41 @@ export interface IIIForm {
   TR: number;
 }
 
-const ERROR_MESSAGES = {
-  required: "Este campo es requerido",
-  number: "Debe especificar un número",
-  positive: "Debe ser un número positivo",
-};
-
 const schema = yup.object().shape({
-  clubName: yup.string().required(ERROR_MESSAGES.required),
-  country: yup.string().required(ERROR_MESSAGES.required),
+  clubName: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  country: yup.string().required(ERROR_MESSAGES.REQUIRED),
   season: yup
     .number()
-    .typeError(ERROR_MESSAGES.number)
-    .positive(ERROR_MESSAGES.positive)
-    .required(ERROR_MESSAGES.required),
-  subPlayer: yup.string().required(ERROR_MESSAGES.required),
-  catTournament: yup.string().required(ERROR_MESSAGES.required),
+    .typeError(ERROR_MESSAGES.NUMBER)
+    .positive(ERROR_MESSAGES.POSITIVE)
+    .required(ERROR_MESSAGES.REQUIRED),
+  subPlayer: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  catTournament: yup.string().required(ERROR_MESSAGES.REQUIRED),
   PJ: yup
     .number()
-    .typeError(ERROR_MESSAGES.number)
-    .positive(ERROR_MESSAGES.positive)
-    .required(ERROR_MESSAGES.required),
+    .typeError(ERROR_MESSAGES.REQUIRED)
+    .positive(ERROR_MESSAGES.POSITIVE)
+    .required(ERROR_MESSAGES.REQUIRED),
   G: yup
     .number()
-    .typeError(ERROR_MESSAGES.number)
-    .positive(ERROR_MESSAGES.positive)
-    .required(ERROR_MESSAGES.required),
+    .typeError(ERROR_MESSAGES.NUMBER)
+    .positive(ERROR_MESSAGES.POSITIVE)
+    .required(ERROR_MESSAGES.REQUIRED),
   A: yup
     .number()
-    .typeError(ERROR_MESSAGES.number)
-    .positive(ERROR_MESSAGES.positive)
-    .required(ERROR_MESSAGES.required),
+    .typeError(ERROR_MESSAGES.NUMBER)
+    .positive(ERROR_MESSAGES.POSITIVE)
+    .required(ERROR_MESSAGES.REQUIRED),
   TA: yup
     .number()
-    .typeError(ERROR_MESSAGES.number)
-    .positive(ERROR_MESSAGES.positive)
-    .required(ERROR_MESSAGES.required),
+    .typeError(ERROR_MESSAGES.NUMBER)
+    .positive(ERROR_MESSAGES.POSITIVE)
+    .required(ERROR_MESSAGES.REQUIRED),
   TR: yup
     .number()
-    .typeError(ERROR_MESSAGES.number)
-    .positive(ERROR_MESSAGES.positive)
-    .required(ERROR_MESSAGES.required),
+    .typeError(ERROR_MESSAGES.NUMBER)
+    .positive(ERROR_MESSAGES.POSITIVE)
+    .required(ERROR_MESSAGES.REQUIRED),
 });
 
 export const AddClub: React.FC = () => {
@@ -93,6 +86,7 @@ export const AddClub: React.FC = () => {
   };
   const [dataClub, setDataClub] = useState<any>(null);
   const [present] = useIonToast();
+  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -101,7 +95,10 @@ export const AddClub: React.FC = () => {
     formState: { errors },
   } = useForm<IIIForm>({ resolver: yupResolver(schema) });
 
-  const onSubmit = async (data: any, e: any) => {
+  const onSubmit = async (
+    data: IIIForm,
+    e: React.BaseSyntheticEvent<object, any, any> | undefined
+  ) => {
     const {
       clubName,
       country,
@@ -136,38 +133,38 @@ export const AddClub: React.FC = () => {
       });
     }
     console.log("data", data);
-    e.target.reset();
+    e?.target.reset();
+    history.push("/tabs/perfil-jugador");
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <IonPage>
-        <IonHeader>
-          <IonToolbar color="light" className="acciones">
-            <IonButtons slot="start">
-              <IonBackButton
-                defaultHref="/tabs/perfil-jugador"
-                className="icon-back"
-              />
-            </IonButtons>
-            <IonTitle color="primary" className="titulo">
-              Añadir Club
-            </IonTitle>
-            <IonButton
-              fill="clear"
-              slot="end"
-              color="tertiary"
-              type="submit"
-              routerLink="/tabs/perfil-jugador"
-            >
-              Guardar
-            </IonButton>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent fullscreen class="nuevo-club">
-          <IonItemDivider color="primary">
-            <div className="divisor">Información del Club y temporada</div>
-          </IonItemDivider>
-          <IonItem className="campo-club">
+    <IonPage>
+      <IonHeader>
+        <IonToolbar color="light" className={styles.acts}>
+          <IonButtons slot="start">
+            <IonBackButton
+              defaultHref="/tabs/perfil-jugador"
+              className={styles.icon_back}
+            />
+          </IonButtons>
+          <IonTitle color="primary" className={styles.title}>
+            Añadir Club
+          </IonTitle>
+          <button
+            type="submit"
+            form="add-club-info-form"
+            slot="end"
+            className={styles.save_club_info}
+          >
+            Guardar
+          </button>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen class={styles.new_club}>
+        <IonItemDivider color="primary">
+          <div className={styles.divisor}>Información del Club y temporada</div>
+        </IonItemDivider>
+        <form onSubmit={handleSubmit(onSubmit)} id="add-club-info-form">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="Ingrese el nombre del club"
               type="text"
@@ -181,7 +178,7 @@ export const AddClub: React.FC = () => {
           {errors.clubName?.message && (
             <IonNote color="danger">{errors.clubName?.message}</IonNote>
           )}
-          <IonItem className="campo-club">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="País del club"
               type="text"
@@ -195,7 +192,7 @@ export const AddClub: React.FC = () => {
           {errors.country?.message && (
             <IonNote color="danger">{errors.country?.message}</IonNote>
           )}
-          <IonItem className="campo-club">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="Año de temporada"
               type="number"
@@ -209,7 +206,7 @@ export const AddClub: React.FC = () => {
           {errors.season?.message && (
             <IonNote color="danger">{errors.season?.message}</IonNote>
           )}
-          <IonItem className="campo-club">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="Categoria del jugador"
               type="text"
@@ -223,7 +220,7 @@ export const AddClub: React.FC = () => {
           {errors.subPlayer?.message && (
             <IonNote color="danger">{errors.subPlayer?.message}</IonNote>
           )}
-          <IonItem className="campo-club">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="Nivel de la competencia"
               type="text"
@@ -237,7 +234,7 @@ export const AddClub: React.FC = () => {
           {errors.catTournament?.message && (
             <IonNote color="danger">{errors.catTournament?.message}</IonNote>
           )}
-          <IonItem className="campo-club">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="Total partidos jugados"
               type="number"
@@ -251,7 +248,7 @@ export const AddClub: React.FC = () => {
           {errors.PJ?.message && (
             <IonNote color="danger">{errors.PJ?.message}</IonNote>
           )}
-          <IonItem className="campo-club">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="Total de goles"
               type="number"
@@ -265,7 +262,7 @@ export const AddClub: React.FC = () => {
           {errors.G?.message && (
             <IonNote color="danger">{errors.G?.message}</IonNote>
           )}
-          <IonItem className="campo-club">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="Total de asistencias"
               type="number"
@@ -279,7 +276,7 @@ export const AddClub: React.FC = () => {
           {errors.A?.message && (
             <IonNote color="danger">{errors.A?.message}</IonNote>
           )}
-          <IonItem className="campo-club">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="Tarjetas amarillas"
               type="number"
@@ -293,7 +290,7 @@ export const AddClub: React.FC = () => {
           {errors.TA?.message && (
             <IonNote color="danger">{errors.TA?.message}</IonNote>
           )}
-          <IonItem className="campo-club">
+          <IonItem className={styles.club_field}>
             <IonInput
               placeholder="Tarjetas Rojas"
               type="number"
@@ -307,9 +304,9 @@ export const AddClub: React.FC = () => {
           {errors.TR?.message && (
             <IonNote color="danger">{errors.TR?.message}</IonNote>
           )}
-        </IonContent>
-      </IonPage>
-    </form>
+        </form>
+      </IonContent>
+    </IonPage>
   );
 };
 

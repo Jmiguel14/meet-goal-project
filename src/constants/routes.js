@@ -11,6 +11,15 @@ const PrivateRoutes = {
   SEARCH: "/tabs/busqueda",
   NOTIFICATIONS: "/tabs/notificaciones-jugador",
   MESSAGES: "/tabs/mensajes-jugador",
+  PLAYERPROFILE: "/tabs/perfil-jugador",
+  EDITPERSONALINFO: "/tabs/editar-info-personal-jugador",
+  EDITTACTICALINFO: "/tabs/editar-info-tactica-jugador",
+  EDITATTRIBUTESINFO: "/tabs/editar-info-atributos-jugador",
+  ADDCLUBEXPERIENCE: "/tabs/agregar-experiencia",
+  ADDINJURYEXPERIENCE: "/tabs/agregar-lesiones-jugador",
+  EDITPSYCOINFO: "/tabs/editar-info-psicologica-jugador",
+  EDITVALUES: "/tabs/editar-valores-jugador",
+  EDITCHANNELS: "/tabs/canales-jugador",
 };
 
 export const Routes = {

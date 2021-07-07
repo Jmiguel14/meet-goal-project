@@ -18,8 +18,9 @@ import {
 import { EditTacticalAttributes } from "firebase/client";
 import { warningSharp } from "ionicons/icons";
 import { useState } from "react";
+import { useHistory } from "react-router";
+import styles from "./styles.module.css";
 
-import "./EditAttributes.css";
 const checkboxList = [
   { val: "Fuerza", isChecked: false },
   { val: "Entradas precisas", isChecked: false },
@@ -47,6 +48,7 @@ const checkboxList = [
 const EditAttributes: React.FC = () => {
   const [present] = useIonToast();
   const [check, setCheck] = useState(true);
+  const history = useHistory();
 
   var values: string[] = [];
   function setAttributesValues(value: string) {
@@ -71,43 +73,42 @@ const EditAttributes: React.FC = () => {
         color: "primary",
       });
     }
+    history.push("/tabs/perfil-jugador");
   };
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" className="acciones">
+        <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/tabs/perfil-jugador"
-              className="icon-back"
+              className={styles.icon_back}
             />
           </IonButtons>
-          <IonTitle color="primary" className="titulo">
+          <IonTitle color="primary" className={styles.title}>
             Atributos
           </IonTitle>
-          <IonButton
-            fill="clear"
+          <button
             slot="end"
-            color="tertiary"
+            className={styles.save_attribute_info}
             onClick={onSubmit}
-            routerLink="/tabs/perfil-jugador"
           >
             Guardar
-          </IonButton>
+          </button>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonItemDivider color="primary">
-          <div className="subtitulo">Atributos</div>
+          <div className={styles.subtitle}>Atributos</div>
         </IonItemDivider>
         <IonItemDivider color="medium">
-          <div className="mensaje">
+          <div className={styles.message}>
             <IonIcon icon={warningSharp} size="small"></IonIcon>
             {" " + "Seleccione solo 4 atributos"}
           </div>
         </IonItemDivider>
-        <IonList className="atributos">
+        <IonList className={styles.attributes}>
           {checkboxList.map(({ val, isChecked }, i) => (
             <IonItem key={i}>
               <IonLabel>{val}</IonLabel>

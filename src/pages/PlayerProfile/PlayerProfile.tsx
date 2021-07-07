@@ -12,7 +12,7 @@ import {
 import { PlayerInfo } from "components/PlayerInfo/PlayerInfo";
 import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";
-import "./PlayerProfile.css";
+import styles from "./styles.module.css";
 import firebase from "firebase/app";
 import { getUserDoc } from "firebase/client";
 
@@ -33,14 +33,14 @@ const PlayerProfile: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className="regresar">
+        <IonToolbar className={styles.back}>
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/tabs/inicio-jugador"
-              className="icon-back"
+              className={styles.icon_back}
             />
           </IonButtons>
-          <IonRow className="title">
+          <IonRow className={styles.title}>
             <IonCol size="auto">
               <IonTitle>{datos?.name}</IonTitle>
             </IonCol>

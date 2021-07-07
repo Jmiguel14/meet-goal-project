@@ -1,6 +1,5 @@
 import {
   IonBackButton,
-  IonButton,
   IonButtons,
   IonContent,
   IonDatetime,
@@ -18,18 +17,13 @@ import {
   useIonToast,
 } from "@ionic/react";
 import React, { useState } from "react";
-import "./EditPersonalInfo.css";
+import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { SetPersonalData } from "firebase/client";
-import { contract } from "ionicons/icons";
-
-export enum ContractTypeEnum {
-  libre = "libre",
-  prestamo = "prestamo",
-  contratado = "contratado",
-}
+import { ERROR_MESSAGES } from "constants/errorMessages";
+import { useHistory } from "react-router";
 
 export interface IIForm {
   mail: string;
@@ -37,34 +31,30 @@ export interface IIForm {
   city: string;
   phone: number;
   birth: string;
-  contract: ContractTypeEnum;
+  contract: string;
   marketTransfer: string;
 }
-
-const ERROR_MESSAGES = {
-  required: "Este campo es requerido",
-  email: "Email no válido",
-};
 
 const schema = yup.object().shape({
   mail: yup
     .string()
-    .required(ERROR_MESSAGES.required)
-    .email(ERROR_MESSAGES.email),
-  country: yup.string().required(ERROR_MESSAGES.required),
-  city: yup.string().required(ERROR_MESSAGES.required),
-  birth: yup.string().required(ERROR_MESSAGES.required),
-  contract: yup.string().required(ERROR_MESSAGES.required),
+    .required(ERROR_MESSAGES.REQUIRED)
+    .email(ERROR_MESSAGES.EMAIL),
+  country: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  city: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  birth: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  contract: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
 
 export const EditPersonalInfo: React.FC = () => {
   const [present] = useIonToast();
   const [selectedDate, setSelectedDate] = useState<string>("");
+  const history = useHistory();
   const initialValues = {
     mail: "",
     country: "",
     city: "",
-    birth: selectedDate,
+    contract: "",
     marketTransfer: "",
   };
 
@@ -79,7 +69,10 @@ export const EditPersonalInfo: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: any, e: any) => {
+  const onSubmit = async (
+    data: IIForm,
+    e: React.BaseSyntheticEvent<object, any, any> | undefined
+  ) => {
     const { mail, phone, country, city, birth, contract, marketTransfer } =
       data;
     if (
@@ -100,40 +93,41 @@ export const EditPersonalInfo: React.FC = () => {
         color: "primary",
       });
     }
-    e.target.reset();
+    e?.target.reset();
+    history.push("/tabs/perfil-jugador");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <IonPage>
-        <IonHeader>
-          <IonToolbar color="light" className="acciones">
-            <IonButtons slot="start">
-              <IonBackButton
-                defaultHref="/tabs/perfil-jugador"
-                className="icon-back"
-              />
-            </IonButtons>
-            <IonTitle color="primary" className="ion-padding titulo">
-              Editar I. Personal
-            </IonTitle>
-            <IonButton
-              fill="clear"
-              slot="end"
-              color="tertiary"
-              type="submit"
-              routerLink="/tabs/perfil-jugador"
-            >
-              Guardar
-            </IonButton>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent fullscreen className="fondo">
-          <IonItemDivider color="primary">
-            <div className="subtitulo">Edita aquí tu Información Personal</div>
-          </IonItemDivider>
-
-          <IonItem className="dato-personal">
+    <IonPage>
+      <IonHeader>
+        <IonToolbar color="light" className={styles.acts}>
+          <IonButtons slot="start">
+            <IonBackButton
+              defaultHref="/tabs/perfil-jugador"
+              className={styles.icon_back}
+            />
+          </IonButtons>
+          <IonTitle color="primary" className={styles.title}>
+            Editar I. Personal
+          </IonTitle>
+          <button
+            type="submit"
+            form="edit-personal-info-form"
+            slot="end"
+            className={styles.save_personal_info}
+          >
+            Guardar
+          </button>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen className={styles.back}>
+        <IonItemDivider color="primary">
+          <div className={styles.subtitle}>
+            Edita aquí tu Información Personal
+          </div>
+        </IonItemDivider>
+        <form onSubmit={handleSubmit(onSubmit)} id="edit-personal-info-form">
+          <IonItem className={styles.personal_data}>
             <IonInput
               placeholder="Correo Electrónico"
               type="text"
@@ -147,7 +141,7 @@ export const EditPersonalInfo: React.FC = () => {
           {errors.mail?.message && (
             <IonNote color="danger">{errors.mail?.message}</IonNote>
           )}
-          <IonItem className="dato-personal">
+          <IonItem className={styles.personal_data}>
             <IonInput
               placeholder="País"
               type="text"
@@ -163,7 +157,7 @@ export const EditPersonalInfo: React.FC = () => {
             <IonNote color="danger">{errors.country?.message}</IonNote>
           )}
 
-          <IonItem className="dato-personal">
+          <IonItem className={styles.personal_data}>
             <IonInput
               placeholder="Ciudad"
               type="text"
@@ -178,7 +172,7 @@ export const EditPersonalInfo: React.FC = () => {
             <IonNote color="danger">{errors.city?.message}</IonNote>
           )}
 
-          <IonItem className="dato-personal">
+          <IonItem className={styles.personal_data}>
             <IonInput
               placeholder="Teléfono"
               type="text"
@@ -193,7 +187,7 @@ export const EditPersonalInfo: React.FC = () => {
             <IonNote color="danger">{errors.phone?.message}</IonNote>
           )}
 
-          <IonItem className="dato-personal">
+          <IonItem className={styles.personal_data}>
             <IonLabel>F. Nacimiento (Mes/Día/Año)</IonLabel>
             <IonDatetime
               itemType="text"
@@ -203,10 +197,9 @@ export const EditPersonalInfo: React.FC = () => {
               onIonChange={(e) => setSelectedDate(e.detail.value!)}
             ></IonDatetime>
           </IonItem>
-          <IonItem className="dato-personal">
+          <IonItem className={styles.personal_data}>
             <IonLabel color="medium">Estado Contractual</IonLabel>
             <IonSelect
-              itemType="text"
               okText="okay"
               cancelText="Cerrar"
               {...register("contract")}
@@ -223,7 +216,7 @@ export const EditPersonalInfo: React.FC = () => {
             <IonNote color="danger">{errors.contract?.message}</IonNote>
           )}
 
-          <IonItem className="dato-personal">
+          <IonItem className={styles.personal_data}>
             <IonInput
               placeholder="Pega aquí tu link de MarketTransfer"
               type="text"
@@ -234,9 +227,9 @@ export const EditPersonalInfo: React.FC = () => {
               }}
             ></IonInput>
           </IonItem>
-        </IonContent>
-      </IonPage>{" "}
-    </form>
+        </form>
+      </IonContent>
+    </IonPage>
   );
 };
 

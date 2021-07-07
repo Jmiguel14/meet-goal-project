@@ -7,8 +7,8 @@ import {
   IonLabel,
   IonText,
 } from "@ionic/react";
-import { addCircleOutline, medkitOutline, timeOutline } from "ionicons/icons";
-import "./MedicalInfo.css";
+import { addCircleOutline } from "ionicons/icons";
+import styles from "./styles.module.css";
 import SurgeryIcon from "icons/SurgeryIcon.png";
 import RecoveryTimeIcon from "icons/recoveryTimeIcon.png";
 import { useEffect, useState } from "react";
@@ -37,7 +37,7 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
       <IonButton
         shape="round"
         expand="block"
-        className="ion-padding-horizontal"
+        className={styles.ion_padding_horizontal}
         routerLink="/tabs/agregar-lesiones-jugador"
       >
         <IonIcon icon={addCircleOutline}></IonIcon>
@@ -45,19 +45,19 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
       </IonButton>
       {datos?.injuries === undefined ? (
         <>
-          <div className="container-message">
-            <IonLabel className="message-not-found">
+          <div className={styles.container_message}>
+            <IonLabel className={styles.message_not_found}>
               Registra aquí todos las lesiones experimentadas
             </IonLabel>
           </div>
         </>
       ) : (
         datos?.injuries.map((injury: any) => (
-          <IonCard className="datos-medicos" key={injury.injuryName}>
-            <IonItem className="titulo">
+          <IonCard className={styles.medical_data} key={injury.injuryName}>
+            <IonItem className={styles.title}>
               <IonLabel>{injury.injuryName}</IonLabel>
             </IonItem>
-            <IonItem className="elemento">
+            <IonItem className={styles.element}>
               <IonImg
                 src={RecoveryTimeIcon}
                 slot="start"
@@ -65,7 +65,7 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
               ></IonImg>
               <IonText>{injury.recoveryTime}</IonText>
             </IonItem>
-            <IonItem className="elemento">
+            <IonItem className={styles.element}>
               <IonImg
                 src={SurgeryIcon}
                 slot="start"

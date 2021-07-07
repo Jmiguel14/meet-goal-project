@@ -11,7 +11,7 @@ import {
   IonText,
 } from "@ionic/react";
 import { pencilOutline } from "ionicons/icons";
-import "./ChannelsInfo.css";
+import styles from "./styles.module.css";
 import FacebookIcon from "icons/FacebookIcon.png";
 import InstagramIcon from "icons/InstagramIcon.png";
 import TwitterIcon from "icons/TwitterIcon.png";
@@ -40,8 +40,8 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
   }, [currentUser]);
   return (
     <>
-      <IonCard className="redes-sociales">
-        <IonItem className="titulo">
+      <IonCard className={styles.social_networks}>
+        <IonItem className={styles.title}>
           <IonLabel>Canales y Redes Sociales</IonLabel>
           <IonButton fill="clear" routerLink="/tabs/canales-jugador">
             <IonIcon icon={pencilOutline} />
@@ -49,11 +49,14 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
         </IonItem>
       </IonCard>
 
-      <IonGrid className="logos">
+      <IonGrid className={styles.logos}>
         <IonRow>
           <IonCol>
             {datos?.facebook !== undefined && datos?.facebook !== "" ? (
-              <IonCard href={datos?.facebook} className="channel-logo-facebook">
+              <IonCard
+                href={datos?.facebook}
+                className={styles.channel_logo_facebook}
+              >
                 <IonButton size="large" fill="clear">
                   <IonImg src={FacebookIcon} slot="start"></IonImg>
                 </IonButton>
@@ -65,7 +68,10 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
 
           <IonCol>
             {datos?.twitter !== undefined && datos?.twitter !== "" ? (
-              <IonCard href={datos?.twitter} className="channel-logo-twitter">
+              <IonCard
+                href={datos?.twitter}
+                className={styles.channel_logo_twitter}
+              >
                 <IonButton size="large" fill="clear">
                   <IonImg
                     src={TwitterIcon}
@@ -84,13 +90,13 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
             {datos?.instagram !== undefined && datos?.instagram !== "" ? (
               <IonCard
                 href={datos?.instagram}
-                className="channel-logo-instagram"
+                className={styles.channel_logo_instagram}
               >
                 <IonButton size="large" fill="clear">
                   <IonImg
                     src={InstagramIcon}
                     slot="start"
-                    className="ion-padding-vertical"
+                    className={styles.ion_padding_vertical}
                   ></IonImg>
                 </IonButton>
               </IonCard>
@@ -100,12 +106,15 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
           </IonCol>
           <IonCol>
             {datos?.youtube !== undefined && datos?.youtube !== "" ? (
-              <IonCard href={datos?.youtube} className="channel-logo-youtube">
+              <IonCard
+                href={datos?.youtube}
+                className={styles.channel_logo_youtube}
+              >
                 <IonButton size="large" fill="clear">
                   <IonImg
                     src={YoutubeIcon}
                     slot="start"
-                    className="ion-padding-vertical"
+                    className={styles.ion_padding_vertical}
                   ></IonImg>
                 </IonButton>
               </IonCard>
@@ -117,12 +126,15 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
         <IonRow>
           <IonCol>
             {datos?.vimeo !== undefined && datos?.vimeo !== "" ? (
-              <IonCard href={datos?.vimeo} className="channel-logo-vimeo">
+              <IonCard
+                href={datos?.vimeo}
+                className={styles.channel_logo_vimeo}
+              >
                 <IonButton size="large" fill="clear">
                   <IonImg
                     src={VimeoIcon}
                     slot="start"
-                    className="ion-padding-vertical"
+                    className={styles.ion_padding_vertical}
                   ></IonImg>
                 </IonButton>
               </IonCard>
