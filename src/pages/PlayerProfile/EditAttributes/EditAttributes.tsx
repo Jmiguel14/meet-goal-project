@@ -55,8 +55,6 @@ const EditAttributes: React.FC = () => {
     if (values.length <= 3) {
       values.push(value);
       setCheck(true);
-      console.log(check);
-      console.log(values);
     } else {
       setCheck(false);
       values = [];

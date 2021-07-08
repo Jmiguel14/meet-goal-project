@@ -39,7 +39,6 @@ export const PlayerInfo: React.FC = () => {
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
 
-  console.log(datos);
   return (
     <IonContent>
       <AvatarPlayer />

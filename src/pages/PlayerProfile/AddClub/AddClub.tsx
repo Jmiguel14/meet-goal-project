@@ -132,7 +132,6 @@ export const AddClub: React.FC = () => {
         color: "success",
       });
     }
-    console.log("data", data);
     e?.target.reset();
     history.push("/tabs/perfil-jugador");
   };

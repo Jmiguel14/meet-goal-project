@@ -45,8 +45,6 @@ const Beginning: React.FC = () => {
     if (values.length <= 2) {
       values.push(value);
       setCheck(true);
-      console.log(check);
-      console.log(values);
     } else {
       setCheck(false);
       values = [];
