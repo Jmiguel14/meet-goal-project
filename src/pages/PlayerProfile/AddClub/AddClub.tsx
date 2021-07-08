@@ -129,7 +129,7 @@ export const AddClub: React.FC = () => {
         message: "Se agrego el club a tu experiencia",
         duration: 1000,
         position: "top",
-        color: "primary",
+        color: "success",
       });
     }
     console.log("data", data);

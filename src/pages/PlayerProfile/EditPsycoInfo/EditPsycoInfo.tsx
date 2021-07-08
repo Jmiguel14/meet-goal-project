@@ -39,7 +39,7 @@ const EditPsycoInfo: React.FC = () => {
         message: "Se actualizó la información exitosamente",
         duration: 1000,
         position: "top",
-        color: "primary",
+        color: "success",
       });
     }
     reset();

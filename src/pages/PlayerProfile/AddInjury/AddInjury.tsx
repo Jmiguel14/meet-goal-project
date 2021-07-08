@@ -41,7 +41,7 @@ const AddInjury: React.FC = () => {
         message: "Se ha registrado la inforamción ha tu historial médico",
         duration: 1000,
         position: "top",
-        color: "primary",
+        color: "success",
       });
     }
     e?.target.reset();
@@ -95,8 +95,8 @@ const AddInjury: React.FC = () => {
             <IonLabel color="medium">Proceso Quirúrgico</IonLabel>
             <IonToggle
               checked={checked}
-              onIonChange={(e) => setChecked(e.detail.checked)}
               {...register("surgery")}
+              onIonChange={(e) => setChecked(e.detail.checked)}
             />
           </IonItem>
         </form>

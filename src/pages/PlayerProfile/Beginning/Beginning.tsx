@@ -58,7 +58,7 @@ const Beginning: React.FC = () => {
         message: "Se actualizó la información exitosamente",
         duration: 1000,
         position: "top",
-        color: "primary",
+        color: "success",
       });
     }
     history.push("/tabs/perfil-jugador");

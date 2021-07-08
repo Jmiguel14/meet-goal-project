@@ -42,7 +42,7 @@ const AddChannels: React.FC = () => {
         message: "Se ha actualizado la inforamción de tus redes",
         duration: 1000,
         position: "top",
-        color: "primary",
+        color: "success",
       });
     }
     reset();
