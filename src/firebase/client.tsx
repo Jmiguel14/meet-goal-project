@@ -89,7 +89,7 @@ export async function EditPositionData(
 }
 export async function EditPsycoParameters(
   character: string,
-  personality: string,
+  personality: Object,
   attitude: string
 ) {
   let id = auth.currentUser?.uid;

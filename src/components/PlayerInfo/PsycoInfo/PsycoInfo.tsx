@@ -1,4 +1,5 @@
 import {
+  IonBadge,
   IonButton,
   IonCard,
   IonIcon,
@@ -59,18 +60,34 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
           </IonLabel>
           <IonText className={styles.descripcion}>Carácter</IonText>
         </IonItem>
-        <IonItem className={styles.data_psyco}>
+        <IonItem className={styles.container_personality}>
           <IonImg
             src={PersonalityIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
-          <IonLabel position="stacked">
-            <h1 className={styles.data_detail}>
-              {datos?.personality !== undefined
-                ? datos?.personality
-                : "Personalidad"}
-            </h1>
+          <IonLabel position="stacked" className={styles.container_data}>
+            {datos?.personality !== undefined ? (
+              <>
+                <div>
+                  <IonBadge color="primary" className={styles.data_style}>
+                    {datos.personality.detail1}
+                  </IonBadge>
+                  <IonBadge color="primary" className={styles.data_style}>
+                    {datos.personality.detail2}
+                  </IonBadge>
+                  <br />
+                  <IonBadge color="primary" className={styles.data_style}>
+                    {datos.personality.detail3}
+                  </IonBadge>
+                  <IonBadge color="primary" className={styles.data_style}>
+                    {datos.personality.detail4}
+                  </IonBadge>
+                </div>
+              </>
+            ) : (
+              "Personalidad"
+            )}
           </IonLabel>
           <IonText className={styles.descripcion}>Personalidad</IonText>
         </IonItem>

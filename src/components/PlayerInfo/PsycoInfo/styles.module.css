@@ -9,6 +9,7 @@
 }
 .data_psyco {
   --ion-background-color: #ffffff;
+  line-height: 40px;
 }
 .psycology_data {
   border-radius: 10px;
@@ -28,4 +29,15 @@
   font-style: normal;
   font-size: 16px;
   font-weight: 400;
+}
+.data_style {
+  text-align: center;
+  font-size: 16px;
+}
+.container_data {
+  padding-bottom: 20px;
+  justify-content: center;
+}
+.container_personality {
+  line-height: 24px;
 }

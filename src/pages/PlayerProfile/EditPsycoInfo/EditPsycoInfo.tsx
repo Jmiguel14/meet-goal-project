@@ -21,7 +21,7 @@ import styles from "./styles.module.css";
 
 export interface VForm {
   character: string;
-  personality: string;
+  personality: Object;
   attitude: string;
 }
 const EditPsycoInfo: React.FC = () => {
@@ -126,22 +126,182 @@ const EditPsycoInfo: React.FC = () => {
               {...register("personality")}
               value=""
             >
-              <IonSelectOption value="ESTJ">ESTJ</IonSelectOption>
-              <IonSelectOption value="ESTP">ESTP</IonSelectOption>
-              <IonSelectOption value="ESFJ">ESFJ</IonSelectOption>
-              <IonSelectOption value="ESFP">ESFP</IonSelectOption>
-              <IonSelectOption value="ISTJ">ISTJ</IonSelectOption>
-              <IonSelectOption value="ISTP">ISTP</IonSelectOption>
-              <IonSelectOption value="ISFJ">ISFJ</IonSelectOption>
-              <IonSelectOption value="ISFP">ISFP</IonSelectOption>
-              <IonSelectOption value="ENTJ">ENTJ</IonSelectOption>
-              <IonSelectOption value="ENTP">ENTP</IonSelectOption>
-              <IonSelectOption value="ENFJ">ENFJ</IonSelectOption>
-              <IonSelectOption value="ENFP">ENFP</IonSelectOption>
-              <IonSelectOption value="INTJ">INTJ</IonSelectOption>
-              <IonSelectOption value="INTP">INTP</IonSelectOption>
-              <IonSelectOption value="INFJ">INFJ</IonSelectOption>
-              <IonSelectOption value="INFP">INFP</IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ESTJ",
+                  detail1: "Extrovertido",
+                  detail2: "Sensitivo",
+                  detail3: "Pensador",
+                  detail4: "Jucioso",
+                }}
+              >
+                ESTJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ESTP",
+                  detail1: "Extrovertido",
+                  detail2: "Sensitivo",
+                  detail3: "Pensador",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ESTP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ESFJ",
+                  detail1: "Extrovertido",
+                  detail2: "Sensitivo",
+                  detail3: "Sentimental",
+                  detail4: "Juicioso",
+                }}
+              >
+                ESFJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ESFP",
+                  detail1: "Extrovertido",
+                  detail2: "Sensitivo",
+                  detail3: "Sentimental",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ESFP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ISTJ",
+                  detail1: "Introvertido",
+                  detail2: "Sensitivo",
+                  detail3: "Pensador",
+                  detail4: "Juicioso",
+                }}
+              >
+                ISTJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ISTP",
+                  detail1: "Introvertido",
+                  detail2: "Sensitivo",
+                  detail3: "Pensador",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ISTP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ISFJ",
+                  detail1: "Introvertido",
+                  detail2: "Sensitivo",
+                  detail3: "Sentimental",
+                  detail4: "Juicioso",
+                }}
+              >
+                ISFJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ISFP",
+                  detail1: "Introvertido",
+                  detail2: "Sensitivo",
+                  detail3: "Sentimental",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ISFP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ENTJ",
+                  detail1: "Extrovertido",
+                  detail2: "Intuitivo",
+                  detail3: "Pensador",
+                  detail4: "Jucioso",
+                }}
+              >
+                ENTJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ENTP",
+                  detail1: "Extrovertido",
+                  detail2: "Intuitivo",
+                  detail3: "Pensador",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ENTP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ENFJ",
+                  detail1: "Extrovertido",
+                  detail2: "Intuitivo",
+                  detail3: "Sentimental",
+                  detail4: "Jucioso",
+                }}
+              >
+                ENFJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ENFP",
+                  detail1: "Extrovertido",
+                  detail2: "Intuitivo",
+                  detail3: "Sentimental",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ENFP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "INTJ",
+                  detail1: "Introvertido",
+                  detail2: "Intuitivo",
+                  detail3: "Pensador",
+                  detail4: "Jucioso",
+                }}
+              >
+                INTJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "INTP",
+                  detail1: "Introvertido",
+                  detail2: "Intuitivo",
+                  detail3: "Pensador",
+                  detail4: "Perceptivo",
+                }}
+              >
+                INTP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "INFJ",
+                  detail1: "Introvertido",
+                  detail2: "Intuitivo",
+                  detail3: "Sentimental",
+                  detail4: "Jucioso",
+                }}
+              >
+                INFJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "INFP",
+                  detail1: "Introvertido",
+                  detail2: "Intuitivo",
+                  detail3: "Sentimental",
+                  detail4: "PErceptivo",
+                }}
+              >
+                INFP
+              </IonSelectOption>
             </IonSelect>
           </IonItem>
           <IonItemDivider color="primary">
