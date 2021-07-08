@@ -7,6 +7,7 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,
+  IonNote,
   IonPage,
   IonTitle,
   IonToggle,
@@ -18,6 +19,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import styles from "./styles.module.css";
+import { ERROR_MESSAGES } from "constants/errorMessages";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export interface IVForm {
   injuryName: string;
@@ -25,11 +29,32 @@ export interface IVForm {
   surgery: boolean;
 }
 
+const schema = yup.object().shape({
+  injuryName: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  recoveryTime: yup.string().required(ERROR_MESSAGES.REQUIRED),
+});
+
 const AddInjury: React.FC = () => {
   const [present] = useIonToast();
-  const { register, reset, handleSubmit } = useForm();
   const history = useHistory();
   const [checked, setChecked] = useState(false);
+
+  const initialValues = {
+    injuryName: "",
+    recoveryTime: "",
+    surgery: false,
+  };
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    clearErrors,
+    formState: { errors },
+  } = useForm<IVForm>({
+    defaultValues: initialValues,
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = async (
     data: IVForm,
@@ -81,8 +106,14 @@ const AddInjury: React.FC = () => {
               placeholder="Nombre de la lesión"
               clearInput={true}
               {...register("injuryName")}
+              onIonChange={() => {
+                clearErrors("injuryName");
+              }}
             ></IonInput>
           </IonItem>
+          {errors.injuryName && (
+            <IonNote color="danger">{errors.injuryName?.message}</IonNote>
+          )}
           <IonItem className={styles.injury_field}>
             <IonInput
               type="text"
@@ -91,6 +122,9 @@ const AddInjury: React.FC = () => {
               {...register("recoveryTime")}
             ></IonInput>
           </IonItem>
+          {errors.recoveryTime && (
+            <IonNote color="danger">{errors.recoveryTime?.message}</IonNote>
+          )}
           <IonItem className={styles.injury_field}>
             <IonLabel color="medium">Proceso Quirúrgico</IonLabel>
             <IonToggle
