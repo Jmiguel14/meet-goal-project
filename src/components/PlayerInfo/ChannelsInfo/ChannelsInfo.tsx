@@ -55,6 +55,7 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
             {datos?.facebook !== undefined && datos?.facebook !== "" ? (
               <IonCard
                 href={datos?.facebook}
+                target="_blank"
                 className={styles.channel_logo_facebook}
               >
                 <IonButton size="large" fill="clear">
@@ -70,6 +71,7 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
             {datos?.twitter !== undefined && datos?.twitter !== "" ? (
               <IonCard
                 href={datos?.twitter}
+                target="_blank"
                 className={styles.channel_logo_twitter}
               >
                 <IonButton size="large" fill="clear">
@@ -90,6 +92,7 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
             {datos?.instagram !== undefined && datos?.instagram !== "" ? (
               <IonCard
                 href={datos?.instagram}
+                target="_blank"
                 className={styles.channel_logo_instagram}
               >
                 <IonButton size="large" fill="clear">
@@ -108,6 +111,7 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
             {datos?.youtube !== undefined && datos?.youtube !== "" ? (
               <IonCard
                 href={datos?.youtube}
+                target="_blank"
                 className={styles.channel_logo_youtube}
               >
                 <IonButton size="large" fill="clear">
@@ -128,6 +132,7 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
             {datos?.vimeo !== undefined && datos?.vimeo !== "" ? (
               <IonCard
                 href={datos?.vimeo}
+                target="_blank"
                 className={styles.channel_logo_vimeo}
               >
                 <IonButton size="large" fill="clear">
