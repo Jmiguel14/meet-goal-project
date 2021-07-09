@@ -58,8 +58,15 @@ const Beginning: React.FC = () => {
         position: "top",
         color: "success",
       });
+      history.push("/tabs/perfil-jugador");
+    } else {
+      present({
+        message: "Error al actualizar la información. Intentelo nuevamente...",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
     }
-    history.push("/tabs/perfil-jugador");
   };
 
   return (

@@ -42,9 +42,16 @@ const EditTacticalInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
+      history.push("/tabs/perfil-jugador");
+    } else {
+      present({
+        message: "Seleccione la información requerida",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
     }
     e?.target.reset();
-    history.push("/tabs/perfil-jugador");
   };
   return (
     <IonPage>

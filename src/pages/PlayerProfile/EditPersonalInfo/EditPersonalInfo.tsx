@@ -92,9 +92,16 @@ export const EditPersonalInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
+      history.push("/tabs/perfil-jugador");
+    } else {
+      present({
+        message: "Error al actualizar la información. Intentelo nuevamente...",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
     }
     e?.target.reset();
-    history.push("/tabs/perfil-jugador");
   };
 
   return (

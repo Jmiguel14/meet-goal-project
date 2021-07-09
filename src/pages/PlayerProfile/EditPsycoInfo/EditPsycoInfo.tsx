@@ -24,10 +24,19 @@ export interface VForm {
   personality: Object;
   attitude: string;
 }
+
 const EditPsycoInfo: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
-  const { reset, handleSubmit, register } = useForm();
+
+  const initialValues = {
+    character: "",
+    personality: {},
+    attitude: "",
+  };
+  const { reset, handleSubmit, register } = useForm({
+    defaultValues: initialValues,
+  });
 
   const onSubmit = async (
     data: VForm,
@@ -41,9 +50,16 @@ const EditPsycoInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
+      history.push("/tabs/perfil-jugador");
+    } else {
+      present({
+        message: "Error al actualizar la información. Intentelo nuevamente...",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
     }
     reset();
-    history.push("/tabs/perfil-jugador");
   };
 
   return (

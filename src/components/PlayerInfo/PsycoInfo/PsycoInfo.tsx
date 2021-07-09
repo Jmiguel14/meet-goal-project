@@ -55,7 +55,9 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.data_detail}>
-              {datos?.character !== undefined ? datos?.character : "Carácter"}
+              {datos?.character === undefined || datos?.character === ""
+                ? "Carácter"
+                : datos?.character}
             </h1>
           </IonLabel>
           <IonText className={styles.descripcion}>Carácter</IonText>
@@ -67,26 +69,27 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked" className={styles.container_data}>
-            {datos?.personality !== undefined ? (
+            {datos?.personality === undefined ||
+            JSON.stringify(datos?.personality) === "{}" ? (
+              <h1 className={styles.data_detail}>Personalidad</h1>
+            ) : (
               <>
                 <div>
                   <IonBadge color="primary" className={styles.data_style}>
-                    {datos.personality.detail1}
+                    {datos?.personality.detail1}
                   </IonBadge>
                   <IonBadge color="primary" className={styles.data_style}>
-                    {datos.personality.detail2}
+                    {datos?.personality.detail2}
                   </IonBadge>
                   <br />
                   <IonBadge color="primary" className={styles.data_style}>
-                    {datos.personality.detail3}
+                    {datos?.personality.detail3}
                   </IonBadge>
                   <IonBadge color="primary" className={styles.data_style}>
-                    {datos.personality.detail4}
+                    {datos?.personality.detail4}
                   </IonBadge>
                 </div>
               </>
-            ) : (
-              "Personalidad"
             )}
           </IonLabel>
           <IonText className={styles.descripcion}>Personalidad</IonText>
@@ -99,7 +102,9 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.data_detail}>
-              {datos?.attitude !== undefined ? datos?.attitude : "Actitud"}
+              {datos?.attitude === undefined || datos?.attitude === ""
+                ? "Actitud"
+                : datos?.attitude}
             </h1>
           </IonLabel>
           <IonText className={styles.descripcion}>Actitud</IonText>
