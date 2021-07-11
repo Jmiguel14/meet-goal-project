@@ -20,6 +20,7 @@ const PrivateRoutes = {
   EDITPSYCOINFO: "/tabs/editar-info-psicologica-jugador",
   EDITVALUES: "/tabs/editar-valores-jugador",
   EDITCHANNELS: "/tabs/canales-jugador",
+  EDITPHOTOS: "/tabs/editar-fotos",
 };
 
 export const Routes = {

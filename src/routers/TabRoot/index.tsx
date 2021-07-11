@@ -79,6 +79,10 @@ const AsyncEditChannels = loadable(
   loadableOptions
 );
 
+const AsyncEditPhotos = loadable(
+  () => import("pages/UpdatePhotos/UpdatePhotos"),
+  loadableOptions
+);
 export const TabRoot: React.FC = () => {
   return (
     <>
@@ -149,6 +153,11 @@ export const TabRoot: React.FC = () => {
             exact
             path={Routes.EDITVALUES}
             component={AsyncEditValue}
+          />
+          <PrivateRoutes
+            exact
+            path={Routes.EDITPHOTOS}
+            component={AsyncEditPhotos}
           />
           <Route
             path="/tabs"

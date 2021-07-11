@@ -21,11 +21,12 @@ import AvatarPlayer from "./AvatarPlayer/AvatarPlayer";
 import { getUserDoc } from "firebase/client";
 import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
+import { useHistory } from "react-router";
 
 export const PlayerInfo: React.FC = () => {
   const [info, setInfo] = useState("personal");
   const [busy, setBusy] = useState(true);
-
+  const history = useHistory();
   const [datos, setDatos] = useState<
     firebase.firestore.DocumentData | undefined
   >();
@@ -40,12 +41,19 @@ export const PlayerInfo: React.FC = () => {
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
 
+  function editPhotos() {
+    history.push("/tabs/editar-fotos");
+  }
   return (
     <IonContent>
       <AvatarPlayer />
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
-          <button className={styles.edit_photos} type="submit">
+          <button
+            className={styles.edit_photos}
+            type="submit"
+            onClick={editPhotos}
+          >
             Editar foto de perfil o avatar
           </button>
         </IonCol>

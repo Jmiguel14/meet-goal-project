@@ -1,0 +1,15 @@
+.back {
+  --background: #fafafa;
+  align-content: center;
+}
+.icon_back {
+  --icon-font-size: 30px;
+}
+
+.titles {
+  text-align: center;
+  font-weight: 700;
+  box-shadow: none;
+  color: #000000;
+  font-style: normal;
+}
