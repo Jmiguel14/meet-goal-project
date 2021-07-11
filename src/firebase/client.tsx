@@ -1,6 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
+import Avatar from "icons/avatar.png";
+import Cover from "assets/cover.png";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -256,4 +259,34 @@ export async function EditPersonalValues(
   } catch (e) {
     return false;
   }
+}
+const storage = firebase.storage();
+export function defaultAvatar(id: string) {
+  const storageRef = storage.ref().child(`images/${id}/avatar.png`);
+  fetch(Avatar)
+    .then((res) => res.blob())
+    .then((Blob) => {
+      storageRef.put(Blob).then((savedPicture) => {
+        storageRef.getDownloadURL().then((url) => {
+          firestore.collection("users").doc(id).update({
+            avatarURL: url,
+          });
+        });
+      });
+    });
+}
+
+export function defaultCover(id: string) {
+  const storageRef = storage.ref().child(`images/${id}/cover.png`);
+  fetch(Cover)
+    .then((res) => res.blob())
+    .then((Blob) => {
+      storageRef.put(Blob).then((savedPicture) => {
+        storageRef.getDownloadURL().then((url) => {
+          firestore.collection("users").doc(id).update({
+            coverURL: url,
+          });
+        });
+      });
+    });
 }

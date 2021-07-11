@@ -1,23 +1,34 @@
 import { IonAvatar, IonImg, IonCol, IonRow } from "@ionic/react";
-import {} from "ionicons/icons";
+import { useEffect, useState } from "react";
 import "./AvatarPlayer.css";
+import firebase from "firebase/app";
+import { useAuth } from "contexts/AuthContext";
+import { getUserDoc } from "firebase/client";
 
-interface ContainerProps {}
+export const AvatarPlayer: React.FC = () => {
+  const [datos, setDatos] = useState<
+    firebase.firestore.DocumentData | undefined
+  >();
 
-const AvatarPlayer: React.FC<ContainerProps> = () => {
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setDatos);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
   return (
     <>
       <IonRow>
         <IonCol className="imagenes">
           <IonCol>
-            <IonImg
-              className="portada"
-              src="https://i.pinimg.com/originals/b5/7b/09/b57b09183ff3815986c2130808af06c1.jpg"
-            ></IonImg>
+            <IonImg className="portada" src={datos?.coverURL}></IonImg>
           </IonCol>
           <IonCol className="contenedor">
             <IonAvatar className="avatar">
-              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+              <img src={datos?.avatarURL} />
             </IonAvatar>
           </IonCol>
         </IonCol>

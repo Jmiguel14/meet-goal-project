@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { auth, firestore } from "firebase/client";
+import { auth, defaultAvatar, defaultCover, firestore } from "firebase/client";
 import firebase from "firebase/app";
 import { useIonToast, IonLoading } from "@ionic/react";
 import { userTypeEnum } from "types";
@@ -92,6 +92,8 @@ export const AuthProvider: React.FC = ({ children }) => {
           color: "danger",
         });
       }
+      defaultAvatar(currentUser.uid);
+      defaultCover(currentUser.uid);
     }
   };
 

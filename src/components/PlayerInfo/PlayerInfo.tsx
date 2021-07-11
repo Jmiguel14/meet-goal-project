@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonCol,
   IonContent,
   IonIcon,
@@ -42,6 +43,13 @@ export const PlayerInfo: React.FC = () => {
   return (
     <IonContent>
       <AvatarPlayer />
+      <IonRow className="ion-justify-content-center">
+        <IonCol size="auto">
+          <button className={styles.edit_photos} type="submit">
+            Editar foto de perfil o avatar
+          </button>
+        </IonCol>
+      </IonRow>
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
           <IonLabel className={styles.name}>{datos?.name}</IonLabel>
