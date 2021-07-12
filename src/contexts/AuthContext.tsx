@@ -84,6 +84,8 @@ export const AuthProvider: React.FC = ({ children }) => {
           userType,
           createAt: firebase.firestore.Timestamp.fromDate(new Date()),
         });
+        defaultAvatar(currentUser.uid);
+        defaultCover(currentUser.uid);
       } catch (error) {
         present({
           message: "Ocurrió un error al crear la cuenta",
@@ -92,8 +94,6 @@ export const AuthProvider: React.FC = ({ children }) => {
           color: "danger",
         });
       }
-      defaultAvatar(currentUser.uid);
-      defaultCover(currentUser.uid);
     }
   };
 
