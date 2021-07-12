@@ -8,7 +8,6 @@ import {
   IonItem,
   IonLabel,
   IonRow,
-  IonText,
 } from "@ionic/react";
 import { pencilOutline } from "ionicons/icons";
 import styles from "./styles.module.css";
@@ -25,7 +24,7 @@ import firebase from "firebase/app";
 interface ContainerProps {}
 
 const ChannelsInfo: React.FC<ContainerProps> = () => {
-  const [datos, setDatos] = useState<
+  const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
 
@@ -34,7 +33,7 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
+      unsubscribe = getUserDoc(setData);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
@@ -52,9 +51,9 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
       <IonGrid className={styles.logos}>
         <IonRow>
           <IonCol>
-            {datos?.facebook !== undefined && datos?.facebook !== "" ? (
+            {data?.facebook !== undefined && data?.facebook !== "" ? (
               <IonCard
-                href={datos?.facebook}
+                href={data?.facebook}
                 target="_blank"
                 className={styles.channel_logo_facebook}
               >
@@ -68,9 +67,9 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
           </IonCol>
 
           <IonCol>
-            {datos?.twitter !== undefined && datos?.twitter !== "" ? (
+            {data?.twitter !== undefined && data?.twitter !== "" ? (
               <IonCard
-                href={datos?.twitter}
+                href={data?.twitter}
                 target="_blank"
                 className={styles.channel_logo_twitter}
               >
@@ -89,9 +88,9 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
         </IonRow>
         <IonRow>
           <IonCol>
-            {datos?.instagram !== undefined && datos?.instagram !== "" ? (
+            {data?.instagram !== undefined && data?.instagram !== "" ? (
               <IonCard
-                href={datos?.instagram}
+                href={data?.instagram}
                 target="_blank"
                 className={styles.channel_logo_instagram}
               >
@@ -108,9 +107,9 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
             )}
           </IonCol>
           <IonCol>
-            {datos?.youtube !== undefined && datos?.youtube !== "" ? (
+            {data?.youtube !== undefined && data?.youtube !== "" ? (
               <IonCard
-                href={datos?.youtube}
+                href={data?.youtube}
                 target="_blank"
                 className={styles.channel_logo_youtube}
               >
@@ -129,9 +128,9 @@ const ChannelsInfo: React.FC<ContainerProps> = () => {
         </IonRow>
         <IonRow>
           <IonCol>
-            {datos?.vimeo !== undefined && datos?.vimeo !== "" ? (
+            {data?.vimeo !== undefined && data?.vimeo !== "" ? (
               <IonCard
-                href={datos?.vimeo}
+                href={data?.vimeo}
                 target="_blank"
                 className={styles.channel_logo_vimeo}
               >

@@ -19,7 +19,7 @@ import { getUserDoc } from "firebase/client";
 interface ContainerProps {}
 
 const CareerInfo: React.FC<ContainerProps> = () => {
-  const [datos, setDatos] = useState<
+  const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
 
@@ -28,7 +28,7 @@ const CareerInfo: React.FC<ContainerProps> = () => {
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
+      unsubscribe = getUserDoc(setData);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
@@ -43,7 +43,7 @@ const CareerInfo: React.FC<ContainerProps> = () => {
         <IonIcon icon={addCircleOutline}></IonIcon>
         Agregar club a tu experiencia
       </IonButton>
-      {datos?.clubs === undefined ? (
+      {data?.clubs === undefined ? (
         <>
           <div className={styles.container_message}>
             <IonLabel className={styles.message_not_found}>
@@ -52,7 +52,7 @@ const CareerInfo: React.FC<ContainerProps> = () => {
           </div>
         </>
       ) : (
-        datos?.clubs.map((club: any) => (
+        data?.clubs.map((club: any) => (
           <IonCard className={styles.box} key={club?.clubName}>
             <IonItem className={styles.title}>
               <IonLabel>{club.clubName}</IonLabel>

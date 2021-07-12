@@ -19,7 +19,7 @@ import firebase from "firebase/app";
 interface ContainerProps {}
 
 const MedicalInfo: React.FC<ContainerProps> = () => {
-  const [datos, setDatos] = useState<
+  const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
 
@@ -28,7 +28,7 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
+      unsubscribe = getUserDoc(setData);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
@@ -43,7 +43,7 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
         <IonIcon icon={addCircleOutline}></IonIcon>
         Agregar informes médicos
       </IonButton>
-      {datos?.injuries === undefined ? (
+      {data?.injuries === undefined ? (
         <>
           <div className={styles.container_message}>
             <IonLabel className={styles.message_not_found}>
@@ -52,7 +52,7 @@ const MedicalInfo: React.FC<ContainerProps> = () => {
           </div>
         </>
       ) : (
-        datos?.injuries.map((injury: any) => (
+        data?.injuries.map((injury: any) => (
           <IonCard className={styles.medical_data} key={injury.injuryName}>
             <IonItem className={styles.title}>
               <IonLabel>{injury.injuryName}</IonLabel>

@@ -22,7 +22,7 @@ import ValueIcon from "icons/valueIcon.png";
 interface ContainerProps {}
 
 const PsycoInfo: React.FC<ContainerProps> = () => {
-  const [datos, setDatos] = useState<
+  const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
 
@@ -31,7 +31,7 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
+      unsubscribe = getUserDoc(setData);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
@@ -55,9 +55,9 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.data_detail}>
-              {datos?.character === undefined || datos?.character === ""
+              {data?.character === undefined || data?.character === ""
                 ? "Carácter"
-                : datos?.character}
+                : data?.character}
             </h1>
           </IonLabel>
           <IonText className={styles.descripcion}>Carácter</IonText>
@@ -69,24 +69,24 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked" className={styles.container_data}>
-            {datos?.personality === undefined ||
-            JSON.stringify(datos?.personality) === "{}" ? (
+            {data?.personality === undefined ||
+            JSON.stringify(data?.personality) === "{}" ? (
               <h1 className={styles.data_detail}>Personalidad</h1>
             ) : (
               <>
                 <div>
                   <IonBadge color="primary" className={styles.data_style}>
-                    {datos?.personality.detail1}
+                    {data?.personality.detail1}
                   </IonBadge>
                   <IonBadge color="primary" className={styles.data_style}>
-                    {datos?.personality.detail2}
+                    {data?.personality.detail2}
                   </IonBadge>
                   <br />
                   <IonBadge color="primary" className={styles.data_style}>
-                    {datos?.personality.detail3}
+                    {data?.personality.detail3}
                   </IonBadge>
                   <IonBadge color="primary" className={styles.data_style}>
-                    {datos?.personality.detail4}
+                    {data?.personality.detail4}
                   </IonBadge>
                 </div>
               </>
@@ -102,9 +102,9 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.data_detail}>
-              {datos?.attitude === undefined || datos?.attitude === ""
+              {data?.attitude === undefined || data?.attitude === ""
                 ? "Actitud"
-                : datos?.attitude}
+                : data?.attitude}
             </h1>
           </IonLabel>
           <IonText className={styles.descripcion}>Actitud</IonText>
@@ -124,8 +124,8 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText className={styles.values}>
-            {datos?.value1 !== undefined
-              ? datos?.value1
+            {data?.value1 !== undefined
+              ? data?.value1
               : "Aquí se mostrarán los valores seleccionados"}
           </IonText>
         </IonItem>
@@ -136,8 +136,8 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText className={styles.values}>
-            {datos?.value2 !== undefined
-              ? datos?.value2
+            {data?.value2 !== undefined
+              ? data?.value2
               : "Aquí se mostrarán los valores seleccionados"}
           </IonText>
         </IonItem>
@@ -148,8 +148,8 @@ const PsycoInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText className={styles.values}>
-            {datos?.value3 !== undefined
-              ? datos?.value3
+            {data?.value3 !== undefined
+              ? data?.value3
               : "Aquí se mostrarán los valores seleccionados"}
           </IonText>
         </IonItem>

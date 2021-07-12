@@ -8,3 +8,10 @@
 .title {
   justify-content: flex-start;
 }
+.divider {
+  text-align: center;
+  width: 100%;
+}
+.container_divider {
+  justify-content: center;
+}

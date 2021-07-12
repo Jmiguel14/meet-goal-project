@@ -5,36 +5,30 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonRow,
-  IonCol,
-  IonButton,
-  IonIcon,
   IonBackButton,
   IonCard,
   IonImg,
-  IonInput,
   useIonToast,
+  IonItemDivider,
 } from "@ionic/react";
 import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import firebase from "firebase/app";
 import { firestore, getUserDoc } from "firebase/client";
-import { useHistory } from "react-router";
 
 const UpdatePhotos: React.FC = () => {
   const [present] = useIonToast();
-  const [datos, setDatos] = useState<
+  const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
 
   const { currentUser } = useAuth();
-  const history = useHistory();
 
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
+      unsubscribe = getUserDoc(setData);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
@@ -80,9 +74,6 @@ const UpdatePhotos: React.FC = () => {
     });
   }
 
-  function backHome() {
-    history.push("/tabs/inicio-jugador");
-  }
   return (
     <IonPage>
       <IonHeader>
@@ -98,13 +89,19 @@ const UpdatePhotos: React.FC = () => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen className={styles.back}>
+        <IonItemDivider color="primary" className={styles.container_divider}>
+          <div className={styles.divider}>Foto de portada</div>
+        </IonItemDivider>
         <IonCard>
-          <IonImg src={datos?.avatarURL}> </IonImg>
+          <IonImg src={data?.avatarURL}> </IonImg>
           <input type="file" onChange={handleUploadAvatar}></input>
         </IonCard>
+        <IonItemDivider color="primary">
+          <div className={styles.divider}>Avatar del usuario</div>
+        </IonItemDivider>
         <IonCard>
-          <IonImg src={datos?.coverURL}> </IonImg>
+          <IonImg src={data?.coverURL}> </IonImg>
           <input type="file" onChange={handleUploadCover}></input>
         </IonCard>
       </IonContent>

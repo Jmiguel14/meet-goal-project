@@ -19,7 +19,7 @@ import { getUserDoc } from "firebase/client";
 interface ContainerProps {}
 
 const PersonalInfo: React.FC<ContainerProps> = () => {
-  const [datos, setDatos] = useState<
+  const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
 
@@ -28,12 +28,12 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
+      unsubscribe = getUserDoc(setData);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
   function converterDate() {
-    let birth = datos?.birth.split("T");
+    let birth = data?.birth.split("T");
     return birth[0];
   }
   return (
@@ -47,7 +47,7 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.info}>
-              {datos?.email !== undefined ? datos?.email : "Correo"}
+              {data?.email !== undefined ? data?.email : "Correo"}
             </h1>
           </IonLabel>
           <IonText className={styles.text}>Correo</IonText>
@@ -62,7 +62,7 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.info}>
-              {datos?.phone !== undefined ? datos?.phone : "Teléfono"}
+              {data?.phone !== undefined ? data?.phone : "Teléfono"}
             </h1>
           </IonLabel>
           <IonText className={styles.text}>Teléfono</IonText>
@@ -77,9 +77,7 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.info}>
-              {datos?.birth !== undefined
-                ? converterDate()
-                : "F. de Nacimiento"}
+              {data?.birth !== undefined ? converterDate() : "F. de Nacimiento"}
             </h1>
           </IonLabel>
           <IonText className={styles.text}>Fecha de Nacimiento</IonText>
@@ -94,8 +92,8 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.info}>
-              {datos?.contract !== undefined
-                ? datos?.contract
+              {data?.contract !== undefined
+                ? data?.contract
                 : "Est. Contractual"}
             </h1>
           </IonLabel>
@@ -103,7 +101,7 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
         </IonItem>
       </IonCard>
       <IonCard className={styles.boxes}>
-        <IonItem href={datos?.marketTransfer}>
+        <IonItem href={data?.marketTransfer}>
           <IonImg
             src={MarketIcon}
             slot="start"

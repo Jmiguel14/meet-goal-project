@@ -1,5 +1,4 @@
 import {
-  IonButton,
   IonCol,
   IonContent,
   IonIcon,
@@ -28,7 +27,7 @@ export const PlayerInfo: React.FC = () => {
   const [info, setInfo] = useState("personal");
   const [busy, setBusy] = useState(true);
   const history = useHistory();
-  const [datos, setDatos] = useState<
+  const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
 
@@ -37,14 +36,11 @@ export const PlayerInfo: React.FC = () => {
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
+      unsubscribe = getUserDoc(setData);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
 
-  /*function editPhotos() {
-    history.push("/tabs/editar-fotos");
-  }*/
   return (
     <IonContent>
       <IonRow>
@@ -65,15 +61,15 @@ export const PlayerInfo: React.FC = () => {
       </IonRow>
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
-          <IonLabel className={styles.name}>{datos?.name}</IonLabel>
+          <IonLabel className={styles.name}>{data?.name}</IonLabel>
         </IonCol>
       </IonRow>
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
           <IonLabel className={styles.location}>
             <IonIcon icon={locationOutline} size="small"></IonIcon>{" "}
-            {datos?.city || datos?.country !== undefined
-              ? "" + datos?.city + "/" + datos?.country
+            {data?.city || data?.country !== undefined
+              ? "" + data?.city + "/" + data?.country
               : "Ciudad/Pais"}
           </IonLabel>
         </IonCol>

@@ -1,6 +1,5 @@
 import {
   IonBackButton,
-  IonButton,
   IonButtons,
   IonCheckbox,
   IonContent,
@@ -36,7 +35,6 @@ const checkboxList = [
 ];
 const Beginning: React.FC = () => {
   const [present] = useIonToast();
-  const [checked, setChecked] = useState(false);
   const [check, setCheck] = useState(true);
   const history = useHistory();
 

@@ -84,7 +84,6 @@ export const AddClub: React.FC = () => {
     TA: 0,
     TR: 0,
   };
-  const [dataClub, setDataClub] = useState<any>(null);
   const [present] = useIonToast();
   const history = useHistory();
   const {

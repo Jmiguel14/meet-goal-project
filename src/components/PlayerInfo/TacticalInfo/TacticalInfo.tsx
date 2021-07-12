@@ -20,7 +20,7 @@ import SkillIcon from "icons/skillIcon.png";
 interface ContainerProps {}
 
 const TacticalInfo: React.FC<ContainerProps> = () => {
-  const [datos, setDatos] = useState<
+  const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
 
@@ -29,7 +29,7 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
+      unsubscribe = getUserDoc(setData);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
@@ -38,7 +38,7 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
       <IonCard className={styles.positional_data}>
         <IonItem className={styles.title}>
           <IonLabel>
-            {datos?.pospri !== undefined ? datos?.pospri : "Posición Principal"}
+            {data?.pospri !== undefined ? data?.pospri : "Posición Principal"}
           </IonLabel>
           <IonButton
             fill="clear"
@@ -54,9 +54,7 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText>
-            {datos?.possec !== undefined
-              ? datos?.possec
-              : "Posición Secundaria"}
+            {data?.possec !== undefined ? data?.possec : "Posición Secundaria"}
           </IonText>
         </IonItem>
         <IonItem className={styles.element}>
@@ -66,7 +64,7 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText>
-            {datos?.goals !== undefined ? datos?.goals : "Logros"}
+            {data?.goals !== undefined ? data?.goals : "Logros"}
           </IonText>
         </IonItem>
       </IonCard>
@@ -87,8 +85,8 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText className={styles.attribute}>
-            {datos?.firstAttribute !== undefined
-              ? datos?.firstAttribute
+            {data?.firstAttribute !== undefined
+              ? data?.firstAttribute
               : "Aquí se mostrarán tus atributos"}
           </IonText>
         </IonItem>
@@ -99,8 +97,8 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText className={styles.attribute}>
-            {datos?.secondAttribute !== undefined
-              ? datos?.secondAttribute
+            {data?.secondAttribute !== undefined
+              ? data?.secondAttribute
               : "Aquí se mostrarán tus atributos"}
           </IonText>
         </IonItem>
@@ -111,8 +109,8 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText className={styles.attribute}>
-            {datos?.thirdAttribute !== undefined
-              ? datos?.thirdAttribute
+            {data?.thirdAttribute !== undefined
+              ? data?.thirdAttribute
               : "Aquí se mostrarán tus atributos"}
           </IonText>
         </IonItem>
@@ -123,8 +121,8 @@ const TacticalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText className={styles.attribute}>
-            {datos?.fourthAttribute !== undefined
-              ? datos?.fourthAttribute
+            {data?.fourthAttribute !== undefined
+              ? data?.fourthAttribute
               : "Aquí se mostrarán tus atributos"}
           </IonText>
         </IonItem>

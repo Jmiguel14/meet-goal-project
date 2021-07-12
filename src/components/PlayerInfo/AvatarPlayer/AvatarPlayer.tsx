@@ -6,7 +6,7 @@ import { useAuth } from "contexts/AuthContext";
 import { getUserDoc } from "firebase/client";
 
 export const AvatarPlayer: React.FC = () => {
-  const [datos, setDatos] = useState<
+  const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
 
@@ -15,7 +15,7 @@ export const AvatarPlayer: React.FC = () => {
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
+      unsubscribe = getUserDoc(setData);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
@@ -24,11 +24,11 @@ export const AvatarPlayer: React.FC = () => {
       <IonRow>
         <IonCol className="imagenes">
           <IonCol>
-            <IonImg className="portada" src={datos?.coverURL}></IonImg>
+            <IonImg className="portada" src={data?.coverURL}></IonImg>
           </IonCol>
           <IonCol className="contenedor">
             <IonAvatar className="avatar">
-              <img src={datos?.avatarURL} />
+              <img src={data?.avatarURL} />
             </IonAvatar>
           </IonCol>
         </IonCol>
