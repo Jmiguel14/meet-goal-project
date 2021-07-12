@@ -2,12 +2,13 @@ import { IonAvatar } from "@ionic/react";
 import React from "react";
 
 interface IAvatar {
-  src: string;
+  src: string; 
+  className?: string
 }
 
-export const Avatar: React.FC<IAvatar> = ({ src }) => {
+export const Avatar: React.FC<IAvatar> = ({ src, className }) => {
   return (
-    <IonAvatar>
+    <IonAvatar className={className}>
       <img src={src}></img>
     </IonAvatar>
   );

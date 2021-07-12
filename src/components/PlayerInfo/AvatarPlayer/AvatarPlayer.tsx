@@ -4,6 +4,7 @@ import "./AvatarPlayer.css";
 import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
 import { getUserDoc } from "firebase/client";
+import { Avatar } from "components/Avatar";
 
 export const AvatarPlayer: React.FC = () => {
   const [data, setData] = useState<
@@ -21,10 +22,10 @@ export const AvatarPlayer: React.FC = () => {
   }, [currentUser]);
   return (
     <>
-      <IonRow>
+      <IonRow className='profile-photos'>
         <IonCol className="imagenes">
-          <IonCol>
-            <IonImg className="portada" src={data?.coverURL}></IonImg>
+          <IonCol className='portada'>
+            <IonImg src={data?.coverURL}></IonImg>
           </IonCol>
           <IonCol className="contenedor">
             <IonAvatar className="avatar">

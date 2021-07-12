@@ -43,11 +43,7 @@ export const PlayerInfo: React.FC = () => {
 
   return (
     <IonContent>
-      <IonRow>
-        <IonCol>
-          <AvatarPlayer />
-        </IonCol>
-      </IonRow>
+      <AvatarPlayer />
       <br />
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">

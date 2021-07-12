@@ -7,10 +7,17 @@
   margin: 0 auto;
 }
 .imagenes {
+  padding: 0px;
+  align-items: flex-start;
   position: relative;
   height: 48%;
 }
 .portada {
+  padding: 0px;
+  align-items: flex-start
+}
+
+.portada ion-img {
   display: flex;
   width: 100%;
 }
@@ -20,4 +27,8 @@
 }
 .fotos-jugador {
   align-items: center;
+}
+
+.profile-photos{
+  padding-bottom: 10px;
 }
