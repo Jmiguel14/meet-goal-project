@@ -15,13 +15,20 @@ import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import firebase from "firebase/app";
-import { firestore, getUserDoc } from "firebase/client";
+import {
+  firestore,
+  getUserDoc,
+  updateProfileAvatar,
+  updateProfileCover,
+} from "firebase/client";
 
 const UpdatePhotos: React.FC = () => {
   const [present] = useIonToast();
   const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
+  const [task, setTask] = useState<firebase.storage.UploadTask>();
+  const [typePhoto, setTypePhoto] = useState("");
 
   const { currentUser } = useAuth();
 
@@ -33,46 +40,45 @@ const UpdatePhotos: React.FC = () => {
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
 
-  function handleUploadAvatar(event: React.ChangeEvent<HTMLInputElement>) {
+  async function HandleUploadAvatar(
+    event: React.ChangeEvent<HTMLInputElement>
+  ) {
     const file = event.target.files![0];
-    const storageRef = firebase
-      .storage()
-      .ref()
-      .child(`images/${currentUser.uid}/avatar.png`);
-    const task = storageRef.put(file).then((savedPicture) => {
-      storageRef.getDownloadURL().then((url) => {
-        firestore.collection("users").doc(currentUser.uid).update({
-          avatarURL: url,
-        });
-        present({
-          message: "Se ha cambiado su foto correctamente",
-          duration: 1000,
-          position: "top",
-          color: "success",
-        });
-      });
-    });
+    setTask(updateProfileAvatar(file));
+    setTypePhoto("avatar");
   }
   function handleUploadCover(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files![0];
-    const storageRef = firebase
-      .storage()
-      .ref()
-      .child(`images/${currentUser.uid}/cover.png`);
-    const task = storageRef.put(file).then((savedPicture) => {
-      storageRef.getDownloadURL().then((url) => {
-        firestore.collection("users").doc(currentUser.uid).update({
-          coverURL: url,
-        });
+    setTask(updateProfileCover(file));
+    setTypePhoto("cover");
+  }
+
+  useEffect(() => {
+    if (task) {
+      const onProgress = () => {};
+      const onError = () => {};
+      const onComplete = () => {
         present({
           message: "Se ha cambiado su foto correctamente",
           duration: 1000,
           position: "top",
           color: "success",
         });
-      });
-    });
-  }
+        task.snapshot.ref.getDownloadURL().then((url) => {
+          if (typePhoto == "avatar") {
+            firestore.collection("users").doc(currentUser.uid).update({
+              avatarURL: url,
+            });
+          } else {
+            firestore.collection("users").doc(currentUser.uid).update({
+              coverURL: url,
+            });
+          }
+        });
+      };
+      task.on("state_changed", onProgress, onError, onComplete);
+    }
+  }, [task]);
 
   return (
     <IonPage>
@@ -91,14 +97,14 @@ const UpdatePhotos: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen className={styles.back}>
         <IonItemDivider color="primary" className={styles.container_divider}>
-          <div className={styles.divider}>Foto de portada</div>
+          <div className={styles.divider}>Avatar del usuario</div>
         </IonItemDivider>
         <IonCard>
           <IonImg src={data?.avatarURL}> </IonImg>
-          <input type="file" onChange={handleUploadAvatar}></input>
+          <input type="file" onChange={HandleUploadAvatar}></input>
         </IonCard>
         <IonItemDivider color="primary">
-          <div className={styles.divider}>Avatar del usuario</div>
+          <div className={styles.divider}>Foto del perfil</div>
         </IonItemDivider>
         <IonCard>
           <IonImg src={data?.coverURL}> </IonImg>
