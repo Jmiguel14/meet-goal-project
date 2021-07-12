@@ -69,7 +69,8 @@ const UpdatePhotos: React.FC = () => {
             firestore.collection("users").doc(currentUser.uid).update({
               avatarURL: url,
             });
-          } else {
+          }
+          if (typePhoto == "cover") {
             firestore.collection("users").doc(currentUser.uid).update({
               coverURL: url,
             });
