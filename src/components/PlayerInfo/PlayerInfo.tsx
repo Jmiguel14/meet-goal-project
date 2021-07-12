@@ -4,6 +4,7 @@ import {
   IonContent,
   IonIcon,
   IonLabel,
+  IonRouterLink,
   IonRow,
   IonSegment,
   IonSegmentButton,
@@ -41,21 +42,25 @@ export const PlayerInfo: React.FC = () => {
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
 
-  function editPhotos() {
+  /*function editPhotos() {
     history.push("/tabs/editar-fotos");
-  }
+  }*/
   return (
     <IonContent>
-      <AvatarPlayer />
+      <IonRow>
+        <IonCol>
+          <AvatarPlayer />
+        </IonCol>
+      </IonRow>
+      <br />
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
-          <button
+          <IonRouterLink
+            href="/tabs/editar-fotos"
             className={styles.edit_photos}
-            type="submit"
-            onClick={editPhotos}
           >
             Editar foto de perfil o avatar
-          </button>
+          </IonRouterLink>
         </IonCol>
       </IonRow>
       <IonRow className="ion-justify-content-center">

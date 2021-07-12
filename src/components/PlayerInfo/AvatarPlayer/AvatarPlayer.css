@@ -5,11 +5,10 @@
   top: 184px;
   border-radius: 99px;
   margin: 0 auto;
-  border: 0;
 }
 .imagenes {
   position: relative;
-  padding: 0;
+  height: 48%;
 }
 .portada {
   display: flex;
