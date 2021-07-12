@@ -25,7 +25,7 @@ const getDataToUserDoc = (doc: any) => {
   return data;
 };
 
-export const getUserDoc = (callback: any) => {
+export const getUserDoc = (callback: React.Dispatch<React.SetStateAction<firebase.firestore.DocumentData | undefined>>) => {
   return firestore
     .collection("users")
     .doc(auth.currentUser?.uid)

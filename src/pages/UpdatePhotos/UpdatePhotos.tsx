@@ -33,8 +33,8 @@ const UpdatePhotos: React.FC = () => {
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
 
-  function handleUploadAvatar(event: any) {
-    const file = event.target.files[0];
+  function handleUploadAvatar(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files![0];
     const storageRef = firebase
       .storage()
       .ref()
@@ -53,8 +53,8 @@ const UpdatePhotos: React.FC = () => {
       });
     });
   }
-  function handleUploadCover(event: any) {
-    const file = event.target.files[0];
+  function handleUploadCover(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files![0];
     const storageRef = firebase
       .storage()
       .ref()
