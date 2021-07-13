@@ -11,27 +11,12 @@ import { addCircleOutline } from "ionicons/icons";
 import styles from "./styles.module.css";
 import SurgeryIcon from "icons/SurgeryIcon.png";
 import RecoveryTimeIcon from "icons/recoveryTimeIcon.png";
-import { useEffect, useState } from "react";
 import { useAuth } from "contexts/AuthContext";
-import { getUserDoc } from "firebase/client";
-import firebase from "firebase/app";
 
 interface ContainerProps {}
 
 const MedicalInfo: React.FC<ContainerProps> = () => {
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const { data } = useAuth();
   return (
     <>
       <IonButton

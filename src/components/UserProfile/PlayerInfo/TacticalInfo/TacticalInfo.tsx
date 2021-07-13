@@ -11,28 +11,14 @@ import { pencilOutline } from "ionicons/icons";
 import styles from "./styles.module.css";
 import MedalIcon from "icons/medalIcon.png";
 import PlayerIcon from "icons/playerIcon.png";
-import { useEffect, useState } from "react";
-import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
-import { getUserDoc } from "firebase/client";
 import SkillIcon from "icons/skillIcon.png";
 
 interface ContainerProps {}
 
 const TacticalInfo: React.FC<ContainerProps> = () => {
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
+  const { data } = useAuth();
 
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
   return (
     <>
       <IonCard className={styles.positional_data}>

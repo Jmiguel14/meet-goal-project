@@ -22,19 +22,7 @@ import ValueIcon from "icons/valueIcon.png";
 interface ContainerProps {}
 
 const PsycoInfo: React.FC<ContainerProps> = () => {
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const { data } = useAuth();
   return (
     <>
       <IonCard className={styles.psycology_data}>

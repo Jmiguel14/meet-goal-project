@@ -7,31 +7,17 @@ import {
   IonText,
 } from "@ionic/react";
 import styles from "./styles.module.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import MailIcon from "icons/emailIcon.png";
 import BirthdayIcon from "icons/birthdayIcon.png";
 import ContractIcon from "icons/contractIcon.png";
 import MarketIcon from "icons/marketIcon.png";
 import TelephoneIcon from "icons/telephoneIcon.png";
-import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
-import { getUserDoc } from "firebase/client";
 interface ContainerProps {}
 
 const PersonalInfo: React.FC<ContainerProps> = () => {
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const { data } = useAuth();
   function converterDate() {
     let birth = data?.birth.split("T");
     return birth[0];

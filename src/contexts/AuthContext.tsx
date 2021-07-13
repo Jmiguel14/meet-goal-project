@@ -1,5 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { auth, defaultAvatar, defaultCover, firestore } from "firebase/client";
+import {
+  auth,
+  defaultAvatar,
+  defaultCover,
+  firestore,
+  getUserDoc,
+} from "firebase/client";
 import firebase from "firebase/app";
 import { useIonToast, IonLoading } from "@ionic/react";
 import { userTypeEnum } from "types";
@@ -12,6 +18,7 @@ type user = {
 
 interface IAuthProvider {
   currentUser: firebase.User;
+  data: firebase.firestore.DocumentData | undefined;
   signUp: (
     email: string,
     password: string
@@ -38,6 +45,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [present] = useIonToast();
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<
+    firebase.firestore.DocumentData | undefined
+  >();
 
   const signUp = (email: string, password: string) => {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -96,16 +106,23 @@ export const AuthProvider: React.FC = ({ children }) => {
       }
     }
   };
+  useEffect(() => {
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setData);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
 
   const value = {
     currentUser,
+    data,
     signUp,
     createUserDocument,
     login,
     logout,
     resetPassword,
   } as IAuthProvider;
-
   return (
     <>
       <AuthContext.Provider value={value}>

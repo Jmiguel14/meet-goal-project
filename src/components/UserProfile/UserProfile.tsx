@@ -7,10 +7,8 @@ import {
   IonRow,
 } from "@ionic/react";
 import { locationOutline } from "ionicons/icons";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./styles.module.css";
-import { getUserDoc } from "firebase/client";
-import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
 import { useHistory } from "react-router";
 import PhotoUser from "./PlayerInfo/PhotoUser/PhotoUser";
@@ -19,19 +17,7 @@ import { PlayerSegments } from "./PlayerInfo/PlayerSegments";
 
 export const UserProfile: React.FC = () => {
   const history = useHistory();
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const { data } = useAuth();
 
   return (
     <IonContent>

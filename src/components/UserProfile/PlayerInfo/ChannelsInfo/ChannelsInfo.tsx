@@ -16,27 +16,12 @@ import InstagramIcon from "icons/InstagramIcon.png";
 import TwitterIcon from "icons/TwitterIcon.png";
 import YoutubeIcon from "icons/YouTubeIcon.png";
 import VimeoIcon from "icons/VimeoIcon.png";
-import { useEffect, useState } from "react";
 import { useAuth } from "contexts/AuthContext";
-import { getUserDoc } from "firebase/client";
-import firebase from "firebase/app";
 
 interface ContainerProps {}
 
 const ChannelsInfo: React.FC<ContainerProps> = () => {
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const { data } = useAuth();
   return (
     <>
       <IonCard className={styles.social_networks}>

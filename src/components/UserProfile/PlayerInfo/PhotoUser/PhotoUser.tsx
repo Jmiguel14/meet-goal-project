@@ -1,24 +1,9 @@
 import { IonAvatar, IonImg, IonCol, IonRow } from "@ionic/react";
-import { useEffect, useState } from "react";
 import "./PhotoUser.css";
-import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
-import { getUserDoc } from "firebase/client";
 
 export const PhotoUser: React.FC = () => {
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const { data } = useAuth();
   return (
     <>
       <IonRow className="profile-photos">

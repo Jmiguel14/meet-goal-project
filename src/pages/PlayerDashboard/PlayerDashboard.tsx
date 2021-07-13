@@ -19,19 +19,7 @@ import { getUserDoc } from "firebase/client";
 import { addOutline } from "ionicons/icons";
 
 const PlayerDashboard: React.FC = () => {
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const { data } = useAuth();
   return (
     <IonPage>
       <IonHeader>

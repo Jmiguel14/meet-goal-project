@@ -7,27 +7,13 @@ import {
   IonText,
 } from "@ionic/react";
 import styles from "./styles.module.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Trophy from "icons/trophy.png";
-import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
-import { getUserDoc } from "firebase/client";
 interface ContainerProps {}
 
 const SportsGoalsInfo: React.FC<ContainerProps> = () => {
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const { data } = useAuth();
   return (
     <>
       <IonCard className={styles.boxes}>

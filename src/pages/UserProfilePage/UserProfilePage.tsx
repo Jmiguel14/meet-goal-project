@@ -20,20 +20,8 @@ import { arrowBack } from "ionicons/icons";
 import UserProfile from "components/UserProfile/UserProfile";
 
 const UserProfilePage: React.FC = () => {
-  const [datos, setDatos] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-
-  const { currentUser } = useAuth();
+  const { data } = useAuth();
   const history = useHistory();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
 
   function backHome() {
     history.push("/tabs/inicio-jugador");
@@ -53,7 +41,7 @@ const UserProfilePage: React.FC = () => {
           </IonButtons>
           <IonRow className={styles.title}>
             <IonCol size="auto">
-              <IonTitle>{datos?.name}</IonTitle>
+              <IonTitle>{data?.name}</IonTitle>
             </IonCol>
           </IonRow>
         </IonToolbar>
