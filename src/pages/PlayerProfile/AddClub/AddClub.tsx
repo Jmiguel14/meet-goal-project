@@ -20,7 +20,7 @@ import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { AddCubExperience } from "firebase/client";
 import { useHistory } from "react-router";
-import { IIIForm } from "constants/collectionsForms";
+import { ClubDataForm } from "types";
 
 const schema = yup.object().shape({
   clubName: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -80,10 +80,10 @@ export const AddClub: React.FC = () => {
     clearErrors,
     reset,
     formState: { errors },
-  } = useForm<IIIForm>({ resolver: yupResolver(schema) });
+  } = useForm<ClubDataForm>({ resolver: yupResolver(schema) });
 
   const onSubmit = async (
-    data: IIIForm,
+    data: ClubDataForm,
     e: React.BaseSyntheticEvent<object, any, any> | undefined
   ) => {
     const {

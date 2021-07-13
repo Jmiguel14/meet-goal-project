@@ -22,7 +22,7 @@ import styles from "./styles.module.css";
 import { ERROR_MESSAGES } from "constants/errorMessages";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IVForm } from "constants/collectionsForms";
+import { InjuryDataForm } from "types";
 
 const schema = yup.object().shape({
   injuryName: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -46,13 +46,13 @@ const AddInjury: React.FC = () => {
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<IVForm>({
+  } = useForm<InjuryDataForm>({
     defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (
-    data: IVForm,
+    data: InjuryDataForm,
     e: React.BaseSyntheticEvent<object, any, any> | undefined
   ) => {
     const { injuryName, recoveryTime, surgery } = data;

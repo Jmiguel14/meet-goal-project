@@ -14,10 +14,10 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import { VForm } from "constants/collectionsForms";
 import { EditPsycoParameters } from "firebase/client";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import { PsycoDataForm } from "types";
 import styles from "./styles.module.css";
 
 const EditPsycoInfo: React.FC = () => {
@@ -34,7 +34,7 @@ const EditPsycoInfo: React.FC = () => {
   });
 
   const onSubmit = async (
-    data: VForm,
+    data: PsycoDataForm,
     e: React.BaseSyntheticEvent<object, any, any> | undefined
   ) => {
     const { character, personality, attitude } = data;

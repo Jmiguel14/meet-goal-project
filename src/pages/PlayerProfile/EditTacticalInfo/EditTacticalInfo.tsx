@@ -14,10 +14,10 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import { VIForm } from "constants/collectionsForms";
 import { EditPositionData } from "firebase/client";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import { TacticalDataForm } from "types";
 import styles from "./styles.module.css";
 
 const EditTacticalInfo: React.FC = () => {
@@ -26,7 +26,7 @@ const EditTacticalInfo: React.FC = () => {
   const { reset, handleSubmit, register } = useForm();
 
   const onSubmit = async (
-    data: VIForm,
+    data: TacticalDataForm,
     e: React.BaseSyntheticEvent<object, any, any> | undefined
   ) => {
     const { pospri, possec, goals } = data;

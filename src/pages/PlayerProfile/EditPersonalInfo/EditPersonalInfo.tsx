@@ -24,7 +24,7 @@ import { useForm } from "react-hook-form";
 import { SetPersonalData } from "firebase/client";
 import { ERROR_MESSAGES } from "constants/errorMessages";
 import { useHistory } from "react-router";
-import { IIForm } from "constants/collectionsForms";
+import { PersonalDataForm } from "types";
 
 const schema = yup.object().shape({
   mail: yup
@@ -55,13 +55,13 @@ export const EditPersonalInfo: React.FC = () => {
     clearErrors,
     reset,
     formState: { errors },
-  } = useForm<IIForm>({
+  } = useForm<PersonalDataForm>({
     defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (
-    data: IIForm,
+    data: PersonalDataForm,
     e: React.BaseSyntheticEvent<object, any, any> | undefined
   ) => {
     const { mail, phone, country, city, birth, contract, marketTransfer } =
