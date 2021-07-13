@@ -24,16 +24,7 @@ import { useForm } from "react-hook-form";
 import { SetPersonalData } from "firebase/client";
 import { ERROR_MESSAGES } from "constants/errorMessages";
 import { useHistory } from "react-router";
-
-export interface IIForm {
-  mail: string;
-  country: string;
-  city: string;
-  phone: number;
-  birth: string;
-  contract: string;
-  marketTransfer: string;
-}
+import { IIForm } from "constants/collectionsForms";
 
 const schema = yup.object().shape({
   mail: yup

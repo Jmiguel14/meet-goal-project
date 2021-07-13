@@ -14,16 +14,11 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
+import { VForm } from "constants/collectionsForms";
 import { EditPsycoParameters } from "firebase/client";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import styles from "./styles.module.css";
-
-export interface VForm {
-  character: string;
-  personality: Object;
-  attitude: string;
-}
 
 const EditPsycoInfo: React.FC = () => {
   const [present] = useIonToast();

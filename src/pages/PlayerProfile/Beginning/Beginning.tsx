@@ -14,25 +14,13 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
+import { checkboxListI } from "constants/collectionsForms";
 import { EditPersonalValues } from "firebase/client";
 import { warningSharp } from "ionicons/icons";
 import { useState } from "react";
 import { useHistory } from "react-router";
 import styles from "./styles.module.css";
 
-const checkboxList = [
-  { val: "Juego Limpio", isChecked: false },
-  { val: "Respeto", isChecked: false },
-  { val: "Compañerismo", isChecked: false },
-  { val: "Disciplina", isChecked: false },
-  { val: "Asumir Frustraciones", isChecked: false },
-  { val: "Esfuerzo", isChecked: false },
-  { val: "Ssaber disfrutar", isChecked: false },
-  { val: "Humildad", isChecked: false },
-  { val: "Amistad", isChecked: false },
-  { val: "Unidad y liderazgo", isChecked: false },
-  { val: "Solidaridad", isChecked: false },
-];
 const Beginning: React.FC = () => {
   const [present] = useIonToast();
   const [check, setCheck] = useState(true);
@@ -100,7 +88,7 @@ const Beginning: React.FC = () => {
           </div>
         </IonItemDivider>
         <IonList className={styles.atribute}>
-          {checkboxList.map(({ val, isChecked }, i) => (
+          {checkboxListI.map(({ val, isChecked }, i) => (
             <IonItem key={i}>
               <IonLabel>{val}</IonLabel>
               <IonCheckbox

@@ -22,12 +22,7 @@ import styles from "./styles.module.css";
 import { ERROR_MESSAGES } from "constants/errorMessages";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-export interface IVForm {
-  injuryName: string;
-  recoveryTime: string;
-  surgery: boolean;
-}
+import { IVForm } from "constants/collectionsForms";
 
 const schema = yup.object().shape({
   injuryName: yup.string().required(ERROR_MESSAGES.REQUIRED),

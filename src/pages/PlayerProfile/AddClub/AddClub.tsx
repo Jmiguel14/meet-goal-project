@@ -20,19 +20,7 @@ import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { AddCubExperience } from "firebase/client";
 import { useHistory } from "react-router";
-
-export interface IIIForm {
-  clubName: string;
-  country: string;
-  season: number;
-  subPlayer: string;
-  catTournament: string;
-  PJ: number;
-  G: number;
-  A: number;
-  TA: number;
-  TR: number;
-}
+import { IIIForm } from "constants/collectionsForms";
 
 const schema = yup.object().shape({
   clubName: yup.string().required(ERROR_MESSAGES.REQUIRED),

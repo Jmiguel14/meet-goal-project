@@ -14,16 +14,11 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
+import { VIForm } from "constants/collectionsForms";
 import { EditPositionData } from "firebase/client";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import styles from "./styles.module.css";
-
-export interface VIForm {
-  pospri: string;
-  possec: string;
-  goals: string;
-}
 
 const EditTacticalInfo: React.FC = () => {
   const [present] = useIonToast();
