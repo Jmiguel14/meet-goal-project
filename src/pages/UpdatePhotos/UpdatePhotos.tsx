@@ -102,14 +102,22 @@ const UpdatePhotos: React.FC = () => {
         </IonItemDivider>
         <IonCard>
           <IonImg src={data?.avatarURL}> </IonImg>
-          <input type="file" onChange={HandleUploadAvatar}></input>
+          <input
+            type="file"
+            accept=".png,.jpg,.jpeg"
+            onChange={HandleUploadAvatar}
+          ></input>
         </IonCard>
         <IonItemDivider color="primary">
           <div className={styles.divider}>Foto del perfil</div>
         </IonItemDivider>
         <IonCard>
           <IonImg src={data?.coverURL}> </IonImg>
-          <input type="file" onChange={handleUploadCover}></input>
+          <input
+            type="file"
+            accept=".png,.jpg,.jpeg"
+            onChange={handleUploadCover}
+          ></input>
         </IonCard>
       </IonContent>
     </IonPage>

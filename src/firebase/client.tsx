@@ -266,7 +266,7 @@ export async function EditPersonalValues(
 }
 const storage = firebase.storage();
 export function defaultAvatar(id: string) {
-  const storageRef = storage.ref().child(`images/${id}/avatar.png`);
+  const storageRef = storage.ref().child(`images/${id}/avatar`);
   fetch(Avatar)
     .then((res) => res.blob())
     .then((Blob) => {
@@ -281,7 +281,7 @@ export function defaultAvatar(id: string) {
 }
 
 export function defaultCover(id: string) {
-  const storageRef = storage.ref().child(`images/${id}/cover.png`);
+  const storageRef = storage.ref().child(`images/${id}/cover`);
   fetch(Cover)
     .then((res) => res.blob())
     .then((Blob) => {
@@ -298,7 +298,7 @@ export function updateProfileAvatar(image: File) {
   const storageRef = firebase
     .storage()
     .ref()
-    .child(`images/${auth.currentUser?.uid}/avatar.png`);
+    .child(`images/${auth.currentUser?.uid}/avatar`);
   const task = storageRef.put(image);
   return task;
 }
@@ -306,7 +306,7 @@ export function updateProfileCover(image: File) {
   const storageRef = firebase
     .storage()
     .ref()
-    .child(`images/${auth.currentUser?.uid}/cover.png`);
+    .child(`images/${auth.currentUser?.uid}/cover`);
   const task = storageRef.put(image);
   return task;
 }
