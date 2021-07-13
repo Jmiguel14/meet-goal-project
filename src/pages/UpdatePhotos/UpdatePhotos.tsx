@@ -65,7 +65,7 @@ const UpdatePhotos: React.FC = () => {
           color: "success",
         });
         task.snapshot.ref.getDownloadURL().then((url) => {
-          if (typePhoto == "avatar") {
+          if (typePhoto === "avatar") {
             firestore.collection("users").doc(currentUser.uid).update({
               avatarURL: url,
             });
@@ -102,22 +102,30 @@ const UpdatePhotos: React.FC = () => {
         </IonItemDivider>
         <IonCard>
           <IonImg src={data?.avatarURL}> </IonImg>
-          <input
-            type="file"
-            accept=".png,.jpg,.jpeg"
-            onChange={HandleUploadAvatar}
-          ></input>
+          <div className={styles.custom_input_file}>
+            <span className={styles.label}>SUBIR IMAGEN</span>
+            <input
+              className={styles.input_file}
+              type="file"
+              accept=".png,.jpg,.jpeg"
+              onChange={HandleUploadAvatar}
+            ></input>
+          </div>
         </IonCard>
         <IonItemDivider color="primary">
           <div className={styles.divider}>Foto del perfil</div>
         </IonItemDivider>
         <IonCard>
           <IonImg src={data?.coverURL}> </IonImg>
-          <input
-            type="file"
-            accept=".png,.jpg,.jpeg"
-            onChange={handleUploadCover}
-          ></input>
+          <div className={styles.custom_input_file}>
+            <span className={styles.label}>SUBIR IMAGEN</span>
+            <input
+              className={styles.input_file}
+              type="file"
+              accept=".png,.jpg,.jpeg"
+              onChange={handleUploadCover}
+            ></input>
+          </div>
         </IonCard>
       </IonContent>
     </IonPage>
