@@ -1,6 +1,5 @@
 import {
   IonBackButton,
-  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
@@ -13,102 +12,336 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
+import { EditPsycoParameters } from "firebase/client";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
+import { PsycoDataForm } from "types";
+import styles from "./styles.module.css";
 
-import "./EditPsycoInfo.css";
 const EditPsycoInfo: React.FC = () => {
+  const [present] = useIonToast();
+  const history = useHistory();
+
+  const initialValues = {
+    character: "",
+    personality: {},
+    attitude: "",
+  };
+  const { reset, handleSubmit, register } = useForm({
+    defaultValues: initialValues,
+  });
+
+  const onSubmit = async (
+    data: PsycoDataForm,
+    e: React.BaseSyntheticEvent<object, any, any> | undefined
+  ) => {
+    const { character, personality, attitude } = data;
+    if (await EditPsycoParameters(character, personality, attitude)) {
+      present({
+        message: "Se actualizó la información exitosamente",
+        duration: 1000,
+        position: "top",
+        color: "success",
+      });
+      history.push("/tabs/perfil-jugador");
+    } else {
+      present({
+        message: "Error al actualizar la información. Intentelo nuevamente...",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
+    }
+    reset();
+  };
+
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" className="acciones">
+        <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/tabs/perfil-jugador"
-              className="icon-back"
+              className={styles.icon_back}
             />
           </IonButtons>
-          <IonTitle color="primary" className="titulo">
-            Param. Psicológicos
+          <IonTitle color="primary" className={styles.title}>
+            P. Psicológicos
           </IonTitle>
-          <IonButton fill="clear" slot="end" color="tertiary">
+          <button
+            type="submit"
+            form="edit-psyco-info-form"
+            slot="end"
+            className={styles.save_psyco_info}
+          >
             Guardar
-          </IonButton>
+          </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className="datos-psyco">
+      <IonContent fullscreen className={styles.data_psyco}>
         <IonItemDivider color="primary">
-          <div className="subtitulo">Selecciona tu Carácter</div>
+          <div className={styles.subtitle}>Selecciona tu Carácter</div>
         </IonItemDivider>
-        <IonItem className="campo-psyco">
-          <IonLabel>Carácter</IonLabel>
-          <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
-            <IonSelectOption value="flematico">Flemático</IonSelectOption>
-            <IonSelectOption value="colerico">Colérico</IonSelectOption>
-            <IonSelectOption value="seunguineo">Senguíneo</IonSelectOption>
-            <IonSelectOption value="apatico">Apático</IonSelectOption>
-            <IonSelectOption value="apasionado">Apasionado</IonSelectOption>
-            <IonSelectOption value="sentimental">Sentimental</IonSelectOption>
-            <IonSelectOption value="nervioso">Nervioso</IonSelectOption>
-            <IonSelectOption value="amorfo">Amorfo</IonSelectOption>
-            <IonSelectOption value="inseguro">Inseguro</IonSelectOption>
-            <IonSelectOption value="obsesivo">Obsesivo</IonSelectOption>
-            <IonSelectOption value="sensible">Sensible</IonSelectOption>
-          </IonSelect>
-        </IonItem>
-        <IonItemDivider color="primary">
-          <div className="subtitulo">Parametros de Personalidad</div>
-        </IonItemDivider>
-        <div className="notas">
-          <IonNote className="nota">E:Extrovertido - I: Introvertido</IonNote>
-          <br />
-          <IonNote className="nota">N:Intuitivo - S: Sensitivo</IonNote>
-          <br />
-          <IonNote className="nota">T:Pensador - F:Sentimental</IonNote>
-          <br />
-          <IonNote className="nota">J:Juicioso - P: Perceptivo</IonNote>
-          <br />
-        </div>
-        <IonItem className="campo-psyco">
-          <IonLabel>Personalidad</IonLabel>
-          <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
-            <IonSelectOption value="ESTJ">ESTJ</IonSelectOption>
-            <IonSelectOption value="ESTP">ESTP</IonSelectOption>
-            <IonSelectOption value="ESFJ">ESFJ</IonSelectOption>
-            <IonSelectOption value="ESFP">ESFP</IonSelectOption>
-            <IonSelectOption value="ISTJ">ISTJ</IonSelectOption>
-            <IonSelectOption value="ISTP">ISTP</IonSelectOption>
-            <IonSelectOption value="ISFJ">ISFJ</IonSelectOption>
-            <IonSelectOption value="ISFP">ISFP</IonSelectOption>
-            <IonSelectOption value="ENTJ">ENTJ</IonSelectOption>
-            <IonSelectOption value="ENTP">ENTP</IonSelectOption>
-            <IonSelectOption value="ENFJ">ENFJ</IonSelectOption>
-            <IonSelectOption value="ENFP">ENFP</IonSelectOption>
-            <IonSelectOption value="INTJ">INTJ</IonSelectOption>
-            <IonSelectOption value="INTP">INTP</IonSelectOption>
-            <IonSelectOption value="INFJ">INFJ</IonSelectOption>
-            <IonSelectOption value="INFP">INFP</IonSelectOption>
-          </IonSelect>
-        </IonItem>
-        <IonItemDivider color="primary">
-          <div className="subtitulo">Selecciona tu Actitud</div>
-        </IonItemDivider>
-        <IonItem className="campo-psyco">
-          <IonLabel>Actitud</IonLabel>
-          <IonSelect okText="Listo" cancelText="Cerrar" slot="end">
-            <IonSelectOption value="positiva">Positiva</IonSelectOption>
-            <IonSelectOption value="derrotista">Derrotista</IonSelectOption>
-            <IonSelectOption value="pasiva">Pasiva</IonSelectOption>
-            <IonSelectOption value="altruista">Altruista</IonSelectOption>
-            <IonSelectOption value="neutra">Neutra</IonSelectOption>
-            <IonSelectOption value="agresiva">Agresiva</IonSelectOption>
-            <IonSelectOption value="empatica">Empática</IonSelectOption>
-            <IonSelectOption value="flexible">Flexible</IonSelectOption>
-            <IonSelectOption value="inflexible">Inflexible</IonSelectOption>
-            <IonSelectOption value="moralista">Moralista</IonSelectOption>
-            <IonSelectOption value="nihilista">Nihilista</IonSelectOption>
-            <IonSelectOption value="suspicaz">Suspicaz</IonSelectOption>
-          </IonSelect>
-        </IonItem>
+        <form onSubmit={handleSubmit(onSubmit)} id="edit-psyco-info-form">
+          <IonItem className={styles.psyco_field}>
+            <IonLabel>Carácter</IonLabel>
+            <IonSelect
+              okText="Listo"
+              cancelText="Cerrar"
+              slot="end"
+              {...register("character")}
+              value=""
+            >
+              <IonSelectOption value="flematico">Flemático</IonSelectOption>
+              <IonSelectOption value="colerico">Colérico</IonSelectOption>
+              <IonSelectOption value="seunguineo">Senguíneo</IonSelectOption>
+              <IonSelectOption value="apatico">Apático</IonSelectOption>
+              <IonSelectOption value="apasionado">Apasionado</IonSelectOption>
+              <IonSelectOption value="sentimental">Sentimental</IonSelectOption>
+              <IonSelectOption value="nervioso">Nervioso</IonSelectOption>
+              <IonSelectOption value="amorfo">Amorfo</IonSelectOption>
+              <IonSelectOption value="inseguro">Inseguro</IonSelectOption>
+              <IonSelectOption value="obsesivo">Obsesivo</IonSelectOption>
+              <IonSelectOption value="sensible">Sensible</IonSelectOption>
+            </IonSelect>
+          </IonItem>
+          <IonItemDivider color="primary">
+            <div className={styles.subtitle}>Parámetros de Personalidad</div>
+          </IonItemDivider>
+          <div className={styles.notes}>
+            <IonNote className={styles.note}>
+              E:Extrovertido - I: Introvertido
+            </IonNote>
+            <br />
+            <IonNote className={styles.note}>
+              N:Intuitivo - S: Sensitivo
+            </IonNote>
+            <br />
+            <IonNote className={styles.note}>
+              T:Pensador - F:Sentimental
+            </IonNote>
+            <br />
+            <IonNote className={styles.note}>
+              J:Juicioso - P: Perceptivo
+            </IonNote>
+            <br />
+          </div>
+          <IonItem className={styles.psyco_field}>
+            <IonLabel>Personalidad</IonLabel>
+            <IonSelect
+              okText="Listo"
+              cancelText="Cerrar"
+              slot="end"
+              {...register("personality")}
+              value=""
+            >
+              <IonSelectOption
+                value={{
+                  val: "ESTJ",
+                  detail1: "Extrovertido",
+                  detail2: "Sensitivo",
+                  detail3: "Pensador",
+                  detail4: "Jucioso",
+                }}
+              >
+                ESTJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ESTP",
+                  detail1: "Extrovertido",
+                  detail2: "Sensitivo",
+                  detail3: "Pensador",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ESTP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ESFJ",
+                  detail1: "Extrovertido",
+                  detail2: "Sensitivo",
+                  detail3: "Sentimental",
+                  detail4: "Juicioso",
+                }}
+              >
+                ESFJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ESFP",
+                  detail1: "Extrovertido",
+                  detail2: "Sensitivo",
+                  detail3: "Sentimental",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ESFP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ISTJ",
+                  detail1: "Introvertido",
+                  detail2: "Sensitivo",
+                  detail3: "Pensador",
+                  detail4: "Juicioso",
+                }}
+              >
+                ISTJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ISTP",
+                  detail1: "Introvertido",
+                  detail2: "Sensitivo",
+                  detail3: "Pensador",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ISTP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ISFJ",
+                  detail1: "Introvertido",
+                  detail2: "Sensitivo",
+                  detail3: "Sentimental",
+                  detail4: "Juicioso",
+                }}
+              >
+                ISFJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ISFP",
+                  detail1: "Introvertido",
+                  detail2: "Sensitivo",
+                  detail3: "Sentimental",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ISFP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ENTJ",
+                  detail1: "Extrovertido",
+                  detail2: "Intuitivo",
+                  detail3: "Pensador",
+                  detail4: "Jucioso",
+                }}
+              >
+                ENTJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ENTP",
+                  detail1: "Extrovertido",
+                  detail2: "Intuitivo",
+                  detail3: "Pensador",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ENTP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ENFJ",
+                  detail1: "Extrovertido",
+                  detail2: "Intuitivo",
+                  detail3: "Sentimental",
+                  detail4: "Jucioso",
+                }}
+              >
+                ENFJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "ENFP",
+                  detail1: "Extrovertido",
+                  detail2: "Intuitivo",
+                  detail3: "Sentimental",
+                  detail4: "Perceptivo",
+                }}
+              >
+                ENFP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "INTJ",
+                  detail1: "Introvertido",
+                  detail2: "Intuitivo",
+                  detail3: "Pensador",
+                  detail4: "Jucioso",
+                }}
+              >
+                INTJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "INTP",
+                  detail1: "Introvertido",
+                  detail2: "Intuitivo",
+                  detail3: "Pensador",
+                  detail4: "Perceptivo",
+                }}
+              >
+                INTP
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "INFJ",
+                  detail1: "Introvertido",
+                  detail2: "Intuitivo",
+                  detail3: "Sentimental",
+                  detail4: "Jucioso",
+                }}
+              >
+                INFJ
+              </IonSelectOption>
+              <IonSelectOption
+                value={{
+                  val: "INFP",
+                  detail1: "Introvertido",
+                  detail2: "Intuitivo",
+                  detail3: "Sentimental",
+                  detail4: "PErceptivo",
+                }}
+              >
+                INFP
+              </IonSelectOption>
+            </IonSelect>
+          </IonItem>
+          <IonItemDivider color="primary">
+            <div className={styles.subtitle}>Selecciona tu Actitud</div>
+          </IonItemDivider>
+          <IonItem className={styles.psyco_field}>
+            <IonLabel>Actitud</IonLabel>
+            <IonSelect
+              okText="Listo"
+              cancelText="Cerrar"
+              slot="end"
+              {...register("attitude")}
+              value=""
+            >
+              <IonSelectOption value="positiva">Positiva</IonSelectOption>
+              <IonSelectOption value="derrotista">Derrotista</IonSelectOption>
+              <IonSelectOption value="pasiva">Pasiva</IonSelectOption>
+              <IonSelectOption value="altruista">Altruista</IonSelectOption>
+              <IonSelectOption value="neutra">Neutra</IonSelectOption>
+              <IonSelectOption value="agresiva">Agresiva</IonSelectOption>
+              <IonSelectOption value="empatica">Empática</IonSelectOption>
+              <IonSelectOption value="flexible">Flexible</IonSelectOption>
+              <IonSelectOption value="inflexible">Inflexible</IonSelectOption>
+              <IonSelectOption value="moralista">Moralista</IonSelectOption>
+              <IonSelectOption value="nihilista">Nihilista</IonSelectOption>
+              <IonSelectOption value="suspicaz">Suspicaz</IonSelectOption>
+            </IonSelect>
+          </IonItem>
+        </form>
       </IonContent>
     </IonPage>
   );

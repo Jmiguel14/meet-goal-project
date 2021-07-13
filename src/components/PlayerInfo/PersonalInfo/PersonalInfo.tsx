@@ -1,33 +1,44 @@
 import {
   IonButton,
   IonCard,
-  IonIcon,
   IonImg,
   IonItem,
   IonLabel,
   IonText,
 } from "@ionic/react";
-import { useAuth } from "contexts/AuthContext";
-import {
-  calendarOutline,
-  callOutline,
-  documentTextOutline,
-  globeOutline,
-  mail,
-} from "ionicons/icons";
-import "./PersonalInfo.css";
-import React from "react";
+import styles from "./styles.module.css";
+import React, { useEffect, useState } from "react";
 import MailIcon from "icons/emailIcon.png";
 import BirthdayIcon from "icons/birthdayIcon.png";
 import ContractIcon from "icons/contractIcon.png";
 import MarketIcon from "icons/marketIcon.png";
 import TelephoneIcon from "icons/telephoneIcon.png";
+import firebase from "firebase/app";
+import { useAuth } from "contexts/AuthContext";
+import { getUserDoc } from "firebase/client";
 interface ContainerProps {}
 
 const PersonalInfo: React.FC<ContainerProps> = () => {
+  const [data, setData] = useState<
+    firebase.firestore.DocumentData | undefined
+  >();
+
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setData);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
+  function converterDate() {
+    let birth = data?.birth.split("T");
+    return birth[0];
+  }
   return (
     <>
-      <IonCard className="cajas">
+      <IonCard className={styles.boxes}>
         <IonItem>
           <IonImg
             src={MailIcon}
@@ -35,12 +46,14 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">Correo</h1>
+            <h1 className={styles.info}>
+              {data?.email !== undefined ? data?.email : "Correo"}
+            </h1>
           </IonLabel>
-          <IonText className="texto">Correo</IonText>
+          <IonText className={styles.text}>Correo</IonText>
         </IonItem>
       </IonCard>
-      <IonCard className="cajas">
+      <IonCard className={styles.boxes}>
         <IonItem>
           <IonImg
             src={TelephoneIcon}
@@ -48,12 +61,14 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">Teléfono</h1>
+            <h1 className={styles.info}>
+              {data?.phone !== undefined ? data?.phone : "Teléfono"}
+            </h1>
           </IonLabel>
-          <IonText className="texto">Teléfono</IonText>
+          <IonText className={styles.text}>Teléfono</IonText>
         </IonItem>
       </IonCard>
-      <IonCard className="cajas">
+      <IonCard className={styles.boxes}>
         <IonItem>
           <IonImg
             src={BirthdayIcon}
@@ -61,12 +76,14 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">Fec. de Nacimiento</h1>
+            <h1 className={styles.info}>
+              {data?.birth !== undefined ? converterDate() : "F. de Nacimiento"}
+            </h1>
           </IonLabel>
-          <IonText className="texto">Fecha de Nacimiento</IonText>
+          <IonText className={styles.text}>Fecha de Nacimiento</IonText>
         </IonItem>
       </IonCard>
-      <IonCard className="cajas">
+      <IonCard className={styles.boxes}>
         <IonItem>
           <IonImg
             src={ContractIcon}
@@ -74,22 +91,26 @@ const PersonalInfo: React.FC<ContainerProps> = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">Est. Contractual</h1>
+            <h1 className={styles.info}>
+              {data?.contract !== undefined
+                ? data?.contract
+                : "Est. Contractual"}
+            </h1>
           </IonLabel>
-          <IonText className="texto">Estado contractual</IonText>
+          <IonText className={styles.text}>Estado contractual</IonText>
         </IonItem>
       </IonCard>
-      <IonCard className="cajas">
-        <IonItem>
+      <IonCard className={styles.boxes}>
+        <IonItem href={data?.marketTransfer}>
           <IonImg
             src={MarketIcon}
             slot="start"
             className="ion-padding-vertical"
           ></IonImg>
           <IonLabel position="stacked">
-            <h1 className="info">MarketTransfer</h1>
+            <h1 className={styles.info}>MarketTransfer</h1>
           </IonLabel>
-          <IonText className="texto">Link MarketTransfer</IonText>
+          <IonText className={styles.text}>Link MarketTransfer</IonText>
         </IonItem>
       </IonCard>
       <IonButton

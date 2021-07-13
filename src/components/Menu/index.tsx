@@ -12,7 +12,7 @@ import {
   IonIcon,
   useIonToast,
 } from "@ionic/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import { Avatar } from "components/Avatar";
 import {
@@ -25,6 +25,8 @@ import {
 } from "ionicons/icons";
 import { useLocation } from "react-router";
 import { useAuth } from "contexts/AuthContext";
+import { getUserDoc } from "firebase/client";
+import firebase from "firebase/app";
 
 interface AppPage {
   url: string;
@@ -64,6 +66,19 @@ export const Menu: React.FC = () => {
   const location = useLocation();
   const [present] = useIonToast();
   const { logout } = useAuth();
+  const [datos, setDatos] = useState<
+    firebase.firestore.DocumentData | undefined
+  >();
+
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setDatos);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
   const handleLogout = async () => {
     try {
       await logout();
@@ -84,17 +99,13 @@ export const Menu: React.FC = () => {
           <IonListHeader>
             <IonRow>
               <IonCol size="12">
-                <Avatar
-                  src={
-                    "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-                  }
-                />
+                <Avatar src={datos?.avatarURL} />
               </IonCol>
               <IonCol size="12" className="user-name">
-                <IonLabel>userName</IonLabel>
+                <IonLabel>{datos?.name}</IonLabel>
               </IonCol>
               <IonCol size="12" className="unique-user-name">
-                <IonLabel>@userName</IonLabel>
+                <IonLabel>{`@${datos?.name}`}</IonLabel>
               </IonCol>
             </IonRow>
           </IonListHeader>

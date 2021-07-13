@@ -1,0 +1,43 @@
+.title {
+  --ion-background-color: rgba(173, 173, 173, 0.38);
+  border-radius: 10px 10px 0px 0px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+.data_psyco {
+  --ion-background-color: #ffffff;
+  line-height: 40px;
+}
+.psycology_data {
+  border-radius: 10px;
+  --ion-background-color: #ffffff;
+}
+.data_detail {
+  font-style: normal !important;
+  font-weight: bold !important;
+  line-height: 24px !important;
+}
+.descripcion {
+  color: #315c79;
+  font-size: 14px;
+  opacity: 75%;
+}
+.values {
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 400;
+}
+.data_style {
+  text-align: center;
+  font-size: 16px;
+}
+.container_data {
+  padding-bottom: 20px;
+  justify-content: center;
+}
+.container_personality {
+  line-height: 24px;
+}

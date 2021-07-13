@@ -1,18 +1,23 @@
 .avatar {
-  width: 99px;
-  height: 97px;
+  width: 27.5%;
+  height: 26.94444%;
   left: 150px;
   top: 184px;
-  background: #ffffff;
   border-radius: 99px;
   margin: 0 auto;
-  border: 0;
 }
 .imagenes {
+  padding: 0px;
+  align-items: flex-start;
   position: relative;
-  padding: 0;
+  height: 48%;
 }
 .portada {
+  padding: 0px;
+  align-items: flex-start;
+}
+
+.portada ion-img {
   display: flex;
   width: 100%;
 }
@@ -22,4 +27,8 @@
 }
 .fotos-jugador {
   align-items: center;
+}
+
+.profile-photos {
+  padding-bottom: 10px;
 }

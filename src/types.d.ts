@@ -17,3 +17,39 @@ export interface SigninFormInputs {
   email: string;
   password: string;
 }
+export interface ClubDataForm {
+  clubName: string;
+  country: string;
+  season: number;
+  subPlayer: string;
+  catTournament: string;
+  PJ: number;
+  G: number;
+  A: number;
+  TA: number;
+  TR: number;
+}
+export interface InjuryDataForm {
+  injuryName: string;
+  recoveryTime: string;
+  surgery: boolean;
+}
+export interface PersonalDataForm {
+  mail: string;
+  country: string;
+  city: string;
+  phone: number;
+  birth: string;
+  contract: string;
+  marketTransfer: string;
+}
+export interface PsycoDataForm {
+  character: string;
+  personality: Object;
+  attitude: string;
+}
+export interface TacticalDataForm {
+  pospri: string;
+  possec: string;
+  goals: string;
+}

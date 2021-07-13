@@ -1,32 +1,41 @@
-.subtitulo {
+.subtitle {
   text-align: center;
   width: 100%;
 }
-.icon-back {
+.icon_back {
   --icon-font-size: 30px;
 }
-.titulo {
+.title {
   text-align: center;
   font-weight: 700;
   box-shadow: none;
   color: #000000;
   font-style: normal;
+  font-size: 18px;
 }
-.acciones {
+.acts {
   text-align: center;
 }
-.notas {
+.notes {
   background: #677656;
   text-align: center;
   border-radius: 25px;
 }
-.nota {
+.note {
   color: #ffffff;
 }
-.datos-psyco {
+.data_psyco {
   --ion-background-color: #ffffff;
 }
-.campo-psyco {
+.psyco_field {
   padding-bottom: 10px;
   padding-top: 10px;
+}
+.save_psyco_info {
+  height: 16px;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 10px;
+  color: #5ab3ef;
+  background-color: #f4f5f8;
 }

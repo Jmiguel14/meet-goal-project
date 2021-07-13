@@ -42,7 +42,47 @@ const AsyncMessages = loadable(
   () => import("pages/Messages/Messages"),
   loadableOptions
 );
+const AsyncPlayerProfile = loadable(
+  () => import("pages/PlayerProfile/PlayerProfile"),
+  loadableOptions
+);
+const AsyncEditPersonalInfo = loadable(
+  () => import("pages/PlayerProfile/EditPersonalInfo/EditPersonalInfo"),
+  loadableOptions
+);
+const AsyncEditTacticalInfo = loadable(
+  () => import("pages/PlayerProfile/EditTacticalInfo/EditTacticalInfo"),
+  loadableOptions
+);
+const AsyncEditAttributesInfo = loadable(
+  () => import("pages/PlayerProfile/EditAttributes/EditAttributes"),
+  loadableOptions
+);
+const AsyncAddClubExperience = loadable(
+  () => import("pages/PlayerProfile/AddClub/AddClub"),
+  loadableOptions
+);
+const AsyncAddInjuryExperience = loadable(
+  () => import("pages/PlayerProfile/AddInjury/AddInjury"),
+  loadableOptions
+);
+const AsyncEditPsycoInfo = loadable(
+  () => import("pages/PlayerProfile/EditPsycoInfo/EditPsycoInfo"),
+  loadableOptions
+);
+const AsyncEditValue = loadable(
+  () => import("pages/PlayerProfile/Beginning/Beginning"),
+  loadableOptions
+);
+const AsyncEditChannels = loadable(
+  () => import("pages/PlayerProfile/AddChannels/AddChannels"),
+  loadableOptions
+);
 
+const AsyncEditPhotos = loadable(
+  () => import("pages/UpdatePhotos/UpdatePhotos"),
+  loadableOptions
+);
 export const TabRoot: React.FC = () => {
   return (
     <>
@@ -71,48 +111,53 @@ export const TabRoot: React.FC = () => {
           />
           <PrivateRoutes
             exact
-            path="/tabs/perfil-jugador"
-            component={PlayerProfile}
+            path={Routes.PLAYERPROFILE}
+            component={AsyncPlayerProfile}
           />
           <PrivateRoutes
             exact
-            path="/tabs/editar-info-personal-jugador"
-            component={EditPersonalInfo}
+            path={Routes.EDITPERSONALINFO}
+            component={AsyncEditPersonalInfo}
           />
           <PrivateRoutes
             exact
-            path="/tabs/editar-info-tactica-jugador"
-            component={EditTacticalInfo}
+            path={Routes.EDITTACTICALINFO}
+            component={AsyncEditTacticalInfo}
           />
           <PrivateRoutes
             exact
-            path="/tabs/editar-info-atributos-jugador"
-            component={EditAttributes}
+            path={Routes.EDITATTRIBUTESINFO}
+            component={AsyncEditAttributesInfo}
           />
           <PrivateRoutes
             exact
-            path="/tabs/agregar-experiencia"
-            component={AddClub}
+            path={Routes.ADDCLUBEXPERIENCE}
+            component={AsyncAddClubExperience}
           />
           <PrivateRoutes
             exact
-            path="/tabs/agregar-lesiones-jugador"
-            component={AddInjury}
+            path={Routes.ADDINJURYEXPERIENCE}
+            component={AsyncAddInjuryExperience}
           />
           <PrivateRoutes
             exact
-            path="/tabs/editar-info-psicologica-jugador"
-            component={EditPsycoInfo}
+            path={Routes.EDITPSYCOINFO}
+            component={AsyncEditPsycoInfo}
           />
           <PrivateRoutes
             exact
-            path="/tabs/editar-valores-jugador"
-            component={Beginning}
+            path={Routes.EDITCHANNELS}
+            component={AsyncEditChannels}
           />
           <PrivateRoutes
             exact
-            path="/tabs/canales-jugador"
-            component={AddChannels}
+            path={Routes.EDITVALUES}
+            component={AsyncEditValue}
+          />
+          <PrivateRoutes
+            exact
+            path={Routes.EDITPHOTOS}
+            component={AsyncEditPhotos}
           />
           <Route
             path="/tabs"

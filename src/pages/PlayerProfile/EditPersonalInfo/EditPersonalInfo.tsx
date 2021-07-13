@@ -1,6 +1,5 @@
 import {
   IonBackButton,
-  IonButton,
   IonButtons,
   IonContent,
   IonDatetime,
@@ -15,87 +14,118 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
-import { useState } from "react";
-import "./EditPersonalInfo.css";
+import React, { useState } from "react";
+import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-
-export enum ContractTypeEnum {
-  libre = "libre",
-  prestamo = "prestamo",
-  contratado = "contratado",
-}
-
-export interface IIForm {
-  mail: string;
-  country: string;
-  city: string;
-  birth: string;
-  contract: ContractTypeEnum;
-}
-
-const ERROR_MESSAGES = {
-  required: "Este campo es requerido",
-  email: "Email no válido",
-};
+import { SetPersonalData } from "firebase/client";
+import { ERROR_MESSAGES } from "constants/errorMessages";
+import { useHistory } from "react-router";
+import { PersonalDataForm } from "types";
 
 const schema = yup.object().shape({
   mail: yup
     .string()
-    .required(ERROR_MESSAGES.required)
-    .email(ERROR_MESSAGES.email),
-  country: yup.string().required(ERROR_MESSAGES.required),
-  city: yup.string().required(ERROR_MESSAGES.required),
-  birth: yup.string().required(ERROR_MESSAGES.required),
-  contract: yup.string().required(ERROR_MESSAGES.required),
+    .required(ERROR_MESSAGES.REQUIRED)
+    .email(ERROR_MESSAGES.EMAIL),
+  country: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  city: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  birth: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  contract: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
 
-export const EditPersonalInfo = ({ onSubmit }: any) => {
+export const EditPersonalInfo: React.FC = () => {
+  const [present] = useIonToast();
+  const [selectedDate, setSelectedDate] = useState<string>("");
+  const history = useHistory();
   const initialValues = {
     mail: "",
     country: "",
     city: "",
-    birth: "",
     contract: "",
+    marketTransfer: "",
   };
 
   const {
     register,
     handleSubmit,
     clearErrors,
+    reset,
     formState: { errors },
-  } = useForm<IIForm>({ resolver: yupResolver(schema) });
+  } = useForm<PersonalDataForm>({
+    defaultValues: initialValues,
+    resolver: yupResolver(schema),
+  });
 
-  const [selectedDate, setSelectedDate] = useState<string>(
-    "2012-12-15T13:47:20.789"
-  );
+  const onSubmit = async (
+    data: PersonalDataForm,
+    e: React.BaseSyntheticEvent<object, any, any> | undefined
+  ) => {
+    const { mail, phone, country, city, birth, contract, marketTransfer } =
+      data;
+    if (
+      await SetPersonalData(
+        mail,
+        country,
+        city,
+        birth,
+        contract,
+        phone,
+        marketTransfer
+      )
+    ) {
+      present({
+        message: "Se actualizó la información exitosamente",
+        duration: 1000,
+        position: "top",
+        color: "success",
+      });
+      history.push("/tabs/perfil-jugador");
+    } else {
+      present({
+        message: "Error al actualizar la información. Intentelo nuevamente...",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
+    }
+    e?.target.reset();
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <IonPage>
-        <IonHeader>
-          <IonToolbar color="light" className="acciones">
-            <IonButtons slot="start">
-              <IonBackButton
-                defaultHref="/tabs/perfil-jugador"
-                className="icon-back"
-              />
-            </IonButtons>
-            <IonTitle color="primary" className="ion-padding titulo">
-              Editar I. Personal
-            </IonTitle>
-            <IonButton fill="clear" slot="end" color="tertiary" type="submit">
-              Guardar
-            </IonButton>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent fullscreen className="fondo">
-          <IonItemDivider color="primary">
-            <div className="subtitulo">Edita aquí tu Información Personal</div>
-          </IonItemDivider>
-
-          <IonItem className="dato-personal">
+    <IonPage>
+      <IonHeader>
+        <IonToolbar color="light" className={styles.acts}>
+          <IonButtons slot="start">
+            <IonBackButton
+              defaultHref="/tabs/perfil-jugador"
+              className={styles.icon_back}
+            />
+          </IonButtons>
+          <IonTitle color="primary" className={styles.title}>
+            Editar I. Personal
+          </IonTitle>
+          <button
+            type="submit"
+            form="edit-personal-info-form"
+            slot="end"
+            className={styles.save_personal_info}
+          >
+            Guardar
+          </button>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen className={styles.back}>
+        <IonItemDivider color="primary">
+          <div className={styles.subtitle}>
+            Edita aquí tu Información Personal
+          </div>
+        </IonItemDivider>
+        <form onSubmit={handleSubmit(onSubmit)} id="edit-personal-info-form">
+          <IonItem className={styles.personal_data}>
             <IonInput
               placeholder="Correo Electrónico"
               type="text"
@@ -109,7 +139,7 @@ export const EditPersonalInfo = ({ onSubmit }: any) => {
           {errors.mail?.message && (
             <IonNote color="danger">{errors.mail?.message}</IonNote>
           )}
-          <IonItem className="dato-personal">
+          <IonItem className={styles.personal_data}>
             <IonInput
               placeholder="País"
               type="text"
@@ -125,12 +155,12 @@ export const EditPersonalInfo = ({ onSubmit }: any) => {
             <IonNote color="danger">{errors.country?.message}</IonNote>
           )}
 
-          <IonItem className="dato-personal">
+          <IonItem className={styles.personal_data}>
             <IonInput
               placeholder="Ciudad"
               type="text"
               clearInput={true}
-              {...register("country")}
+              {...register("city")}
               onIonChange={() => {
                 clearErrors("city");
               }}
@@ -139,15 +169,33 @@ export const EditPersonalInfo = ({ onSubmit }: any) => {
           {errors.city?.message && (
             <IonNote color="danger">{errors.city?.message}</IonNote>
           )}
-          <IonItem className="dato-personal">
+
+          <IonItem className={styles.personal_data}>
+            <IonInput
+              placeholder="Teléfono"
+              type="text"
+              clearInput={true}
+              {...register("phone")}
+              onIonChange={() => {
+                clearErrors("phone");
+              }}
+            ></IonInput>
+          </IonItem>
+          {errors.phone?.message && (
+            <IonNote color="danger">{errors.phone?.message}</IonNote>
+          )}
+
+          <IonItem className={styles.personal_data}>
             <IonLabel>F. Nacimiento (Mes/Día/Año)</IonLabel>
             <IonDatetime
+              itemType="text"
               displayFormat="MMM/DD/YY"
-              monthShortNames="JAN, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DEC"
+              monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
+              {...register("birth")}
               onIonChange={(e) => setSelectedDate(e.detail.value!)}
             ></IonDatetime>
           </IonItem>
-          <IonItem className="dato-personal">
+          <IonItem className={styles.personal_data}>
             <IonLabel color="medium">Estado Contractual</IonLabel>
             <IonSelect
               okText="okay"
@@ -158,16 +206,28 @@ export const EditPersonalInfo = ({ onSubmit }: any) => {
               }}
             >
               <IonSelectOption value="libre">Libre</IonSelectOption>
-              <IonSelectOption value="prestamo">prestamo</IonSelectOption>
-              <IonSelectOption value="contratado">contratado</IonSelectOption>
+              <IonSelectOption value="prestamo">Préstamo</IonSelectOption>
+              <IonSelectOption value="contratado">Contratado</IonSelectOption>
             </IonSelect>
           </IonItem>
           {errors.contract && (
             <IonNote color="danger">{errors.contract?.message}</IonNote>
           )}
-        </IonContent>
-      </IonPage>{" "}
-    </form>
+
+          <IonItem className={styles.personal_data}>
+            <IonInput
+              placeholder="Pega aquí tu link de MarketTransfer"
+              type="text"
+              clearInput={true}
+              {...register("marketTransfer")}
+              onIonChange={() => {
+                clearErrors("marketTransfer");
+              }}
+            ></IonInput>
+          </IonItem>
+        </form>
+      </IonContent>
+    </IonPage>
   );
 };
 

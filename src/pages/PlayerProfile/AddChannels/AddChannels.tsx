@@ -11,7 +11,9 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
+import { EditChannelsLinks } from "firebase/client";
 import {
   logoFacebook,
   logoInstagram,
@@ -19,62 +21,114 @@ import {
   logoVimeo,
   logoYoutube,
 } from "ionicons/icons";
-
-import "./AddChannels.css";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
+import styles from "./styles.module.css";
 
 const AddChannels: React.FC = () => {
+  const [facebook, setFacebook] = useState<string>("");
+  const [twitter, setTwitter] = useState<string>("");
+  const [instagram, setInstagram] = useState<string>("");
+  const [vimeo, setVimeo] = useState<string>("");
+  const [youtube, setYoutube] = useState<string>("");
+  const { reset, handleSubmit } = useForm();
+  const [present] = useIonToast();
+  const history = useHistory();
+
+  const onSubmit = async () => {
+    if (await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo)) {
+      present({
+        message: "Se ha actualizado la inforamción de tus redes",
+        duration: 1000,
+        position: "top",
+        color: "success",
+      });
+      history.push("/tabs/perfil-jugador");
+    } else {
+      present({
+        message: "Error al actualizar la información. Intentelo nuevamente...",
+        duration: 1000,
+        position: "top",
+        color: "success",
+      });
+    }
+    reset();
+  };
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" className="acciones">
+        <IonToolbar color="light">
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/tabs/perfil-jugador"
-              className="icon-back"
+              className={styles.icon_back}
             />
           </IonButtons>
-          <IonTitle color="primary" className="titulo">
+          <IonTitle color="primary" className={styles.title}>
             Redes Sociales
           </IonTitle>
-          <IonButton fill="clear" slot="end" color="tertiary">
+          <button
+            type="submit"
+            form="add-channels-info-form"
+            slot="end"
+            className={styles.save_channels_info}
+          >
             Guardar
-          </IonButton>
+          </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className="redes">
+      <IonContent fullscreen className={styles.networks}>
         <IonItemDivider color="primary">
-          <div className="subtitulo">Pega aquí tus redes sociales</div>
+          <div className={styles.subtitle}>Pega aquí tus redes sociales</div>
         </IonItemDivider>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoFacebook}></IonIcon>
-          </IonButton>
-          <IonInput placeholder="facebook"></IonInput>
-        </IonItem>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoTwitter}></IonIcon>
-          </IonButton>
-          <IonInput placeholder="twitter"></IonInput>
-        </IonItem>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoInstagram}></IonIcon>
-          </IonButton>
-          <IonInput placeholder="instagram"></IonInput>
-        </IonItem>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoYoutube}></IonIcon>
-          </IonButton>
-          <IonInput placeholder="youtube"></IonInput>
-        </IonItem>
-        <IonItem className="red">
-          <IonButton slot="start" fill="clear">
-            <IonIcon icon={logoVimeo}></IonIcon>
-          </IonButton>
-          <IonInput placeholder="vimeo"></IonInput>
-        </IonItem>
+        <form onSubmit={handleSubmit(onSubmit)} id="add-channels-info-form">
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoFacebook}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Facebook: Ej. www.facebook.com/meet-goal-official-page"
+              onIonChange={(e: any) => setFacebook(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoTwitter}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Twitter: Ej. www.twitter.com/MeetGoalOfficial"
+              onIonChange={(e: any) => setTwitter(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoInstagram}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Instagram: Ej. www.instagram.com/MeetGoalOfficial"
+              onIonChange={(e: any) => setInstagram(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoYoutube}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Youtube: Ej. www.youtube.com/channel/UcsqpqcxtErZpw"
+              onIonChange={(e: any) => setYoutube(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+          <IonItem className={styles.network}>
+            <IonButton slot="start" fill="clear">
+              <IonIcon icon={logoVimeo}></IonIcon>
+            </IonButton>
+            <IonInput
+              placeholder="Vimeo: Ej. www.vimeo.com/userZZZZZZZZ"
+              onIonChange={(e: any) => setVimeo(e.currentTarget.value)}
+            ></IonInput>
+          </IonItem>
+        </form>
       </IonContent>
     </IonPage>
   );

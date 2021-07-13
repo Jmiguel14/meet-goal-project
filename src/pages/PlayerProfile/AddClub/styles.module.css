@@ -1,24 +1,32 @@
-.subtitulo {
+.divisor {
   text-align: center;
   width: 100%;
 }
-.icon-back {
+.icon_back {
   --icon-font-size: 30px;
 }
-.titulo {
+.title {
   text-align: center;
   font-weight: 700;
   box-shadow: none;
   color: #000000;
   font-style: normal;
 }
-.acciones {
+.acts {
   text-align: center;
 }
-.campo-club {
+.club_field {
   padding-bottom: 3px;
   padding-top: 3px;
 }
-.nuevo-club {
+.new_club {
   --ion-background-color: #ffffff;
+}
+.save_club_info {
+  height: 16px;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 10px;
+  color: #5ab3ef;
+  background-color: #f4f5f8;
 }
