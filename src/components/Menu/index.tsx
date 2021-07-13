@@ -38,7 +38,7 @@ interface AppPage {
 const appPages: AppPage[] = [
   {
     title: "Perfil",
-    url: "/tabs/perfil-jugador",
+    url: "/tabs/perfil",
     icon: personOutline,
     iconSelected: person,
   },

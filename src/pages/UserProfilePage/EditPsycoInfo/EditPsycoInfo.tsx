@@ -45,7 +45,7 @@ const EditPsycoInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil-jugador");
+      history.push("/tabs/perfil");
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
@@ -63,7 +63,7 @@ const EditPsycoInfo: React.FC = () => {
         <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil-jugador"
+              defaultHref="/tabs/perfil"
               className={styles.icon_back}
             />
           </IonButtons>

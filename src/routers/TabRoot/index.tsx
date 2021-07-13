@@ -11,15 +11,15 @@ import {
 } from "ionicons/icons";
 import "./styles.css";
 import { Menu } from "components/Menu";
-import PlayerProfile from "pages/PlayerProfile/PlayerProfile";
-import EditPersonalInfo from "pages/PlayerProfile/EditPersonalInfo/EditPersonalInfo";
-import EditTacticalInfo from "pages/PlayerProfile/EditTacticalInfo/EditTacticalInfo";
-import EditAttributes from "pages/PlayerProfile/EditAttributes/EditAttributes";
-import AddClub from "pages/PlayerProfile/AddClub/AddClub";
-import AddInjury from "pages/PlayerProfile/AddInjury/AddInjury";
-import EditPsycoInfo from "pages/PlayerProfile/EditPsycoInfo/EditPsycoInfo";
-import Beginning from "pages/PlayerProfile/Beginning/Beginning";
-import AddChannels from "pages/PlayerProfile/AddChannels/AddChannels";
+import PlayerProfile from "pages/UserProfilePage/UserProfilePage";
+import EditPersonalInfo from "pages/UserProfilePage/EditPersonalInfo/EditPersonalInfo";
+import EditTacticalInfo from "pages/UserProfilePage/EditTacticalInfo/EditTacticalInfo";
+import EditAttributes from "pages/UserProfilePage/EditAttributes/EditAttributes";
+import AddClub from "pages/UserProfilePage/AddClub/AddClub";
+import AddInjury from "pages/UserProfilePage/AddInjury/AddInjury";
+import EditPsycoInfo from "pages/UserProfilePage/EditPsycoInfo/EditPsycoInfo";
+import Beginning from "pages/UserProfilePage/Beginning/Beginning";
+import AddChannels from "pages/UserProfilePage/AddChannels/AddChannels";
 import loadable from "@loadable/component";
 import { IonLoading } from "@ionic/react";
 import { Routes } from "constants/routes";
@@ -43,39 +43,39 @@ const AsyncMessages = loadable(
   loadableOptions
 );
 const AsyncPlayerProfile = loadable(
-  () => import("pages/PlayerProfile/PlayerProfile"),
+  () => import("pages/UserProfilePage/UserProfilePage"),
   loadableOptions
 );
 const AsyncEditPersonalInfo = loadable(
-  () => import("pages/PlayerProfile/EditPersonalInfo/EditPersonalInfo"),
+  () => import("pages/UserProfilePage/EditPersonalInfo/EditPersonalInfo"),
   loadableOptions
 );
 const AsyncEditTacticalInfo = loadable(
-  () => import("pages/PlayerProfile/EditTacticalInfo/EditTacticalInfo"),
+  () => import("pages/UserProfilePage/EditTacticalInfo/EditTacticalInfo"),
   loadableOptions
 );
 const AsyncEditAttributesInfo = loadable(
-  () => import("pages/PlayerProfile/EditAttributes/EditAttributes"),
+  () => import("pages/UserProfilePage/EditAttributes/EditAttributes"),
   loadableOptions
 );
 const AsyncAddClubExperience = loadable(
-  () => import("pages/PlayerProfile/AddClub/AddClub"),
+  () => import("pages/UserProfilePage/AddClub/AddClub"),
   loadableOptions
 );
 const AsyncAddInjuryExperience = loadable(
-  () => import("pages/PlayerProfile/AddInjury/AddInjury"),
+  () => import("pages/UserProfilePage/AddInjury/AddInjury"),
   loadableOptions
 );
 const AsyncEditPsycoInfo = loadable(
-  () => import("pages/PlayerProfile/EditPsycoInfo/EditPsycoInfo"),
+  () => import("pages/UserProfilePage/EditPsycoInfo/EditPsycoInfo"),
   loadableOptions
 );
 const AsyncEditValue = loadable(
-  () => import("pages/PlayerProfile/Beginning/Beginning"),
+  () => import("pages/UserProfilePage/Beginning/Beginning"),
   loadableOptions
 );
 const AsyncEditChannels = loadable(
-  () => import("pages/PlayerProfile/AddChannels/AddChannels"),
+  () => import("pages/UserProfilePage/AddChannels/AddChannels"),
   loadableOptions
 );
 

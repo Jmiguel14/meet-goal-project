@@ -1,18 +1,13 @@
 import {
   IonButton,
-  IonButtons,
   IonContent,
   IonHeader,
   IonIcon,
-  IonImg,
-  IonItem,
-  IonMenuButton,
   IonPage,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { PlayerInfo } from "components/PlayerInfo/PlayerInfo";
-import { arrowBackCircleOutline, arrowBackOutline } from "ionicons/icons";
+import { arrowBackOutline } from "ionicons/icons";
 import "./SearchForPlayer.css";
 
 const SearchForPlayer: React.FC = () => (

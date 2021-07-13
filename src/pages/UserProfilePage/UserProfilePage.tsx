@@ -10,7 +10,6 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
-import { PlayerInfo } from "components/PlayerInfo/PlayerInfo";
 import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
@@ -18,8 +17,9 @@ import firebase from "firebase/app";
 import { getUserDoc } from "firebase/client";
 import { useHistory } from "react-router";
 import { arrowBack } from "ionicons/icons";
+import UserProfile from "components/UserProfile/UserProfile";
 
-const PlayerProfile: React.FC = () => {
+const UserProfilePage: React.FC = () => {
   const [datos, setDatos] = useState<
     firebase.firestore.DocumentData | undefined
   >();
@@ -59,9 +59,9 @@ const PlayerProfile: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <PlayerInfo />
+        <UserProfile />
       </IonContent>
     </IonPage>
   );
 };
-export default PlayerProfile;
+export default UserProfilePage;

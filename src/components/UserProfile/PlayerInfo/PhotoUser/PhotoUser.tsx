@@ -1,12 +1,11 @@
 import { IonAvatar, IonImg, IonCol, IonRow } from "@ionic/react";
 import { useEffect, useState } from "react";
-import "./AvatarPlayer.css";
+import "./PhotoUser.css";
 import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
 import { getUserDoc } from "firebase/client";
-import { Avatar } from "components/Avatar";
 
-export const AvatarPlayer: React.FC = () => {
+export const PhotoUser: React.FC = () => {
   const [data, setData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
@@ -38,4 +37,4 @@ export const AvatarPlayer: React.FC = () => {
   );
 };
 
-export default AvatarPlayer;
+export default PhotoUser;

@@ -1,0 +1,18 @@
+.segments {
+  font-style: normal;
+  font-weight: normal;
+  size: auto;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.menu_horizontal {
+  size: auto;
+  display: flex;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  --background: #d0dde1;
+}

@@ -44,7 +44,7 @@ const AddChannels: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil-jugador");
+      history.push("/tabs/perfil");
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
@@ -61,7 +61,7 @@ const AddChannels: React.FC = () => {
         <IonToolbar color="light">
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil-jugador"
+              defaultHref="/tabs/perfil"
               className={styles.icon_back}
             />
           </IonButtons>
