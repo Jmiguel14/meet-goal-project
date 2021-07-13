@@ -14,7 +14,7 @@
 }
 .portada {
   padding: 0px;
-  align-items: flex-start
+  align-items: flex-start;
 }
 
 .portada ion-img {
@@ -29,6 +29,6 @@
   align-items: center;
 }
 
-.profile-photos{
+.profile-photos {
   padding-bottom: 10px;
 }

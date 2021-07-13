@@ -22,9 +22,9 @@ export const AvatarPlayer: React.FC = () => {
   }, [currentUser]);
   return (
     <>
-      <IonRow className='profile-photos'>
+      <IonRow className="profile-photos">
         <IonCol className="imagenes">
-          <IonCol className='portada'>
+          <IonCol className="portada">
             <IonImg src={data?.coverURL}></IonImg>
           </IonCol>
           <IonCol className="contenedor">

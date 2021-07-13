@@ -21,6 +21,7 @@ import {
   updateProfileAvatar,
   updateProfileCover,
 } from "firebase/client";
+import { COLLECTIONS } from "constants/collections";
 
 const UpdatePhotos: React.FC = () => {
   const [present] = useIonToast();
@@ -66,14 +67,20 @@ const UpdatePhotos: React.FC = () => {
         });
         task.snapshot.ref.getDownloadURL().then((url) => {
           if (typePhoto === "avatar") {
-            firestore.collection("users").doc(currentUser.uid).update({
-              avatarURL: url,
-            });
+            firestore
+              .collection(COLLECTIONS.USERS)
+              .doc(currentUser.uid)
+              .update({
+                avatarURL: url,
+              });
           }
           if (typePhoto == "cover") {
-            firestore.collection("users").doc(currentUser.uid).update({
-              coverURL: url,
-            });
+            firestore
+              .collection(COLLECTIONS.USERS)
+              .doc(currentUser.uid)
+              .update({
+                coverURL: url,
+              });
           }
         });
       };

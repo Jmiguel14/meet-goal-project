@@ -4,6 +4,7 @@ import "firebase/firestore";
 import "firebase/storage";
 import Avatar from "icons/avatar.png";
 import Cover from "assets/cover.png";
+import { COLLECTIONS } from "constants/collections";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -31,7 +32,7 @@ export const getUserDoc = (
   >
 ) => {
   return firestore
-    .collection("users")
+    .collection(COLLECTIONS.USERS)
     .doc(auth.currentUser?.uid)
     .onSnapshot((snapshot) => {
       const newData = getDataToUserDoc(snapshot);
@@ -41,7 +42,7 @@ export const getUserDoc = (
 
 export async function fetchUserDoc() {
   return await firestore
-    .collection("users")
+    .collection(COLLECTIONS.USERS)
     .doc(auth.currentUser?.uid)
     .get()
     .then((doc) => {
@@ -62,7 +63,7 @@ export async function SetPersonalData(
 ) {
   let id = auth.currentUser?.uid;
   try {
-    const save = await firestore.collection("users").doc(id).update({
+    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
       email: email,
       phone: phone,
       country: country,
@@ -84,7 +85,7 @@ export async function EditPositionData(
 ) {
   let id = auth.currentUser?.uid;
   try {
-    const save = await firestore.collection("users").doc(id).update({
+    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
       pospri: pospri,
       possec: possec,
       goals: goals,
@@ -101,7 +102,7 @@ export async function EditPsycoParameters(
 ) {
   let id = auth.currentUser?.uid;
   try {
-    const save = await firestore.collection("users").doc(id).update({
+    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
       character: character,
       personality: personality,
       attitude: attitude,
@@ -120,7 +121,7 @@ export async function EditChannelsLinks(
 ) {
   let id = auth.currentUser?.uid;
   try {
-    const save = await firestore.collection("users").doc(id).update({
+    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
       facebook: facebook,
       twitter: twitter,
       instagram: instagram,
@@ -146,7 +147,7 @@ export async function AddCubExperience(
 ) {
   let id = auth.currentUser?.uid;
   try {
-    const res = await firestore.collection("users").doc(id);
+    const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
     res.get().then((doc) => {
       if (doc.exists) {
         if (typeof doc.data()?.club === undefined) {
@@ -197,7 +198,7 @@ export async function AddInjuryExperienced(
 ) {
   let id = auth.currentUser?.uid;
   try {
-    const res = await firestore.collection("users").doc(id);
+    const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
     res.get().then((doc) => {
       if (doc.exists) {
         if (typeof doc.data()?.injuries === undefined) {
@@ -235,7 +236,7 @@ export async function EditTacticalAttributes(
 ) {
   let id = auth.currentUser?.uid;
   try {
-    const save = await firestore.collection("users").doc(id).update({
+    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
       firstAttribute: att1,
       secondAttribute: att2,
       thirdAttribute: att3,
@@ -254,7 +255,7 @@ export async function EditPersonalValues(
 ) {
   let id = auth.currentUser?.uid;
   try {
-    const save = await firestore.collection("users").doc(id).update({
+    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
       value1: value1,
       value2: value2,
       value3: value3,
@@ -272,7 +273,7 @@ export function defaultAvatar(id: string) {
     .then((Blob) => {
       storageRef.put(Blob).then((savedPicture) => {
         storageRef.getDownloadURL().then((url) => {
-          firestore.collection("users").doc(id).update({
+          firestore.collection(COLLECTIONS.USERS).doc(id).update({
             avatarURL: url,
           });
         });
@@ -287,7 +288,7 @@ export function defaultCover(id: string) {
     .then((Blob) => {
       storageRef.put(Blob).then((savedPicture) => {
         storageRef.getDownloadURL().then((url) => {
-          firestore.collection("users").doc(id).update({
+          firestore.collection(COLLECTIONS.USERS).doc(id).update({
             coverURL: url,
           });
         });
