@@ -12,8 +12,8 @@ import styles from "./styles.module.css";
 import { useAuth } from "contexts/AuthContext";
 import { useHistory } from "react-router";
 import PhotoUser from "./PlayerInfo/PhotoUser/PhotoUser";
-import { ClubSegments } from "./ClubInfo/ClubSegments";
-import { PlayerSegments } from "./PlayerInfo/PlayerSegments";
+import PlayerSegments from "./PlayerInfo/PlayerSegments/PlayerSegments";
+import ClubSegments from "./ClubInfo/ClubSegments/ClubSegments";
 
 export const UserProfile: React.FC = () => {
   const history = useHistory();

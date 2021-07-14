@@ -5,12 +5,13 @@ import {
   IonSegmentButton,
 } from "@ionic/react";
 import React, { useState } from "react";
-import CareerInfo from "./CareerInfo/CareerInfo";
-import ChannelsInfo from "./ChannelsInfo/ChannelsInfo";
-import MedicalInfo from "./MedicalInfo/MedicalInfo";
-import PersonalInfo from "./PersonalInfo/PersonalInfo";
-import PsycoInfo from "./PsycoInfo/PsycoInfo";
-import TacticalInfo from "./TacticalInfo/TacticalInfo";
+import CareerInfo from "../CareerInfo/CareerInfo";
+import ChannelsInfo from "../ChannelsInfo/ChannelsInfo";
+import MedicalInfo from "../MedicalInfo/MedicalInfo";
+import PersonalInfo from "../PersonalInfo/PersonalInfo";
+import PsycoInfo from "../PsycoInfo/PsycoInfo";
+import TacticalInfo from "../TacticalInfo/TacticalInfo";
+
 import styles from "./styles.module.css";
 
 export const PlayerSegments: React.FC = () => {

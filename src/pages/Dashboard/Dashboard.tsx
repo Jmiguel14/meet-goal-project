@@ -7,16 +7,19 @@ import {
   IonRow,
   IonToolbar,
   IonMenuButton,
-  IonButton,
   IonIcon,
+  IonFab,
+  IonFabButton,
 } from "@ionic/react";
 import { useAuth } from "contexts/AuthContext";
 import MeetGoal from "icons/MeetGoal";
-import { useEffect, useState } from "react";
-import "./PlayerDashboard.css";
-import firebase from "firebase/app";
-import { getUserDoc } from "firebase/client";
-import { addOutline } from "ionicons/icons";
+import "./Dashboard.css";
+import {
+  add,
+  addCircle,
+  addCircleOutline,
+  addCircleSharp,
+} from "ionicons/icons";
 
 const PlayerDashboard: React.FC = () => {
   const { data } = useAuth();
@@ -36,9 +39,11 @@ const PlayerDashboard: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
         {data?.userType !== "Jugador" ? (
-          <button className="add_calls">
-            <IonIcon icon={addOutline} className="add_calls_icon"></IonIcon>
-          </button>
+          <IonFab vertical="bottom" horizontal="end" slot="fixed">
+            <IonFabButton>
+              <IonIcon icon={add} />
+            </IonFabButton>
+          </IonFab>
         ) : (
           <div></div>
         )}

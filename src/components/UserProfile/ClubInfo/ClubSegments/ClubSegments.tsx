@@ -5,8 +5,9 @@ import {
   IonSegmentButton,
 } from "@ionic/react";
 import React, { useState } from "react";
-import InstitutionalInfo from "./InstitutionalInfo/InstitutionalInfo";
-import SportsGoalsInfo from "./SportsGoalsInfo/SportsGoalsInfo";
+import InstitutionalInfo from "../InstitutionalInfo/InstitutionalInfo";
+import SportsGoalsInfo from "../SportsGoalsInfo/SportsGoalsInfo";
+
 import styles from "./styles.module.css";
 
 export const ClubSegments: React.FC = () => {

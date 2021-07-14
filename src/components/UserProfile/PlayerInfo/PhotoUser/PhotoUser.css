@@ -11,6 +11,7 @@
   align-items: flex-start;
   position: relative;
   height: 48%;
+  padding-bottom: 30px;
 }
 .portada {
   padding: 0px;
@@ -29,5 +30,5 @@
 }
 
 .profile-photos {
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 }

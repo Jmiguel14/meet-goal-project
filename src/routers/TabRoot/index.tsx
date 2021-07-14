@@ -27,7 +27,7 @@ import { Routes } from "constants/routes";
 const loadableOptions = { fallback: <IonLoading isOpen={true} /> };
 
 const AsyncDashboard = loadable(
-  () => import("pages/PlayerDashboard/PlayerDashboard"),
+  () => import("pages/Dashboard/Dashboard"),
   loadableOptions
 );
 const AsyncSearchForPlayer = loadable(
