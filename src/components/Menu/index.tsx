@@ -12,7 +12,7 @@ import {
   IonIcon,
   useIonToast,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./styles.css";
 import { Avatar } from "components/Avatar";
 import {
@@ -26,8 +26,6 @@ import {
 } from "ionicons/icons";
 import { useLocation } from "react-router";
 import { useAuth } from "contexts/AuthContext";
-import { getUserDoc } from "firebase/client";
-import firebase from "firebase/app";
 
 interface AppPage {
   url: string;
