@@ -43,6 +43,14 @@ export interface PersonalDataForm {
   contract: string;
   marketTransfer: string;
 }
+export interface InstitutionalDataForm {
+  socialName: string;
+  mail: string;
+  city: string;
+  country: string;
+  phone: number;
+  foundation: string;
+}
 export interface PsycoDataForm {
   character: string;
   personality: Object;
@@ -52,4 +60,9 @@ export interface TacticalDataForm {
   pospri: string;
   possec: string;
   goals: string;
+}
+export interface SportsGoalsDataForm {
+  totalWins: number;
+  maxNacGoal: string;
+  maxIntGoal: string;
 }

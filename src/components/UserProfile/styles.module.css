@@ -1,0 +1,23 @@
+.edit_photos {
+  height: 16px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #315c79;
+}
+.name {
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 21px;
+  color: #315c79;
+}
+.location {
+  size: 12px;
+  font-style: normal;
+  line-height: 14px;
+  font-weight: 400;
+}
+.country_name {
+  position: relative;
+  height: auto;
+}

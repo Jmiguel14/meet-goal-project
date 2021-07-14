@@ -25,21 +25,12 @@ import { COLLECTIONS } from "constants/collections";
 
 const UpdatePhotos: React.FC = () => {
   const [present] = useIonToast();
-  const [data, setData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
   const [task, setTask] = useState<firebase.storage.UploadTask>();
   const [typePhoto, setTypePhoto] = useState("");
 
   const { currentUser } = useAuth();
 
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const { data } = useAuth();
 
   async function HandleUploadAvatar(
     event: React.ChangeEvent<HTMLInputElement>
@@ -94,7 +85,7 @@ const UpdatePhotos: React.FC = () => {
         <IonToolbar color="light" className={styles.back}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil-jugador"
+              defaultHref="/tabs/perfil"
               className={styles.icon_back}
             />
           </IonButtons>
