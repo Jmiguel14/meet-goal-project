@@ -18,7 +18,7 @@ interface ContainerProps {}
 const InstitutionalInfo: React.FC<ContainerProps> = () => {
   const { data } = useAuth();
   function converterDate() {
-    let birth = data?.birth.split("T");
+    let birth = data?.foundation.split("T");
     return birth[0];
   }
   return (

@@ -78,6 +78,30 @@ export async function SetPersonalData(
   }
 }
 
+export async function SetInstitutionalData(
+  socialName: string,
+  mail: string,
+  city: string,
+  country: string,
+  phone: number,
+  foundation: string
+) {
+  let id = auth.currentUser?.uid;
+  try {
+    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
+      socialName,
+      mail,
+      city,
+      country,
+      phone,
+      foundation,
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 export async function EditPositionData(
   pospri: string,
   possec: string,
@@ -127,6 +151,23 @@ export async function EditChannelsLinks(
       instagram: instagram,
       youtube: youtube,
       vimeo: vimeo,
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+export async function EditSportsGoalsData(
+  totalWins: number,
+  maxNacGoal: string,
+  maxIntGoal: string
+) {
+  let id = auth.currentUser?.uid;
+  try {
+    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
+      totalWins,
+      maxNacGoal,
+      maxIntGoal,
     });
     return true;
   } catch (e) {

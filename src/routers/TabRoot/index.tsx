@@ -83,6 +83,17 @@ const AsyncEditPhotos = loadable(
   () => import("pages/UpdatePhotos/UpdatePhotos"),
   loadableOptions
 );
+
+const AsyncEditInstitutionalInfo = loadable(
+  () =>
+    import("pages/UserProfilePage/EditInstitutionalInfo/EditInstitutionalInfo"),
+  loadableOptions
+);
+
+const AsyncEditSportsGoalsInfo = loadable(
+  () => import("pages/UserProfilePage/EditSportsGoalsInfo/EditSportsGoalsInfo"),
+  loadableOptions
+);
 export const TabRoot: React.FC = () => {
   return (
     <>
@@ -158,6 +169,16 @@ export const TabRoot: React.FC = () => {
             exact
             path={Routes.EDITPHOTOS}
             component={AsyncEditPhotos}
+          />
+          <PrivateRoutes
+            exact
+            path={Routes.EDITINSTITUTIONALINFO}
+            component={AsyncEditInstitutionalInfo}
+          />
+          <PrivateRoutes
+            exact
+            path={Routes.EDITSPORTSGOALSINFO}
+            component={AsyncEditSportsGoalsInfo}
           />
           <Route
             path="/tabs"
