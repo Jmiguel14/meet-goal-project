@@ -17,7 +17,6 @@ import styles from "./styles.module.css";
 import firebase from "firebase/app";
 import {
   firestore,
-  getUserDoc,
   updateProfileAvatar,
   updateProfileCover,
 } from "firebase/client";

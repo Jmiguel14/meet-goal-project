@@ -20,7 +20,7 @@ export const ClubSegments: React.FC = () => {
           className={styles.segments}
           onClick={() => setInfo("institucional")}
         >
-          <IonLabel>Datos Instintucionales</IonLabel>
+          <IonLabel>Datos Institucionales</IonLabel>
         </IonSegmentButton>
         <IonSegmentButton
           value="logros"

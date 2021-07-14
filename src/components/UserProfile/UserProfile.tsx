@@ -14,6 +14,7 @@ import { useHistory } from "react-router";
 import PhotoUser from "./PlayerInfo/PhotoUser/PhotoUser";
 import PlayerSegments from "./PlayerInfo/PlayerSegments/PlayerSegments";
 import ClubSegments from "./ClubInfo/ClubSegments/ClubSegments";
+import { USER_TYPES } from "constants/userTypes";
 
 export const UserProfile: React.FC = () => {
   const history = useHistory();
@@ -22,7 +23,6 @@ export const UserProfile: React.FC = () => {
   return (
     <IonContent>
       <PhotoUser />
-      <br />
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
           <IonRouterLink
@@ -48,7 +48,11 @@ export const UserProfile: React.FC = () => {
           </IonLabel>
         </IonCol>
       </IonRow>
-      {data?.userType === "Jugador" ? <PlayerSegments /> : <ClubSegments />}
+      {data?.userType === USER_TYPES.JUGADOR ? (
+        <PlayerSegments />
+      ) : (
+        <ClubSegments />
+      )}
     </IonContent>
   );
 };
