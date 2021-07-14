@@ -26,7 +26,7 @@ import {
 } from "ionicons/icons";
 import { useLocation } from "react-router";
 import { useAuth } from "contexts/AuthContext";
-import { USER_TYPE } from "constants/userType";
+import { USER_TYPES } from "constants/userTypes";
 
 interface AppPage {
   url: string;
@@ -115,7 +115,7 @@ export const Menu: React.FC = () => {
             </IonRow>
           </IonListHeader>
           <IonItemDivider></IonItemDivider>
-          {data?.userType === USER_TYPE.JUGADOR
+          {data?.userType === USER_TYPES.JUGADOR
             ? appPagesPlayer.map((appPage, key) => {
                 return (
                   <IonMenuToggle key={key} autoHide={false}>

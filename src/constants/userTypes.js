@@ -1,4 +1,4 @@
-export const USER_TYPE = {
+export const USER_TYPES = {
   CLUB: "Club",
   JUGADOR: "Jugador",
   ACADEMIA: "Académia",

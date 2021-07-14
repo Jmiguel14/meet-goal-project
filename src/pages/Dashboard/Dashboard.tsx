@@ -15,7 +15,7 @@ import { useAuth } from "contexts/AuthContext";
 import MeetGoal from "icons/MeetGoal";
 import "./Dashboard.css";
 import { add } from "ionicons/icons";
-import { USER_TYPE } from "constants/userType";
+import { USER_TYPES } from "constants/userTypes";
 
 const PlayerDashboard: React.FC = () => {
   const { data } = useAuth();
@@ -34,7 +34,7 @@ const PlayerDashboard: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        {data?.userType !== USER_TYPE.JUGADOR ? (
+        {data?.userType !== USER_TYPES.JUGADOR ? (
           <IonFab vertical="bottom" horizontal="end" slot="fixed">
             <IonFabButton>
               <IonIcon icon={add} />
