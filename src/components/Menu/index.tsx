@@ -16,6 +16,7 @@ import React, { useEffect, useState } from "react";
 import "./styles.css";
 import { Avatar } from "components/Avatar";
 import {
+  albumsSharp,
   football,
   logOutOutline,
   peopleCircle,
@@ -35,7 +36,7 @@ interface AppPage {
   title: string;
 }
 
-const appPages: AppPage[] = [
+const appPagesPlayer: AppPage[] = [
   {
     title: "Perfil",
     url: "/tabs/perfil",
@@ -60,25 +61,39 @@ const appPages: AppPage[] = [
     icon: shieldHalf,
     iconSelected: "",
   },
+  {
+    title: "Postulaciones",
+    url: "/tabs/mis-postulaciones",
+    icon: albumsSharp,
+    iconSelected: "",
+  },
 ];
 
+const appPagesClub: AppPage[] = [
+  {
+    title: "Perfil",
+    url: "/tabs/perfil",
+    icon: personOutline,
+    iconSelected: person,
+  },
+  {
+    title: "Mis Convocatorias",
+    url: "/tabs/convocatorias-creadas",
+    icon: peopleCircle,
+    iconSelected: "",
+  },
+  {
+    title: "Lista de jugadores",
+    url: "/tabs/lista-jugadores",
+    icon: football,
+    iconSelected: "",
+  },
+];
 export const Menu: React.FC = () => {
   const location = useLocation();
   const [present] = useIonToast();
-  const { logout } = useAuth();
-  const [datos, setDatos] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
+  const { logout, data } = useAuth();
 
-  const { currentUser } = useAuth();
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setDatos);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
   const handleLogout = async () => {
     try {
       await logout();
@@ -99,32 +114,49 @@ export const Menu: React.FC = () => {
           <IonListHeader>
             <IonRow>
               <IonCol size="12">
-                <Avatar src={datos?.avatarURL} />
+                <Avatar src={data?.avatarURL} />
               </IonCol>
               <IonCol size="12" className="user-name">
-                <IonLabel>{datos?.name}</IonLabel>
+                <IonLabel>{data?.name}</IonLabel>
               </IonCol>
               <IonCol size="12" className="unique-user-name">
-                <IonLabel>{`@${datos?.name}`}</IonLabel>
+                <IonLabel>{`@${data?.name}`}</IonLabel>
               </IonCol>
             </IonRow>
           </IonListHeader>
           <IonItemDivider></IonItemDivider>
-          {appPages.map((appPage, key) => {
-            return (
-              <IonMenuToggle key={key} autoHide={false}>
-                <IonItem
-                  className={
-                    location.pathname === appPage.url ? "selected" : ""
-                  }
-                  routerLink={appPage.url}
-                >
-                  <IonIcon slot="start" icon={appPage.icon} size="large" />
-                  <IonLabel>{appPage.title}</IonLabel>
-                </IonItem>
-              </IonMenuToggle>
-            );
-          })}
+          {data?.userType === "Jugador"
+            ? appPagesPlayer.map((appPage, key) => {
+                return (
+                  <IonMenuToggle key={key} autoHide={false}>
+                    <IonItem
+                      className={
+                        location.pathname === appPage.url ? "selected" : ""
+                      }
+                      routerLink={appPage.url}
+                    >
+                      <IonIcon slot="start" icon={appPage.icon} size="large" />
+                      <IonLabel>{appPage.title}</IonLabel>
+                    </IonItem>
+                  </IonMenuToggle>
+                );
+              })
+            : appPagesClub.map((appPage, key) => {
+                return (
+                  <IonMenuToggle key={key} autoHide={false}>
+                    <IonItem
+                      className={
+                        location.pathname === appPage.url ? "selected" : ""
+                      }
+                      routerLink={appPage.url}
+                    >
+                      <IonIcon slot="start" icon={appPage.icon} size="large" />
+                      <IonLabel>{appPage.title}</IonLabel>
+                    </IonItem>
+                  </IonMenuToggle>
+                );
+              })}
+
           <IonMenuToggle autoHide={false}>
             <IonItem onClick={handleLogout}>
               <IonIcon slot="start" icon={logOutOutline} size="large" />
