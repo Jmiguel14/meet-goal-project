@@ -14,12 +14,7 @@ import {
 import { useAuth } from "contexts/AuthContext";
 import MeetGoal from "icons/MeetGoal";
 import "./Dashboard.css";
-import {
-  add,
-  addCircle,
-  addCircleOutline,
-  addCircleSharp,
-} from "ionicons/icons";
+import { add } from "ionicons/icons";
 
 const PlayerDashboard: React.FC = () => {
   const { data } = useAuth();
