@@ -80,7 +80,7 @@ export async function SetPersonalData(
 
 export async function SetInstitutionalData(
   socialName: string,
-  mail: string,
+  email: string,
   city: string,
   country: string,
   phone: number,
@@ -90,7 +90,7 @@ export async function SetInstitutionalData(
   try {
     const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
       socialName,
-      mail,
+      email,
       city,
       country,
       phone,

@@ -1,6 +1,5 @@
 import {
   IonBackButton,
-  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
@@ -13,50 +12,48 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import React from "react";
+import { ERROR_MESSAGES } from "constants/errorMessages";
 import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { EditSportsGoalsData } from "firebase/client";
-import { ERROR_MESSAGES } from "constants/errorMessages";
+import React from "react";
 import { useHistory } from "react-router";
 import { SportsGoalsDataForm } from "types";
+import { EditSportsGoalsData } from "firebase/client";
 
 const schema = yup.object().shape({
-  totalWins: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  totalWins: yup
+    .number()
+    .typeError(ERROR_MESSAGES.REQUIRED)
+    .required(ERROR_MESSAGES.REQUIRED),
   maxNacGoal: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  maxIntgoal: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  maxIntGoal: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
 
 export const EditSportsGoalsInfo: React.FC = () => {
-  const [present] = useIonToast();
-  const history = useHistory();
   const initialValues = {
     maxNacGoal: "",
     maxIntGoal: "",
   };
-
+  const [present] = useIonToast();
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     clearErrors,
     reset,
     formState: { errors },
-  } = useForm<SportsGoalsDataForm>({
-    defaultValues: initialValues,
-    resolver: yupResolver(schema),
-  });
+  } = useForm<SportsGoalsDataForm>({ resolver: yupResolver(schema) });
 
   const onSubmit = async (
     data: SportsGoalsDataForm,
     e: React.BaseSyntheticEvent<object, any, any> | undefined
   ) => {
-    console.log(data);
     const { totalWins, maxNacGoal, maxIntGoal } = data;
     if (await EditSportsGoalsData(totalWins, maxNacGoal, maxIntGoal)) {
       present({
-        message: "Se actualizó la información exitosamente",
+        message: "Se agrego el club a tu experiencia",
         duration: 1000,
         position: "top",
         color: "success",
@@ -64,7 +61,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
       history.push("/tabs/perfil");
     } else {
       present({
-        message: "Error al actualizar la información. Intentelo nuevamente...",
+        message: "Error al agregar la información intentelo nuevamente...",
         duration: 1000,
         position: "top",
         color: "danger",
@@ -72,7 +69,6 @@ export const EditSportsGoalsInfo: React.FC = () => {
     }
     e?.target.reset();
   };
-
   return (
     <IonPage>
       <IonHeader>
@@ -96,11 +92,9 @@ export const EditSportsGoalsInfo: React.FC = () => {
           </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className={styles.back}>
+      <IonContent fullscreen class={styles.back}>
         <IonItemDivider color="primary">
-          <div className={styles.subtitle}>
-            Agregue aquí su logros deportivos
-          </div>
+          <div className={styles.divisor}>Edite aquí sus logros deportivos</div>
         </IonItemDivider>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -108,6 +102,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
         >
           <IonItem className={styles.goals_data}>
             <IonInput
+              type="number"
               placeholder="Logros totales obtenidos"
               clearInput={true}
               {...register("totalWins")}

@@ -92,7 +92,7 @@ const InstitutionalInfo: React.FC<ContainerProps> = () => {
         shape="round"
         expand="full"
         className="ion-padding-horizontal"
-        routerLink="/tabs/editar-info-institutional-club"
+        routerLink="/tabs/editar-info-institucional-club"
       >
         Editar
       </IonButton>

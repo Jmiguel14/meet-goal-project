@@ -21,8 +21,8 @@ const PrivateRoutes = {
   EDITVALUES: "/tabs/editar-valores-jugador",
   EDITCHANNELS: "/tabs/canales-jugador",
   EDITPHOTOS: "/tabs/editar-fotos",
-  EDITINSTITUTIONALINFO: "/tabs/editar-info-institutional-club",
-  EDITSPORTSGOALSINFO: "/tabs/editar-logros-institutionales-club",
+  EDITINSTITUTIONALINFO: "/tabs/editar-info-institucional-club",
+  EDITSPORTSGOALSINFO: "/tabs/editar-logros-institucionales-club",
 };
 
 export const Routes = {

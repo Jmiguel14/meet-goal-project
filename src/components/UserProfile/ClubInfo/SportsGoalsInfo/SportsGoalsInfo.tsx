@@ -45,8 +45,8 @@ const SportsGoalsInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.info}>
-              {data?.nationalWins !== undefined
-                ? data?.nationalWins
+              {data?.maxNacGoal !== undefined
+                ? data?.maxNacGoal
                 : "Máximo Logro"}
             </h1>
           </IonLabel>
@@ -63,8 +63,8 @@ const SportsGoalsInfo: React.FC<ContainerProps> = () => {
           ></IonImg>
           <IonLabel position="stacked">
             <h1 className={styles.info}>
-              {data?.internationalWins !== undefined
-                ? data?.internationalWins
+              {data?.maxIntGoal !== undefined
+                ? data?.maxIntGoal
                 : "Máximo Logro"}
             </h1>
           </IonLabel>
@@ -78,7 +78,7 @@ const SportsGoalsInfo: React.FC<ContainerProps> = () => {
         shape="round"
         expand="full"
         className="ion-padding-horizontal"
-        routerLink="/tabs/editar-logros-institutionales-club"
+        routerLink="/tabs/editar-logros-institucionales-club"
       >
         Editar
       </IonButton>
