@@ -9,6 +9,7 @@ import {
   IonInput,
   IonButton,
 } from "@ionic/react";
+import { USER_TYPE } from "constants/userType";
 
 export const SignUpForm = ({
   register,
@@ -30,10 +31,16 @@ export const SignUpForm = ({
                 clearErrors("userType");
               }}
             >
-              <IonSelectOption value="Jugador">Jugador</IonSelectOption>
-              <IonSelectOption value="Club">Club</IonSelectOption>
-              <IonSelectOption value="Académia">Académia</IonSelectOption>
-              <IonSelectOption value="Técnico">Técnico</IonSelectOption>
+              <IonSelectOption value={USER_TYPE.JUGADOR}>
+                Jugador
+              </IonSelectOption>
+              <IonSelectOption value={USER_TYPE.CLUB}>Club</IonSelectOption>
+              <IonSelectOption value={USER_TYPE.ACADEMIA}>
+                Académia
+              </IonSelectOption>
+              <IonSelectOption value={USER_TYPE.TECNICO}>
+                Técnico
+              </IonSelectOption>
             </IonSelect>
           </IonItem>
           {errors.userType && (

@@ -26,11 +26,11 @@ import {
 } from "ionicons/icons";
 import { useLocation } from "react-router";
 import { useAuth } from "contexts/AuthContext";
+import { USER_TYPE } from "constants/userType";
 
 interface AppPage {
   url: string;
   icon: string;
-  iconSelected: string;
   title: string;
 }
 
@@ -39,31 +39,26 @@ const appPagesPlayer: AppPage[] = [
     title: "Perfil",
     url: "/tabs/perfil",
     icon: personOutline,
-    iconSelected: person,
   },
   {
     title: "Lista de convocatorias",
     url: "/tabs/lista-convocatorias",
     icon: peopleCircle,
-    iconSelected: "",
   },
   {
     title: "Lista de jugadores",
     url: "/tabs/lista-jugadores",
     icon: football,
-    iconSelected: "",
   },
   {
     title: "Lista de clubes",
     url: "/tabs/lista-clubes",
     icon: shieldHalf,
-    iconSelected: "",
   },
   {
     title: "Postulaciones",
     url: "/tabs/mis-postulaciones",
     icon: albumsSharp,
-    iconSelected: "",
   },
 ];
 
@@ -72,19 +67,16 @@ const appPagesClub: AppPage[] = [
     title: "Perfil",
     url: "/tabs/perfil",
     icon: personOutline,
-    iconSelected: person,
   },
   {
     title: "Mis Convocatorias",
     url: "/tabs/convocatorias-creadas",
     icon: peopleCircle,
-    iconSelected: "",
   },
   {
     title: "Lista de jugadores",
     url: "/tabs/lista-jugadores",
     icon: football,
-    iconSelected: "",
   },
 ];
 export const Menu: React.FC = () => {
@@ -123,7 +115,7 @@ export const Menu: React.FC = () => {
             </IonRow>
           </IonListHeader>
           <IonItemDivider></IonItemDivider>
-          {data?.userType === "Jugador"
+          {data?.userType === USER_TYPE.JUGADOR
             ? appPagesPlayer.map((appPage, key) => {
                 return (
                   <IonMenuToggle key={key} autoHide={false}>
