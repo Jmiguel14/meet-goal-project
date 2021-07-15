@@ -23,6 +23,8 @@ const PrivateRoutes = {
   EDITPHOTOS: "/tabs/editar-fotos",
   EDITINSTITUTIONALINFO: "/tabs/editar-info-institucional-club",
   EDITSPORTSGOALSINFO: "/tabs/editar-logros-institucionales-club",
+  NEWCALL: "/tabs/nueva-convocatoria",
+  CALLSLISTCLUB: "/tabs/convocatorias-creadas",
 };
 
 export const Routes = {

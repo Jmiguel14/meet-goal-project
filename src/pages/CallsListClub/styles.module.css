@@ -1,0 +1,9 @@
+.back {
+  --background: #fafafa;
+}
+.icon_back {
+  --icon-font-size: 30px;
+}
+.title {
+  justify-content: flex-start;
+}
