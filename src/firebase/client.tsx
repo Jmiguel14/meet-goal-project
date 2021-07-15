@@ -5,6 +5,7 @@ import "firebase/storage";
 import Avatar from "icons/avatar.png";
 import Cover from "assets/cover.png";
 import { COLLECTIONS } from "constants/collections";
+import { NewCallDataForm } from "types";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -351,4 +352,27 @@ export function updateProfileCover(image: File) {
     .child(`images/${auth.currentUser?.uid}/cover`);
   const task = storageRef.put(image);
   return task;
+}
+export async function AddNewCallClub(
+  clubId: string,
+  ageRequired: string,
+  posRequired: string,
+  startDate: string,
+  endDate: string,
+  extraDetails: string
+) {
+  try {
+    await firestore.collection(COLLECTIONS.CALLS).add({
+      clubId,
+      ageRequired,
+      posRequired,
+      startDate,
+      endDate,
+      extraDetails,
+      postulatedPlayers: {},
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
