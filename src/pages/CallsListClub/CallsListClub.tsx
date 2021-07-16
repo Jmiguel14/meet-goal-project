@@ -82,12 +82,12 @@ const CallsListClub: React.FC = () => {
           <IonCard key={key} className={styles.back}>
             <IonCardTitle
               className={styles.title_calls_details}
-            >{`CAT: ${call.ageRequired}`}</IonCardTitle>
+            >{`CATEGORÍA: ${call.ageRequired}`}</IonCardTitle>
             <IonItem className={styles.calls_details}>
               <IonLabel position="stacked">
                 <h1
                   className={styles.calls_data}
-                >{`POS: ${call.posRequired}`}</h1>
+                >{`POSICIÓN: ${call.posRequired}`}</h1>
               </IonLabel>
               <IonText
                 className={styles.end_date}

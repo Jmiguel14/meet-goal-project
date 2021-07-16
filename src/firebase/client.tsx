@@ -385,6 +385,7 @@ export const getMyCallsData = (
   return firestore
     .collection(COLLECTIONS.CALLS)
     .where("clubId", "==", id)
+    .orderBy("endDate", "desc")
     .onSnapshot((snapshot) => {
       const newData = snapshot.docs.map((doc) => {
         const data = doc.data();
