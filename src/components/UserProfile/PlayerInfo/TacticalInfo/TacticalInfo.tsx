@@ -16,7 +16,7 @@ import SkillIcon from "icons/skillIcon.png";
 
 interface ContainerProps {}
 
-const TacticalInfo: React.FC<ContainerProps> = () => {
+const TacticalInfo = () => {
   const { data } = useAuth();
 
   return (

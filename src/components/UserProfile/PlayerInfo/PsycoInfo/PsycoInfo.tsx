@@ -13,15 +13,12 @@ import styles from "./styles.module.css";
 import AttitudeIcon from "icons/attitudeIcon.png";
 import PersonalityIcon from "icons/personalityIcon.png";
 import CharacterIcon from "icons/characterIcon.png";
-import { useEffect, useState } from "react";
 import { useAuth } from "contexts/AuthContext";
-import { getUserDoc } from "firebase/client";
-import firebase from "firebase/app";
 import ValueIcon from "icons/valueIcon.png";
 
 interface ContainerProps {}
 
-const PsycoInfo: React.FC<ContainerProps> = () => {
+const PsycoInfo = () => {
   const { data } = useAuth();
   return (
     <>

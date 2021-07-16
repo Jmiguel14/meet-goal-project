@@ -7,7 +7,6 @@ import {
   IonText,
 } from "@ionic/react";
 import styles from "./styles.module.css";
-import React from "react";
 import MailIcon from "icons/emailIcon.png";
 import BirthdayIcon from "icons/birthdayIcon.png";
 import ContractIcon from "icons/contractIcon.png";
@@ -16,7 +15,7 @@ import TelephoneIcon from "icons/telephoneIcon.png";
 import { useAuth } from "contexts/AuthContext";
 interface ContainerProps {}
 
-const PersonalInfo: React.FC<ContainerProps> = () => {
+const PersonalInfo = () => {
   const { data } = useAuth();
   function converterDate() {
     let birth = data?.birth.split("T");

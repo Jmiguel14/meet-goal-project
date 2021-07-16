@@ -15,61 +15,46 @@ import TacticalInfo from "../TacticalInfo/TacticalInfo";
 import styles from "./styles.module.css";
 
 export const PlayerSegments: React.FC = () => {
-  const [info, setInfo] = useState("personal");
+  const PLAYERSEGMENTS = {
+    personal: <PersonalInfo />,
+    tactical: <TacticalInfo />,
+    career: <CareerInfo />,
+    medical: <MedicalInfo />,
+    psyco: <PsycoInfo />,
+    channels: <ChannelsInfo />,
+  } as { [index: string]: JSX.Element };
+  const [info, setInfo] = useState<string | undefined>("personal");
   return (
     <IonContent>
-      <IonSegment scrollable value={info} className={styles.menu_horizontal}>
-        <IonSegmentButton
-          value="personal"
-          className={styles.segments}
-          onClick={() => setInfo("personal")}
-        >
+      <IonSegment
+        scrollable
+        value={info}
+        className={styles.menu_horizontal}
+        onIonChange={(e) => {
+          const value = e.detail.value;
+          setInfo(value);
+        }}
+      >
+        <IonSegmentButton value="personal">
           <IonLabel>Datos Personales</IonLabel>
         </IonSegmentButton>
-        <IonSegmentButton
-          value="tactica"
-          className={styles.segments}
-          onClick={() => setInfo("tactica")}
-        >
+        <IonSegmentButton value="tactical">
           <IonLabel>Datos tácticos</IonLabel>
         </IonSegmentButton>
-        <IonSegmentButton
-          value="carrera"
-          className={styles.segments}
-          onClick={() => setInfo("carrera")}
-        >
+        <IonSegmentButton value="career">
           <IonLabel>Experiencia</IonLabel>
         </IonSegmentButton>
-        <IonSegmentButton
-          value="medica"
-          className={styles.segments}
-          onClick={() => setInfo("medica")}
-        >
+        <IonSegmentButton value="medical">
           <IonLabel>Datos médicos</IonLabel>
         </IonSegmentButton>
-        <IonSegmentButton
-          value="psico"
-          className={styles.segments}
-          onClick={() => setInfo("psico")}
-        >
+        <IonSegmentButton value="psyco">
           <IonLabel>Datos psicológicos</IonLabel>
         </IonSegmentButton>
-        <IonSegmentButton
-          value="canales"
-          className={styles.segments}
-          onClick={() => setInfo("canales")}
-        >
+        <IonSegmentButton value="channels">
           <IonLabel>Canales</IonLabel>
         </IonSegmentButton>
       </IonSegment>
-      <>
-        {info === "personal" ? <PersonalInfo /> : <div></div>}
-        {info === "tactica" ? <TacticalInfo /> : <div></div>}
-        {info === "carrera" ? <CareerInfo /> : <div></div>}
-        {info === "medica" ? <MedicalInfo /> : <div></div>}
-        {info === "psico" ? <PsycoInfo /> : <div></div>}
-        {info === "canales" ? <ChannelsInfo /> : <div></div>}
-      </>
+      {info && PLAYERSEGMENTS[info]}
     </IonContent>
   );
 };
