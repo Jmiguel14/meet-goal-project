@@ -11,15 +11,6 @@ import {
 } from "ionicons/icons";
 import "./styles.css";
 import { Menu } from "components/Menu";
-import PlayerProfile from "pages/UserProfilePage/UserProfilePage";
-import EditPersonalInfo from "pages/UserProfilePage/EditPersonalInfo/EditPersonalInfo";
-import EditTacticalInfo from "pages/UserProfilePage/EditTacticalInfo/EditTacticalInfo";
-import EditAttributes from "pages/UserProfilePage/EditAttributes/EditAttributes";
-import AddClub from "pages/UserProfilePage/AddClub/AddClub";
-import AddInjury from "pages/UserProfilePage/AddInjury/AddInjury";
-import EditPsycoInfo from "pages/UserProfilePage/EditPsycoInfo/EditPsycoInfo";
-import Beginning from "pages/UserProfilePage/Beginning/Beginning";
-import AddChannels from "pages/UserProfilePage/AddChannels/AddChannels";
 import loadable from "@loadable/component";
 import { IonLoading } from "@ionic/react";
 import { Routes } from "constants/routes";
@@ -31,7 +22,7 @@ const AsyncDashboard = loadable(
   loadableOptions
 );
 const AsyncSearchForPlayer = loadable(
-  () => import("pages/SearchForPlayer/SearchForPlayer"),
+  () => import("pages/Search"),
   loadableOptions
 );
 const AsyncNotifications = loadable(

@@ -17,7 +17,7 @@ import styles from "./styles.module.css";
 export const PlayerSegments: React.FC = () => {
   const [info, setInfo] = useState("personal");
   return (
-    <IonContent>
+    <>
       <IonSegment scrollable value={info} className={styles.menu_horizontal}>
         <IonSegmentButton
           value="personal"
@@ -70,7 +70,7 @@ export const PlayerSegments: React.FC = () => {
         {info === "psico" ? <PsycoInfo /> : <div></div>}
         {info === "canales" ? <ChannelsInfo /> : <div></div>}
       </>
-    </IonContent>
+    </>
   );
 };
 

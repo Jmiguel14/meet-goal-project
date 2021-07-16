@@ -21,7 +21,7 @@ export const UserProfile: React.FC = () => {
   const { data } = useAuth();
 
   return (
-    <IonContent>
+    <>
       <PhotoUser />
       <IonRow className="ion-justify-content-center">
         <IonCol size="auto">
@@ -53,7 +53,7 @@ export const UserProfile: React.FC = () => {
       ) : (
         <ClubSegments />
       )}
-    </IonContent>
+    </>
   );
 };
 

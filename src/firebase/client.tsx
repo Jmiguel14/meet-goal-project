@@ -5,6 +5,7 @@ import "firebase/storage";
 import Avatar from "icons/avatar.png";
 import Cover from "assets/cover.png";
 import { COLLECTIONS } from "constants/collections";
+import { USER_TYPES } from "constants/userTypes";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -352,3 +353,22 @@ export function updateProfileCover(image: File) {
   const task = storageRef.put(image);
   return task;
 }
+
+export const getPlayers = (
+  callback: React.Dispatch<
+    React.SetStateAction<firebase.firestore.DocumentData | undefined>
+  >
+) => {
+  return firestore
+    .collection(COLLECTIONS.USERS)
+    .where("userType", "==", USER_TYPES.JUGADOR)
+    .orderBy('createAt', 'desc')
+    //.limit(20)
+    .onSnapshot((snapshot) => {
+      const newData = snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return data;
+      });
+      callback(newData);
+    });
+};
