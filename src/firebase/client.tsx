@@ -376,3 +376,20 @@ export async function AddNewCallClub(
     return false;
   }
 }
+export const getMyCallsData = (
+  callback: React.Dispatch<
+    React.SetStateAction<firebase.firestore.DocumentData | undefined>
+  >
+) => {
+  let id = auth.currentUser?.uid;
+  return firestore
+    .collection(COLLECTIONS.CALLS)
+    .where("clubId", "==", id)
+    .onSnapshot((snapshot) => {
+      const newData = snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return data;
+      });
+      callback(newData);
+    });
+};

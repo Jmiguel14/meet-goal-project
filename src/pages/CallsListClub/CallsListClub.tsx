@@ -1,6 +1,8 @@
 import {
   IonButton,
   IonButtons,
+  IonCard,
+  IonCardTitle,
   IonCol,
   IonContent,
   IonFab,
@@ -18,51 +20,25 @@ import {
   useIonViewWillEnter,
 } from "@ionic/react";
 import { add, arrowBack } from "ionicons/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { NewCallDataForm } from "types";
 import styles from "./styles.module.css";
 import { firestore } from "firebase/client";
 import { COLLECTIONS } from "constants/collections";
 import { useAuth } from "contexts/AuthContext";
+import firebase from "firebase/app";
+import { getMyCallsData } from "firebase/client";
 
 const CallsListClub: React.FC = () => {
   const history = useHistory();
   const { currentUser } = useAuth();
-  const [callsList, setCallList] = useState<NewCallDataForm[]>([]);
+  const [callsList, setCallList] = useState<firebase.firestore.DocumentData>();
 
-  const getMyCallsData = async () => {
-    let id = currentUser.uid;
-    try {
-      let calls: NewCallDataForm[] = [];
-      const res = await firestore
-        .collection(COLLECTIONS.CALLS)
-        .where("clubId", "==", id)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            let obj = {
-              id: doc.id,
-              clubId: doc.data().clubId,
-              ageRequired: doc.data().ageRequired,
-              posRequired: doc.data().posRequired,
-              startDate: doc.data().startDate,
-              endDate: doc.data().endDate,
-              postulatedPlayers: doc.data().postulatedPlayers,
-              extraDetails: doc.data().extraDetails,
-            };
-            calls.push(obj);
-          });
-          setCallList(calls);
-        });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useIonViewWillEnter(() => {
-    getMyCallsData();
-  });
+  useEffect(() => {
+    const unsubscribe = getMyCallsData(setCallList);
+    //return () => unsubscribe && unsubscribe()
+  }, []);
 
   function backHome() {
     history.push("/tabs/inicio-jugador");
@@ -92,25 +68,30 @@ const CallsListClub: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonItemDivider color="primary" className={styles.container_divider}>
+        <IonItemDivider color="primary">
           <div className={styles.title_divider}>
             Listado de las convocatorias creadas
           </div>
         </IonItemDivider>
-        {callsList.map((call) => (
-          <IonItem key={call.id} className={styles.calls_details}>
-            <IonLabel position="stacked">
-              <h1
-                className={styles.calls_data}
-              >{`CAT: ${call.ageRequired} | POS: ${call.posRequired}`}</h1>
-            </IonLabel>
-            <IonText
-              className={styles.end_date}
-            >{`F. de Cierre: ${converterDate(call.endDate)}`}</IonText>
-            <IonButton slot="end" fill="clear" size="small" color="tertiary">
-              Ver
-            </IonButton>
-          </IonItem>
+        {callsList?.map((call: any, key: any) => (
+          <IonCard key={key} className={styles.back}>
+            <IonCardTitle
+              className={styles.title_calls_details}
+            >{`CAT: ${call.ageRequired}`}</IonCardTitle>
+            <IonItem className={styles.calls_details}>
+              <IonLabel position="stacked">
+                <h1
+                  className={styles.calls_data}
+                >{`POS: ${call.posRequired}`}</h1>
+              </IonLabel>
+              <IonText
+                className={styles.end_date}
+              >{`F. de Cierre: ${converterDate(call.endDate)}`}</IonText>
+              <IonButton slot="end" fill="clear" size="small" color="tertiary">
+                Ver
+              </IonButton>
+            </IonItem>
+          </IonCard>
         ))}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton routerLink="/tabs/nueva-convocatoria">
