@@ -43,10 +43,15 @@ const CallsListClub: React.FC = () => {
   function backHome() {
     history.push("/tabs/inicio-jugador");
   }
-  function converterDate(date: string) {
-    let birth = date.split("T");
-    return birth[0];
+  function converterDate(date: firebase.firestore.Timestamp) {
+    let convertDate = date.toDate();
+    console.log(convertDate);
+    let newDate = `${convertDate.getUTCDate()} / ${
+      convertDate.getUTCMonth() + 1
+    } / ${convertDate.getUTCFullYear()}`;
+    return newDate;
   }
+
   return (
     <IonPage>
       <IonHeader>

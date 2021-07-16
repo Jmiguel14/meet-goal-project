@@ -366,8 +366,8 @@ export async function AddNewCallClub(
       clubId,
       ageRequired,
       posRequired,
-      startDate,
-      endDate,
+      startDate: firebase.firestore.Timestamp.fromDate(new Date(startDate)),
+      endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
       extraDetails,
       postulatedPlayers: {},
     });

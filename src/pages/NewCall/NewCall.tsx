@@ -9,6 +9,7 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,
+  IonNote,
   IonPage,
   IonRow,
   IonSelect,
@@ -30,6 +31,16 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { NewCallDataForm } from "types";
 import styles from "./styles.module.css";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { ERROR_MESSAGES } from "constants/errorMessages";
+
+const schema = yup.object().shape({
+  ageRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  posRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  startDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  endDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
+});
 
 const NewCall: React.FC = () => {
   const [present] = useIonToast();
@@ -55,6 +66,7 @@ const NewCall: React.FC = () => {
     formState: { errors },
   } = useForm<NewCallDataForm>({
     defaultValues: initialValues,
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (
@@ -90,7 +102,7 @@ const NewCall: React.FC = () => {
     e?.target.reset();
   };
   function backHome() {
-    history.push("/tabs/inicio-jugador");
+    history.push("/tabs/convocatorias-creadas");
   }
   return (
     <IonPage>
@@ -126,7 +138,7 @@ const NewCall: React.FC = () => {
         </IonItemDivider>
         <form onSubmit={handleSubmit(onSubmit)} id="add-new-call-form">
           <IonCol>
-            <IonRow>
+            <IonRow className={styles.container_calls_data}>
               <IonItem className={styles.calls_field}>
                 <IonLabel>Edad requerida</IonLabel>
                 <IonSelect
@@ -165,8 +177,11 @@ const NewCall: React.FC = () => {
                   </IonSelectOption>
                 </IonSelect>
               </IonItem>
+              {errors.ageRequired?.message && (
+                <IonNote color="danger">{errors.ageRequired?.message}</IonNote>
+              )}
             </IonRow>
-            <IonRow>
+            <IonRow className={styles.container_calls_data}>
               <IonItem className={styles.calls_field}>
                 <IonLabel>Posición Requerida</IonLabel>
                 <IonSelect
@@ -203,8 +218,11 @@ const NewCall: React.FC = () => {
                   <IonSelectOption value="ED">Ext.Derecho</IonSelectOption>
                 </IonSelect>
               </IonItem>
+              {errors.posRequired?.message && (
+                <IonNote color="danger">{errors.posRequired?.message}</IonNote>
+              )}
             </IonRow>
-            <IonRow>
+            <IonRow className={styles.container_calls_data}>
               <IonCol>
                 <IonItem className={styles.calls_field}>
                   <IonIcon icon={calendarClearOutline} size="small"></IonIcon>
@@ -218,6 +236,9 @@ const NewCall: React.FC = () => {
                     onIonChange={(e) => setSelectedDateStart(e.detail.value!)}
                   ></IonDatetime>
                 </IonItem>
+                {errors.startDate?.message && (
+                  <IonNote color="danger">{errors.startDate?.message}</IonNote>
+                )}
               </IonCol>
               <IonCol>
                 <IonItem className={styles.calls_field}>
@@ -232,9 +253,12 @@ const NewCall: React.FC = () => {
                     onIonChange={(e) => setSelectedDateEnd(e.detail.value!)}
                   ></IonDatetime>
                 </IonItem>
+                {errors.endDate?.message && (
+                  <IonNote color="danger">{errors.endDate?.message}</IonNote>
+                )}
               </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow className={styles.container_calls_data}>
               <IonItemDivider color="primary">
                 <div className={styles.title_divider}>
                   Detalles extras de la convocatoria
