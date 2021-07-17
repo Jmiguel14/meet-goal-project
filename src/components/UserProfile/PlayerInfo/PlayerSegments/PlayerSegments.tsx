@@ -25,7 +25,7 @@ export const PlayerSegments: React.FC = () => {
   } as { [index: string]: JSX.Element };
   const [info, setInfo] = useState<string | undefined>("personal");
   return (
-    <IonContent>
+    <>
       <IonSegment
         scrollable
         value={info}
@@ -55,7 +55,7 @@ export const PlayerSegments: React.FC = () => {
         </IonSegmentButton>
       </IonSegment>
       {info && PLAYERSEGMENTS[info]}
-    </IonContent>
+    </>
   );
 };
 

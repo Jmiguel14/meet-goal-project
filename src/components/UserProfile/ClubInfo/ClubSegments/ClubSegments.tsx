@@ -18,7 +18,7 @@ export const ClubSegments: React.FC = () => {
 
   const [info, setInfo] = useState<string | undefined>("institutional");
   return (
-    <IonContent>
+    <>
       <IonSegment
         scrollable
         value={info}
@@ -36,7 +36,7 @@ export const ClubSegments: React.FC = () => {
         </IonSegmentButton>
       </IonSegment>
       {info && CLUBSEGMENTS[info]}
-    </IonContent>
+    </>
   );
 };
 

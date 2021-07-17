@@ -45,7 +45,6 @@ const CallsListClub: React.FC = () => {
   }
   function converterDate(date: firebase.firestore.Timestamp) {
     let convertDate = date.toDate();
-    console.log(convertDate);
     let newDate = `${convertDate.getUTCDate()} / ${
       convertDate.getUTCMonth() + 1
     } / ${convertDate.getUTCFullYear()}`;
