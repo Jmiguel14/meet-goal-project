@@ -3,7 +3,6 @@ import {
   IonButton,
   IonButtons,
   IonCard,
-  IonCardTitle,
   IonCol,
   IonContent,
   IonHeader,
@@ -16,15 +15,13 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
-  useIonViewWillEnter,
 } from "@ionic/react";
 import { arrowBack } from "ionicons/icons";
 import { useHistory } from "react-router";
 import styles from "./styles.module.css";
-import Avatar from "icons/avatar.png";
 import { useParams } from "react-router-dom";
 import { useAuth } from "contexts/AuthContext";
-import { firestore, getCallCreator, getCallData } from "firebase/client";
+import { firestore } from "firebase/client";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { COLLECTIONS } from "constants/collections";

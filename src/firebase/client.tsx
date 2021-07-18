@@ -5,7 +5,6 @@ import "firebase/storage";
 import Avatar from "icons/avatar.png";
 import Cover from "assets/cover.png";
 import { COLLECTIONS } from "constants/collections";
-import { NewCallDataForm } from "types";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -394,27 +393,3 @@ export const getMyCallsData = (
       callback(newData);
     });
 };
-
-export async function getCallCreator(id: string) {
-  const docRef = await firestore.collection(COLLECTIONS.USERS).doc(id);
-  docRef
-    .get()
-    .then((doc) => {
-      return doc.data();
-    })
-    .catch((error) => {
-      return error;
-    });
-}
-
-export async function getCallData(id: string) {
-  const docRef = await firestore.collection(COLLECTIONS.CALLS).doc(id);
-  docRef
-    .get()
-    .then((doc) => {
-      return doc.data();
-    })
-    .catch((e) => {
-      return e;
-    });
-}
