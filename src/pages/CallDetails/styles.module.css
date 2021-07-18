@@ -1,0 +1,80 @@
+.back {
+  --background: #fafafa;
+}
+.icon_back {
+  --icon-font-size: 30px;
+}
+.title {
+  justify-content: flex-start;
+}
+.title_club {
+  --ion-background-color: rgba(173, 173, 173, 0.38) !important;
+  text-align: center;
+}
+.club_container {
+  --ion-background-color: #fafafa;
+}
+.title_club_details {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  font-style: normal;
+}
+.info_club {
+  height: 100px;
+}
+.club_name {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  font-style: normal;
+}
+.club_location {
+  font-size: 18px !important;
+  font-style: normal;
+}
+.request {
+  text-align: center;
+  width: 100%;
+  top: 10px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+.avatar {
+  width: 70px;
+  height: 70px;
+}
+.position_container {
+  height: 70px;
+}
+.position_desc {
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+.position_data {
+  font-size: 16px !important;
+  font-style: normal;
+  color: #c8aba4;
+}
+.age_container {
+  height: 70px;
+}
+.extra_container {
+  height: 70px;
+}
+.age_desc {
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+.extra_desc {
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+.age_data {
+  font-size: 16px !important;
+  font-style: normal;
+  color: #c8aba4;
+}
+.extra_data {
+  font-size: 16px !important;
+  font-style: normal;
+  color: #c8aba4;
+}

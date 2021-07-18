@@ -29,6 +29,7 @@ import { COLLECTIONS } from "constants/collections";
 import { useAuth } from "contexts/AuthContext";
 import firebase from "firebase/app";
 import { getMyCallsData } from "firebase/client";
+import { Link } from "react-router-dom";
 
 const CallsListClub: React.FC = () => {
   const history = useHistory();
@@ -92,7 +93,7 @@ const CallsListClub: React.FC = () => {
                 className={styles.end_date}
               >{`F. de Cierre: ${converterDate(call.endDate)}`}</IonText>
               <IonButton slot="end" fill="clear" size="small" color="tertiary">
-                Ver
+                <Link to={`/tabs/convocatoria/${call.id}`}>Ver</Link>
               </IonButton>
             </IonItem>
           </IonCard>

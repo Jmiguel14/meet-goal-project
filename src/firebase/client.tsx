@@ -388,9 +388,33 @@ export const getMyCallsData = (
     .orderBy("endDate", "desc")
     .onSnapshot((snapshot) => {
       const newData = snapshot.docs.map((doc) => {
-        const data = doc.data();
+        const data = { id: doc.id, ...doc.data() };
         return data;
       });
       callback(newData);
     });
 };
+
+export async function getCallCreator(id: string) {
+  const docRef = await firestore.collection(COLLECTIONS.USERS).doc(id);
+  docRef
+    .get()
+    .then((doc) => {
+      return doc.data();
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
+export async function getCallData(id: string) {
+  const docRef = await firestore.collection(COLLECTIONS.CALLS).doc(id);
+  docRef
+    .get()
+    .then((doc) => {
+      return doc.data();
+    })
+    .catch((e) => {
+      return e;
+    });
+}

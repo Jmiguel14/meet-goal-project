@@ -25,6 +25,7 @@ const PrivateRoutes = {
   EDITSPORTSGOALSINFO: "/tabs/editar-logros-institucionales-club",
   NEWCALL: "/tabs/nueva-convocatoria",
   CALLSLISTCLUB: "/tabs/convocatorias-creadas",
+  CALLDETAILS: "/tabs/convocatoria/:id",
 };
 
 export const Routes = {

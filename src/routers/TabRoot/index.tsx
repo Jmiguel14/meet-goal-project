@@ -11,15 +11,6 @@ import {
 } from "ionicons/icons";
 import "./styles.css";
 import { Menu } from "components/Menu";
-import PlayerProfile from "pages/UserProfilePage/UserProfilePage";
-import EditPersonalInfo from "pages/UserProfilePage/EditPersonalInfo/EditPersonalInfo";
-import EditTacticalInfo from "pages/UserProfilePage/EditTacticalInfo/EditTacticalInfo";
-import EditAttributes from "pages/UserProfilePage/EditAttributes/EditAttributes";
-import AddClub from "pages/UserProfilePage/AddClub/AddClub";
-import AddInjury from "pages/UserProfilePage/AddInjury/AddInjury";
-import EditPsycoInfo from "pages/UserProfilePage/EditPsycoInfo/EditPsycoInfo";
-import Beginning from "pages/UserProfilePage/Beginning/Beginning";
-import AddChannels from "pages/UserProfilePage/AddChannels/AddChannels";
 import loadable from "@loadable/component";
 import { IonLoading } from "@ionic/react";
 import { Routes } from "constants/routes";
@@ -104,6 +95,12 @@ const AsyncCallsListClub = loadable(
   () => import("pages/CallsListClub/CallsListClub"),
   loadableOptions
 );
+
+const AsyncCallDetails = loadable(
+  () => import("pages/CallDetails/CallDetails"),
+  loadableOptions
+);
+
 export const TabRoot: React.FC = () => {
   return (
     <>
@@ -195,6 +192,11 @@ export const TabRoot: React.FC = () => {
             exact
             path={Routes.CALLSLISTCLUB}
             component={AsyncCallsListClub}
+          />
+          <PrivateRoutes
+            exact
+            path={Routes.CALLDETAILS}
+            component={AsyncCallDetails}
           />
           <Route
             path="/tabs"
