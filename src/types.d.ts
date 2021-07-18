@@ -66,3 +66,16 @@ export interface SportsGoalsDataForm {
   maxNacGoal: string;
   maxIntGoal: string;
 }
+
+export interface Player {
+  userType: userTypeEnum
+  name: string
+  email: string
+  phone: number
+  avatarURL: string
+  coverURL: string
+  attitude: string
+  character: string
+  personality: {}
+  createAt: firebase.firestore.Timestamp
+}
