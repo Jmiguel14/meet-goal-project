@@ -18,6 +18,7 @@ import {
   IonTitle,
   IonToolbar,
   useIonToast,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import { useAuth } from "contexts/AuthContext";
 import {
@@ -91,10 +92,6 @@ const NewCall: React.FC = () => {
         position: "top",
         color: "success",
       });
-      setValue("ageRequired", "");
-      setValue("posRequired", "");
-      setValue("startDate", "");
-      setValue("endDate", "");
       e?.target.reset();
       history.push("/tabs/convocatorias-creadas");
     } else {
@@ -106,6 +103,14 @@ const NewCall: React.FC = () => {
       });
     }
   };
+
+  useIonViewWillEnter(() => {
+    setValue("ageRequired", "");
+    setValue("posRequired", "");
+    setValue("startDate", "");
+    setValue("endDate", "");
+    setValue("extraDetails", "");
+  });
   function backHome() {
     history.push("/tabs/convocatorias-creadas");
   }
@@ -238,7 +243,10 @@ const NewCall: React.FC = () => {
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("startDate")}
-                    onIonChange={(e) => setSelectedDateStart(e.detail.value!)}
+                    onIonChange={(e) => {
+                      setSelectedDateStart(e.detail.value!);
+                      clearErrors("startDate");
+                    }}
                   ></IonDatetime>
                 </IonItem>
                 {errors.startDate?.message && (
@@ -255,7 +263,10 @@ const NewCall: React.FC = () => {
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("endDate")}
-                    onIonChange={(e) => setSelectedDateEnd(e.detail.value!)}
+                    onIonChange={(e) => {
+                      setSelectedDateEnd(e.detail.value!);
+                      clearErrors("endDate");
+                    }}
                   ></IonDatetime>
                 </IonItem>
                 {errors.endDate?.message && (
