@@ -25,6 +25,7 @@ import { firestore } from "firebase/client";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { COLLECTIONS } from "constants/collections";
+import { getACallData, getOwnCallData } from "firebase/callServices";
 
 const CallDetails: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
@@ -34,26 +35,16 @@ const CallDetails: React.FC = () => {
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
 
   useEffect(() => {
-    const res = firestore.collection(COLLECTIONS.CALLS).doc(id);
-    res.get().then((doc) => {
-      if (doc.exists) {
-        setCallData(doc.data());
-      }
+    const unsubscribe = getACallData(id, (data) => {
+      setCallData(data);
     });
   }, [id]);
 
   useEffect(() => {
-    const res = firestore.collection(COLLECTIONS.USERS).doc(callData?.clubId);
-    res.get().then((doc) => {
-      if (doc.exists) {
-        setClubData(doc.data());
-      }
+    const unsubscribe = getOwnCallData(currentUser.uid, (data) => {
+      setClubData(data);
     });
   }, [callData]);
-
-  function backHome() {
-    history.push("/tabs/convocatorias-creadas");
-  }
 
   return (
     <IonPage>
@@ -63,7 +54,7 @@ const CallDetails: React.FC = () => {
             <IonButton
               fill="clear"
               className={styles.icon_back}
-              onClick={backHome}
+              routerLink="/tabs/convocatorias-creadas"
             >
               <IonIcon icon={arrowBack}></IonIcon>
             </IonButton>

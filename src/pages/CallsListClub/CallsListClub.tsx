@@ -28,8 +28,9 @@ import { firestore } from "firebase/client";
 import { COLLECTIONS } from "constants/collections";
 import { useAuth } from "contexts/AuthContext";
 import firebase from "firebase/app";
-import { getMyCallsData } from "firebase/client";
 import { Link } from "react-router-dom";
+import { getCallsData } from "firebase/callServices";
+import { converterDate } from "utils/ConvertFunctions";
 
 const CallsListClub: React.FC = () => {
   const history = useHistory();
@@ -37,21 +38,9 @@ const CallsListClub: React.FC = () => {
   const [callsList, setCallList] = useState<firebase.firestore.DocumentData>();
 
   useEffect(() => {
-    const unsubscribe = getMyCallsData(setCallList);
-    //return () => unsubscribe && unsubscribe()
+    const unsubscribe = getCallsData(setCallList);
+    return () => unsubscribe && unsubscribe();
   }, []);
-
-  function backHome() {
-    history.push("/tabs/inicio-jugador");
-  }
-  function converterDate(date: firebase.firestore.Timestamp) {
-    let convertDate = date.toDate();
-    let newDate = `${convertDate.getUTCDate()} / ${
-      convertDate.getUTCMonth() + 1
-    } / ${convertDate.getUTCFullYear()}`;
-    return newDate;
-  }
-
   return (
     <IonPage>
       <IonHeader>
@@ -60,7 +49,7 @@ const CallsListClub: React.FC = () => {
             <IonButton
               fill="clear"
               className={styles.icon_back}
-              onClick={backHome}
+              routerLink="/tabs/inicio-jugador"
             >
               <IonIcon icon={arrowBack}></IonIcon>
             </IonButton>

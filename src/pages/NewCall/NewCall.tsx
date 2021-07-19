@@ -20,7 +20,6 @@ import {
   useIonToast,
 } from "@ionic/react";
 import { useAuth } from "contexts/AuthContext";
-import { AddNewCallClub } from "firebase/client";
 import {
   arrowBack,
   calendarClearOutline,
@@ -34,6 +33,7 @@ import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ERROR_MESSAGES } from "constants/errorMessages";
+import { addNewClubCall } from "firebase/callServices";
 
 const schema = yup.object().shape({
   ageRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -75,7 +75,7 @@ const NewCall: React.FC = () => {
   ) => {
     const { ageRequired, posRequired, startDate, endDate, extraDetails } = data;
     if (
-      await AddNewCallClub(
+      await addNewClubCall(
         currentUser.uid,
         ageRequired,
         posRequired,
@@ -90,6 +90,8 @@ const NewCall: React.FC = () => {
         position: "top",
         color: "success",
       });
+      setSelectedDateEnd("");
+      setSelectedDateStart("");
       history.push("/tabs/convocatorias-creadas");
     } else {
       present({
