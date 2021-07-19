@@ -63,6 +63,7 @@ const NewCall: React.FC = () => {
     handleSubmit,
     clearErrors,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<NewCallDataForm>({
     defaultValues: initialValues,
@@ -90,8 +91,11 @@ const NewCall: React.FC = () => {
         position: "top",
         color: "success",
       });
-      setSelectedDateEnd("");
-      setSelectedDateStart("");
+      setValue("ageRequired", "");
+      setValue("posRequired", "");
+      setValue("startDate", "");
+      setValue("endDate", "");
+      e?.target.reset();
       history.push("/tabs/convocatorias-creadas");
     } else {
       present({
@@ -101,7 +105,6 @@ const NewCall: React.FC = () => {
         color: "danger",
       });
     }
-    e?.target.reset();
   };
   function backHome() {
     history.push("/tabs/convocatorias-creadas");
@@ -159,23 +162,23 @@ const NewCall: React.FC = () => {
                     {" "}
                     (8-10 años) Benjamines
                   </IonSelectOption>
-                  <IonSelectOption value="Sub 10">
+                  <IonSelectOption value="Sub 12">
                     (10-12 años) Sub 12
                   </IonSelectOption>
-                  <IonSelectOption value="Sub 12">
+                  <IonSelectOption value="Sub 14">
                     (12-13 años) Sub 14
                   </IonSelectOption>
-                  <IonSelectOption value="Sub 14">
+                  <IonSelectOption value="Sub 16">
                     (14-15 años) Sub 16
                   </IonSelectOption>
-                  <IonSelectOption value="Sub 16">
+                  <IonSelectOption value="Sub 18">
                     (16-18 años) Sub 18
                   </IonSelectOption>
-                  <IonSelectOption value="Sub 18">
+                  <IonSelectOption value="Senior">
                     (19-23 años) Senior
                   </IonSelectOption>
-                  <IonSelectOption value="Senior">
-                    (+20) Absoluta
+                  <IonSelectOption value="Absoluta">
+                    (+23) Absoluta
                   </IonSelectOption>
                 </IonSelect>
               </IonItem>
