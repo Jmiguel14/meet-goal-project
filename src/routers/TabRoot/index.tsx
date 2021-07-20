@@ -22,7 +22,7 @@ const AsyncDashboard = loadable(
   loadableOptions
 );
 const AsyncSearchForPlayer = loadable(
-  () => import("pages/SearchForPlayer/SearchForPlayer"),
+  () => import("pages/Search"),
   loadableOptions
 );
 const AsyncNotifications = loadable(
