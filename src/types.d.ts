@@ -66,3 +66,13 @@ export interface SportsGoalsDataForm {
   maxNacGoal: string;
   maxIntGoal: string;
 }
+export interface NewCallDataForm {
+  id?: string;
+  ageRequired: string;
+  posRequired: string;
+  startDate: string;
+  endDate: string;
+  extraDetails: string;
+  clubId?: string;
+  postulatedPlayers?: any;
+}

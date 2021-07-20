@@ -11,30 +11,32 @@ import SportsGoalsInfo from "../SportsGoalsInfo/SportsGoalsInfo";
 import styles from "./styles.module.css";
 
 export const ClubSegments: React.FC = () => {
-  const [info, setInfo] = useState("institucional");
+  const CLUBSEGMENTS = {
+    institutional: <InstitutionalInfo />,
+    goals: <SportsGoalsInfo />,
+  } as { [index: string]: JSX.Element };
+
+  const [info, setInfo] = useState<string | undefined>("institutional");
   return (
-    <IonContent>
-      <IonSegment scrollable value={info} className={styles.menu_horizontal}>
-        <IonSegmentButton
-          value="institucional"
-          className={styles.segments}
-          onClick={() => setInfo("institucional")}
-        >
+    <>
+      <IonSegment
+        scrollable
+        value={info}
+        className={styles.menu_horizontal}
+        onIonChange={(e) => {
+          const value = e.detail.value;
+          setInfo(value);
+        }}
+      >
+        <IonSegmentButton value="institutional">
           <IonLabel>Datos Institucionales</IonLabel>
         </IonSegmentButton>
-        <IonSegmentButton
-          value="logros"
-          className={styles.segments}
-          onClick={() => setInfo("logros")}
-        >
+        <IonSegmentButton value="goals">
           <IonLabel>Logros deportivos</IonLabel>
         </IonSegmentButton>
       </IonSegment>
-      <>
-        {info === "institucional" ? <InstitutionalInfo /> : <div></div>}
-        {info === "logros" ? <SportsGoalsInfo /> : <div></div>}
-      </>
-    </IonContent>
+      {info && CLUBSEGMENTS[info]}
+    </>
   );
 };
 

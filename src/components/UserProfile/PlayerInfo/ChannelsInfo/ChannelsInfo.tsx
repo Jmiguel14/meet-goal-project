@@ -20,7 +20,7 @@ import { useAuth } from "contexts/AuthContext";
 
 interface ContainerProps {}
 
-const ChannelsInfo: React.FC<ContainerProps> = () => {
+const ChannelsInfo = () => {
   const { data } = useAuth();
   return (
     <>

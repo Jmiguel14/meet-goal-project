@@ -15,7 +15,7 @@ import styles from "./styles.module.css";
 import { useAuth } from "contexts/AuthContext";
 interface ContainerProps {}
 
-const CareerInfo: React.FC<ContainerProps> = () => {
+const CareerInfo = () => {
   const { data } = useAuth();
   return (
     <>
