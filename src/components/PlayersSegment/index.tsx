@@ -1,4 +1,8 @@
-import { IonCol, IonRow, IonSearchbar } from "@ionic/react";
+import {
+  IonCol,
+  IonRow,
+  IonSearchbar,
+} from "@ionic/react";
 import {
   listtenFirstPlayersBatch,
   listtenNextPlayersBatch,
@@ -11,9 +15,10 @@ import { PlayersList } from "components/PlayersList";
 import { SearchbarChangeEventDetail } from "@ionic/core";
 import { Player } from "types";
 import { toTitleCase } from "components/utils/toTitleCase";
+import { SkeletonList } from "components/Skeletons/SkeletonList";
 
 const PlayersSegment = () => {
-  const [players, setPlayers] = useState<firebase.firestore.DocumentData>([]);
+  const [players, setPlayers] = useState<firebase.firestore.DocumentData>();
   const [lastKey, setLastKey] = useState<
     firebase.firestore.Timestamp | undefined
   >();
@@ -24,8 +29,9 @@ const PlayersSegment = () => {
   const [oldPlayers, setOldPlayers] = useState<firebase.firestore.DocumentData>(
     []
   );
-  const [filteredPlayers, setFilteredPlayers] =
-    useState<firebase.firestore.DocumentData>([]);
+  const [filteredPlayers, setFilteredPlayers] = useState<
+    firebase.firestore.DocumentData | undefined
+  >([]);
 
   useEffect(() => {
     const unsubscribe = listtenFirstPlayersBatch(setPlayers, setLastKey);
@@ -35,7 +41,7 @@ const PlayersSegment = () => {
   function searchNext($event: CustomEvent<void>) {
     listtenNextPlayersBatch(
       (newPlayers) => {
-        setPlayers(players.concat(newPlayers));
+        setPlayers(players?.concat(newPlayers));
       },
       setLastKey,
       lastKey
@@ -45,10 +51,9 @@ const PlayersSegment = () => {
   }
 
   const allPlayers = usePlayers();
-  console.log("allPlayers", allPlayers);
 
   useEffect(() => {
-    if (players.length === allPlayers.length) {
+    if (players?.length === allPlayers.length) {
       setDisableInfinitiScroll(true);
     } else {
       setDisableInfinitiScroll(false);
@@ -57,11 +62,13 @@ const PlayersSegment = () => {
 
   useEffect(() => {
     const oldPlayers = allPlayers.map((player: Player) => {
-      const { name } = player;
+      const { name, pospri } = player;
       const lowerCaseName = name.toLowerCase();
+      const lowerCasePlayerPosition = pospri?.toLowerCase();
       return {
         ...player,
         name: lowerCaseName,
+        pospri: lowerCasePlayerPosition,
       };
     });
     setOldPlayers(oldPlayers);
@@ -70,15 +77,19 @@ const PlayersSegment = () => {
   useEffect(() => {
     if (searchText !== "") {
       let newList = [];
-      newList = oldPlayers.filter((player: Player) =>
-        player.name.includes(searchText?.toLowerCase()!)
+      newList = oldPlayers.filter(
+        (player: Player) =>
+          player.name.includes(searchText?.toLowerCase()!) ||
+          player.pospri?.includes(searchText?.toLowerCase()!)
       );
       const newListMapped = newList.map((list: Player) => {
-        const { name } = list;
+        const { name, pospri } = list;
         const nameToTitleCase = toTitleCase(name);
+        const pospriToTitleCase = toTitleCase(pospri);
         return {
           ...list,
           name: nameToTitleCase,
+          pospri: pospriToTitleCase,
         };
       });
       setFilteredPlayers(newListMapped);
@@ -86,9 +97,6 @@ const PlayersSegment = () => {
       setFilteredPlayers(players);
     }
   }, [searchText, oldPlayers, players]);
-  console.log("players", players);
-  console.log("oldPlayers", oldPlayers);
-  console.log("newPlayers", filteredPlayers);
 
   const handleChange = (e: CustomEvent<SearchbarChangeEventDetail>) => {
     const searchValue = e.detail.value;
@@ -99,20 +107,26 @@ const PlayersSegment = () => {
     <>
       <IonRow>
         <IonCol>
-          <IonRow className={styles.searchBar}>
-            <IonCol size="12">
-              <IonSearchbar
-                placeholder="Buscar"
-                value={searchText}
-                onIonChange={handleChange}
-              ></IonSearchbar>
-            </IonCol>
-          </IonRow>
-          <PlayersList
-            players={filteredPlayers}
-            disableInfinitiScroll={disableInfinitiScroll}
-            onSearchNext={searchNext}
-          />
+          {players ? (
+            <>
+              <IonRow className={styles.searchBar}>
+                <IonCol size="12">
+                  <IonSearchbar
+                    placeholder="Buscar por nombre o por posición"
+                    value={searchText}
+                    onIonChange={handleChange}
+                  ></IonSearchbar>
+                </IonCol>
+              </IonRow>
+              <PlayersList
+                players={filteredPlayers}
+                disableInfinitiScroll={disableInfinitiScroll}
+                onSearchNext={searchNext}
+              />
+            </>
+          ) : (
+            <SkeletonList />
+          )}
         </IonCol>
       </IonRow>
     </>

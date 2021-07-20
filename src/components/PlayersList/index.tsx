@@ -1,15 +1,19 @@
 import {
+  IonAvatar,
+  IonButton,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   IonItem,
   IonLabel,
   IonList,
+  IonNote,
+  IonText,
 } from "@ionic/react";
 import { Player } from "types";
 import firebase from "firebase";
 
 interface PlayersListProps {
-  players: firebase.firestore.DocumentData;
+  players: firebase.firestore.DocumentData | undefined;
   disableInfinitiScroll: boolean;
   onSearchNext: ($event: CustomEvent<void>) => void;
 }
@@ -21,12 +25,18 @@ export const PlayersList = ({
 }: PlayersListProps) => {
   return (
     <IonList>
-      {console.log(players)}
       {players &&
         players.map((player: Player, index: number) => {
           return (
             <IonItem key={index}>
-              <IonLabel>{player.name}</IonLabel>
+              <IonAvatar slot='start'>
+                <img src={player.avatarURL}/>
+              </IonAvatar>
+              <IonLabel>
+                <IonText>{player.name}</IonText><br/>
+                <IonNote>{player.pospri}</IonNote>
+              </IonLabel>
+              <IonButton slot='end' fill='clear' size='small'>Ver</IonButton>
             </IonItem>
           );
         })}

@@ -72,6 +72,8 @@ export interface Player {
   name: string
   email: string
   phone: number
+  pospri: string
+  possec: string
   avatarURL: string
   coverURL: string
   attitude: string

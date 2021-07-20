@@ -1,10 +1,8 @@
 import {
-  IonButton,
   IonRow,
   IonCol,
   IonContent,
   IonHeader,
-  IonIcon,
   IonLabel,
   IonPage,
   IonSegment,
@@ -13,7 +11,6 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import PlayersSegment from "components/PlayersSegment";
-import { arrowBackOutline } from "ionicons/icons";
 import { useState } from "react";
 import styles from "./styles.module.css";
 
@@ -39,7 +36,6 @@ const SearchForPlayer: React.FC = () => {
             <IonSegment
               value={segment}
               onIonChange={(e) => {
-                console.log(e);
                 const value = e.detail.value;
                 setSegment(value);
               }}
