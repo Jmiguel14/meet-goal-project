@@ -24,7 +24,7 @@ const PlayersSegment = () => {
   const [oldPlayers, setOldPlayers] = useState<firebase.firestore.DocumentData>(
     []
   );
-  const [filterPlayers, setFilterPlayers] =
+  const [filteredPlayers, setFilteredPlayers] =
     useState<firebase.firestore.DocumentData>([]);
 
   useEffect(() => {
@@ -81,14 +81,14 @@ const PlayersSegment = () => {
           name: nameToTitleCase,
         };
       });
-      setFilterPlayers(newListMapped);
+      setFilteredPlayers(newListMapped);
     } else {
-      setFilterPlayers(players);
+      setFilteredPlayers(players);
     }
   }, [searchText, oldPlayers, players]);
   console.log("players", players);
   console.log("oldPlayers", oldPlayers);
-  console.log("newPlayers", filterPlayers);
+  console.log("newPlayers", filteredPlayers);
 
   const handleChange = (e: CustomEvent<SearchbarChangeEventDetail>) => {
     const searchValue = e.detail.value;
@@ -109,7 +109,7 @@ const PlayersSegment = () => {
             </IonCol>
           </IonRow>
           <PlayersList
-            players={filterPlayers}
+            players={filteredPlayers}
             disableInfinitiScroll={disableInfinitiScroll}
             onSearchNext={searchNext}
           />
