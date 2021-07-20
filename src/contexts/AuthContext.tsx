@@ -92,7 +92,7 @@ export const AuthProvider: React.FC = ({ children }) => {
           name,
           phone,
           userType,
-          createAt: firebase.firestore.Timestamp.fromDate(new Date()),
+          createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
         });
         defaultAvatar(currentUser.uid);
         defaultCover(currentUser.uid);

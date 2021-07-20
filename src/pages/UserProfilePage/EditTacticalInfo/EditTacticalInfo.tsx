@@ -85,21 +85,49 @@ const EditTacticalInfo: React.FC = () => {
               value=""
               {...register("pospri")}
             >
-              <IonSelectOption value="POR">Portero</IonSelectOption>
-              <IonSelectOption value="CAI">Carrilero Izq.</IonSelectOption>
-              <IonSelectOption value="CAD">Carrilero Der.</IonSelectOption>
-              <IonSelectOption value="LI">Lateral Izquierdo</IonSelectOption>
-              <IonSelectOption value="LD">Lateral Derecho</IonSelectOption>
-              <IonSelectOption value="DFC">Defensa Central</IonSelectOption>
-              <IonSelectOption value="MCD">Medio Centro Def.</IonSelectOption>
-              <IonSelectOption value="MC">Medio Centro</IonSelectOption>
-              <IonSelectOption value="MCO">Medio Centro Of.</IonSelectOption>
-              <IonSelectOption value="MI">Medio Izquierdo</IonSelectOption>
-              <IonSelectOption value="MD">Medio Derecho</IonSelectOption>
-              <IonSelectOption value="SD">Segundo Delantero</IonSelectOption>
-              <IonSelectOption value="DC">Centro Delantero</IonSelectOption>
-              <IonSelectOption value="EI">Ext. Izquierdo</IonSelectOption>
-              <IonSelectOption value="ED">Ext.Derecho</IonSelectOption>
+              <IonSelectOption value="Portero">Portero</IonSelectOption>
+              <IonSelectOption value="Carrilero Izquierdo">
+                Carrilero Izq.
+              </IonSelectOption>
+              <IonSelectOption value="Carrilero Derecho">
+                Carrilero Der.
+              </IonSelectOption>
+              <IonSelectOption value="Lateral Izquierdo">
+                Lateral Izquierdo
+              </IonSelectOption>
+              <IonSelectOption value="Lateral Derecho">
+                Lateral Derecho
+              </IonSelectOption>
+              <IonSelectOption value="Defensa Central">
+                Defensa Central
+              </IonSelectOption>
+              <IonSelectOption value="Medio Centro Defensivo">
+                Medio Centro Def.
+              </IonSelectOption>
+              <IonSelectOption value="Medio Centro">
+                Medio Centro
+              </IonSelectOption>
+              <IonSelectOption value="Medio Centro Ofensivo">
+                Medio Centro Of.
+              </IonSelectOption>
+              <IonSelectOption value="Medio Izquierdo">
+                Medio Izquierdo
+              </IonSelectOption>
+              <IonSelectOption value="Medio Derecho">
+                Medio Derecho
+              </IonSelectOption>
+              <IonSelectOption value="Segundo Delantero">
+                Segundo Delantero
+              </IonSelectOption>
+              <IonSelectOption value="Centro Delantero">
+                Centro Delantero
+              </IonSelectOption>
+              <IonSelectOption value="Extremo Izquierdo">
+                Ext. Izquierdo
+              </IonSelectOption>
+              <IonSelectOption value="Extremo Derecho">
+                Ext.Derecho
+              </IonSelectOption>
             </IonSelect>
           </IonItem>
           <IonItem className={styles.tactical_field}>
