@@ -15,7 +15,7 @@ import { useAuth } from "contexts/AuthContext";
 
 interface ContainerProps {}
 
-const MedicalInfo: React.FC<ContainerProps> = () => {
+const MedicalInfo = () => {
   const { data } = useAuth();
   return (
     <>

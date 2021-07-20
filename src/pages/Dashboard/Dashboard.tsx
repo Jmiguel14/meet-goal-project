@@ -36,7 +36,7 @@ const PlayerDashboard: React.FC = () => {
       <IonContent fullscreen className="ion-padding">
         {data?.userType !== USER_TYPES.JUGADOR ? (
           <IonFab vertical="bottom" horizontal="end" slot="fixed">
-            <IonFabButton>
+            <IonFabButton routerLink="/tabs/nueva-convocatoria">
               <IonIcon icon={add} />
             </IonFabButton>
           </IonFab>

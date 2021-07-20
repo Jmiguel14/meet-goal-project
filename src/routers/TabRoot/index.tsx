@@ -85,6 +85,22 @@ const AsyncEditSportsGoalsInfo = loadable(
   () => import("pages/UserProfilePage/EditSportsGoalsInfo/EditSportsGoalsInfo"),
   loadableOptions
 );
+
+const AsyncNewCall = loadable(
+  () => import("pages/NewCall/NewCall"),
+  loadableOptions
+);
+
+const AsyncCallsListClub = loadable(
+  () => import("pages/CallsListClub/CallsListClub"),
+  loadableOptions
+);
+
+const AsyncCallDetails = loadable(
+  () => import("pages/CallDetails/CallDetails"),
+  loadableOptions
+);
+
 export const TabRoot: React.FC = () => {
   return (
     <>
@@ -170,6 +186,17 @@ export const TabRoot: React.FC = () => {
             exact
             path={Routes.EDITSPORTSGOALSINFO}
             component={AsyncEditSportsGoalsInfo}
+          />
+          <PrivateRoutes exact path={Routes.NEWCALL} component={AsyncNewCall} />
+          <PrivateRoutes
+            exact
+            path={Routes.CALLSLISTCLUB}
+            component={AsyncCallsListClub}
+          />
+          <PrivateRoutes
+            exact
+            path={Routes.CALLDETAILS}
+            component={AsyncCallDetails}
           />
           <Route
             path="/tabs"

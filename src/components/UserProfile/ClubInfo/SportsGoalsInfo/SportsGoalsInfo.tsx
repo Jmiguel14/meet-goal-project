@@ -7,12 +7,11 @@ import {
   IonText,
 } from "@ionic/react";
 import styles from "./styles.module.css";
-import React from "react";
 import Trophy from "icons/trophy.png";
 import { useAuth } from "contexts/AuthContext";
 interface ContainerProps {}
 
-const SportsGoalsInfo: React.FC<ContainerProps> = () => {
+const SportsGoalsInfo = () => {
   const { data } = useAuth();
   return (
     <>
