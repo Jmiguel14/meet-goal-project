@@ -17,20 +17,16 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
-  useIonViewWillEnter,
 } from "@ionic/react";
 import { add, arrowBack } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { NewCallDataForm } from "types";
 import styles from "./styles.module.css";
-import { firestore } from "firebase/client";
-import { COLLECTIONS } from "constants/collections";
 import { useAuth } from "contexts/AuthContext";
 import firebase from "firebase/app";
 import { Link } from "react-router-dom";
 import { getCallsData } from "firebase/callServices";
-import { converterDate } from "utils/ConvertFunctions";
+import { converterDate } from "utils/converterDate";
 
 const CallsListClub: React.FC = () => {
   const history = useHistory();
