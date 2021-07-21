@@ -32,7 +32,7 @@ const SearchForPlayer: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonRow className={styles.segments}>
-          <IonCol size='12'>
+          <IonCol size="12">
             <IonSegment
               value={segment}
               onIonChange={(e) => {
@@ -52,7 +52,7 @@ const SearchForPlayer: React.FC = () => {
             </IonSegment>
           </IonCol>
         </IonRow>
-          {segment && SEGMENTS[segment]}
+        {segment && SEGMENTS[segment]}
       </IonContent>
     </IonPage>
   );

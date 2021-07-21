@@ -1,8 +1,4 @@
-import {
-  IonCol,
-  IonRow,
-  IonSearchbar,
-} from "@ionic/react";
+import { IonCol, IonRow, IonSearchbar } from "@ionic/react";
 import {
   listtenFirstPlayersBatch,
   listtenNextPlayersBatch,
@@ -14,7 +10,7 @@ import styles from "./styles.module.css";
 import { PlayersList } from "components/PlayersList";
 import { SearchbarChangeEventDetail } from "@ionic/core";
 import { Player } from "types";
-import { toTitleCase } from "components/utils/toTitleCase";
+import { toTitleCase } from "utils/toTitleCase";
 import { SkeletonList } from "components/Skeletons/SkeletonList";
 
 const PlayersSegment = () => {

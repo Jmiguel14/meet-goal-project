@@ -17,19 +17,15 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { arrowBack } from "ionicons/icons";
-import { useHistory } from "react-router";
 import styles from "./styles.module.css";
 import { useParams } from "react-router-dom";
 import { useAuth } from "contexts/AuthContext";
-import { firestore } from "firebase/client";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
-import { COLLECTIONS } from "constants/collections";
 import { getACallData, getOwnCallData } from "firebase/callServices";
 
 const CallDetails: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
-  const history = useHistory();
   const { currentUser } = useAuth();
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
