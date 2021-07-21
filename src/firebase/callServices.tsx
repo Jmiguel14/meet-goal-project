@@ -53,12 +53,9 @@ export const getACallData = (
   return firestore
     .collection(COLLECTIONS.CALLS)
     .doc(id)
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        const data = doc.data();
-        callback(data);
-      }
+    .onSnapshot((doc) => {
+      const data = { id: doc.id, ...doc.data() };
+      callback(data);
     });
 };
 
@@ -79,3 +76,28 @@ export const getOwnCallData = (
       }
     });
 };
+
+export async function saveCallChanges(
+  id: string,
+  ageRequired: string,
+  posRequired: string,
+  startDate: string,
+  endDate: string,
+  extraDetails: string
+) {
+  try {
+    const save = firestore
+      .collection(COLLECTIONS.CALLS)
+      .doc(id)
+      .update({
+        ageRequired,
+        posRequired,
+        startDate: firebase.firestore.Timestamp.fromDate(new Date(startDate)),
+        endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
+        extraDetails,
+      });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}

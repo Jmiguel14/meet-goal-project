@@ -26,6 +26,7 @@ const PrivateRoutes = {
   NEWCALL: "/tabs/nueva-convocatoria",
   CALLSLISTCLUB: "/tabs/convocatorias-creadas",
   CALLDETAILS: "/tabs/convocatoria/:id",
+  EDITCALLDETAILS: "/tabs/editar-convocatoria/:id",
 };
 
 export const Routes = {
