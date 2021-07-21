@@ -29,14 +29,17 @@ export const PlayersList = ({
         players.map((player: Player, index: number) => {
           return (
             <IonItem key={index}>
-              <IonAvatar slot='start'>
-                <img src={player.avatarURL}/>
+              <IonAvatar slot="start">
+                <img src={player.avatarURL} />
               </IonAvatar>
               <IonLabel>
-                <IonText>{player.name}</IonText><br/>
+                <IonText>{player.name}</IonText>
+                <br />
                 <IonNote>{player.pospri}</IonNote>
               </IonLabel>
-              <IonButton slot='end' fill='clear' size='small'>Ver</IonButton>
+              <IonButton slot="end" fill="clear" size="small">
+                Ver
+              </IonButton>
             </IonItem>
           );
         })}

@@ -1,5 +1,5 @@
 import {
-  IonButton,
+  IonBackButton,
   IonButtons,
   IonCol,
   IonContent,
@@ -21,11 +21,7 @@ import {
   useIonViewWillEnter,
 } from "@ionic/react";
 import { useAuth } from "contexts/AuthContext";
-import {
-  arrowBack,
-  calendarClearOutline,
-  calendarOutline,
-} from "ionicons/icons";
+import { calendarClearOutline, calendarOutline } from "ionicons/icons";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
@@ -111,21 +107,12 @@ const NewCall: React.FC = () => {
     setValue("endDate", "");
     setValue("extraDetails", "");
   });
-  function backHome() {
-    history.push("/tabs/convocatorias-creadas");
-  }
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar className={styles.back}>
           <IonButtons slot="start">
-            <IonButton
-              fill="clear"
-              className={styles.icon_back}
-              onClick={backHome}
-            >
-              <IonIcon icon={arrowBack}></IonIcon>
-            </IonButton>
+            <IonBackButton defaultHref="/" className={styles.icon_back} />
           </IonButtons>
           <IonTitle color="primary" className={styles.title}>
             Nueva Convocatoria

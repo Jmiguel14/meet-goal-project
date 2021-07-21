@@ -5,7 +5,6 @@ import "firebase/storage";
 import Avatar from "icons/avatar.png";
 import Cover from "assets/cover.png";
 import { COLLECTIONS } from "constants/collections";
-import { USER_TYPES } from "constants/userTypes";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,

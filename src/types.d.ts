@@ -67,18 +67,18 @@ export interface SportsGoalsDataForm {
   maxIntGoal: string;
 }
 export interface Player {
-  userType: userTypeEnum
-  name: string
-  email: string
-  phone: number
-  pospri: string
-  possec: string
-  avatarURL: string
-  coverURL: string
-  attitude: string
-  character: string
-  personality: {}
-  createAt: firebase.firestore.Timestamp
+  userType: userTypeEnum;
+  name: string;
+  email: string;
+  phone: number;
+  pospri: string;
+  possec: string;
+  avatarURL: string;
+  coverURL: string;
+  attitude: string;
+  character: string;
+  personality: {};
+  createdAt: firebase.firestore.Timestamp;
 }
 export interface NewCallDataForm {
   id?: string;
