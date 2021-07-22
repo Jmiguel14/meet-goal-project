@@ -106,7 +106,7 @@ const CallsSegment = () => {
               <IonRow className={styles.searchBar}>
                 <IonCol size="12">
                   <IonSearchbar
-                    placeholder="Buscar por posición requerida"
+                    placeholder="Buscar por edad o posición requerida"
                     value={searchText}
                     onIonChange={handleChange}
                   ></IonSearchbar>
