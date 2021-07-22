@@ -70,6 +70,9 @@ const CallDetails: React.FC = () => {
                 Detalles de la Convocatoria
               </h1>
             </IonLabel>
+            <Link to={`/tabs/editar-convocatoria/${callData?.id}`}>
+              <IonIcon icon={create} size="medium" color="primary"></IonIcon>
+            </Link>
           </IonItem>
           <IonItem lines="none" className={styles.info_club}>
             <IonAvatar slot="start" className={styles.avatar}>
@@ -84,9 +87,6 @@ const CallDetails: React.FC = () => {
               </h1>
             </IonLabel>
             <IonText className={styles.club_location}>{clubData?.name}</IonText>
-            <Link to={`/tabs/editar-convocatoria/${callData?.id}`}>
-              <IonIcon icon={create} size="small" color="primary"></IonIcon>
-            </Link>
           </IonItem>
           <IonItemDivider color="primary">
             <div className={styles.request}>Requerimos</div>
