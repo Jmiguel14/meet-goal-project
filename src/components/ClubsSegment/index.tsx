@@ -1,20 +1,20 @@
 import { IonCol, IonRow, IonSearchbar } from "@ionic/react";
-import {
-  listtenFirstPlayersBatch,
-  listtenNextPlayersBatch,
-} from "firebase/playersList";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
-import { usePlayers } from "hooks/usePlayers";
 import styles from "./styles.module.css";
-import { PlayersList } from "components/PlayersList";
 import { SearchbarChangeEventDetail } from "@ionic/core";
-import { Player } from "types";
+import { Club } from "types";
 import { toTitleCase } from "utils/toTitleCase";
 import { SkeletonList } from "components/Skeletons/SkeletonList";
+import {
+  listtenFirstClubsBatch,
+  listtenNextClubsBatch,
+} from "firebase/clubsList";
+import { useClubs } from "hooks/useClubs";
+import { ClubsList } from "components/ClubsList";
 
-const PlayersSegment = () => {
-  const [players, setPlayers] = useState<firebase.firestore.DocumentData>();
+const ClubsSegment = () => {
+  const [clubs, setClubs] = useState<firebase.firestore.DocumentData>();
   const [lastKey, setLastKey] = useState<
     firebase.firestore.Timestamp | undefined
   >();
@@ -22,22 +22,20 @@ const PlayersSegment = () => {
     useState<boolean>(false);
 
   const [searchText, setSearchText] = useState<string | undefined>("");
-  const [oldPlayers, setOldPlayers] = useState<firebase.firestore.DocumentData>(
-    []
-  );
-  const [filteredPlayers, setFilteredPlayers] = useState<
+  const [oldClubs, setOldClubs] = useState<firebase.firestore.DocumentData>([]);
+  const [filteredClubs, setFilteredClubs] = useState<
     firebase.firestore.DocumentData | undefined
   >([]);
 
   useEffect(() => {
-    const unsubscribe = listtenFirstPlayersBatch(setPlayers, setLastKey);
+    const unsubscribe = listtenFirstClubsBatch(setClubs, setLastKey);
     return () => unsubscribe && unsubscribe();
   }, []);
 
   function searchNext($event: CustomEvent<void>) {
-    listtenNextPlayersBatch(
-      (newPlayers) => {
-        setPlayers(players?.concat(newPlayers));
+    listtenNextClubsBatch(
+      (newClubs) => {
+        setClubs(clubs?.concat(newClubs));
       },
       setLastKey,
       lastKey
@@ -46,53 +44,47 @@ const PlayersSegment = () => {
     ($event.target as HTMLIonInfiniteScrollElement).complete();
   }
 
-  const allPlayers = usePlayers();
+  const allClubs = useClubs();
 
   useEffect(() => {
-    if (players?.length === allPlayers.length) {
+    if (clubs?.length === allClubs.length) {
       setDisableInfinitiScroll(true);
     } else {
       setDisableInfinitiScroll(false);
     }
-  }, [players]);
+  }, [clubs]);
 
   useEffect(() => {
-    const oldPlayers = allPlayers.map((player: Player) => {
-      const { name, pospri } = player;
+    const oldClubs = allClubs.map((club: Club) => {
+      const { name } = club;
       const lowerCaseName = name.toLowerCase();
-      const lowerCasePlayerPosition = pospri?.toLowerCase();
       return {
-        ...player,
+        ...club,
         name: lowerCaseName,
-        pospri: lowerCasePlayerPosition,
       };
     });
-    setOldPlayers(oldPlayers);
-  }, [allPlayers]);
+    setOldClubs(oldClubs);
+  }, [allClubs]);
 
   useEffect(() => {
     if (searchText !== "") {
       let newList = [];
-      newList = oldPlayers.filter(
-        (player: Player) =>
-          player.name.includes(searchText?.toLowerCase()!) ||
-          player.pospri?.includes(searchText?.toLowerCase()!)
+      newList = oldClubs.filter((club: Club) =>
+        club.name.includes(searchText?.toLowerCase()!)
       );
-      const newListMapped = newList.map((list: Player) => {
-        const { name, pospri } = list;
+      const newListMapped = newList.map((list: Club) => {
+        const { name } = list;
         const nameToTitleCase = toTitleCase(name);
-        const pospriToTitleCase = toTitleCase(pospri);
         return {
           ...list,
           name: nameToTitleCase,
-          pospri: pospriToTitleCase,
         };
       });
-      setFilteredPlayers(newListMapped);
+      setFilteredClubs(newListMapped);
     } else {
-      setFilteredPlayers(players);
+      setFilteredClubs(clubs);
     }
-  }, [searchText, oldPlayers, players]);
+  }, [searchText, oldClubs, clubs]);
 
   const handleChange = (e: CustomEvent<SearchbarChangeEventDetail>) => {
     const searchValue = e.detail.value;
@@ -103,19 +95,19 @@ const PlayersSegment = () => {
     <>
       <IonRow>
         <IonCol>
-          {players ? (
+          {clubs ? (
             <>
               <IonRow className={styles.searchBar}>
                 <IonCol size="12">
                   <IonSearchbar
-                    placeholder="Buscar por nombre o por posición"
+                    placeholder="Buscar por nombre"
                     value={searchText}
                     onIonChange={handleChange}
                   ></IonSearchbar>
                 </IonCol>
               </IonRow>
-              <PlayersList
-                players={filteredPlayers}
+              <ClubsList
+                clubs={filteredClubs}
                 disableInfinitiScroll={disableInfinitiScroll}
                 onSearchNext={searchNext}
               />
@@ -129,4 +121,4 @@ const PlayersSegment = () => {
   );
 };
 
-export default PlayersSegment;
+export default ClubsSegment;

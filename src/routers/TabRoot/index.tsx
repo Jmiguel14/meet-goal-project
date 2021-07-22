@@ -2,7 +2,7 @@ import { IonTabBar, IonTabs, IonTabButton, IonIcon } from "@ionic/react";
 import React from "react";
 import { IonRouterOutlet } from "@ionic/react";
 import { PrivateRoutes } from "routers/PrivateRoutes";
-import { Route, Redirect } from "react-router";
+import { Route, Redirect, useLocation } from "react-router";
 import {
   homeOutline,
   mailOutline,
@@ -102,6 +102,8 @@ const AsyncCallDetails = loadable(
 );
 
 export const TabRoot: React.FC = () => {
+  const location = useLocation();
+  console.log("location", location);
   return (
     <>
       <Menu />
@@ -129,7 +131,7 @@ export const TabRoot: React.FC = () => {
           />
           <PrivateRoutes
             exact
-            path={Routes.PLAYERPROFILE}
+            path={Routes.PROFILE}
             component={AsyncPlayerProfile}
           />
           <PrivateRoutes
@@ -200,33 +202,39 @@ export const TabRoot: React.FC = () => {
           />
           <Route
             path="/tabs"
-            render={() => (
-              <Redirect to={{ pathname: "/tabs/inicio-jugador" }} />
-            )}
+            render={() => <Redirect to={{ pathname: Routes.DASHBOARD }} />}
             exact={true}
           />
           <Route
             path="/"
-            render={() => (
-              <Redirect to={{ pathname: "/tabs/inicio-jugador" }} />
-            )}
+            render={() => <Redirect to={{ pathname: Routes.DASHBOARD }} />}
             exact={true}
           />
         </IonRouterOutlet>
         <IonTabBar slot="bottom" color="light">
-          <IonTabButton tab="inicio-jugador" href="/tabs/inicio-jugador">
+          <IonTabButton tab="inicio-jugador" href={Routes.DASHBOARD}>
             <IonIcon icon={homeOutline} />
           </IonTabButton>
-          <IonTabButton tab="busqueda" href="/tabs/busqueda">
+          <IonTabButton
+            tab="busqueda"
+            href={Routes.SEARCH_CLUBS}
+            selected={
+              location.pathname === Routes.SEARCH_CLUBS ||
+              location.pathname === Routes.SEARCH_CALLS ||
+              location.pathname === Routes.SEARCH_PLAYERS
+                ? true
+                : false
+            }
+          >
             <IonIcon icon={searchOutline}></IonIcon>
           </IonTabButton>
           <IonTabButton
             tab="notificaciones-jugador"
-            href="/tabs/notificaciones-jugador"
+            href={Routes.NOTIFICATIONS}
           >
             <IonIcon icon={notificationsOutline}></IonIcon>
           </IonTabButton>
-          <IonTabButton tab="mensajes-jugador" href="/tabs/mensajes-jugador">
+          <IonTabButton tab="mensajes-jugador" href={Routes.MESSAGES}>
             <IonIcon icon={mailOutline}></IonIcon>
           </IonTabButton>
         </IonTabBar>

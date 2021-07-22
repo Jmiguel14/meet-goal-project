@@ -7,11 +7,15 @@ const PublicRoutes = {
 };
 
 const PrivateRoutes = {
+  TABS: "/tabs",
   DASHBOARD: "/tabs/inicio-jugador",
-  SEARCH: "/tabs/busqueda",
+  SEARCH: "/tabs/busqueda/:segment",
+  SEARCH_CLUBS: "/tabs/busqueda/clubs",
+  SEARCH_CALLS: "/tabs/busqueda/calls",
+  SEARCH_PLAYERS: "/tabs/busqueda/players",
   NOTIFICATIONS: "/tabs/notificaciones-jugador",
   MESSAGES: "/tabs/mensajes-jugador",
-  PLAYERPROFILE: "/tabs/perfil",
+  PROFILE: "/tabs/perfil",
   EDITPERSONALINFO: "/tabs/editar-info-personal-jugador",
   EDITTACTICALINFO: "/tabs/editar-info-tactica-jugador",
   EDITATTRIBUTESINFO: "/tabs/editar-info-atributos-jugador",
@@ -29,7 +33,6 @@ const PrivateRoutes = {
 };
 
 export const Routes = {
-  TABS: "/tabs",
   ...PublicRoutes,
   ...PrivateRoutes,
 };
