@@ -22,8 +22,9 @@
 .calls_data {
   font-style: normal !important;
   font-weight: bold !important;
-  line-height: 16px !important;
+  line-height: 20px !important;
   color: #315c79 !important;
+  width: 100% !important;
 }
 .title_divider {
   text-align: center;

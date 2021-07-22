@@ -100,6 +100,10 @@ const AsyncCallDetails = loadable(
   () => import("pages/CallDetails/CallDetails"),
   loadableOptions
 );
+const AsyncEditCallDetails = loadable(
+  () => import("pages/EditCall/EditCall"),
+  loadableOptions
+);
 
 export const TabRoot: React.FC = () => {
   const location = useLocation();
@@ -198,6 +202,11 @@ export const TabRoot: React.FC = () => {
             exact
             path={Routes.CALLDETAILS}
             component={AsyncCallDetails}
+          />
+          <PrivateRoutes
+            exact
+            path={Routes.EDITCALLDETAILS}
+            component={AsyncEditCallDetails}
           />
           <Route
             path="/tabs"

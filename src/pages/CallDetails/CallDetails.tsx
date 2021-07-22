@@ -16,9 +16,9 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { arrowBack } from "ionicons/icons";
+import { arrowBack, create, documentAttachSharp } from "ionicons/icons";
 import styles from "./styles.module.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
@@ -70,6 +70,9 @@ const CallDetails: React.FC = () => {
                 Detalles de la Convocatoria
               </h1>
             </IonLabel>
+            <Link to={`/tabs/editar-convocatoria/${callData?.id}`}>
+              <IonIcon icon={create} size="medium" color="primary"></IonIcon>
+            </Link>
           </IonItem>
           <IonItem lines="none" className={styles.info_club}>
             <IonAvatar slot="start" className={styles.avatar}>
@@ -77,9 +80,11 @@ const CallDetails: React.FC = () => {
               <img src={clubData?.avatarURL}></img>
             </IonAvatar>
             <IonLabel position="stacked">
-              <h1
-                className={styles.club_name}
-              >{`${clubData?.city}/${clubData?.country}`}</h1>
+              <h1 className={styles.club_name}>
+                {clubData?.city === undefined
+                  ? "Ciudad/País"
+                  : `${clubData?.city}/${clubData?.country}`}
+              </h1>
             </IonLabel>
             <IonText className={styles.club_location}>{clubData?.name}</IonText>
           </IonItem>

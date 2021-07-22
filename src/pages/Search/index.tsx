@@ -17,18 +17,19 @@ import styles from "./styles.module.css";
 import { SegmentChangeEventDetail } from "@ionic/core";
 import { useHistory, useParams } from "react-router";
 import { Routes } from "constants/routes";
+import CallsSegment from "components/CallSegment";
 
 const SearchForPlayer: React.FC = () => {
   const { segment: paramSegment } = useParams<{ segment: string }>();
   const [segment, setSegment] = useState<string>(paramSegment);
-  
+
   useEffect(() => {
     setSegment(paramSegment);
   }, [paramSegment]);
 
   const SEGMENTS = {
     clubs: <ClubsSegment />,
-    calls: <IonLabel>Convocatorias</IonLabel>,
+    calls: <CallsSegment />,
     players: <PlayersSegment />,
   } as { [index: string]: JSX.Element };
 

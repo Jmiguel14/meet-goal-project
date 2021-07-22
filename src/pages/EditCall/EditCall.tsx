@@ -1,5 +1,5 @@
 import {
-  IonBackButton,
+  IonButton,
   IonButtons,
   IonCol,
   IonContent,
@@ -18,19 +18,23 @@ import {
   IonTitle,
   IonToolbar,
   useIonToast,
-  useIonViewWillEnter,
 } from "@ionic/react";
-import { useAuth } from "contexts/AuthContext";
-import { calendarClearOutline, calendarOutline } from "ionicons/icons";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router";
-import { NewCallDataForm } from "types";
+import {
+  arrowBack,
+  calendarClearOutline,
+  calendarOutline,
+} from "ionicons/icons";
 import styles from "./styles.module.css";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { useAuth } from "contexts/AuthContext";
+import { useEffect, useState } from "react";
+import firebase from "firebase/app";
+import { getACallData, saveCallChanges } from "firebase/callServices";
+import { useForm } from "react-hook-form";
+import { NewCallDataForm } from "types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ERROR_MESSAGES } from "constants/errorMessages";
-import { addNewClubCall } from "firebase/callServices";
 
 const schema = yup.object().shape({
   ageRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -39,21 +43,22 @@ const schema = yup.object().shape({
   endDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
 
-const NewCall: React.FC = () => {
+const EditCall: React.FC = () => {
+  const { id } = useParams<{ id?: string }>();
+  const { currentUser } = useAuth();
   const [present] = useIonToast();
+  const history = useHistory();
+  const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [selectedDateStart, setSelectedDateStart] = useState<string>("");
   const [selectedDateEnd, setSelectedDateEnd] = useState<string>("");
   const [text, setText] = useState<string>("");
-  const { currentUser } = useAuth();
-  const history = useHistory();
 
-  const initialValues = {
-    ageRequired: "",
-    posRequired: "",
-    startDate: "",
-    endDate: "",
-    extraDetails: "",
-  };
+  useEffect(() => {
+    const unsubscribe = getACallData(id, (data) => {
+      setCallData(data);
+    });
+    return () => unsubscribe && unsubscribe();
+  }, [id]);
 
   const {
     register,
@@ -63,7 +68,6 @@ const NewCall: React.FC = () => {
     setValue,
     formState: { errors },
   } = useForm<NewCallDataForm>({
-    defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
 
@@ -73,8 +77,8 @@ const NewCall: React.FC = () => {
   ) => {
     const { ageRequired, posRequired, startDate, endDate, extraDetails } = data;
     if (
-      await addNewClubCall(
-        currentUser.uid,
+      await saveCallChanges(
+        id!,
         ageRequired,
         posRequired,
         startDate,
@@ -83,16 +87,16 @@ const NewCall: React.FC = () => {
       )
     ) {
       present({
-        message: "Se agrego su convocatoria correctamente",
+        message: "Se edito convocatoria correctamente",
         duration: 1000,
         position: "top",
         color: "success",
       });
       e?.target.reset();
-      history.push("/tabs/convocatorias-creadas");
+      history.push(`/tabs/convocatoria/${id}`);
     } else {
       present({
-        message: "Error al crear la convocatoria",
+        message: "Error al edtar la convocatoria",
         duration: 1000,
         position: "top",
         color: "danger",
@@ -100,26 +104,25 @@ const NewCall: React.FC = () => {
     }
   };
 
-  useIonViewWillEnter(() => {
-    setValue("ageRequired", "");
-    setValue("posRequired", "");
-    setValue("startDate", "");
-    setValue("endDate", "");
-    setValue("extraDetails", "");
-  });
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar className={styles.back}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" className={styles.icon_back} />
+            <Link to={`/tabs/convocatoria/${id}`}>
+              <IonButton fill="clear" className={styles.icon_back}>
+                <IonIcon icon={arrowBack}></IonIcon>
+              </IonButton>
+            </Link>
           </IonButtons>
-          <IonTitle color="primary" className={styles.title}>
-            Nueva Convocatoria
-          </IonTitle>
+          <IonRow className={styles.title}>
+            <IonCol size="auto">
+              <IonTitle>Editar Convocatoria</IonTitle>
+            </IonCol>
+          </IonRow>
           <button
             type="submit"
-            form="add-new-call-form"
+            form="edit-call-form"
             slot="end"
             className={styles.save_new_call}
           >
@@ -133,7 +136,7 @@ const NewCall: React.FC = () => {
             Detalles requeridos de la convocatoria
           </div>
         </IonItemDivider>
-        <form onSubmit={handleSubmit(onSubmit)} id="add-new-call-form">
+        <form onSubmit={handleSubmit(onSubmit)} id="edit-call-form">
           <IonCol>
             <IonRow className={styles.container_calls_data}>
               <IonItem className={styles.calls_field}>
@@ -143,7 +146,7 @@ const NewCall: React.FC = () => {
                   cancelText="Cerrar"
                   slot="end"
                   {...register("ageRequired")}
-                  onIonChange={() => {
+                  onIonChange={(e) => {
                     clearErrors("ageRequired");
                   }}
                 >
@@ -303,4 +306,4 @@ const NewCall: React.FC = () => {
     </IonPage>
   );
 };
-export default NewCall;
+export default EditCall;
