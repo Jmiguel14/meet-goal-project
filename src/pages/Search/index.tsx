@@ -16,13 +16,12 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { SegmentChangeEventDetail } from "@ionic/core";
 import { useHistory, useParams } from "react-router";
+import { Routes } from "constants/routes";
 
 const SearchForPlayer: React.FC = () => {
   const { segment: paramSegment } = useParams<{ segment: string }>();
   const [segment, setSegment] = useState<string>(paramSegment);
-  console.log("paramSegment", paramSegment);
-  console.log("segment", segment);
-
+  
   useEffect(() => {
     setSegment(paramSegment);
   }, [paramSegment]);
@@ -36,9 +35,9 @@ const SearchForPlayer: React.FC = () => {
   const history = useHistory();
 
   const ROUTES_SEGMENTS = {
-    clubs: () => history.push("/tabs/busqueda/clubs"),
-    calls: () => history.push("/tabs/busqueda/calls"),
-    players: () => history.push("/tabs/busqueda/players"),
+    clubs: () => history.push(Routes.SEARCH_CLUBS),
+    calls: () => history.push(Routes.SEARCH_CALLS),
+    players: () => history.push(Routes.SEARCH_PLAYERS),
   } as { [index: string]: () => void };
 
   useEffect(() => {

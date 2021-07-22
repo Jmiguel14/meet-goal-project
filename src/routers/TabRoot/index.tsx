@@ -103,7 +103,6 @@ const AsyncCallDetails = loadable(
 
 export const TabRoot: React.FC = () => {
   const location = useLocation();
-  console.log("location", location);
   return (
     <>
       <Menu />
