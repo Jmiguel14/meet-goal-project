@@ -90,3 +90,17 @@ export interface NewCallDataForm {
   clubId?: string;
   postulatedPlayers?: any;
 }
+
+export interface Club {
+  id?: string;
+  avatarURL: string;
+  name: string;
+  businessName: string;
+  email: string;
+  phone: number;
+  country: string;
+  city: string;
+  totalAchievements: number;
+  nationalAchievements: number;
+  internationalAchievements: number;
+}

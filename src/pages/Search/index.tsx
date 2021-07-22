@@ -10,18 +10,44 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import ClubsSegment from "components/ClubsSegment";
 import PlayersSegment from "components/PlayersSegment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import { SegmentChangeEventDetail } from "@ionic/core";
+import { useHistory, useParams } from "react-router";
+import { Routes } from "constants/routes";
 
 const SearchForPlayer: React.FC = () => {
-  const [segment, setSegment] = useState<string | undefined>("clubs");
+  const { segment: paramSegment } = useParams<{ segment: string }>();
+  const [segment, setSegment] = useState<string>(paramSegment);
+  
+  useEffect(() => {
+    setSegment(paramSegment);
+  }, [paramSegment]);
 
   const SEGMENTS = {
-    clubs: <IonLabel>Clubs</IonLabel>,
+    clubs: <ClubsSegment />,
     calls: <IonLabel>Convocatorias</IonLabel>,
     players: <PlayersSegment />,
   } as { [index: string]: JSX.Element };
+
+  const history = useHistory();
+
+  const ROUTES_SEGMENTS = {
+    clubs: () => history.push(Routes.SEARCH_CLUBS),
+    calls: () => history.push(Routes.SEARCH_CALLS),
+    players: () => history.push(Routes.SEARCH_PLAYERS),
+  } as { [index: string]: () => void };
+
+  useEffect(() => {
+    ROUTES_SEGMENTS[segment]();
+  }, [segment]);
+
+  const handleChange = (e: CustomEvent<SegmentChangeEventDetail>) => {
+    const value = e.detail.value;
+    setSegment(value!);
+  };
 
   return (
     <IonPage>
@@ -30,16 +56,10 @@ const SearchForPlayer: React.FC = () => {
           <IonTitle>Búsqueda</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent>
         <IonRow className={styles.segments}>
           <IonCol size="12">
-            <IonSegment
-              value={segment}
-              onIonChange={(e) => {
-                const value = e.detail.value;
-                setSegment(value);
-              }}
-            >
+            <IonSegment scrollable value={segment} onIonChange={handleChange}>
               <IonSegmentButton value="clubs">
                 <IonLabel>Clubes</IonLabel>
               </IonSegmentButton>

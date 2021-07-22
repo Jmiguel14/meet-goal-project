@@ -20,13 +20,13 @@ import {
   football,
   logOutOutline,
   peopleCircle,
-  person,
   personOutline,
   shieldHalf,
 } from "ionicons/icons";
 import { useLocation } from "react-router";
 import { useAuth } from "contexts/AuthContext";
 import { USER_TYPES } from "constants/userTypes";
+import { Routes } from "constants/routes";
 
 interface AppPage {
   url: string;
@@ -37,22 +37,22 @@ interface AppPage {
 const appPagesPlayer: AppPage[] = [
   {
     title: "Perfil",
-    url: "/tabs/perfil",
+    url: Routes.PROFILE,
     icon: personOutline,
   },
   {
     title: "Lista de convocatorias",
-    url: "/tabs/lista-convocatorias",
+    url: Routes.SEARCH_CALLS,
     icon: peopleCircle,
   },
   {
     title: "Lista de jugadores",
-    url: "/tabs/lista-jugadores",
+    url: Routes.SEARCH_PLAYERS,
     icon: football,
   },
   {
     title: "Lista de clubes",
-    url: "/tabs/lista-clubes",
+    url: Routes.SEARCH_CLUBS,
     icon: shieldHalf,
   },
   {
@@ -65,7 +65,7 @@ const appPagesPlayer: AppPage[] = [
 const appPagesClub: AppPage[] = [
   {
     title: "Perfil",
-    url: "/tabs/perfil",
+    url: Routes.PROFILE,
     icon: personOutline,
   },
   {
@@ -75,7 +75,7 @@ const appPagesClub: AppPage[] = [
   },
   {
     title: "Lista de jugadores",
-    url: "/tabs/lista-jugadores",
+    url: Routes.SEARCH_PLAYERS,
     icon: football,
   },
 ];
