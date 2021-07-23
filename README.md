@@ -7,7 +7,7 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 * [Registro de usuarios](#-registro-de-usuarios)
 * [Inicio de sesión](#-inicio-de-sesión)
 * [Registro de datos de perfil de usuario](#-registro-de-datos-de-perfil-de-usuario)
-* [Búsqueda y filtrado](#-búsqued-y-filtrado)
+* [Búsqueda y filtrado](#-búsqueda-y-filtrado)
 * [Creación de convocatorias](#-creación-de-convocatorias)
 * [Gestión de postulaciones a una convocatoria](#-gestión-de-postulaciones-a-una-convocatoria)
 * [Notificaciones](#-notificaciones)
