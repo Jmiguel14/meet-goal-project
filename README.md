@@ -36,11 +36,12 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 ![first image](./tmp/ChatApp.png)
 ![other image](./tmp/ChatApp2.png)
 
-## 👨‍💻 Registro de datos de perfil de usuario
+## 💁 Registro de datos de perfil de usuario
 ## 🔎 Búsqueda y filtrado
 ## 📂 Creación de convocatoria
 ## 👨‍💼 Gestión de postulaciones a una convocatoria
-## 📨 Notificaciones
+## 🔔 Notificaciones
+## 📨 Mensajería
 ## 🔐 Autenticación de aplicación web administrativa
 ## 👨‍💼 🖥️ Gestión de aplicación web administrativa
 ## 🗳️ Pruebas finales de App móvil y web
