@@ -7,15 +7,17 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 * [Registro de usuarios](#books-información-general)
 * [Inicio de sesión](#books-información-general)
 * [Registro de datos de perfil de usuario](#books-información-general)
-* [_Tab_ de búsqueda](#books-información-general)
-* [Crear convocatorias](#books-información-general)
-* [Screenshots](#camera-screenshots)
-* [Technologías](#technologias)
+* [Búsqueda y filtrado](#books-información-general)
+* [Creación de convocatorias](#books-información-general)
+* [Gestión de postulaciones a una convocatoria](#camera-screenshots)
+* [Notificaciones](#books-información-general)
+* [Autenticación de aplicación web administrativa](#technologias)
+* [Gestión de aplicación web administrativa](#technologias)
+* [Pruebas finales de App móvil y web](#technologias)
+* [Despliegue de App móvil y web](#technologias)
 * [Disposición](#Disposición)
-* [Inspiración](#inspiración)
-* [Contacto](#contacto)
 
-## :books: Información general
+## :books: Registro de usuarios
 
 #Funcionamiento
 * Dentro de la app el usuario puede:
@@ -29,10 +31,21 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 * Cerrar sesión
 
 
-## :camera: Screenshots
+## :camera: Inicio de sesión
 
 ![first image](./tmp/ChatApp.png)
 ![other image](./tmp/ChatApp2.png)
+
+## :camera: Registro de datos de perfil de usuario
+## :camera: Búsqueda y filtrado
+## :camera: Creación de convocatorias
+## :camera: Gestión de postulaciones a una convocatoria
+## :camera: Notificaciones
+## :camera: Autenticación de aplicación web administrativa
+## :camera: Gestión de aplicación web administrativa
+## :camera: Pruebas finales de App móvil y web
+## :camera: Despliegue de App móvil y web
+## :camera: Disposición
 
 ## :signal_strength: Tecnologías
 
@@ -41,7 +54,7 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 * [Gradle](https://gradle.org/)
 * [Firebase](https://firebase.google.com/docs)
 
-## ▶️ Video explicativo del desarrollo
+## ▶️ Registro de datos de perfil de usuario
 
 * [IR](https://youtu.be/zCsxU5hkg3M)
 
