@@ -24,7 +24,7 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 
 ## 💁 Registro de datos de perfil de usuario
 ## 🔎 Búsqueda y filtrado
-## 📂 Creación de convocatoria
+## 📂 Creación de convocatorias
 ## 👨‍💼 Gestión de postulaciones a una convocatoria
 ## 🔔 Notificaciones
 ## 📨 Mensajería
