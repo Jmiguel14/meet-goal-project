@@ -2,9 +2,13 @@
 
 App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.org/) y [firebase](https://firebase.google.com/docs).
 
-## :page_facing_up: Tabla de contenidos
+## :page_facing_up: Módulos
 
-* [Información general](#books-información-general)
+* [Registro de usuarios](#books-información-general)
+* [Inicio de sesión](#books-información-general)
+* [Registro de datos de perfil de usuario](#books-información-general)
+* [_Tab_ de búsqueda](#books-información-general)
+* [Crear convocatorias](#books-información-general)
 * [Screenshots](#camera-screenshots)
 * [Technologías](#technologias)
 * [Disposición](#Disposición)
