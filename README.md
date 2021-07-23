@@ -4,7 +4,7 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 
 ## :page_facing_up: Tabla de contenidos
 
-* [Información general](#general-info)
+* [Información general](#books-información-general)
 * [Screenshots](#camera-screenshots)
 * [Technologías](#technologias)
 * [Disposición](#Disposición)
