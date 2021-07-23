@@ -5,8 +5,8 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 ## :page_facing_up: Módulos
 
 * [Registro de usuarios](#-registro-de-usuarios)
-* [Inicio de sesión](#books-información-general)
-* [Registro de datos de perfil de usuario](#books-información-general)
+* [Inicio de sesión](#-inicio-de-sesión)
+* [Registro de datos de perfil de usuario](#-registro-de-datos-de-perfil-de-usuario)
 * [Búsqueda y filtrado](#books-información-general)
 * [Creación de convocatorias](#books-información-general)
 * [Gestión de postulaciones a una convocatoria](#camera-screenshots)
