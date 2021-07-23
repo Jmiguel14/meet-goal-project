@@ -31,13 +31,13 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 * Cerrar sesión
 
 
-## :camera: Inicio de sesión
+## 📲 Inicio de sesión
 
 ![first image](./tmp/ChatApp.png)
 ![other image](./tmp/ChatApp2.png)
 
 ## 👨‍💻 Registro de datos de perfil de usuario
-## 📲 Búsqueda y filtrado
+## 🔎 Búsqueda y filtrado
 ## 📂 Creación de convocatoria
 ## 👨‍💼 Gestión de postulaciones a una convocatoria
 ## 📨 Notificaciones
