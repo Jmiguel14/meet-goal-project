@@ -17,7 +17,7 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 * [Despliegue de App móvil y web](#technologias)
 * [Disposición](#Disposición)
 
-## :books: Registro de usuarios
+## :👨‍💻: Registro de usuarios
 
 #Funcionamiento
 * Dentro de la app el usuario puede:
