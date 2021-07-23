@@ -36,16 +36,16 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 ![first image](./tmp/ChatApp.png)
 ![other image](./tmp/ChatApp2.png)
 
-## :camera: Registro de datos de perfil de usuario
-## :camera: Búsqueda y filtrado
-## :camera: Creación de convocatorias
-## :camera: Gestión de postulaciones a una convocatoria
-## :camera: Notificaciones
-## :camera: Autenticación de aplicación web administrativa
-## :camera: Gestión de aplicación web administrativa
-## :camera: Pruebas finales de App móvil y web
-## :camera: Despliegue de App móvil y web
-## :camera: Disposición
+## 👨‍💻 Registro de datos de perfil de usuario
+## 📲 Búsqueda y filtrado
+## 📂 Creación de convocatoria
+## 👨‍💼 Gestión de postulaciones a una convocatoria
+## 📨 Notificaciones
+## 🔐 Autenticación de aplicación web administrativa
+## 👨‍💼 🖥️ Gestión de aplicación web administrativa
+## 🗳️ Pruebas finales de App móvil y web
+## 🌎 Despliegue de App móvil y web
+## 💾 Disposición
 
 ## :signal_strength: Tecnologías
 
