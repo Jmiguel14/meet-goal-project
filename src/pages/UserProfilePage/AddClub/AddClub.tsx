@@ -21,6 +21,7 @@ import React from "react";
 import { AddCubExperience } from "firebase/client";
 import { useHistory } from "react-router";
 import { ClubDataForm } from "types";
+import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
   clubName: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -74,6 +75,7 @@ export const AddClub: React.FC = () => {
   };
   const [present] = useIonToast();
   const history = useHistory();
+  const {currentUser} = useAuth()
   const {
     register,
     handleSubmit,
@@ -118,7 +120,7 @@ export const AddClub: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil");
+      history.push(`/tabs/perfil/${currentUser.uid}`);
     } else {
       present({
         message: "Error al agregar la información intentelo nuevamente...",
@@ -135,7 +137,7 @@ export const AddClub: React.FC = () => {
         <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil"
+              defaultHref={`/tabs/perfil/${currentUser.uid}`}
               className={styles.icon_back}
             />
           </IonButtons>

@@ -15,7 +15,7 @@ const PrivateRoutes = {
   SEARCH_PLAYERS: "/tabs/busqueda/players",
   NOTIFICATIONS: "/tabs/notificaciones-jugador",
   MESSAGES: "/tabs/mensajes-jugador",
-  PROFILE: "/tabs/perfil",
+  PROFILE: "/tabs/perfil/:id",
   EDITPERSONALINFO: "/tabs/editar-info-personal-jugador",
   EDITTACTICALINFO: "/tabs/editar-info-tactica-jugador",
   EDITATTRIBUTESINFO: "/tabs/editar-info-atributos-jugador",

@@ -16,9 +16,21 @@ import MeetGoal from "icons/MeetGoal";
 import "./Dashboard.css";
 import { add } from "ionicons/icons";
 import { USER_TYPES } from "constants/userTypes";
+import { useEffect } from "react";
+import { getUserDoc } from "firebase/client";
 
 const PlayerDashboard: React.FC = () => {
-  const { data } = useAuth();
+  const { data, setData, currentUser } = useAuth();
+  const id = currentUser.uid
+  
+  useEffect(() => {
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setData, id);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
+
   return (
     <IonPage>
       <IonHeader>

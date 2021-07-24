@@ -14,6 +14,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
+import { useAuth } from "contexts/AuthContext";
 import { EditPositionData } from "firebase/client";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
@@ -23,6 +24,7 @@ import styles from "./styles.module.css";
 const EditTacticalInfo: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
+  const {currentUser} = useAuth()
   const { reset, handleSubmit, register } = useForm();
 
   const onSubmit = async (
@@ -37,7 +39,7 @@ const EditTacticalInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil");
+      history.push(`/tabs/perfil/${currentUser.uid}`);
     } else {
       present({
         message: "Seleccione la información requerida",
@@ -54,7 +56,7 @@ const EditTacticalInfo: React.FC = () => {
         <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil"
+              defaultHref={`/tabs/perfil/${currentUser.uid}`}
               className={styles.icon_back}
             />
           </IonButtons>

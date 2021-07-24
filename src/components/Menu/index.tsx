@@ -34,52 +34,54 @@ interface AppPage {
   title: string;
 }
 
-const appPagesPlayer: AppPage[] = [
-  {
-    title: "Perfil",
-    url: Routes.PROFILE,
-    icon: personOutline,
-  },
-  {
-    title: "Lista de convocatorias",
-    url: Routes.SEARCH_CALLS,
-    icon: peopleCircle,
-  },
-  {
-    title: "Lista de jugadores",
-    url: Routes.SEARCH_PLAYERS,
-    icon: football,
-  },
-  {
-    title: "Lista de clubes",
-    url: Routes.SEARCH_CLUBS,
-    icon: shieldHalf,
-  },
-  {
-    title: "Postulaciones",
-    url: "/tabs/mis-postulaciones",
-    icon: albumsSharp,
-  },
-];
-
-const appPagesClub: AppPage[] = [
-  {
-    title: "Perfil",
-    url: Routes.PROFILE,
-    icon: personOutline,
-  },
-  {
-    title: "Mis Convocatorias",
-    url: "/tabs/convocatorias-creadas",
-    icon: peopleCircle,
-  },
-  {
-    title: "Lista de jugadores",
-    url: Routes.SEARCH_PLAYERS,
-    icon: football,
-  },
-];
 export const Menu: React.FC = () => {
+  const { currentUser } = useAuth()
+  const appPagesPlayer: AppPage[] = [
+    {
+      title: "Perfil",
+      url: `/tabs/perfil/${currentUser?.uid}`,
+      icon: personOutline,
+    },
+    {
+      title: "Lista de convocatorias",
+      url: Routes.SEARCH_CALLS,
+      icon: peopleCircle,
+    },
+    {
+      title: "Lista de jugadores",
+      url: Routes.SEARCH_PLAYERS,
+      icon: football,
+    },
+    {
+      title: "Lista de clubes",
+      url: Routes.SEARCH_CLUBS,
+      icon: shieldHalf,
+    },
+    {
+      title: "Postulaciones",
+      url: "/tabs/mis-postulaciones",
+      icon: albumsSharp,
+    },
+  ];
+
+  const appPagesClub: AppPage[] = [
+    {
+      title: "Perfil",
+      url: `/tabs/perfil/${currentUser?.uid}`,
+      icon: personOutline,
+    },
+    {
+      title: "Mis Convocatorias",
+      url: "/tabs/convocatorias-creadas",
+      icon: peopleCircle,
+    },
+    {
+      title: "Lista de jugadores",
+      url: Routes.SEARCH_PLAYERS,
+      icon: football,
+    },
+  ];
+
   const location = useLocation();
   const [present] = useIonToast();
   const { logout, data } = useAuth();

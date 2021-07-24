@@ -21,6 +21,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import { SportsGoalsDataForm } from "types";
 import { EditSportsGoalsData } from "firebase/client";
+import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
   totalWins: yup
@@ -38,6 +39,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
   };
   const [present] = useIonToast();
   const history = useHistory();
+  const {currentUser} = useAuth()
   const {
     register,
     handleSubmit,
@@ -58,7 +60,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil");
+      history.push(`/tabs/perfil/${currentUser.uid}`);
     } else {
       present({
         message: "Error al agregar la información intentelo nuevamente...",
@@ -75,7 +77,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
         <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil"
+              defaultHref={`/tabs/perfil/${currentUser.uid}`}
               className={styles.icon_back}
             />
           </IonButtons>

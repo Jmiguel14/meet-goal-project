@@ -25,6 +25,7 @@ import { SetPersonalData } from "firebase/client";
 import { ERROR_MESSAGES } from "constants/errorMessages";
 import { useHistory } from "react-router";
 import { PersonalDataForm } from "types";
+import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
   mail: yup
@@ -41,6 +42,7 @@ export const EditPersonalInfo: React.FC = () => {
   const [present] = useIonToast();
   const [selectedDate, setSelectedDate] = useState<string>("");
   const history = useHistory();
+  const {currentUser} = useAuth()
   const initialValues = {
     mail: "",
     country: "",
@@ -83,7 +85,7 @@ export const EditPersonalInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil");
+      history.push(`/tabs/perfil/${currentUser.uid}`);
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
@@ -101,7 +103,7 @@ export const EditPersonalInfo: React.FC = () => {
         <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil"
+              defaultHref={`/tabs/perfil/${currentUser.uid}`}
               className={styles.icon_back}
             />
           </IonButtons>

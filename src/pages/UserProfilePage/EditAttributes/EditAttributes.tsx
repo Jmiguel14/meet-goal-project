@@ -14,6 +14,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
+import { useAuth } from "contexts/AuthContext";
 import { EditTacticalAttributes } from "firebase/client";
 import { warningSharp } from "ionicons/icons";
 import { useState } from "react";
@@ -49,6 +50,7 @@ const EditAttributes: React.FC = () => {
   const [present] = useIonToast();
   const [check, setCheck] = useState(true);
   const history = useHistory();
+  const {currentUser} = useAuth()
 
   var values: string[] = [];
   function setAttributesValues(value: string) {
@@ -70,7 +72,7 @@ const EditAttributes: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil");
+      history.push(`/tabs/perfil/${currentUser.uid}`);
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
@@ -87,7 +89,7 @@ const EditAttributes: React.FC = () => {
         <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil"
+              defaultHref={`/tabs/perfil/${currentUser.uid}`}
               className={styles.icon_back}
             />
           </IonButtons>

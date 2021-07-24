@@ -11,17 +11,25 @@ import {
   IonIcon,
 } from "@ionic/react";
 import { useAuth } from "contexts/AuthContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "./styles.module.css";
-import firebase from "firebase/app";
 import { getUserDoc } from "firebase/client";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { arrowBack } from "ionicons/icons";
 import UserProfile from "components/UserProfile/UserProfile";
 
 const UserProfilePage: React.FC = () => {
-  const { data } = useAuth();
+  const { data, setData, currentUser } = useAuth();
+  const {id} = useParams<{id: string}>()
   const history = useHistory();
+
+  useEffect(() => {
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setData, id);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
 
   function backHome() {
     history.push("/tabs/inicio-jugador");

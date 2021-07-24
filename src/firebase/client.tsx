@@ -23,17 +23,23 @@ export const firestore = firebase.firestore();
 
 const getDataToUserDoc = (doc: any) => {
   const data = doc.data();
-  return data;
+  const id = doc.id
+  return {
+    ...data,
+    id: id
+  }
 };
 
 export const getUserDoc = (
   callback: React.Dispatch<
     React.SetStateAction<firebase.firestore.DocumentData | undefined>
-  >
+  >,
+  id: string
 ) => {
+  console.log('id', id)
   return firestore
     .collection(COLLECTIONS.USERS)
-    .doc(auth.currentUser?.uid)
+    .doc(id)
     .onSnapshot((snapshot) => {
       const newData = getDataToUserDoc(snapshot);
       callback(newData);
