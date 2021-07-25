@@ -24,7 +24,7 @@ import styles from "./styles.module.css";
 const EditPsycoInfo: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth();
 
   const initialValues = {
     character: "",
@@ -47,7 +47,7 @@ const EditPsycoInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push(`/tabs/perfil/${currentUser.uid}`);
+      history.goBack();
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",

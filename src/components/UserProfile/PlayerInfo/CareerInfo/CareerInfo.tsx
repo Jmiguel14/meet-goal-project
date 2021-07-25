@@ -13,26 +13,32 @@ import {
 } from "ionicons/icons";
 import styles from "./styles.module.css";
 import { useAuth } from "contexts/AuthContext";
-interface ContainerProps {}
+import { useParams } from "react-router";
 
 const CareerInfo = () => {
-  const { data } = useAuth();
+  const { data, currentUser } = useAuth();
+  const { id } = useParams<{ id: string }>();
+
   return (
     <>
-      <IonButton
-        shape="round"
-        expand="block"
-        className="ion-padding-horizontal"
-        routerLink="/tabs/agregar-experiencia"
-      >
-        <IonIcon icon={addCircleOutline}></IonIcon>
-        Agregar club a tu experiencia
-      </IonButton>
+      {currentUser.uid === id ? (
+        <IonButton
+          shape="round"
+          expand="block"
+          className="ion-padding-horizontal"
+          routerLink="/tabs/agregar-experiencia"
+        >
+          <IonIcon icon={addCircleOutline}></IonIcon>
+          Agregar club a tu experiencia
+        </IonButton>
+      ) : (
+        ""
+      )}
       {data?.clubs === undefined ? (
         <>
           <div className={styles.container_message}>
             <IonLabel className={styles.message_not_found}>
-              Registra aqui todos los clubes en los cuales has jugado
+              Sin clubes registrados
             </IonLabel>
           </div>
         </>

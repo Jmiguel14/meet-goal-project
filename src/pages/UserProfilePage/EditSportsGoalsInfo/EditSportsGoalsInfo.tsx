@@ -39,7 +39,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
   };
   const [present] = useIonToast();
   const history = useHistory();
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -60,7 +60,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push(`/tabs/perfil/${currentUser.uid}`);
+      history.goBack();
     } else {
       present({
         message: "Error al agregar la información intentelo nuevamente...",

@@ -39,7 +39,7 @@ const Beginning: React.FC = () => {
   const [present] = useIonToast();
   const [check, setCheck] = useState(true);
   const history = useHistory();
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth();
 
   var values: string[] = [];
   function setAttributesValues(value: string) {
@@ -59,7 +59,7 @@ const Beginning: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push(`/tabs/perfil/${currentUser.uid}`);
+      history.goBack();
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",

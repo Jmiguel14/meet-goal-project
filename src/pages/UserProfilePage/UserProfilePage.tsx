@@ -7,21 +7,18 @@ import {
   IonToolbar,
   IonRow,
   IonCol,
-  IonButton,
-  IonIcon,
+  IonBackButton,
 } from "@ionic/react";
 import { useAuth } from "contexts/AuthContext";
 import { useEffect } from "react";
 import styles from "./styles.module.css";
 import { getUserDoc } from "firebase/client";
-import { useHistory, useParams } from "react-router";
-import { arrowBack } from "ionicons/icons";
+import { useParams } from "react-router";
 import UserProfile from "components/UserProfile/UserProfile";
 
 const UserProfilePage: React.FC = () => {
   const { data, setData, currentUser } = useAuth();
-  const {id} = useParams<{id: string}>()
-  const history = useHistory();
+  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     let unsubscribe: any;
@@ -29,23 +26,14 @@ const UserProfilePage: React.FC = () => {
       unsubscribe = getUserDoc(setData, id);
     }
     return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  }, [currentUser, id]);
 
-  function backHome() {
-    history.push("/tabs/inicio-jugador");
-  }
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar className={styles.back}>
           <IonButtons slot="start">
-            <IonButton
-              fill="clear"
-              className={styles.icon_back}
-              onClick={backHome}
-            >
-              <IonIcon icon={arrowBack}></IonIcon>
-            </IonButton>
+            <IonBackButton defaultHref="/" className={styles.icon_back} />
           </IonButtons>
           <IonRow className={styles.title}>
             <IonCol size="auto">

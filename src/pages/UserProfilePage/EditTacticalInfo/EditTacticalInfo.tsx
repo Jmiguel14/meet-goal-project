@@ -24,7 +24,7 @@ import styles from "./styles.module.css";
 const EditTacticalInfo: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth();
   const { reset, handleSubmit, register } = useForm();
 
   const onSubmit = async (
@@ -39,7 +39,7 @@ const EditTacticalInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push(`/tabs/perfil/${currentUser.uid}`);
+      history.goBack();
     } else {
       present({
         message: "Seleccione la información requerida",

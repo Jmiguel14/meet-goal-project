@@ -36,7 +36,7 @@ const AddChannels: React.FC = () => {
   const { reset, handleSubmit } = useForm();
   const [present] = useIonToast();
   const history = useHistory();
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth();
 
   const onSubmit = async () => {
     if (await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo)) {
@@ -46,7 +46,7 @@ const AddChannels: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push(`/tabs/perfil/${currentUser.uid}`);
+      history.goBack();
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",

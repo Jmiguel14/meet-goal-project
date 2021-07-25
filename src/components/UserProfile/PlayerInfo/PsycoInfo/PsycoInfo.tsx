@@ -15,22 +15,27 @@ import PersonalityIcon from "icons/personalityIcon.png";
 import CharacterIcon from "icons/characterIcon.png";
 import { useAuth } from "contexts/AuthContext";
 import ValueIcon from "icons/valueIcon.png";
-
-interface ContainerProps {}
+import { useParams } from "react-router";
 
 const PsycoInfo = () => {
-  const { data } = useAuth();
+  const { data, currentUser } = useAuth();
+  const { id } = useParams<{ id: string }>();
+
   return (
     <>
       <IonCard className={styles.psycology_data}>
         <IonItem className={styles.title}>
           <IonLabel>Parámetros Psicológicos</IonLabel>
-          <IonButton
-            fill="clear"
-            routerLink="/tabs/editar-info-psicologica-jugador"
-          >
-            <IonIcon icon={pencilOutline} />
-          </IonButton>
+          {currentUser.uid === id ? (
+            <IonButton
+              fill="clear"
+              routerLink="/tabs/editar-info-psicologica-jugador"
+            >
+              <IonIcon icon={pencilOutline} />
+            </IonButton>
+          ) : (
+            ""
+          )}
         </IonItem>
         <IonItem className={styles.data_psyco}>
           <IonImg
@@ -98,9 +103,13 @@ const PsycoInfo = () => {
       <IonCard className={styles.psycology_data}>
         <IonItem className={styles.title}>
           <IonLabel>Valores</IonLabel>
-          <IonButton fill="clear" routerLink="/tabs/editar-valores-jugador">
-            <IonIcon icon={pencilOutline} />
-          </IonButton>
+          {currentUser.uid === id ? (
+            <IonButton fill="clear" routerLink="/tabs/editar-valores-jugador">
+              <IonIcon icon={pencilOutline} />
+            </IonButton>
+          ) : (
+            ""
+          )}
         </IonItem>
         <IonItem>
           <IonImg

@@ -41,7 +41,7 @@ export const listtenNextClubsBatch = (
   return firestore
     .collection(COLLECTIONS.USERS)
     .where("userType", "==", USER_TYPES.CLUB)
-    .orderBy("createAt", "desc")
+    .orderBy("createdAt", "desc")
     .startAfter(key)
     .limit(15)
     .onSnapshot((snapshot) => {

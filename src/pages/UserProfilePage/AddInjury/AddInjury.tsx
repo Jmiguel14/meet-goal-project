@@ -34,7 +34,7 @@ const AddInjury: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
   const [checked, setChecked] = useState(false);
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth();
 
   const initialValues = {
     injuryName: "",
@@ -65,7 +65,7 @@ const AddInjury: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push(`/tabs/perfil/${currentUser.uid}`);
+      history.goBack();
     } else {
       present({
         message: "Error al agregar la información. Intentelo nuevamente...",

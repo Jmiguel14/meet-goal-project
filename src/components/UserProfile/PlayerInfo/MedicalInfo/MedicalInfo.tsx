@@ -12,27 +12,33 @@ import styles from "./styles.module.css";
 import SurgeryIcon from "icons/SurgeryIcon.png";
 import RecoveryTimeIcon from "icons/recoveryTimeIcon.png";
 import { useAuth } from "contexts/AuthContext";
+import { useParams } from "react-router";
 
 interface ContainerProps {}
 
 const MedicalInfo = () => {
-  const { data } = useAuth();
+  const { data, currentUser } = useAuth();
+  const { id } = useParams<{ id: string }>();
   return (
     <>
-      <IonButton
-        shape="round"
-        expand="block"
-        className={styles.ion_padding_horizontal}
-        routerLink="/tabs/agregar-lesiones-jugador"
-      >
-        <IonIcon icon={addCircleOutline}></IonIcon>
-        Agregar informes médicos
-      </IonButton>
+      {currentUser.uid === id ? (
+        <IonButton
+          shape="round"
+          expand="block"
+          className={styles.ion_padding_horizontal}
+          routerLink="/tabs/agregar-lesiones-jugador"
+        >
+          <IonIcon icon={addCircleOutline}></IonIcon>
+          Agregar informes médicos
+        </IonButton>
+      ) : (
+        ""
+      )}
       {data?.injuries === undefined ? (
         <>
           <div className={styles.container_message}>
             <IonLabel className={styles.message_not_found}>
-              Registra aquí todos las lesiones experimentadas
+              Sin registros médicos registrados
             </IonLabel>
           </div>
         </>

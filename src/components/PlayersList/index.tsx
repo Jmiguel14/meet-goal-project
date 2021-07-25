@@ -37,7 +37,12 @@ export const PlayersList = ({
                 <br />
                 <IonNote>{player.pospri}</IonNote>
               </IonLabel>
-              <IonButton slot="end" fill="clear" size="small">
+              <IonButton
+                slot="end"
+                fill="clear"
+                size="small"
+                routerLink={`/tabs/perfil/${player.id}`}
+              >
                 Ver
               </IonButton>
             </IonItem>

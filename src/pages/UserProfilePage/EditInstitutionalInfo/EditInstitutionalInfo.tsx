@@ -40,7 +40,7 @@ export const EditInstitutionalInfo: React.FC = () => {
   const [present] = useIonToast();
   const [selectedDate, setSelectedDate] = useState<string>("");
   const history = useHistory();
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth();
   const initialValues = {
     socialName: "",
     mail: "",
@@ -80,7 +80,7 @@ export const EditInstitutionalInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push(`/tabs/perfil/${currentUser.uid}`);
+      history.goBack();
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",

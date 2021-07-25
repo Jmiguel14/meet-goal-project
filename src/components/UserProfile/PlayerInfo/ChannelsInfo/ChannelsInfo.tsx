@@ -17,19 +17,24 @@ import TwitterIcon from "icons/TwitterIcon.png";
 import YoutubeIcon from "icons/YouTubeIcon.png";
 import VimeoIcon from "icons/VimeoIcon.png";
 import { useAuth } from "contexts/AuthContext";
-
-interface ContainerProps {}
+import { useParams } from "react-router";
 
 const ChannelsInfo = () => {
-  const { data } = useAuth();
+  const { data, currentUser } = useAuth();
+  const { id } = useParams<{ id: string }>();
+
   return (
     <>
       <IonCard className={styles.social_networks}>
         <IonItem className={styles.title}>
           <IonLabel>Canales y Redes Sociales</IonLabel>
-          <IonButton fill="clear" routerLink="/tabs/canales-jugador">
-            <IonIcon icon={pencilOutline} />
-          </IonButton>
+          {currentUser.uid === id ? (
+            <IonButton fill="clear" routerLink="/tabs/canales-jugador">
+              <IonIcon icon={pencilOutline} />
+            </IonButton>
+          ) : (
+            ""
+          )}
         </IonItem>
       </IonCard>
 

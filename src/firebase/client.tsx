@@ -23,11 +23,11 @@ export const firestore = firebase.firestore();
 
 const getDataToUserDoc = (doc: any) => {
   const data = doc.data();
-  const id = doc.id
+  const id = doc.id;
   return {
     ...data,
-    id: id
-  }
+    id: id,
+  };
 };
 
 export const getUserDoc = (
@@ -36,7 +36,7 @@ export const getUserDoc = (
   >,
   id: string
 ) => {
-  console.log('id', id)
+  console.log("id", id);
   return firestore
     .collection(COLLECTIONS.USERS)
     .doc(id)

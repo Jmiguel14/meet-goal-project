@@ -12,7 +12,7 @@ import {
   IonIcon,
   useIonToast,
 } from "@ionic/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import { Avatar } from "components/Avatar";
 import {
@@ -27,6 +27,8 @@ import { useLocation } from "react-router";
 import { useAuth } from "contexts/AuthContext";
 import { USER_TYPES } from "constants/userTypes";
 import { Routes } from "constants/routes";
+import { getUserDoc } from "firebase/client";
+import firebase from "firebase/app";
 
 interface AppPage {
   url: string;
@@ -35,7 +37,18 @@ interface AppPage {
 }
 
 export const Menu: React.FC = () => {
-  const { currentUser } = useAuth()
+  const { currentUser } = useAuth();
+  const [currentUserData, setCurrentUserData] = useState<
+    firebase.firestore.DocumentData | undefined
+  >();
+  useEffect(() => {
+    let unsubscribe: any;
+    if (currentUser) {
+      unsubscribe = getUserDoc(setCurrentUserData, currentUser.uid);
+    }
+    return () => unsubscribe && unsubscribe();
+  }, [currentUser]);
+
   const appPagesPlayer: AppPage[] = [
     {
       title: "Perfil",
@@ -84,7 +97,7 @@ export const Menu: React.FC = () => {
 
   const location = useLocation();
   const [present] = useIonToast();
-  const { logout, data } = useAuth();
+  const { logout } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -106,18 +119,18 @@ export const Menu: React.FC = () => {
           <IonListHeader>
             <IonRow>
               <IonCol size="12">
-                <Avatar src={data?.avatarURL} />
+                <Avatar src={currentUserData?.avatarURL} />
               </IonCol>
               <IonCol size="12" className="user-name">
-                <IonLabel>{data?.name}</IonLabel>
+                <IonLabel>{currentUserData?.name}</IonLabel>
               </IonCol>
               <IonCol size="12" className="unique-user-name">
-                <IonLabel>{`@${data?.name}`}</IonLabel>
+                <IonLabel>{`@${currentUserData?.name}`}</IonLabel>
               </IonCol>
             </IonRow>
           </IonListHeader>
           <IonItemDivider></IonItemDivider>
-          {data?.userType === USER_TYPES.JUGADOR
+          {currentUserData?.userType === USER_TYPES.JUGADOR
             ? appPagesPlayer.map((appPage, key) => {
                 return (
                   <IonMenuToggle key={key} autoHide={false}>

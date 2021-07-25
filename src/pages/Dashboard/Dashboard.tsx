@@ -21,8 +21,8 @@ import { getUserDoc } from "firebase/client";
 
 const PlayerDashboard: React.FC = () => {
   const { data, setData, currentUser } = useAuth();
-  const id = currentUser.uid
-  
+  const id = currentUser.uid;
+
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
