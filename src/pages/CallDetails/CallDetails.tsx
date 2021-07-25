@@ -1,5 +1,6 @@
 import {
   IonAvatar,
+  IonBackButton,
   IonButton,
   IonButtons,
   IonCard,
@@ -16,17 +17,17 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { arrowBack, create, documentAttachSharp } from "ionicons/icons";
+import { create } from "ionicons/icons";
 import styles from "./styles.module.css";
 import { Link, useParams } from "react-router-dom";
-import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { getACallData, getOwnCallData } from "firebase/callServices";
+import { useAuth } from "contexts/AuthContext";
 
 const CallDetails: React.FC = () => {
-  const { id } = useParams<{ id?: string }>();
   const { currentUser } = useAuth();
+  const { id } = useParams<{ id?: string }>();
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
 
@@ -34,10 +35,11 @@ const CallDetails: React.FC = () => {
     const unsubscribe = getACallData(id, (data) => {
       setCallData(data);
     });
+    return () => unsubscribe && unsubscribe();
   }, [id]);
 
   useEffect(() => {
-    const unsubscribe = getOwnCallData(currentUser.uid, (data) => {
+    const unsubscribe = getOwnCallData(callData?.clubId, (data) => {
       setClubData(data);
     });
   }, [callData]);
@@ -47,13 +49,7 @@ const CallDetails: React.FC = () => {
       <IonHeader>
         <IonToolbar className={styles.back}>
           <IonButtons slot="start">
-            <IonButton
-              fill="clear"
-              className={styles.icon_back}
-              routerLink="/tabs/convocatorias-creadas"
-            >
-              <IonIcon icon={arrowBack}></IonIcon>
-            </IonButton>
+            <IonBackButton defaultHref="/" className={styles.icon_back} />
           </IonButtons>
           <IonRow className={styles.title}>
             <IonCol size="auto">
@@ -70,9 +66,13 @@ const CallDetails: React.FC = () => {
                 Detalles de la Convocatoria
               </h1>
             </IonLabel>
-            <Link to={`/tabs/editar-convocatoria/${callData?.id}`}>
-              <IonIcon icon={create} size="medium" color="primary"></IonIcon>
-            </Link>
+            {currentUser.uid === callData?.clubId ? (
+              <Link to={`/tabs/editar-convocatoria/${callData?.id}`}>
+                <IonIcon icon={create} size="medium" color="primary"></IonIcon>
+              </Link>
+            ) : (
+              ""
+            )}
           </IonItem>
           <IonItem lines="none" className={styles.info_club}>
             <IonAvatar slot="start" className={styles.avatar}>
@@ -116,10 +116,16 @@ const CallDetails: React.FC = () => {
             </IonText>
           </IonItem>
         </IonCard>
-        <IonItemDivider color="primary">
-          <div className={styles.request}>Futbolistas Postulantes</div>
-        </IonItemDivider>
-        <IonItem>Futbolista 1</IonItem>
+        {currentUser.uid === callData?.clubId ? (
+          <>
+            <IonItemDivider color="primary">
+              <div className={styles.request}>Futbolistas Postulantes</div>
+            </IonItemDivider>
+            <IonItem>Futbolista 1</IonItem>
+          </>
+        ) : (
+          ""
+        )}
       </IonContent>
     </IonPage>
   );

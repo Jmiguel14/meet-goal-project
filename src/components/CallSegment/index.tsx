@@ -83,7 +83,7 @@ const CallsSegment = () => {
         return {
           ...list,
           ageRequired: ageRequiredToTitleCase,
-          pospriRequired: posRequiredToTitleCase,
+          posRequired: posRequiredToTitleCase,
         };
       });
       setFilteredCalls(newListMapped);

@@ -27,6 +27,7 @@ import firebase from "firebase/app";
 import { Link } from "react-router-dom";
 import { getCallsData } from "firebase/callServices";
 import { converterDate } from "utils/converterDate";
+import { Routes } from "constants/routes";
 
 const CallsListClub: React.FC = () => {
   const history = useHistory();
@@ -45,7 +46,7 @@ const CallsListClub: React.FC = () => {
             <IonButton
               fill="clear"
               className={styles.icon_back}
-              routerLink="/tabs/inicio-jugador"
+              routerLink={Routes.DASHBOARD}
             >
               <IonIcon icon={arrowBack}></IonIcon>
             </IonButton>

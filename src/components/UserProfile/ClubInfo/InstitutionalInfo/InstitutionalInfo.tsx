@@ -12,10 +12,12 @@ import BirthdayIcon from "icons/birthdayIcon.png";
 import BusinessName from "icons/businessName.png";
 import TelephoneIcon from "icons/telephoneIcon.png";
 import { useAuth } from "contexts/AuthContext";
-interface ContainerProps {}
+import { useParams } from "react-router";
 
 const InstitutionalInfo = () => {
-  const { data } = useAuth();
+  const { data, currentUser } = useAuth();
+  const {id} = useParams<{id: string}>()
+
   function converterDate() {
     let birth = data?.foundation.split("T");
     return birth[0];
@@ -86,7 +88,9 @@ const InstitutionalInfo = () => {
           <IonText className={styles.text}>Fecha de Fundación</IonText>
         </IonItem>
       </IonCard>
-      <IonButton
+      {
+        currentUser.uid === id ? (
+          <IonButton
         size="default"
         shape="round"
         expand="full"
@@ -95,6 +99,9 @@ const InstitutionalInfo = () => {
       >
         Editar
       </IonButton>
+        ):
+        ('')
+      }
     </>
   );
 };

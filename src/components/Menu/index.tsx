@@ -29,6 +29,7 @@ import { USER_TYPES } from "constants/userTypes";
 import { Routes } from "constants/routes";
 import { getUserDoc } from "firebase/client";
 import firebase from "firebase/app";
+import { useCurrentUserData } from "hooks/useCurrentUserData";
 
 interface AppPage {
   url: string;
@@ -38,16 +39,7 @@ interface AppPage {
 
 export const Menu: React.FC = () => {
   const { currentUser } = useAuth();
-  const [currentUserData, setCurrentUserData] = useState<
-    firebase.firestore.DocumentData | undefined
-  >();
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setCurrentUserData, currentUser.uid);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const currentUserData = useCurrentUserData()
 
   const appPagesPlayer: AppPage[] = [
     {
