@@ -13,6 +13,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
+import { useAuth } from "contexts/AuthContext";
 import { EditChannelsLinks } from "firebase/client";
 import {
   logoFacebook,
@@ -35,6 +36,7 @@ const AddChannels: React.FC = () => {
   const { reset, handleSubmit } = useForm();
   const [present] = useIonToast();
   const history = useHistory();
+  const { currentUser } = useAuth();
 
   const onSubmit = async () => {
     if (await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo)) {
@@ -44,7 +46,7 @@ const AddChannels: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil");
+      history.goBack();
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
@@ -61,7 +63,7 @@ const AddChannels: React.FC = () => {
         <IonToolbar color="light">
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil"
+              defaultHref={`/tabs/perfil/${currentUser.uid}`}
               className={styles.icon_back}
             />
           </IonButtons>

@@ -84,7 +84,7 @@ const UpdatePhotos: React.FC = () => {
         <IonToolbar color="light" className={styles.back}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil"
+              defaultHref={`/tabs/perfil/${currentUser.uid}`}
               className={styles.icon_back}
             />
           </IonButtons>

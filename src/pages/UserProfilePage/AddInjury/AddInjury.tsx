@@ -23,6 +23,7 @@ import { ERROR_MESSAGES } from "constants/errorMessages";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InjuryDataForm } from "types";
+import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
   injuryName: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -33,6 +34,7 @@ const AddInjury: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
   const [checked, setChecked] = useState(false);
+  const { currentUser } = useAuth();
 
   const initialValues = {
     injuryName: "",
@@ -63,7 +65,7 @@ const AddInjury: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil");
+      history.goBack();
     } else {
       present({
         message: "Error al agregar la información. Intentelo nuevamente...",
@@ -80,7 +82,7 @@ const AddInjury: React.FC = () => {
         <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil"
+              defaultHref={`/tabs/perfil/${currentUser.uid}`}
               className={styles.icon_back}
             />
           </IonButtons>

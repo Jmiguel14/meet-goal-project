@@ -9,6 +9,7 @@ import {
 import firebase from "firebase/app";
 import { useIonToast, IonLoading } from "@ionic/react";
 import { userTypeEnum } from "types";
+import { useParams } from "react-router";
 
 type user = {
   name: string;
@@ -33,6 +34,9 @@ interface IAuthProvider {
   ) => Promise<firebase.auth.UserCredential>;
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
+  setData: React.Dispatch<
+    React.SetStateAction<firebase.firestore.DocumentData | undefined>
+  >;
 }
 
 const AuthContext = React.createContext<IAuthProvider>({} as IAuthProvider);
@@ -106,17 +110,22 @@ export const AuthProvider: React.FC = ({ children }) => {
       }
     }
   };
+  const params = useParams();
+  console.log("params", params);
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setData);
+      unsubscribe = getUserDoc(setData, currentUser.uid);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
 
+  console.log("data", data);
+
   const value = {
     currentUser,
     data,
+    setData,
     signUp,
     createUserDocument,
     login,

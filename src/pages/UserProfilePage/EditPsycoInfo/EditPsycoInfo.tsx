@@ -14,6 +14,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
+import { useAuth } from "contexts/AuthContext";
 import { EditPsycoParameters } from "firebase/client";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
@@ -23,6 +24,7 @@ import styles from "./styles.module.css";
 const EditPsycoInfo: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
+  const { currentUser } = useAuth();
 
   const initialValues = {
     character: "",
@@ -45,7 +47,7 @@ const EditPsycoInfo: React.FC = () => {
         position: "top",
         color: "success",
       });
-      history.push("/tabs/perfil");
+      history.goBack();
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
@@ -63,7 +65,7 @@ const EditPsycoInfo: React.FC = () => {
         <IonToolbar color="light" className={styles.acts}>
           <IonButtons slot="start">
             <IonBackButton
-              defaultHref="/tabs/perfil"
+              defaultHref={`/tabs/perfil/${currentUser.uid}`}
               className={styles.icon_back}
             />
           </IonButtons>

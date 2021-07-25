@@ -13,11 +13,13 @@ import MedalIcon from "icons/medalIcon.png";
 import PlayerIcon from "icons/playerIcon.png";
 import { useAuth } from "contexts/AuthContext";
 import SkillIcon from "icons/skillIcon.png";
+import { useParams } from "react-router";
 
 interface ContainerProps {}
 
 const TacticalInfo = () => {
-  const { data } = useAuth();
+  const { data, currentUser } = useAuth();
+  const { id } = useParams<{ id: string }>();
 
   return (
     <>
@@ -26,12 +28,16 @@ const TacticalInfo = () => {
           <IonLabel>
             {data?.pospri !== undefined ? data?.pospri : "Posición Principal"}
           </IonLabel>
-          <IonButton
-            fill="clear"
-            routerLink="/tabs/editar-info-tactica-jugador"
-          >
-            <IonIcon icon={pencilOutline} />
-          </IonButton>
+          {currentUser.uid === id ? (
+            <IonButton
+              fill="clear"
+              routerLink="/tabs/editar-info-tactica-jugador"
+            >
+              <IonIcon icon={pencilOutline} />
+            </IonButton>
+          ) : (
+            ""
+          )}
         </IonItem>
         <IonItem className={styles.element}>
           <IonImg
@@ -57,12 +63,16 @@ const TacticalInfo = () => {
       <IonCard className={styles.tactical_data}>
         <IonItem className={styles.title}>
           <IonLabel>Atributos</IonLabel>
-          <IonButton
-            fill="clear"
-            routerLink="/tabs/editar-info-atributos-jugador"
-          >
-            <IonIcon icon={pencilOutline} />
-          </IonButton>
+          {currentUser.uid === id ? (
+            <IonButton
+              fill="clear"
+              routerLink="/tabs/editar-info-atributos-jugador"
+            >
+              <IonIcon icon={pencilOutline} />
+            </IonButton>
+          ) : (
+            ""
+          )}
         </IonItem>
         <IonItem className={styles.element}>
           <IonImg

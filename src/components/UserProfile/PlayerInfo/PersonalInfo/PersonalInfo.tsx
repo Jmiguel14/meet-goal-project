@@ -13,10 +13,11 @@ import ContractIcon from "icons/contractIcon.png";
 import MarketIcon from "icons/marketIcon.png";
 import TelephoneIcon from "icons/telephoneIcon.png";
 import { useAuth } from "contexts/AuthContext";
-interface ContainerProps {}
+import { useParams } from "react-router";
 
 const PersonalInfo = () => {
-  const { data } = useAuth();
+  const { data, currentUser } = useAuth();
+  const { id } = useParams<{ id: string }>();
   function converterDate() {
     let birth = data?.birth.split("T");
     return birth[0];
@@ -98,15 +99,19 @@ const PersonalInfo = () => {
           <IonText className={styles.text}>Link MarketTransfer</IonText>
         </IonItem>
       </IonCard>
-      <IonButton
-        size="default"
-        shape="round"
-        expand="full"
-        className="ion-padding-horizontal"
-        routerLink="/tabs/editar-info-personal-jugador"
-      >
-        Editar
-      </IonButton>
+      {currentUser.uid === id ? (
+        <IonButton
+          size="default"
+          shape="round"
+          expand="full"
+          className="ion-padding-horizontal"
+          routerLink="/tabs/editar-info-personal-jugador"
+        >
+          Editar
+        </IonButton>
+      ) : (
+        ""
+      )}
     </>
   );
 };

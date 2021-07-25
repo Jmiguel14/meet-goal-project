@@ -67,6 +67,7 @@ export interface SportsGoalsDataForm {
   maxIntGoal: string;
 }
 export interface Player {
+  id: string;
   userType: userTypeEnum;
   name: string;
   email: string;
