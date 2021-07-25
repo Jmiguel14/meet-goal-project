@@ -110,17 +110,14 @@ export const AuthProvider: React.FC = ({ children }) => {
       }
     }
   };
-  const params = useParams();
-  console.log("params", params);
+
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {
-      unsubscribe = getUserDoc(setData, currentUser.uid);
+      unsubscribe = getUserDoc(setData, currentUser?.uid);
     }
     return () => unsubscribe && unsubscribe();
   }, [currentUser]);
-
-  console.log("data", data);
 
   const value = {
     currentUser,

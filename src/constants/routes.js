@@ -8,7 +8,7 @@ const PublicRoutes = {
 
 const PrivateRoutes = {
   TABS: "/tabs",
-  DASHBOARD: "/tabs/inicio-jugador",
+  DASHBOARD: "/tabs/panel-noticias",
   SEARCH: "/tabs/busqueda/:segment",
   SEARCH_CLUBS: "/tabs/busqueda/clubs",
   SEARCH_CALLS: "/tabs/busqueda/calls",

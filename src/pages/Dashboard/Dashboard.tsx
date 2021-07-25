@@ -11,25 +11,14 @@ import {
   IonFab,
   IonFabButton,
 } from "@ionic/react";
-import { useAuth } from "contexts/AuthContext";
 import MeetGoal from "icons/MeetGoal";
 import "./Dashboard.css";
 import { add } from "ionicons/icons";
 import { USER_TYPES } from "constants/userTypes";
-import { useEffect } from "react";
-import { getUserDoc } from "firebase/client";
+import { useCurrentUserData } from "hooks/useCurrentUserData";
 
 const PlayerDashboard: React.FC = () => {
-  const { data, setData, currentUser } = useAuth();
-  const id = currentUser.uid;
-
-  useEffect(() => {
-    let unsubscribe: any;
-    if (currentUser) {
-      unsubscribe = getUserDoc(setData, id);
-    }
-    return () => unsubscribe && unsubscribe();
-  }, [currentUser]);
+  const currentUserData = useCurrentUserData()
 
   return (
     <IonPage>
@@ -46,7 +35,7 @@ const PlayerDashboard: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        {data?.userType !== USER_TYPES.JUGADOR ? (
+        {currentUserData?.userType !== USER_TYPES.JUGADOR ? (
           <IonFab vertical="bottom" horizontal="end" slot="fixed">
             <IonFabButton routerLink="/tabs/nueva-convocatoria">
               <IonIcon icon={add} />

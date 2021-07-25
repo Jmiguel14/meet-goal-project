@@ -1,5 +1,4 @@
 import {
-  IonAvatar,
   IonButton,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
@@ -34,7 +33,7 @@ export const CallsList = ({
                 <br />
                 <IonNote>{call.ageRequired}</IonNote>
               </IonLabel>
-              <IonButton slot="end" fill="clear" size="small">
+              <IonButton slot="end" fill="clear" size="small" routerLink={`/tabs/convocatoria/${call.id}`}>
                 Ver
               </IonButton>
             </IonItem>

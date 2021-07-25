@@ -24,6 +24,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SigninFormInputs } from "types";
 import { ERROR_MESSAGES } from "constants/errorMessages";
+import { Routes } from "constants/routes";
 
 const schema = yup.object().shape({
   email: yup
@@ -61,7 +62,7 @@ const SignIn: React.FC = () => {
 
     try {
       await login(email, password);
-      history.push("/tabs/inicio-jugador");
+      history.push(Routes.DASHBOARD);
       e?.target.reset();
     } catch {
       present({

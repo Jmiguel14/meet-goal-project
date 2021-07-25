@@ -1,4 +1,5 @@
 import {
+  IonBackButton,
   IonButton,
   IonButtons,
   IonCol,
@@ -93,7 +94,7 @@ const EditCall: React.FC = () => {
         color: "success",
       });
       e?.target.reset();
-      history.push(`/tabs/convocatoria/${id}`);
+      history.goBack();
     } else {
       present({
         message: "Error al edtar la convocatoria",
@@ -109,11 +110,7 @@ const EditCall: React.FC = () => {
       <IonHeader>
         <IonToolbar className={styles.back}>
           <IonButtons slot="start">
-            <Link to={`/tabs/convocatoria/${id}`}>
-              <IonButton fill="clear" className={styles.icon_back}>
-                <IonIcon icon={arrowBack}></IonIcon>
-              </IonButton>
-            </Link>
+            <IonBackButton defaultHref={`/tabs/convocatoria/${id}`} className={styles.icon_back} />
           </IonButtons>
           <IonRow className={styles.title}>
             <IonCol size="auto">

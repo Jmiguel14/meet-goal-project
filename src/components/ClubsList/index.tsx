@@ -37,7 +37,12 @@ export const ClubsList = ({
                 <br />
                 <IonNote>{club.businessName}</IonNote>
               </IonLabel>
-              <IonButton slot="end" fill="clear" size="small">
+              <IonButton
+                slot="end"
+                fill="clear"
+                size="small"
+                routerLink={`/tabs/perfil/${club.id}`}
+              >
                 Ver
               </IonButton>
             </IonItem>

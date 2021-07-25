@@ -9,10 +9,12 @@ import {
 import styles from "./styles.module.css";
 import Trophy from "icons/trophy.png";
 import { useAuth } from "contexts/AuthContext";
-interface ContainerProps {}
+import { useParams } from "react-router";
 
 const SportsGoalsInfo = () => {
-  const { data } = useAuth();
+  const { data, currentUser } = useAuth();
+  const { id } = useParams<{ id: string }>();
+
   return (
     <>
       <IonCard className={styles.boxes}>
@@ -72,15 +74,19 @@ const SportsGoalsInfo = () => {
           </IonText>
         </IonItem>
       </IonCard>
-      <IonButton
-        size="default"
-        shape="round"
-        expand="full"
-        className="ion-padding-horizontal"
-        routerLink="/tabs/editar-logros-institucionales-club"
-      >
-        Editar
-      </IonButton>
+      {currentUser.uid === id ? (
+        <IonButton
+          size="default"
+          shape="round"
+          expand="full"
+          className="ion-padding-horizontal"
+          routerLink="/tabs/editar-logros-institucionales-club"
+        >
+          Editar
+        </IonButton>
+      ) : (
+        ""
+      )}
     </>
   );
 };

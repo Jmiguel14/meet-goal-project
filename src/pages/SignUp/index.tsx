@@ -21,6 +21,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SignupFormInputs } from "types";
 import { ERROR_MESSAGES } from "constants/errorMessages";
+import { Routes } from "constants/routes";
 
 const schema = yup.object().shape({
   userType: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -76,7 +77,7 @@ const SignUp: React.FC = () => {
     try {
       await signUp(email, password);
       setDataUser(data);
-      history.push("/tabs/inicio-jugador");
+      history.push(Routes.DASHBOARD);
       e?.target.reset();
     } catch {
       present({
