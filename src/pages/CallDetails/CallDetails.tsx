@@ -16,16 +16,20 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import { create } from "ionicons/icons";
 import styles from "./styles.module.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { getACallData, getOwnCallData } from "firebase/callServices";
 import { useAuth } from "contexts/AuthContext";
+import { setPostulation } from "firebase/postulationsServices";
 
 const CallDetails: React.FC = () => {
+  const [present] = useIonToast();
+  const history = useHistory();
   const { currentUser } = useAuth();
   const { id } = useParams<{ id?: string }>();
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
@@ -43,6 +47,25 @@ const CallDetails: React.FC = () => {
       setClubData(data);
     });
   }, [callData]);
+
+  const postMyPostulation = async () => {
+    if (await setPostulation(id!, currentUser.uid)) {
+      present({
+        message: "Te has registrado a la convocatoria",
+        duration: 1000,
+        position: "top",
+        color: "success",
+      });
+      history.push("/tabs/mis-postulaciones");
+    } else {
+      present({
+        message: "Error al registrarte a la convocatoria",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
+    }
+  };
 
   return (
     <IonPage>
@@ -124,7 +147,17 @@ const CallDetails: React.FC = () => {
             <IonItem>Futbolista 1</IonItem>
           </>
         ) : (
-          ""
+          <>
+            <IonButton
+              shape="round"
+              expand="block"
+              size="default"
+              className="ion-padding"
+              onClick={() => postMyPostulation()}
+            >
+              Postularme
+            </IonButton>
+          </>
         )}
       </IonContent>
     </IonPage>
