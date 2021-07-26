@@ -34,6 +34,7 @@ const CallDetails: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
+  const [existPostulation, setExistPostulation] = useState<boolean>(false);
 
   useEffect(() => {
     const unsubscribe = getACallData(id, (data) => {
@@ -47,6 +48,22 @@ const CallDetails: React.FC = () => {
       setClubData(data);
     });
   }, [callData]);
+
+  useEffect(() => {
+    if (callData?.postulatedPlayersId !== undefined) {
+      callData?.postulatedPlayersId.map((id: string) => {
+        if (id === currentUser.uid) {
+          setExistPostulation(true);
+          present({
+            message: "Ya esta registrado en esta convocatoria",
+            duration: 1000,
+            position: "top",
+            color: "danger",
+          });
+        }
+      });
+    }
+  }, [callData, id, currentUser]);
 
   const postMyPostulation = async () => {
     if (await setPostulation(id!, currentUser.uid)) {
@@ -147,17 +164,20 @@ const CallDetails: React.FC = () => {
             <IonItem>Futbolista 1</IonItem>
           </>
         ) : (
-          <>
-            <IonButton
-              shape="round"
-              expand="block"
-              size="default"
-              className="ion-padding"
-              onClick={() => postMyPostulation()}
-            >
-              Postularme
-            </IonButton>
-          </>
+          ""
+        )}
+        {existPostulation ? (
+          ""
+        ) : (
+          <IonButton
+            shape="round"
+            expand="block"
+            size="default"
+            className="ion-padding"
+            onClick={() => postMyPostulation()}
+          >
+            Postularme
+          </IonButton>
         )}
       </IonContent>
     </IonPage>
