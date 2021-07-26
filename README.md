@@ -12,7 +12,7 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Gestión de postulaciones a una convocatoria](#-gestión-de-postulaciones-a-una-convocatoria)
 - [Notificaciones](#-notificaciones)
 - [Autenticación de aplicación web administrativa](#-autenticación-de-aplicación-web-administrativa)
-- [Gestión de aplicación web administrativa](#-gestión-de-aplicación-web-administrativa)
+- [Gestión de aplicación web administrativa](#-%EF%B8%8F-gestión-de-aplicación-web-administrativa)
 - [Pruebas finales de App móvil y web](#-pruebas-finales-de-App-móvil-y-web)
 - [Despliegue de App móvil y web](#-despliegue-de-app-móvil-y-web)
 - [Disposición](#-disposición)
