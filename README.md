@@ -5,7 +5,7 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 ## :page_facing_up: Módulos
 
 - [Registro de usuarios](#-registro-de-usuarios)
-- [Inicio de sesión](#-inicio-de-sesión)
+- [Inicio de sesión](#-inicio-de-sesión-y-restablecimiento-de-contraseña)
 - [Registro de datos de perfil de usuario](#-registro-de-datos-de-perfil-de-usuario)
 - [Búsqueda y filtrado](#-búsqueda-y-filtrado)
 - [Creación de convocatorias](#-creación-de-convocatorias)
@@ -18,9 +18,9 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Disposición](#-disposición)
 
 ## 👨‍💻 Registro de usuarios
-![1](https://user-images.githubusercontent.com/56648593/127066862-c22c2998-ac7e-4f1e-9b7d-fded40e67fd0.png) ![2](https://user-images.githubusercontent.com/56648593/127067064-0db3ec6c-ad40-42e5-92f9-05d2ed37cb2b.png)
+![1](https://user-images.githubusercontent.com/56648593/127067231-9de728a9-ebfc-48c3-aaff-a2cfb04892a4.png) ![2](https://user-images.githubusercontent.com/56648593/127067238-def5e220-3a5b-4e7a-8c64-a4cc8df2eacc.png)
 
-## 📲 Inicio de sesión
+## 📲 Inicio de sesión y restablecimiento de contraseña
 
 ## 💁 Registro de datos de perfil de usuario
 
