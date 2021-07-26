@@ -77,7 +77,7 @@ export const Menu: React.FC = () => {
     },
     {
       title: "Mis Convocatorias",
-      url: "/tabs/convocatorias-creadas",
+      url: Routes.CALLSLISTCLUB,
       icon: peopleCircle,
     },
     {

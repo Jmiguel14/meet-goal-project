@@ -26,11 +26,12 @@ import firebase from "firebase/app";
 import { getACallData, getOwnCallData } from "firebase/callServices";
 import { useAuth } from "contexts/AuthContext";
 import { setPostulation } from "firebase/postulationsServices";
+import { USER_TYPES } from "constants/userTypes";
 
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
-  const { currentUser } = useAuth();
+  const { currentUser, data } = useAuth();
   const { id } = useParams<{ id?: string }>();
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
@@ -166,18 +167,22 @@ const CallDetails: React.FC = () => {
         ) : (
           ""
         )}
-        {existPostulation ? (
-          ""
+        {data?.userType === USER_TYPES.JUGADOR ? (
+          existPostulation ? (
+            ""
+          ) : (
+            <IonButton
+              shape="round"
+              expand="block"
+              size="default"
+              className="ion-padding"
+              onClick={() => postMyPostulation()}
+            >
+              Postularme
+            </IonButton>
+          )
         ) : (
-          <IonButton
-            shape="round"
-            expand="block"
-            size="default"
-            className="ion-padding"
-            onClick={() => postMyPostulation()}
-          >
-            Postularme
-          </IonButton>
+          ""
         )}
       </IonContent>
     </IonPage>

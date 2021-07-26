@@ -17,7 +17,7 @@ export default function DemoCarousel() {
       </div>
       <div>
         <img src="/goal.svg" />
-        <p className="legend">Contruye tu carrera futbolitica!</p>
+        <p className="legend">Construye tu carrera futbolística!</p>
       </div>
       <div>
         <img src="/soccer.svg" />
