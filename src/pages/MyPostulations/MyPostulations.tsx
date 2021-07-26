@@ -8,6 +8,7 @@ import {
   IonHeader,
   IonIcon,
   IonItem,
+  IonItemDivider,
   IonLabel,
   IonPage,
   IonRow,
@@ -23,6 +24,7 @@ import firebase from "firebase/app";
 import { useAuth } from "contexts/AuthContext";
 import { getMyCallsPostulated } from "firebase/postulationsServices";
 import { converterDate } from "utils/converterDate";
+import { Link } from "react-router-dom";
 
 const MyPostulations = () => {
   const { currentUser } = useAuth();
@@ -55,6 +57,9 @@ const MyPostulations = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <IonItemDivider color="primary">
+          <div className={styles.title_divider}>Convocatorias postuladas</div>
+        </IonItemDivider>
         {postulations?.length === 0 ? (
           <div className={styles.container_message}>
             <IonLabel className={styles.message_not_found}>
@@ -78,6 +83,9 @@ const MyPostulations = () => {
               <IonText
                 className={styles.end_date}
               >{`F. de Cierre: ${converterDate(call.endDate)}`}</IonText>
+              <IonButton slot="end" fill="clear" size="small" color="tertiary">
+                <Link to={`/tabs/convocatoria/${call.id}`}>Ver</Link>
+              </IonButton>
             </IonItem>
           </IonCard>
         ))}

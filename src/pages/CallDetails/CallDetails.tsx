@@ -159,16 +159,10 @@ const CallDetails: React.FC = () => {
             </IonText>
           </IonItem>
         </IonCard>
-        {currentUser.uid === callData?.clubId ? (
-          <>
-            <IonItemDivider color="primary">
-              <div className={styles.request}>Futbolistas Postulantes</div>
-            </IonItemDivider>
-            <IonItem>Futbolista 1</IonItem>
-          </>
-        ) : (
-          ""
-        )}
+        <IonItemDivider color="primary">
+          <div className={styles.request}>Futbolistas Postulantes</div>
+        </IonItemDivider>
+        <IonItem>Futbolista 1</IonItem>
         {currentUserData?.userType === USER_TYPES.JUGADOR ? (
           existPostulation ? (
             ""

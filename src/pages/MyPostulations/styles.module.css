@@ -43,3 +43,10 @@
   text-align: center;
   padding-top: 20px;
 }
+.title_divider {
+  text-align: center;
+  width: 100%;
+  top: 10px;
+  font-size: 16px;
+  vertical-align: middle;
+}
