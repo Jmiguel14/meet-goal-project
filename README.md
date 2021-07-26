@@ -13,7 +13,7 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Notificaciones](#-notificaciones)
 - [Autenticación de aplicación web administrativa](#-autenticación-de-aplicación-web-administrativa)
 - [Gestión de aplicación web administrativa](#-%EF%B8%8F-gestión-de-aplicación-web-administrativa)
-- [Pruebas finales de App móvil y web](#-pruebas-finales-de-App-móvil-y-web)
+- [Pruebas finales de App móvil y web](#%EF%B8%8F-pruebas-finales-de-app-móvil-y-web)
 - [Despliegue de App móvil y web](#-despliegue-de-app-móvil-y-web)
 - [Disposición](#-disposición)
 
