@@ -12,6 +12,8 @@ import { SearchbarChangeEventDetail } from "@ionic/core";
 import { Player } from "types";
 import { toTitleCase } from "utils/toTitleCase";
 import { SkeletonList } from "components/Skeletons/SkeletonList";
+import { useCurrentUserData } from "hooks/useCurrentUserData";
+import { USER_TYPES } from "constants/userTypes";
 
 const PlayersSegment = () => {
   const [players, setPlayers] = useState<firebase.firestore.DocumentData>();
@@ -28,6 +30,8 @@ const PlayersSegment = () => {
   const [filteredPlayers, setFilteredPlayers] = useState<
     firebase.firestore.DocumentData | undefined
   >([]);
+
+  const currentUserData = useCurrentUserData();
 
   useEffect(() => {
     const unsubscribe = listtenFirstPlayersBatch(setPlayers, setLastKey);
@@ -105,7 +109,13 @@ const PlayersSegment = () => {
         <IonCol>
           {players ? (
             <>
-              <IonRow className={styles.searchBar}>
+              <IonRow
+                className={
+                  currentUserData?.userType === USER_TYPES.JUGADOR
+                    ? styles.searchBarPlayer
+                    : styles.searchBarClub
+                }
+              >
                 <IonCol size="12">
                   <IonSearchbar
                     placeholder="Buscar por nombre o por posición"

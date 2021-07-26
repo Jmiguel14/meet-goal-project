@@ -234,7 +234,7 @@ export const TabRoot: React.FC = () => {
           </IonTabButton>
           <IonTabButton
             tab="busqueda"
-            href={Routes.SEARCH_CLUBS}
+            href={Routes.SEARCH_PLAYERS}
             selected={
               location.pathname === Routes.SEARCH_CLUBS ||
               location.pathname === Routes.SEARCH_CALLS ||

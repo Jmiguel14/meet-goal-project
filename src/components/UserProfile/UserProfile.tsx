@@ -1,6 +1,6 @@
 import { IonCol, IonIcon, IonLabel, IonRouterLink, IonRow } from "@ionic/react";
 import { locationOutline } from "ionicons/icons";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { useAuth } from "contexts/AuthContext";
 import PhotoUser from "./PlayerInfo/PhotoUser/PhotoUser";
@@ -12,6 +12,7 @@ import { useParams } from "react-router";
 export const UserProfile: React.FC = () => {
   const { data, currentUser } = useAuth();
   const { id } = useParams<{ id: string }>();
+  const [datas, setData] = useState('')
 
   return (
     <>

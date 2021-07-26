@@ -1,4 +1,4 @@
-.searchBar {
+.searchBarPlayer {
   position: -webkit-sticky;
   position: sticky;
   top: 58px;
@@ -6,6 +6,18 @@
   background: rgb(208, 221, 225, 0.7);
 }
 
-.searchBar ion-searchbar {
+.searchBarClub {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgb(208, 221, 225, 0.7);
+}
+
+.searchBarPlayer ion-searchbar {
+  --background: #ffffff;
+}
+
+.searchBarClub ion-searchbar {
   --background: #ffffff;
 }

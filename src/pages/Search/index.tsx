@@ -18,10 +18,13 @@ import { SegmentChangeEventDetail } from "@ionic/core";
 import { useHistory, useParams } from "react-router";
 import { Routes } from "constants/routes";
 import CallsSegment from "components/CallSegment";
+import { useCurrentUserData } from "hooks/useCurrentUserData";
+import { USER_TYPES } from "constants/userTypes";
 
 const SearchForPlayer: React.FC = () => {
   const { segment: paramSegment } = useParams<{ segment: string }>();
   const [segment, setSegment] = useState<string>(paramSegment);
+  const currentUserData = useCurrentUserData()
 
   useEffect(() => {
     setSegment(paramSegment);
@@ -58,7 +61,10 @@ const SearchForPlayer: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonRow className={styles.segments}>
+        {
+          currentUserData?.userType === USER_TYPES.JUGADOR ? (
+            <>
+            <IonRow className={styles.segments}>
           <IonCol size="12">
             <IonSegment scrollable value={segment} onIonChange={handleChange}>
               <IonSegmentButton value="clubs">
@@ -73,7 +79,14 @@ const SearchForPlayer: React.FC = () => {
             </IonSegment>
           </IonCol>
         </IonRow>
-        {segment && SEGMENTS[segment]}
+          {segment && SEGMENTS[segment]}
+            </>
+          ):
+            (
+              <>
+              {segment && SEGMENTS[segment]}
+              </>
+            )}
       </IonContent>
     </IonPage>
   );
