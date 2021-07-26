@@ -39,7 +39,7 @@ interface AppPage {
 
 export const Menu: React.FC = () => {
   const { currentUser } = useAuth();
-  const currentUserData = useCurrentUserData()
+  const currentUserData = useCurrentUserData();
 
   const appPagesPlayer: AppPage[] = [
     {
@@ -64,7 +64,7 @@ export const Menu: React.FC = () => {
     },
     {
       title: "Postulaciones",
-      url: "/tabs/mis-postulaciones",
+      url: Routes.MYPOSTULATIONS,
       icon: albumsSharp,
     },
   ];
@@ -77,7 +77,7 @@ export const Menu: React.FC = () => {
     },
     {
       title: "Mis Convocatorias",
-      url: "/tabs/convocatorias-creadas",
+      url: Routes.CALLSLISTCLUB,
       icon: peopleCircle,
     },
     {

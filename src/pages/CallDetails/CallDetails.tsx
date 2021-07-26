@@ -16,20 +16,28 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import { create } from "ionicons/icons";
 import styles from "./styles.module.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { getACallData, getOwnCallData } from "firebase/callServices";
 import { useAuth } from "contexts/AuthContext";
+import { setPostulation } from "firebase/postulationsServices";
+import { USER_TYPES } from "constants/userTypes";
+import { useCurrentUserData } from "hooks/useCurrentUserData";
 
 const CallDetails: React.FC = () => {
+  const [present] = useIonToast();
+  const history = useHistory();
   const { currentUser } = useAuth();
+  const currentUserData = useCurrentUserData();
   const { id } = useParams<{ id?: string }>();
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
+  const [existPostulation, setExistPostulation] = useState<boolean>(false);
 
   useEffect(() => {
     const unsubscribe = getACallData(id, (data) => {
@@ -43,6 +51,41 @@ const CallDetails: React.FC = () => {
       setClubData(data);
     });
   }, [callData]);
+
+  useEffect(() => {
+    if (callData?.postulatedPlayersId !== undefined) {
+      callData?.postulatedPlayersId.map((id: string) => {
+        if (id === currentUser.uid) {
+          setExistPostulation(true);
+          present({
+            message: "Ya esta registrado en esta convocatoria",
+            duration: 1000,
+            position: "top",
+            color: "danger",
+          });
+        }
+      });
+    }
+  }, [callData, id, currentUser]);
+
+  const postMyPostulation = async () => {
+    if (await setPostulation(id!, currentUser.uid)) {
+      present({
+        message: "Te has registrado a la convocatoria",
+        duration: 1000,
+        position: "top",
+        color: "success",
+      });
+      history.push("/tabs/mis-postulaciones");
+    } else {
+      present({
+        message: "Error al registrarte a la convocatoria",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
+    }
+  };
 
   return (
     <IonPage>
@@ -116,13 +159,24 @@ const CallDetails: React.FC = () => {
             </IonText>
           </IonItem>
         </IonCard>
-        {currentUser.uid === callData?.clubId ? (
-          <>
-            <IonItemDivider color="primary">
-              <div className={styles.request}>Futbolistas Postulantes</div>
-            </IonItemDivider>
-            <IonItem>Futbolista 1</IonItem>
-          </>
+        <IonItemDivider color="primary">
+          <div className={styles.request}>Futbolistas Postulantes</div>
+        </IonItemDivider>
+        <IonItem>Futbolista 1</IonItem>
+        {currentUserData?.userType === USER_TYPES.JUGADOR ? (
+          existPostulation ? (
+            ""
+          ) : (
+            <IonButton
+              shape="round"
+              expand="block"
+              size="default"
+              className="ion-padding"
+              onClick={() => postMyPostulation()}
+            >
+              Postularme
+            </IonButton>
+          )
         ) : (
           ""
         )}
