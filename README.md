@@ -18,7 +18,7 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Disposición](#-disposición)
 
 ## 👨‍💻 Registro de usuarios
-![1](https://user-images.githubusercontent.com/56648593/127066862-c22c2998-ac7e-4f1e-9b7d-fded40e67fd0.png)
+![1](https://user-images.githubusercontent.com/56648593/127066862-c22c2998-ac7e-4f1e-9b7d-fded40e67fd0.png) ![2](https://user-images.githubusercontent.com/56648593/127067064-0db3ec6c-ad40-42e5-92f9-05d2ed37cb2b.png)
 
 ## 📲 Inicio de sesión
 
