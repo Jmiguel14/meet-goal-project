@@ -18,8 +18,8 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Disposición](#-disposición)
 
 ## 👨‍💻 Registro de usuarios
-El usuario puede registrarse de 3 maneras en la aplicación, la primera es con un `email` existente, `contraseña` y datos adionales como el nombre, fecha de nacimiento, etc. La segunda y tercera forma es con una cuenta de `Google` o `Facebook` respectivamente. Esta últimas dos maneras aún se encuentran pendientes.
-Las imagenes de abajo muestran el registro con la primera manera.
+El usuario puede registrarse de 3 maneras en la aplicación, la primera es con un `email` existente, `contraseña` y datos adionales como el nombre, fecha de nacimiento, etc. La segunda y tercera forma es con una cuenta de `Google` o `Facebook` respectivamente. Estas últimas dos maneras aún se encuentran pendientes.
+Las imagenes de abajo muestran las vistas del registro con la primera manera.
 
 ![1](https://user-images.githubusercontent.com/56648593/127067231-9de728a9-ebfc-48c3-aaff-a2cfb04892a4.png) ![2](https://user-images.githubusercontent.com/56648593/127067238-def5e220-3a5b-4e7a-8c64-a4cc8df2eacc.png)
 
