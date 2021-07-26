@@ -27,11 +27,13 @@ import { getACallData, getOwnCallData } from "firebase/callServices";
 import { useAuth } from "contexts/AuthContext";
 import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
+import { useCurrentUserData } from "hooks/useCurrentUserData";
 
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
-  const { currentUser, data } = useAuth();
+  const { currentUser } = useAuth();
+  const currentUserData = useCurrentUserData();
   const { id } = useParams<{ id?: string }>();
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
@@ -167,7 +169,7 @@ const CallDetails: React.FC = () => {
         ) : (
           ""
         )}
-        {data?.userType === USER_TYPES.JUGADOR ? (
+        {currentUserData?.userType === USER_TYPES.JUGADOR ? (
           existPostulation ? (
             ""
           ) : (
