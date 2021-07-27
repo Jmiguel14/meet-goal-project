@@ -13,20 +13,6 @@ App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Features](#-features)
 - [Status](#-status)
 
-
-- [Registro de usuarios](#-registro-de-usuarios)
-- [Inicio de sesión](#-inicio-de-sesión-y-restablecimiento-de-contraseña)
-- [Registro de datos de perfil de usuario](#-registro-de-datos-de-perfil-de-usuario)
-- [Búsqueda y filtrado](#-búsqueda-y-filtrado)
-- [Creación de convocatorias](#-creación-de-convocatorias)
-- [Gestión de postulaciones a una convocatoria](#-gestión-de-postulaciones-a-una-convocatoria)
-- [Notificaciones](#-notificaciones)
-- [Autenticación de aplicación web administrativa](#-autenticación-de-aplicación-web-administrativa)
-- [Gestión de aplicación web administrativa](#-%EF%B8%8F-gestión-de-aplicación-web-administrativa)
-- [Pruebas finales de App móvil y web](#%EF%B8%8F-pruebas-finales-de-app-móvil-y-web)
-- [Despliegue de App móvil y web](#-despliegue-de-app-móvil-y-web)
-- [Disposición](#-disposición)
-
 ## ℹ️ General info
 Mobile App that allows sports clubs to filter their players through calls, and it gives to players the chance to let the clubs know their skills. The App is being built with Ionic, React, and Firebase.
 ## 📷 Screenshots
