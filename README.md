@@ -35,6 +35,8 @@ Mobile App that allows sports clubs to filter their players through calls, and i
 ![1](https://user-images.githubusercontent.com/56648593/127067231-9de728a9-ebfc-48c3-aaff-a2cfb04892a4.png) ![3](https://user-images.githubusercontent.com/56648593/127071720-4d8878e5-e1de-4628-896d-6357c1af4fe0.png) ![2](https://user-images.githubusercontent.com/56648593/127067238-def5e220-3a5b-4e7a-8c64-a4cc8df2eacc.png)
 
  - Usuario jugador
+ 
+ ![5](https://user-images.githubusercontent.com/56648593/127086540-ad7582ce-870c-48c2-8e4f-7addc81c8031.png) ![6](https://user-images.githubusercontent.com/56648593/127086576-835e0cce-af19-4fa7-a658-da301b903854.png)
  - Usuario club 
 
 
