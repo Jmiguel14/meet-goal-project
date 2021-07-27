@@ -76,6 +76,7 @@ Mobile App that allows sports clubs to filter their players through calls, and i
   - Search calls
   - View calls
   - Apply for calls
+  - View calls applied
   - Search clubs
   - View profile clubs
   ### Clubs:
