@@ -1,4 +1,5 @@
-                                                                                       # :zap: Meet Goal
+# :zap: Meet Goal
+![logo](https://user-images.githubusercontent.com/56648593/127076823-cba7b816-e329-4a32-a917-c20635c5838e.png)
 
 App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.org/) y [firebase](https://firebase.google.com/docs).
 
