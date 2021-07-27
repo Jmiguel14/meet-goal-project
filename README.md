@@ -44,16 +44,22 @@ Mobile App that allows sports clubs to filter their players through calls, and i
 
 ## 👨‍💻 Technologies
 
-- [Ionic 5.5.0]((https://ionicframework.com/)
+- [Ionic 5.5.0](https://ionicframework.com/)
 - [React 17.0.1](https://reactjs.org/)
-- [firebase 8.6.8](https://firebase.google.com/docs)
+- [Firebase 8.6.8](https://firebase.google.com/docs)
 - [Capacitor 3.0.0](https://capacitorjs.com/)
 - [react-hook-form 7.8.8](https://react-hook-form.com/)
 - [Yup 0.32.9](https://github.com/jquense/yup)
 
 ## ⚙️ Setup
+- Clone the repo 
+- `npm i` or `npm install`
+- _add to android pending_
+
 ## 🤖 Features
+
 ## 📆 Status
+This app is still being developed, but it will have finished by the end of August.
 
 ## 👨‍💻 Registro de usuarios
 El usuario puede registrarse de 3 maneras en la aplicación, la primera es con un `email` existente, `contraseña` y datos adionales como el nombre, fecha de nacimiento, etc. La segunda y tercera forma es con una cuenta de `Google` o `Facebook` respectivamente. Estas últimas dos maneras aún se encuentran pendientes.
