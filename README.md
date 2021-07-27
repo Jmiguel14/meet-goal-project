@@ -54,12 +54,21 @@ Mobile App that allows sports clubs to filter their players through calls, and i
 ## ⚙️ Setup
 - Clone the repo 
 - `npm i` or `npm install`
-- _add to android pending_
+- `npx cap add android`
 
 ## 🤖 Features
+- Filter the best palyers for calls
+- Let the clubs know your skills.
+
+### To do
+
+- create an account
+- login with the account previusly created
+- register profile information
+- create calls
 
 ## 📆 Status
-This app is still being developed, but it will have finished by the end of August.
+This app is still being developed, but its develop will have finished by the end of August.
 
 ## 👨‍💻 Registro de usuarios
 El usuario puede registrarse de 3 maneras en la aplicación, la primera es con un `email` existente, `contraseña` y datos adionales como el nombre, fecha de nacimiento, etc. La segunda y tercera forma es con una cuenta de `Google` o `Facebook` respectivamente. Estas últimas dos maneras aún se encuentran pendientes.
