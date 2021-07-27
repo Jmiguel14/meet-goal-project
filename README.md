@@ -81,7 +81,7 @@ Mobile App that allows sports clubs to filter their players through calls, and i
   ### Clubs:
   - Create calls
   - Update calls created
-  - Select players of a call
+  - Select players of a call: **Pending**
 
 ## 📆 Status
 This app is still being developed, but its develop will have finished by the end of August.
