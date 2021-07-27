@@ -28,8 +28,9 @@ App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Disposición](#-disposición)
 
 ## ℹ️ General info
-Mobile App that allows sport clubs to filter their players through calls, and it gives to players the chance to let the clubs know their skills. The App is being built with Ionic, React, and Firebase.
+Mobile App that allows sports clubs to filter their players through calls, and it gives to players the chance to let the clubs know their skills. The App is being built with Ionic, React, and Firebase.
 ## 📷 Screenshots
+![1](https://user-images.githubusercontent.com/56648593/127067231-9de728a9-ebfc-48c3-aaff-a2cfb04892a4.png) 
 ## 👨‍💻 Technologies
 ## ⚙️ Setup
 ## 🤖 Features
@@ -39,7 +40,7 @@ Mobile App that allows sport clubs to filter their players through calls, and it
 El usuario puede registrarse de 3 maneras en la aplicación, la primera es con un `email` existente, `contraseña` y datos adionales como el nombre, fecha de nacimiento, etc. La segunda y tercera forma es con una cuenta de `Google` o `Facebook` respectivamente. Estas últimas dos maneras aún se encuentran pendientes.
 Las imagenes de abajo muestran las vistas del registro con la primera manera.
 
-![1](https://user-images.githubusercontent.com/56648593/127067231-9de728a9-ebfc-48c3-aaff-a2cfb04892a4.png) ![2](https://user-images.githubusercontent.com/56648593/127067238-def5e220-3a5b-4e7a-8c64-a4cc8df2eacc.png)
+![1](https://user-images.githubusercontent.com/56648593/127067231-9de728a9-ebfc-48c3-aaff-a2cfb04892a4.png) ![3](https://user-images.githubusercontent.com/56648593/127071720-4d8878e5-e1de-4628-896d-6357c1af4fe0.png) ![2](https://user-images.githubusercontent.com/56648593/127067238-def5e220-3a5b-4e7a-8c64-a4cc8df2eacc.png)
 
 ## 📲 Inicio de sesión y restablecimiento de contraseña
 Una vez que el usuario se haya registrado en la applicación, puede **iniciciar sesión con el correo y la contraseña** como se muestra en la imagen de abajo. Además la aplicación tiene la funcionalidad de `restablecer la contraseña`, dado el caso que el usuario haya olvidado su contraseña.
