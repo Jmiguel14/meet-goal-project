@@ -1,7 +1,7 @@
 # :zap: Meet Goal
 ![logo](https://user-images.githubusercontent.com/56648593/127076823-cba7b816-e329-4a32-a917-c20635c5838e.png)
 
-App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.org/) y [firebase](https://firebase.google.com/docs).
+App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.org/) and [firebase](https://firebase.google.com/docs).
 
 ## :page_facing_up: Table of contents
 
@@ -28,6 +28,7 @@ App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Disposición](#-disposición)
 
 ## ℹ️ General info
+Mobile App that allows sport clubs to filter their players through calls, and it gives to players the chance to let the clubs know their skills. The App is being built with Ionic, React, and Firebase as a backend.
 ## 📷 Screenshots
 ## 👨‍💻 Technologies
 ## ⚙️ Setup
