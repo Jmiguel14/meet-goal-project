@@ -1,8 +1,17 @@
-# :zap: meet-goal-project
+# :zap: Meet Goal
 
-App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.org/) y [firebase](https://firebase.google.com/docs).
+App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.org/) y [firebase](https://firebase.google.com/docs).
 
-## :page_facing_up: Módulos
+## :page_facing_up: Table of contents
+
+
+- [General info](#-general-info)
+- [Screenshots](#-screenshots)
+- [Technologies](#-technologies)
+- [Setup](#-setup)
+- [Features](#-features)
+- [Status](#-status)
+
 
 - [Registro de usuarios](#-registro-de-usuarios)
 - [Inicio de sesión](#-inicio-de-sesión-y-restablecimiento-de-contraseña)
@@ -16,6 +25,13 @@ App creada usando [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Pruebas finales de App móvil y web](#%EF%B8%8F-pruebas-finales-de-app-móvil-y-web)
 - [Despliegue de App móvil y web](#-despliegue-de-app-móvil-y-web)
 - [Disposición](#-disposición)
+
+## ℹ️ General info
+## 📷 Screenshots
+## 👨‍💻 Technologies
+## ⚙️ Setup
+## 🤖 Features
+## 📆 Status
 
 ## 👨‍💻 Registro de usuarios
 El usuario puede registrarse de 3 maneras en la aplicación, la primera es con un `email` existente, `contraseña` y datos adionales como el nombre, fecha de nacimiento, etc. La segunda y tercera forma es con una cuenta de `Google` o `Facebook` respectivamente. Estas últimas dos maneras aún se encuentran pendientes.
