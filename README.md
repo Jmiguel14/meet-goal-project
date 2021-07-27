@@ -60,10 +60,10 @@ Mobile App that allows sports clubs to filter their players through calls, and i
 - Filter the best palyers for calls
 - Let the clubs know your skills.
 
-### To do
-###All users:
-###Players:
-###Clubs:
+  ### To do
+### All users:
+### Players:
+### Clubs:
 - Create an account
 - Login with the account previusly created
 - Register profile information
