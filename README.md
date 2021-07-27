@@ -1,4 +1,4 @@
-== # :zap: Meet Goal ==
+                                                                                       # :zap: Meet Goal
 
 App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.org/) y [firebase](https://firebase.google.com/docs).
 
