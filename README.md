@@ -62,12 +62,26 @@ Mobile App that allows sports clubs to filter their players through calls, and i
 
   ### To do
   ### All users:
+  - Create an account
+  - Create an account with Google or Facebook: **Pending**
+  - Login with the account previusly created
+  - Reset password
+  - Register profile information
+  - Update profile information
+  - Search players
+  - View profile players
+  - View notifications: **Pending**
+  - Send messages: **Pending**
   ### Players:
- ### Clubs:
-- Create an account
-- Login with the account previusly created
-- Register profile information
-- Create calls
+  - Search calls
+  - View calls
+  - Apply for calls
+  - Search clubs
+  - View profile clubs
+  ### Clubs:
+  - Create calls
+  - Update calls created
+  - Select players of a call
 
 ## 📆 Status
 This app is still being developed, but its develop will have finished by the end of August.
