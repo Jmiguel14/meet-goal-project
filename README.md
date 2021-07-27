@@ -9,7 +9,7 @@ App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [General info](#ℹ%EF%B8%8F-general-info)
 - [Screenshots](#-screenshots)
 - [Technologies](#-technologies)
-- [Setup](#-setup)
+- [Setup](#%EF%B8%8F-setup)
 - [Features](#-features)
 - [Status](#-status)
 
