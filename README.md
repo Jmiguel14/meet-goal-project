@@ -60,7 +60,7 @@ Mobile App that allows sports clubs to filter their players through calls, and i
 - Filter the best palyers for calls
 - Let the clubs know your skills.
 
-###    To do
+     ### To do
 
 - create an account
 - login with the account previusly created
