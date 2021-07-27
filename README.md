@@ -6,7 +6,7 @@ App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.
 ## :page_facing_up: Table of contents
 
 
-- [General info](#-general-info)
+- [General info](#ℹ%EF%B8%8F-general-info)
 - [Screenshots](#-screenshots)
 - [Technologies](#-technologies)
 - [Setup](#-setup)
