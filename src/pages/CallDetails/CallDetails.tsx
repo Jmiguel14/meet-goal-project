@@ -30,7 +30,7 @@ import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import { Player } from "types";
-import { getPlayerData, getPostulatedsData } from "firebase/PostulateServices";
+import { getPostulatedsData } from "firebase/PostulateServices";
 
 let playerInfo: Player | undefined;
 const CallDetails: React.FC = () => {
