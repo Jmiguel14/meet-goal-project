@@ -11,6 +11,7 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,
+  IonList,
   IonPage,
   IonRow,
   IonText,
@@ -28,7 +29,10 @@ import { useAuth } from "contexts/AuthContext";
 import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
+import { Player } from "types";
+import { getPlayerData, getPostulatedsData } from "firebase/PostulateServices";
 
+let playerInfo: Player | undefined;
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
@@ -38,6 +42,8 @@ const CallDetails: React.FC = () => {
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
   const [existPostulation, setExistPostulation] = useState<boolean>(false);
+  const [playersData, setPlayersData] =
+    useState<firebase.firestore.DocumentData>([]);
 
   useEffect(() => {
     const unsubscribe = getACallData(id, (data) => {
@@ -67,6 +73,17 @@ const CallDetails: React.FC = () => {
       });
     }
   }, [callData, id, currentUser]);
+
+  useEffect(() => {
+    if (callData && callData.postulatedPlayersId != undefined) {
+      const unsuscribe = getPostulatedsData(
+        callData?.postulatedPlayersId,
+        (data) => {
+          setPlayersData(data);
+        }
+      );
+    }
+  }, [callData]);
 
   const postMyPostulation = async () => {
     if (await setPostulation(id!, currentUser.uid)) {
@@ -159,10 +176,6 @@ const CallDetails: React.FC = () => {
             </IonText>
           </IonItem>
         </IonCard>
-        <IonItemDivider color="primary">
-          <div className={styles.request}>Futbolistas Postulantes</div>
-        </IonItemDivider>
-        <IonItem>Futbolista 1</IonItem>
         {currentUserData?.userType === USER_TYPES.JUGADOR ? (
           existPostulation ? (
             ""
@@ -180,6 +193,30 @@ const CallDetails: React.FC = () => {
         ) : (
           ""
         )}
+        <br />
+        <IonItemDivider color="primary">
+          <div className={styles.request}>Futbolistas Postulantes</div>
+        </IonItemDivider>
+        <IonList>
+          {callData?.postulatedPlayers &&
+            playersData.map((player: Player, index: number) => (
+              <IonItem key={index}>
+                <IonLabel>{player.name}</IonLabel>
+                {currentUserData?.id === callData.clubId ? (
+                  <IonButton
+                    slot="end"
+                    fill="clear"
+                    size="small"
+                    routerLink={`/tabs/perfil/${player.id}`}
+                  >
+                    Ver
+                  </IonButton>
+                ) : (
+                  ""
+                )}
+              </IonItem>
+            ))}
+        </IonList>
       </IonContent>
     </IonPage>
   );
