@@ -16,7 +16,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -26,6 +26,7 @@ import { ERROR_MESSAGES } from "constants/errorMessages";
 import { useHistory } from "react-router";
 import { PersonalDataForm } from "types";
 import { useAuth } from "contexts/AuthContext";
+import { useCurrentUserData } from "hooks/useCurrentUserData";
 
 const schema = yup.object().shape({
   mail: yup
@@ -42,14 +43,33 @@ export const EditPersonalInfo: React.FC = () => {
   const [present] = useIonToast();
   const [selectedDate, setSelectedDate] = useState<string>("");
   const history = useHistory();
-  const { currentUser } = useAuth();
+  const { currentUser, data } = useAuth();
+  const currentUserData = useCurrentUserData()
+  
+  // const initialValues = {
+  //   mail: '',
+  //   phone: 0,
+  //   country: '',
+  //   city: '',
+  //   contract: '',
+  //   marketTransfer: '',
+  //   birth: ''
+  // };
+  
+
+  console.log('data', data)
+  console.log('currentUserData', currentUserData)
+
   const initialValues = {
-    mail: "",
-    country: "",
-    city: "",
-    contract: "",
-    marketTransfer: "",
+    mail: data?.email,
+    phone: data?.phone,
+    country: data?.country,
+    city: data?.city,
+    contract: data?.contract,
+    marketTransfer: data?.marketTransfer,
+    birth: data?.birth
   };
+  console.log('initialValues', initialValues)
 
   const {
     register,
@@ -62,13 +82,21 @@ export const EditPersonalInfo: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
+  // useEffect( () => {
+  //   reset(initialValues)
+  // }, [initialValues])
+  //reset(initialValues, {keepDefaultValues: true})
+
+
+  console.log('reset', reset)
+
   const onSubmit = async (
     data: PersonalDataForm,
     e: React.BaseSyntheticEvent<object, any, any> | undefined
   ) => {
     const { mail, phone, country, city, birth, contract, marketTransfer } =
       data;
-    if (
+    try {
       await SetPersonalData(
         mail,
         country,
@@ -78,7 +106,7 @@ export const EditPersonalInfo: React.FC = () => {
         phone,
         marketTransfer
       )
-    ) {
+     
       present({
         message: "Se actualizó la información exitosamente",
         duration: 1000,
@@ -86,7 +114,7 @@ export const EditPersonalInfo: React.FC = () => {
         color: "success",
       });
       history.goBack();
-    } else {
+    } catch(e) {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
         duration: 1000,
@@ -121,6 +149,7 @@ export const EditPersonalInfo: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className={styles.back}>
+        {console.log('render')}
         <IonItemDivider color="primary">
           <div className={styles.subtitle}>
             Edita aquí tu Información Personal

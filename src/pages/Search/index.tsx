@@ -87,7 +87,7 @@ const SearchForPlayer: React.FC = () => {
               {segment && SEGMENTS[segment]}
               </>
             )}
-      </IonContent>
+        </IonContent>
     </IonPage>
   );
 };

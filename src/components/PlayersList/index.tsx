@@ -1,6 +1,7 @@
 import {
   IonAvatar,
   IonButton,
+  IonContent,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   IonItem,
@@ -24,6 +25,7 @@ export const PlayersList = ({
   onSearchNext,
 }: PlayersListProps) => {
   return (
+    <>
     <IonList>
       {players &&
         players.map((player: Player, index: number) => {
@@ -52,8 +54,9 @@ export const PlayersList = ({
         disabled={disableInfinitiScroll}
         onIonInfinite={(e: CustomEvent<void>) => onSearchNext(e)}
       >
-        <IonInfiniteScrollContent loadingText="Loading..."></IonInfiniteScrollContent>
+        <IonInfiniteScrollContent loadingSpinner="bubbles" loadingText="Loading..."></IonInfiniteScrollContent>
       </IonInfiniteScroll>
     </IonList>
+    </>
   );
 };

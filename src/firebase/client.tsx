@@ -45,18 +45,6 @@ export const getUserDoc = (
     });
 };
 
-export async function fetchUserDoc() {
-  return await firestore
-    .collection(COLLECTIONS.USERS)
-    .doc(auth.currentUser?.uid)
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        return getDataToUserDoc(doc);
-      }
-    });
-}
-
 export async function SetPersonalData(
   email: string,
   country: string,

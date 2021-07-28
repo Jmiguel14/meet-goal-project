@@ -118,9 +118,10 @@ const SignUp: React.FC = () => {
         </IonRow>
         <SignUpForm
           register={register}
-          handleSubmit={handleSubmit(onSubmit)}
+          handleSubmit={handleSubmit}
           clearErrors={clearErrors}
           errors={errors}
+          onHandleSubmit={onSubmit}
         />
       </IonContent>
     </IonPage>

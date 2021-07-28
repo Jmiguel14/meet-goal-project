@@ -9,7 +9,6 @@ import {
 import firebase from "firebase/app";
 import { useIonToast, IonLoading } from "@ionic/react";
 import { userTypeEnum } from "types";
-import { useParams } from "react-router";
 
 type user = {
   name: string;
