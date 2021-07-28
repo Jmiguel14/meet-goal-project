@@ -86,7 +86,7 @@ const CallDetails: React.FC = () => {
     }
   }, [callData]);
 
-  const postMyPostulation = async () => {
+  const postPlayerPostulation = async () => {
     if (await setPostulation(id!, currentUser.uid)) {
       present({
         message: "Te has registrado a la convocatoria",
@@ -186,7 +186,7 @@ const CallDetails: React.FC = () => {
               expand="block"
               size="default"
               className="ion-padding"
-              onClick={() => postMyPostulation()}
+              onClick={() => postPlayerPostulation()}
             >
               Postularme
             </IonButton>
