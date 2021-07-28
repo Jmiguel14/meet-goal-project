@@ -30,9 +30,8 @@ import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import { Player } from "types";
-import { getPostulatedsData } from "firebase/PostulateServices";
+import { getPlayersPostulationData } from "firebase/PostulateServices";
 
-let playerInfo: Player | undefined;
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
@@ -76,7 +75,7 @@ const CallDetails: React.FC = () => {
 
   useEffect(() => {
     if (callData && callData.postulatedPlayersId != undefined) {
-      const unsuscribe = getPostulatedsData(
+      const unsuscribe = getPlayersPostulationData(
         callData?.postulatedPlayersId,
         (data) => {
           setPlayersData(data);
