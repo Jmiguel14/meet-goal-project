@@ -46,7 +46,6 @@ export const getUserDoc = (
 };
 
 export async function SetPersonalData(
-  email: string,
   country: string,
   city: string,
   birth: string,
@@ -57,7 +56,6 @@ export async function SetPersonalData(
   let id = auth.currentUser?.uid;
   try {
     const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      email: email,
       phone: phone,
       country: country,
       city: city,

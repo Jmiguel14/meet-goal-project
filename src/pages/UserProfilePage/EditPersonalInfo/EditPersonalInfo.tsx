@@ -26,13 +26,8 @@ import { ERROR_MESSAGES } from "constants/errorMessages";
 import { useHistory } from "react-router";
 import { PersonalDataForm } from "types";
 import { useAuth } from "contexts/AuthContext";
-import { useCurrentUserData } from "hooks/useCurrentUserData";
 
 const schema = yup.object().shape({
-  mail: yup
-    .string()
-    .required(ERROR_MESSAGES.REQUIRED)
-    .email(ERROR_MESSAGES.EMAIL),
   country: yup.string().required(ERROR_MESSAGES.REQUIRED),
   city: yup.string().required(ERROR_MESSAGES.REQUIRED),
   birth: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -44,85 +39,55 @@ export const EditPersonalInfo: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const history = useHistory();
   const { currentUser, data } = useAuth();
-  const currentUserData = useCurrentUserData()
-  
-  // const initialValues = {
-  //   mail: '',
-  //   phone: 0,
-  //   country: '',
-  //   city: '',
-  //   contract: '',
-  //   marketTransfer: '',
-  //   birth: ''
-  // };
-  
-
-  console.log('data', data)
-  console.log('currentUserData', currentUserData)
-
-  const initialValues = {
-    mail: data?.email,
-    phone: data?.phone,
-    country: data?.country,
-    city: data?.city,
-    contract: data?.contract,
-    marketTransfer: data?.marketTransfer,
-    birth: data?.birth
-  };
-  console.log('initialValues', initialValues)
 
   const {
     register,
     handleSubmit,
     clearErrors,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm<PersonalDataForm>({
-    defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
 
-  // useEffect( () => {
-  //   reset(initialValues)
-  // }, [initialValues])
-  //reset(initialValues, {keepDefaultValues: true})
-
-
-  console.log('reset', reset)
+  useEffect(()=> {
+    setValue('phone', data?.phone)
+    setValue('country', data?.country)
+    setValue('city', data?.city)
+    setValue('contract', data?.contract)
+    setValue('marketTransfer', data?.marketTransfer)
+    setValue('birth', data?.birth)
+  }, [data])
 
   const onSubmit = async (
-    data: PersonalDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
+    data: PersonalDataForm
   ) => {
-    const { mail, phone, country, city, birth, contract, marketTransfer } =
+    const { phone, country, city, birth, contract, marketTransfer } =
       data;
-    try {
-      await SetPersonalData(
-        mail,
-        country,
-        city,
-        birth,
-        contract,
-        phone,
-        marketTransfer
-      )
-     
-      present({
-        message: "Se actualizó la información exitosamente",
-        duration: 1000,
-        position: "top",
-        color: "success",
-      });
-      history.goBack();
-    } catch(e) {
-      present({
-        message: "Error al actualizar la información. Intentelo nuevamente...",
-        duration: 1000,
-        position: "top",
-        color: "danger",
-      });
-    }
-    e?.target.reset();
+      try {
+        await SetPersonalData(
+          country,
+          city,
+          birth,
+          contract,
+          phone,
+          marketTransfer
+        )
+        present({
+          message: "Se actualizó la información exitosamente",
+          duration: 3000,
+          position: "top",
+          color: "success",
+        });
+        history.goBack();
+      } catch{
+        present({
+          message: "Error al actualizar la información. Intentelo nuevamente...",
+          duration: 3000,
+          position: "top",
+          color: "danger",
+        });
+      }
   };
 
   return (
@@ -157,22 +122,10 @@ export const EditPersonalInfo: React.FC = () => {
         </IonItemDivider>
         <form onSubmit={handleSubmit(onSubmit)} id="edit-personal-info-form">
           <IonItem className={styles.personal_data}>
+            <IonLabel color="medium" position="floating">
+              País
+            </IonLabel>
             <IonInput
-              placeholder="Correo Electrónico"
-              type="text"
-              clearInput={true}
-              {...register("mail")}
-              onIonChange={() => {
-                clearErrors("mail");
-              }}
-            ></IonInput>
-          </IonItem>
-          {errors.mail?.message && (
-            <IonNote color="danger">{errors.mail?.message}</IonNote>
-          )}
-          <IonItem className={styles.personal_data}>
-            <IonInput
-              placeholder="País"
               type="text"
               clearInput={true}
               {...register("country")}
@@ -187,8 +140,10 @@ export const EditPersonalInfo: React.FC = () => {
           )}
 
           <IonItem className={styles.personal_data}>
+          <IonLabel color="medium" position="floating">
+              Ciudad
+            </IonLabel>
             <IonInput
-              placeholder="Ciudad"
               type="text"
               clearInput={true}
               {...register("city")}
@@ -202,8 +157,10 @@ export const EditPersonalInfo: React.FC = () => {
           )}
 
           <IonItem className={styles.personal_data}>
+            <IonLabel color="medium" position="floating">
+              Teléfono
+            </IonLabel>
             <IonInput
-              placeholder="Teléfono"
               type="text"
               clearInput={true}
               {...register("phone")}
@@ -246,8 +203,10 @@ export const EditPersonalInfo: React.FC = () => {
           )}
 
           <IonItem className={styles.personal_data}>
+          <IonLabel color="medium" position="floating">
+              Enlace de Market Transfer
+            </IonLabel>
             <IonInput
-              placeholder="Pega aquí tu link de MarketTransfer"
               type="text"
               clearInput={true}
               {...register("marketTransfer")}
