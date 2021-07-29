@@ -8,6 +8,7 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonInput,
   IonItem,
   IonItemDivider,
   IonLabel,
@@ -19,7 +20,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import { create } from "ionicons/icons";
+import { checkmarkOutline, closeOutline, create } from "ionicons/icons";
 import styles from "./styles.module.css";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -30,7 +31,10 @@ import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import { Player } from "types";
-import { getPlayersPostulationData } from "firebase/PostulateServices";
+import {
+  getPlayersPostulationData,
+  selectPostulant,
+} from "firebase/PostulateServices";
 
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
@@ -98,6 +102,23 @@ const CallDetails: React.FC = () => {
     } else {
       present({
         message: "Error al registrarte a la convocatoria",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
+    }
+  };
+
+  const selectPostulationsPlayers = async (
+    callId: string,
+    playerId: string,
+    isSelected: false
+  ) => {
+    try {
+      await selectPostulant(callId, playerId, isSelected);
+    } catch (e) {
+      present({
+        message: "Error, intente nuevamente",
         duration: 1000,
         position: "top",
         color: "danger",
@@ -200,23 +221,54 @@ const CallDetails: React.FC = () => {
         </IonItemDivider>
         <IonList>
           {callData?.postulatedPlayers &&
-            playersData.map((player: Player, index: number) => (
-              <IonItem key={index}>
-                <IonLabel>{player.name}</IonLabel>
-                {currentUserData?.id === callData.clubId ? (
-                  <IonButton
-                    slot="end"
-                    fill="clear"
-                    size="small"
-                    routerLink={`/tabs/perfil/${player.id}`}
-                  >
-                    Ver
-                  </IonButton>
-                ) : (
-                  ""
-                )}
-              </IonItem>
-            ))}
+            playersData.map((player: Player, index: number) => {
+              return (
+                <IonItem key={index}>
+                  {currentUserData?.id === callData.clubId
+                    ? callData.postulatedPlayers.map((postulation: any) =>
+                        postulation.playerId === player.id ? (
+                          <IonButton
+                            key={player.id}
+                            color={
+                              postulation.isSelected ? "danger" : "success"
+                            }
+                            onClick={() =>
+                              selectPostulationsPlayers(
+                                callData?.id,
+                                postulation.playerId,
+                                postulation.isSelected
+                              )
+                            }
+                          >
+                            <IonIcon
+                              icon={
+                                postulation.isSelected
+                                  ? closeOutline
+                                  : checkmarkOutline
+                              }
+                            ></IonIcon>
+                          </IonButton>
+                        ) : (
+                          ""
+                        )
+                      )
+                    : ""}
+                  <IonLabel>{player.name}</IonLabel>
+                  {currentUserData?.id === callData.clubId ? (
+                    <IonButton
+                      slot="end"
+                      fill="clear"
+                      size="small"
+                      routerLink={`/tabs/perfil/${player.id}`}
+                    >
+                      Ver
+                    </IonButton>
+                  ) : (
+                    ""
+                  )}
+                </IonItem>
+              );
+            })}
         </IonList>
       </IonContent>
     </IonPage>

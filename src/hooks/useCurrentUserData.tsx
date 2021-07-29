@@ -1,6 +1,6 @@
 import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";
-import firebase from 'firebase/app'
+import firebase from "firebase/app";
 import { getUserDoc } from "firebase/client";
 
 export const useCurrentUserData = () => {
@@ -8,7 +8,7 @@ export const useCurrentUserData = () => {
   const [currentUserData, setCurrentUserData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
-  
+
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {

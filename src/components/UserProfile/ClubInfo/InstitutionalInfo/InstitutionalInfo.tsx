@@ -16,7 +16,7 @@ import { useParams } from "react-router";
 
 const InstitutionalInfo = () => {
   const { data, currentUser } = useAuth();
-  const {id} = useParams<{id: string}>()
+  const { id } = useParams<{ id: string }>();
 
   function converterDate() {
     let birth = data?.foundation.split("T");
@@ -88,20 +88,19 @@ const InstitutionalInfo = () => {
           <IonText className={styles.text}>Fecha de Fundación</IonText>
         </IonItem>
       </IonCard>
-      {
-        currentUser.uid === id ? (
-          <IonButton
-        size="default"
-        shape="round"
-        expand="full"
-        className="ion-padding-horizontal"
-        routerLink="/tabs/editar-info-institucional-club"
-      >
-        Editar
-      </IonButton>
-        ):
-        ('')
-      }
+      {currentUser.uid === id ? (
+        <IonButton
+          size="default"
+          shape="round"
+          expand="full"
+          className="ion-padding-horizontal"
+          routerLink="/tabs/editar-info-institucional-club"
+        >
+          Editar
+        </IonButton>
+      ) : (
+        ""
+      )}
     </>
   );
 };

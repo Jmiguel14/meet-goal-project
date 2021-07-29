@@ -110,7 +110,10 @@ const EditCall: React.FC = () => {
       <IonHeader>
         <IonToolbar className={styles.back}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref={`/tabs/convocatoria/${id}`} className={styles.icon_back} />
+            <IonBackButton
+              defaultHref={`/tabs/convocatoria/${id}`}
+              className={styles.icon_back}
+            />
           </IonButtons>
           <IonRow className={styles.title}>
             <IonCol size="auto">

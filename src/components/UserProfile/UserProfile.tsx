@@ -12,7 +12,7 @@ import { useParams } from "react-router";
 export const UserProfile: React.FC = () => {
   const { data, currentUser } = useAuth();
   const { id } = useParams<{ id: string }>();
-  const [datas, setData] = useState('')
+  const [datas, setData] = useState("");
 
   return (
     <>

@@ -19,3 +19,28 @@ export const getPlayersPostulationData = (
       callback(newData);
     });
 };
+
+export async function selectPostulant(
+  callId: string,
+  playerId: string,
+  isSelected: boolean
+) {
+  const res = await firestore.collection(COLLECTIONS.CALLS).doc(callId);
+  res.get().then((doc) => {
+    if (doc.exists) {
+      res.update({
+        postulatedPlayers: firebase.firestore.FieldValue.arrayRemove({
+          playerId,
+          isSelected,
+        }),
+      });
+    }
+    const changeSelected = !isSelected;
+    res.update({
+      postulatedPlayers: firebase.firestore.FieldValue.arrayUnion({
+        playerId,
+        isSelected: changeSelected,
+      }),
+    });
+  });
+}
