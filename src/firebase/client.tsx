@@ -45,28 +45,24 @@ export const getUserDoc = (
     });
 };
 
-export async function SetPersonalData(
+export function SetPersonalData(
   country: string,
   city: string,
   birth: string,
   contract: string,
   phone: number,
-  marketTransfer: string
+  marketTransfer?: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      phone: phone,
-      country: country,
-      city: city,
-      contract: contract,
-      birth: birth,
-      marketTransfer: marketTransfer,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    phone,
+    country,
+    city,
+    contract,
+    birth,
+    marketTransfer,
+  });
 }
 
 export async function SetInstitutionalData(
@@ -93,23 +89,20 @@ export async function SetInstitutionalData(
   }
 }
 
-export async function EditPositionData(
+export function EditPositionData(
   pospri: string,
   possec: string,
   goals: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      pospri: pospri,
-      possec: possec,
-      goals: goals,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    pospri,
+    possec,
+    goals,
+  });
 }
+
 export async function EditPsycoParameters(
   character: string,
   personality: Object,
@@ -165,7 +158,8 @@ export async function EditSportsGoalsData(
     return false;
   }
 }
-export async function AddCubExperience(
+
+export async function AddClubExperience(
   clubName: string,
   countryClub: string,
   season: number,
@@ -177,50 +171,46 @@ export async function AddCubExperience(
   TA: number,
   TR: number
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
-    res.get().then((doc) => {
-      if (doc.exists) {
-        if (typeof doc.data()?.club === undefined) {
-          res.update({
-            clubs: [
-              {
-                clubName: clubName,
-                countryClub: countryClub,
-                season: season,
-                subPlayer: subPlayer,
-                catTournament: catTournament,
-                PJ: PJ,
-                G: G,
-                A: A,
-                TA: TA,
-                TR: TR,
-              },
-            ],
-          });
-        } else {
-          res.update({
-            clubs: firebase.firestore.FieldValue.arrayUnion({
-              clubName: clubName,
-              countryClub: countryClub,
-              season: season,
-              subPlayer: subPlayer,
-              catTournament: catTournament,
-              PJ: PJ,
-              G: G,
-              A: A,
-              TA: TA,
-              TR: TR,
-            }),
-          });
-        }
+  const id = auth.currentUser?.uid;
+
+  const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
+  res.get().then((doc) => {
+    if (doc.exists) {
+      if (typeof doc.data()?.club === undefined) {
+        res.update({
+          clubs: [
+            {
+              clubName,
+              countryClub,
+              season,
+              subPlayer,
+              catTournament,
+              PJ,
+              G,
+              A,
+              TA,
+              TR,
+            },
+          ],
+        });
+      } else {
+        res.update({
+          clubs: firebase.firestore.FieldValue.arrayUnion({
+            clubName,
+            countryClub,
+            season,
+            subPlayer,
+            catTournament,
+            PJ,
+            G,
+            A,
+            TA,
+            TR,
+          }),
+        });
       }
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+    }
+  });
 }
 
 export async function AddInjuryExperienced(
@@ -228,36 +218,31 @@ export async function AddInjuryExperienced(
   recoveryTime: string,
   surgery: boolean
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
-    res.get().then((doc) => {
-      if (doc.exists) {
-        if (typeof doc.data()?.injuries === undefined) {
-          res.update({
-            injuries: [
-              {
-                injuryName: injuryName,
-                recoveryTime: recoveryTime,
-                surgery: surgery,
-              },
-            ],
-          });
-        } else {
-          res.update({
-            injuries: firebase.firestore.FieldValue.arrayUnion({
-              injuryName: injuryName,
-              recoveryTime: recoveryTime,
-              surgery: surgery,
-            }),
-          });
-        }
+  const id = auth.currentUser?.uid;
+  const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
+  res.get().then((doc) => {
+    if (doc.exists) {
+      if (typeof doc.data()?.injuries === undefined) {
+        res.update({
+          injuries: [
+            {
+              injuryName,
+              recoveryTime,
+              surgery,
+            },
+          ],
+        });
+      } else {
+        res.update({
+          injuries: firebase.firestore.FieldValue.arrayUnion({
+            injuryName,
+            recoveryTime,
+            surgery,
+          }),
+        });
       }
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+    }
+  });
 }
 
 export async function EditTacticalAttributes(

@@ -7,6 +7,7 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,
+  IonNote,
   IonPage,
   IonSelect,
   IonSelectOption,
@@ -19,37 +20,59 @@ import { EditPositionData } from "firebase/client";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { TacticalDataForm } from "types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import styles from "./styles.module.css";
+import { ERROR_MESSAGES } from "constants/errorMessages";
+import { useEffect } from "react";
+
+const schema = yup.object().shape({
+  pospri: yup.string().required(ERROR_MESSAGES.REQUIRED),
+});
 
 const EditTacticalInfo: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
-  const { currentUser } = useAuth();
-  const { reset, handleSubmit, register } = useForm();
+  const { currentUser, data } = useAuth();
+  const {
+    setValue,
+    clearErrors,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const onSubmit = async (
-    data: TacticalDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
-  ) => {
-    const { pospri, possec, goals } = data;
-    if (await EditPositionData(pospri, possec, goals)) {
+  useEffect(() => {
+    setValue("pospri", data?.pospri);
+    setValue("possec", data?.possec);
+    setValue("goals", data?.goals);
+  }, [data]);
+
+  const onSubmit = async (data: TacticalDataForm) => {
+    const { pospri } = data;
+    const possec = data.possec === undefined ? "" : data.possec;
+    const goals = data.goals === undefined ? "" : data.goals;
+    try {
+      await EditPositionData(pospri, possec, goals);
       present({
         message: "Se actualizó la información exitosamente",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
       history.goBack();
-    } else {
+    } catch {
       present({
-        message: "Seleccione la información requerida",
-        duration: 1000,
+        message: "Error al actualizar la información. Intentelo nuevamente...",
+        duration: 3000,
         position: "top",
         color: "danger",
       });
     }
-    e?.target.reset();
   };
+
   return (
     <IonPage>
       <IonHeader>
@@ -84,8 +107,10 @@ const EditTacticalInfo: React.FC = () => {
               okText="Listo"
               cancelText="Cerrar"
               slot="end"
-              value=""
               {...register("pospri")}
+              onIonChange={() => {
+                clearErrors("pospri");
+              }}
             >
               <IonSelectOption value="Portero">Portero</IonSelectOption>
               <IonSelectOption value="Carrilero Izquierdo">
@@ -132,13 +157,16 @@ const EditTacticalInfo: React.FC = () => {
               </IonSelectOption>
             </IonSelect>
           </IonItem>
+          {errors.pospri?.message && (
+            <IonNote color="danger">{errors.pospri?.message}</IonNote>
+          )}
+
           <IonItem className={styles.tactical_field}>
             <IonLabel>Posición Secundaria</IonLabel>
             <IonSelect
               okText="Listo"
               cancelText="Cerrar"
               slot="end"
-              value=""
               {...register("possec")}
             >
               <IonSelectOption value="POR">Portero</IonSelectOption>
@@ -158,8 +186,12 @@ const EditTacticalInfo: React.FC = () => {
               <IonSelectOption value="ED">Ext.Derecho</IonSelectOption>
             </IonSelect>
           </IonItem>
+
           <IonItem className={styles.tactical_field}>
-            <IonInput placeholder="Logros" {...register("goals")}></IonInput>
+            <IonLabel color="medium" position="floating">
+              Logros
+            </IonLabel>
+            <IonInput {...register("goals")}></IonInput>
           </IonItem>
         </form>
       </IonContent>

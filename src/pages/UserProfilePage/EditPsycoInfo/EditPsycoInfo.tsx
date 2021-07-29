@@ -20,24 +20,29 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { PsycoDataForm } from "types";
 import styles from "./styles.module.css";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { ERROR_MESSAGES } from "constants/errorMessages";
+
+const schema = yup.object().shape({
+  character: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  personality: yup.object().required(ERROR_MESSAGES.REQUIRED),
+  attitude: yup.string().required(ERROR_MESSAGES.REQUIRED),
+});
 
 const EditPsycoInfo: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
   const { currentUser } = useAuth();
 
-  const initialValues = {
-    character: "",
-    personality: {},
-    attitude: "",
-  };
-  const { reset, handleSubmit, register } = useForm({
-    defaultValues: initialValues,
+  const { handleSubmit, register, clearErrors,
+    setValue,
+    formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (
-    data: PsycoDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
+    data: PsycoDataForm
   ) => {
     const { character, personality, attitude } = data;
     if (await EditPsycoParameters(character, personality, attitude)) {
@@ -56,7 +61,6 @@ const EditPsycoInfo: React.FC = () => {
         color: "danger",
       });
     }
-    reset();
   };
 
   return (
@@ -94,7 +98,9 @@ const EditPsycoInfo: React.FC = () => {
               cancelText="Cerrar"
               slot="end"
               {...register("character")}
-              value=""
+              onIonChange={() => {
+                clearErrors("character");
+              }}
             >
               <IonSelectOption value="flematico">Flemático</IonSelectOption>
               <IonSelectOption value="colerico">Colérico</IonSelectOption>
@@ -109,6 +115,10 @@ const EditPsycoInfo: React.FC = () => {
               <IonSelectOption value="sensible">Sensible</IonSelectOption>
             </IonSelect>
           </IonItem>
+          {errors.character?.message && (
+            <IonNote color="danger">{errors.character?.message}</IonNote>
+          )}
+
           <IonItemDivider color="primary">
             <div className={styles.subtitle}>Parámetros de Personalidad</div>
           </IonItemDivider>
@@ -137,7 +147,9 @@ const EditPsycoInfo: React.FC = () => {
               cancelText="Cerrar"
               slot="end"
               {...register("personality")}
-              value=""
+              onIonChange={() => {
+                clearErrors("personality");
+              }}
             >
               <IonSelectOption
                 value={{
@@ -317,6 +329,10 @@ const EditPsycoInfo: React.FC = () => {
               </IonSelectOption>
             </IonSelect>
           </IonItem>
+          {errors.personality?.message && (
+            <IonNote color="danger">{errors.personality?.message}</IonNote>
+          )}
+
           <IonItemDivider color="primary">
             <div className={styles.subtitle}>Selecciona tu Actitud</div>
           </IonItemDivider>
@@ -327,7 +343,9 @@ const EditPsycoInfo: React.FC = () => {
               cancelText="Cerrar"
               slot="end"
               {...register("attitude")}
-              value=""
+              onIonChange={() => {
+                clearErrors("attitude");
+              }}
             >
               <IonSelectOption value="positiva">Positiva</IonSelectOption>
               <IonSelectOption value="derrotista">Derrotista</IonSelectOption>
@@ -343,6 +361,9 @@ const EditPsycoInfo: React.FC = () => {
               <IonSelectOption value="suspicaz">Suspicaz</IonSelectOption>
             </IonSelect>
           </IonItem>
+          {errors.attitude?.message && (
+            <IonNote color="danger">{errors.attitude?.message}</IonNote>
+          )}
         </form>
       </IonContent>
     </IonPage>

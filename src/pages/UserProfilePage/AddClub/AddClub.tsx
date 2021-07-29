@@ -6,6 +6,7 @@ import {
   IonInput,
   IonItem,
   IonItemDivider,
+  IonLabel,
   IonNote,
   IonPage,
   IonTitle,
@@ -18,7 +19,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import React from "react";
-import { AddCubExperience } from "firebase/client";
+import { AddClubExperience } from "firebase/client";
 import { useHistory } from "react-router";
 import { ClubDataForm } from "types";
 import { useAuth } from "contexts/AuthContext";
@@ -61,18 +62,6 @@ const schema = yup.object().shape({
 });
 
 export const AddClub: React.FC = () => {
-  const initialValues = {
-    clubName: "",
-    country: "",
-    season: 0,
-    subPlayer: "",
-    catTournament: "",
-    PJ: 0,
-    G: 0,
-    A: 0,
-    TA: 0,
-    TR: 0,
-  };
   const [present] = useIonToast();
   const history = useHistory();
   const { currentUser } = useAuth();
@@ -80,14 +69,10 @@ export const AddClub: React.FC = () => {
     register,
     handleSubmit,
     clearErrors,
-    reset,
     formState: { errors },
   } = useForm<ClubDataForm>({ resolver: yupResolver(schema) });
 
-  const onSubmit = async (
-    data: ClubDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
-  ) => {
+  const onSubmit = async (data: ClubDataForm) => {
     const {
       clubName,
       country,
@@ -100,8 +85,8 @@ export const AddClub: React.FC = () => {
       TA,
       TR,
     } = data;
-    if (
-      await AddCubExperience(
+    try {
+      await AddClubExperience(
         clubName,
         country,
         season,
@@ -112,16 +97,15 @@ export const AddClub: React.FC = () => {
         A,
         TA,
         TR
-      )
-    ) {
+      );
       present({
-        message: "Se agrego el club a tu experiencia",
+        message: "Se agregó el club a tu experiencia",
         duration: 1000,
         position: "top",
         color: "success",
       });
       history.goBack();
-    } else {
+    } catch {
       present({
         message: "Error al agregar la información intentelo nuevamente...",
         duration: 1000,
@@ -129,8 +113,8 @@ export const AddClub: React.FC = () => {
         color: "danger",
       });
     }
-    e?.target.reset();
   };
+
   return (
     <IonPage>
       <IonHeader>
@@ -160,8 +144,10 @@ export const AddClub: React.FC = () => {
         </IonItemDivider>
         <form onSubmit={handleSubmit(onSubmit)} id="add-club-info-form">
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              Ingrese el nombre del club
+            </IonLabel>
             <IonInput
-              placeholder="Ingrese el nombre del club"
               type="text"
               clearInput={true}
               {...register("clubName")}
@@ -174,8 +160,10 @@ export const AddClub: React.FC = () => {
             <IonNote color="danger">{errors.clubName?.message}</IonNote>
           )}
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              País del club
+            </IonLabel>
             <IonInput
-              placeholder="País del club"
               type="text"
               clearInput={true}
               {...register("country")}
@@ -188,8 +176,10 @@ export const AddClub: React.FC = () => {
             <IonNote color="danger">{errors.country?.message}</IonNote>
           )}
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              Año de temporada
+            </IonLabel>
             <IonInput
-              placeholder="Año de temporada"
               type="number"
               clearInput={true}
               {...register("season")}
@@ -202,8 +192,10 @@ export const AddClub: React.FC = () => {
             <IonNote color="danger">{errors.season?.message}</IonNote>
           )}
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              Categoría del jugador
+            </IonLabel>
             <IonInput
-              placeholder="Categoria del jugador"
               type="text"
               clearInput={true}
               {...register("subPlayer")}
@@ -216,8 +208,10 @@ export const AddClub: React.FC = () => {
             <IonNote color="danger">{errors.subPlayer?.message}</IonNote>
           )}
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              Nivel de la competencia
+            </IonLabel>
             <IonInput
-              placeholder="Nivel de la competencia"
               type="text"
               clearInput={true}
               {...register("catTournament")}
@@ -230,8 +224,10 @@ export const AddClub: React.FC = () => {
             <IonNote color="danger">{errors.catTournament?.message}</IonNote>
           )}
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              Total partidos jugados
+            </IonLabel>
             <IonInput
-              placeholder="Total partidos jugados"
               type="number"
               clearInput={true}
               {...register("PJ")}
@@ -244,8 +240,10 @@ export const AddClub: React.FC = () => {
             <IonNote color="danger">{errors.PJ?.message}</IonNote>
           )}
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              Total de goles
+            </IonLabel>
             <IonInput
-              placeholder="Total de goles"
               type="number"
               clearInput={true}
               {...register("G")}
@@ -258,8 +256,10 @@ export const AddClub: React.FC = () => {
             <IonNote color="danger">{errors.G?.message}</IonNote>
           )}
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              Total de asistencias
+            </IonLabel>
             <IonInput
-              placeholder="Total de asistencias"
               type="number"
               clearInput={true}
               {...register("A")}
@@ -272,8 +272,10 @@ export const AddClub: React.FC = () => {
             <IonNote color="danger">{errors.A?.message}</IonNote>
           )}
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              Tarjetas amarillas
+            </IonLabel>
             <IonInput
-              placeholder="Tarjetas amarillas"
               type="number"
               clearInput={true}
               {...register("TA")}
@@ -286,8 +288,10 @@ export const AddClub: React.FC = () => {
             <IonNote color="danger">{errors.TA?.message}</IonNote>
           )}
           <IonItem className={styles.club_field}>
+            <IonLabel color="medium" position="floating">
+              Tarjetas Rojas
+            </IonLabel>
             <IonInput
-              placeholder="Tarjetas Rojas"
               type="number"
               clearInput={true}
               {...register("TR")}

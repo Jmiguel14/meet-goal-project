@@ -4,6 +4,7 @@ import {
   IonIcon,
   IonItem,
   IonLabel,
+  IonNote,
   IonText,
 } from "@ionic/react";
 import {
@@ -54,11 +55,19 @@ const CareerInfo = () => {
             <IonCard className={styles.element}>
               <IonItem>
                 <IonIcon icon={barChartOutline} slot="start"></IonIcon>
+                <IonLabel>
                 <IonText>{club.subPlayer}</IonText>
+                <br/>
+                <IonNote>Categoría del jugador</IonNote>
+                </IonLabel>
               </IonItem>
               <IonItem>
                 <IonIcon icon={speedometerOutline} slot="start"></IonIcon>
+                <IonLabel>
                 <IonText>{club.catTournament}</IonText>
+                <br/>
+                <IonNote>Nivel de competencia</IonNote>
+                </IonLabel>
               </IonItem>
             </IonCard>
           </IonCard>

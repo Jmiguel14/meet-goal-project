@@ -16,7 +16,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -36,7 +36,6 @@ const schema = yup.object().shape({
 
 export const EditPersonalInfo: React.FC = () => {
   const [present] = useIonToast();
-  const [selectedDate, setSelectedDate] = useState<string>("");
   const history = useHistory();
   const { currentUser, data } = useAuth();
 
@@ -50,44 +49,44 @@ export const EditPersonalInfo: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(()=> {
-    setValue('phone', data?.phone)
-    setValue('country', data?.country)
-    setValue('city', data?.city)
-    setValue('contract', data?.contract)
-    setValue('marketTransfer', data?.marketTransfer)
-    setValue('birth', data?.birth)
-  }, [data])
+  useEffect(() => {
+    setValue("phone", data?.phone);
+    setValue("country", data?.country);
+    setValue("city", data?.city);
+    setValue("contract", data?.contract);
+    setValue("marketTransfer", data?.marketTransfer);
+    setValue("birth", data?.birth);
+  }, [data]);
 
-  const onSubmit = async (
-    data: PersonalDataForm
-  ) => {
-    const { phone, country, city, birth, contract, marketTransfer } =
-      data;
-      try {
-        await SetPersonalData(
-          country,
-          city,
-          birth,
-          contract,
-          phone,
-          marketTransfer
-        )
-        present({
-          message: "Se actualizó la información exitosamente",
-          duration: 3000,
-          position: "top",
-          color: "success",
-        });
-        history.goBack();
-      } catch{
-        present({
-          message: "Error al actualizar la información. Intentelo nuevamente...",
-          duration: 3000,
-          position: "top",
-          color: "danger",
-        });
-      }
+  const onSubmit = async (data: PersonalDataForm) => {
+    const { phone, country, city, birth, contract } = data;
+    console.log("data", data);
+    const marketTransfer =
+      data.marketTransfer === undefined ? "" : data.marketTransfer;
+    try {
+      await SetPersonalData(
+        country,
+        city,
+        birth,
+        contract,
+        phone,
+        marketTransfer
+      );
+      present({
+        message: "Se actualizó la información exitosamente",
+        duration: 3000,
+        position: "top",
+        color: "success",
+      });
+      history.goBack();
+    } catch {
+      present({
+        message: "Error al actualizar la información. Intentelo nuevamente...",
+        duration: 3000,
+        position: "top",
+        color: "danger",
+      });
+    }
   };
 
   return (
@@ -114,7 +113,7 @@ export const EditPersonalInfo: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className={styles.back}>
-        {console.log('render')}
+        {console.log("render")}
         <IonItemDivider color="primary">
           <div className={styles.subtitle}>
             Edita aquí tu Información Personal
@@ -134,13 +133,12 @@ export const EditPersonalInfo: React.FC = () => {
               }}
             ></IonInput>
           </IonItem>
-
           {errors.country?.message && (
             <IonNote color="danger">{errors.country?.message}</IonNote>
           )}
 
           <IonItem className={styles.personal_data}>
-          <IonLabel color="medium" position="floating">
+            <IonLabel color="medium" position="floating">
               Ciudad
             </IonLabel>
             <IonInput
@@ -180,9 +178,15 @@ export const EditPersonalInfo: React.FC = () => {
               displayFormat="MMM/DD/YY"
               monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
               {...register("birth")}
-              onIonChange={(e) => setSelectedDate(e.detail.value!)}
+              onIonChange={() => {
+                clearErrors("birth");
+              }}
             ></IonDatetime>
           </IonItem>
+          {errors.birth?.message && (
+            <IonNote color="danger">{errors.birth?.message}</IonNote>
+          )}
+
           <IonItem className={styles.personal_data}>
             <IonLabel color="medium">Estado Contractual</IonLabel>
             <IonSelect
@@ -203,7 +207,7 @@ export const EditPersonalInfo: React.FC = () => {
           )}
 
           <IonItem className={styles.personal_data}>
-          <IonLabel color="medium" position="floating">
+            <IonLabel color="medium" position="floating">
               Enlace de Market Transfer
             </IonLabel>
             <IonInput

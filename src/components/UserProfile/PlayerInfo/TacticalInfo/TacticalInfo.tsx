@@ -15,8 +15,6 @@ import { useAuth } from "contexts/AuthContext";
 import SkillIcon from "icons/skillIcon.png";
 import { useParams } from "react-router";
 
-interface ContainerProps {}
-
 const TacticalInfo = () => {
   const { data, currentUser } = useAuth();
   const { id } = useParams<{ id: string }>();
@@ -26,7 +24,9 @@ const TacticalInfo = () => {
       <IonCard className={styles.positional_data}>
         <IonItem className={styles.title}>
           <IonLabel>
-            {data?.pospri !== undefined ? data?.pospri : "Posición Principal"}
+            {data?.pospri === undefined || data?.pospri === ""
+              ? "Posición Principal"
+              : data?.pospri}
           </IonLabel>
           {currentUser.uid === id ? (
             <IonButton
@@ -46,7 +46,9 @@ const TacticalInfo = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText>
-            {data?.possec !== undefined ? data?.possec : "Posición Secundaria"}
+            {data?.possec === undefined || data?.possec === ""
+              ? "Posición Secundaria"
+              : data?.possec}
           </IonText>
         </IonItem>
         <IonItem className={styles.element}>
@@ -56,7 +58,9 @@ const TacticalInfo = () => {
             className="ion-padding-vertical"
           ></IonImg>
           <IonText>
-            {data?.goals !== undefined ? data?.goals : "Logros"}
+            {data?.goals === undefined || data?.goals === ""
+              ? "Logros"
+              : data?.goals}
           </IonText>
         </IonItem>
       </IonCard>
