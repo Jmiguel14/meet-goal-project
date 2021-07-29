@@ -233,7 +233,7 @@ const CallDetails: React.FC = () => {
                               postulation.isSelected ? "danger" : "success"
                             }
                             onClick={() =>
-                              selectPostulant(
+                              selectPostulationsPlayers(
                                 callData?.id,
                                 postulation.playerId,
                                 postulation.isSelected
