@@ -24,7 +24,7 @@ import { USER_TYPES } from "constants/userTypes";
 const SearchForPlayer: React.FC = () => {
   const { segment: paramSegment } = useParams<{ segment: string }>();
   const [segment, setSegment] = useState<string>(paramSegment);
-  const currentUserData = useCurrentUserData()
+  const currentUserData = useCurrentUserData();
 
   useEffect(() => {
     setSegment(paramSegment);
@@ -61,32 +61,32 @@ const SearchForPlayer: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {
-          currentUserData?.userType === USER_TYPES.JUGADOR ? (
-            <>
+        {currentUserData?.userType === USER_TYPES.JUGADOR ? (
+          <>
             <IonRow className={styles.segments}>
-          <IonCol size="12">
-            <IonSegment scrollable value={segment} onIonChange={handleChange}>
-              <IonSegmentButton value="clubs">
-                <IonLabel>Clubes</IonLabel>
-              </IonSegmentButton>
-              <IonSegmentButton value="calls">
-                <IonLabel>Convocatorias</IonLabel>
-              </IonSegmentButton>
-              <IonSegmentButton value="players">
-                <IonLabel>Jugadores</IonLabel>
-              </IonSegmentButton>
-            </IonSegment>
-          </IonCol>
-        </IonRow>
-          {segment && SEGMENTS[segment]}
-            </>
-          ):
-            (
-              <>
-              {segment && SEGMENTS[segment]}
-              </>
-            )}
+              <IonCol size="12">
+                <IonSegment
+                  scrollable
+                  value={segment}
+                  onIonChange={handleChange}
+                >
+                  <IonSegmentButton value="clubs">
+                    <IonLabel>Clubes</IonLabel>
+                  </IonSegmentButton>
+                  <IonSegmentButton value="calls">
+                    <IonLabel>Convocatorias</IonLabel>
+                  </IonSegmentButton>
+                  <IonSegmentButton value="players">
+                    <IonLabel>Jugadores</IonLabel>
+                  </IonSegmentButton>
+                </IonSegment>
+              </IonCol>
+            </IonRow>
+            {segment && SEGMENTS[segment]}
+          </>
+        ) : (
+          <>{segment && SEGMENTS[segment]}</>
+        )}
       </IonContent>
     </IonPage>
   );
