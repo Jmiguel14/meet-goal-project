@@ -114,7 +114,9 @@ const CallDetails: React.FC = () => {
     playerId: string,
     isSelected: false
   ) => {
-    if (!(await selectPostulant(callId, playerId, !isSelected))) {
+    try {
+      await selectPostulant(callId, playerId, isSelected);
+    } catch (e) {
       present({
         message: "Error, intente nuevamente",
         duration: 1000,
@@ -231,7 +233,7 @@ const CallDetails: React.FC = () => {
                               postulation.isSelected ? "danger" : "success"
                             }
                             onClick={() =>
-                              selectPostulationsPlayers(
+                              selectPostulant(
                                 callData?.id,
                                 postulation.playerId,
                                 postulation.isSelected

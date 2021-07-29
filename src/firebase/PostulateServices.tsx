@@ -25,27 +25,22 @@ export async function selectPostulant(
   playerId: string,
   isSelected: boolean
 ) {
-  try {
-    const res = await firestore.collection(COLLECTIONS.CALLS).doc(callId);
-    res.get().then((doc) => {
-      if (doc.exists) {
-        const changeSelected = !isSelected;
-        res.update({
-          postulatedPlayers: firebase.firestore.FieldValue.arrayRemove({
-            playerId,
-            isSelected: changeSelected,
-          }),
-        });
-      }
+  const res = await firestore.collection(COLLECTIONS.CALLS).doc(callId);
+  res.get().then((doc) => {
+    if (doc.exists) {
       res.update({
-        postulatedPlayers: firebase.firestore.FieldValue.arrayUnion({
+        postulatedPlayers: firebase.firestore.FieldValue.arrayRemove({
           playerId,
           isSelected,
         }),
       });
+    }
+    const changeSelected = !isSelected;
+    res.update({
+      postulatedPlayers: firebase.firestore.FieldValue.arrayUnion({
+        playerId,
+        isSelected: changeSelected,
+      }),
     });
-    return true;
-  } catch (error) {
-    return false;
-  }
+  });
 }
