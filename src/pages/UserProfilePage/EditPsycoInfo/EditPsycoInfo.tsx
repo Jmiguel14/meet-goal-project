@@ -23,29 +23,38 @@ import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ERROR_MESSAGES } from "constants/errorMessages";
+import { useEffect } from "react";
 
 const schema = yup.object().shape({
   character: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  personality: yup.object().required(ERROR_MESSAGES.REQUIRED),
   attitude: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
 
 const EditPsycoInfo: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
-  const { currentUser } = useAuth();
+  const { currentUser, data } = useAuth();
 
-  const { handleSubmit, register, clearErrors,
+  const {
+    handleSubmit,
+    register,
+    clearErrors,
     setValue,
-    formState: { errors } } = useForm({
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (
-    data: PsycoDataForm
-  ) => {
+  useEffect(() => {
+    setValue("character", data?.character);
+    setValue("personality", data?.personality);
+    setValue("attitude", data?.attitude);
+  }, [data]);
+
+  const onSubmit = async (data: PsycoDataForm) => {
     const { character, personality, attitude } = data;
-    if (await EditPsycoParameters(character, personality, attitude)) {
+    try {
+      await EditPsycoParameters(character, personality, attitude);
       present({
         message: "Se actualizó la información exitosamente",
         duration: 1000,
@@ -53,7 +62,7 @@ const EditPsycoInfo: React.FC = () => {
         color: "success",
       });
       history.goBack();
-    } else {
+    } catch {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
         duration: 1000,
@@ -102,17 +111,17 @@ const EditPsycoInfo: React.FC = () => {
                 clearErrors("character");
               }}
             >
-              <IonSelectOption value="flematico">Flemático</IonSelectOption>
-              <IonSelectOption value="colerico">Colérico</IonSelectOption>
-              <IonSelectOption value="seunguineo">Senguíneo</IonSelectOption>
-              <IonSelectOption value="apatico">Apático</IonSelectOption>
-              <IonSelectOption value="apasionado">Apasionado</IonSelectOption>
-              <IonSelectOption value="sentimental">Sentimental</IonSelectOption>
-              <IonSelectOption value="nervioso">Nervioso</IonSelectOption>
-              <IonSelectOption value="amorfo">Amorfo</IonSelectOption>
-              <IonSelectOption value="inseguro">Inseguro</IonSelectOption>
-              <IonSelectOption value="obsesivo">Obsesivo</IonSelectOption>
-              <IonSelectOption value="sensible">Sensible</IonSelectOption>
+              <IonSelectOption value="Flamático">Flemático</IonSelectOption>
+              <IonSelectOption value="Colérico">Colérico</IonSelectOption>
+              <IonSelectOption value="Senguíneo">Senguíneo</IonSelectOption>
+              <IonSelectOption value="Apático">Apático</IonSelectOption>
+              <IonSelectOption value="Apasionado">Apasionado</IonSelectOption>
+              <IonSelectOption value="Sentimental">Sentimental</IonSelectOption>
+              <IonSelectOption value="Nervioso">Nervioso</IonSelectOption>
+              <IonSelectOption value="Amorfo">Amorfo</IonSelectOption>
+              <IonSelectOption value="Inseguro">Inseguro</IonSelectOption>
+              <IonSelectOption value="Obsesivo">Obsesivo</IonSelectOption>
+              <IonSelectOption value="Sensible">Sensible</IonSelectOption>
             </IonSelect>
           </IonItem>
           {errors.character?.message && (
@@ -147,9 +156,6 @@ const EditPsycoInfo: React.FC = () => {
               cancelText="Cerrar"
               slot="end"
               {...register("personality")}
-              onIonChange={() => {
-                clearErrors("personality");
-              }}
             >
               <IonSelectOption
                 value={{
@@ -347,18 +353,18 @@ const EditPsycoInfo: React.FC = () => {
                 clearErrors("attitude");
               }}
             >
-              <IonSelectOption value="positiva">Positiva</IonSelectOption>
-              <IonSelectOption value="derrotista">Derrotista</IonSelectOption>
-              <IonSelectOption value="pasiva">Pasiva</IonSelectOption>
-              <IonSelectOption value="altruista">Altruista</IonSelectOption>
-              <IonSelectOption value="neutra">Neutra</IonSelectOption>
-              <IonSelectOption value="agresiva">Agresiva</IonSelectOption>
-              <IonSelectOption value="empatica">Empática</IonSelectOption>
-              <IonSelectOption value="flexible">Flexible</IonSelectOption>
-              <IonSelectOption value="inflexible">Inflexible</IonSelectOption>
-              <IonSelectOption value="moralista">Moralista</IonSelectOption>
-              <IonSelectOption value="nihilista">Nihilista</IonSelectOption>
-              <IonSelectOption value="suspicaz">Suspicaz</IonSelectOption>
+              <IonSelectOption value="Positiva">Positiva</IonSelectOption>
+              <IonSelectOption value="Derrotista">Derrotista</IonSelectOption>
+              <IonSelectOption value="Pasiva">Pasiva</IonSelectOption>
+              <IonSelectOption value="Altruista">Altruista</IonSelectOption>
+              <IonSelectOption value="Neutra">Neutra</IonSelectOption>
+              <IonSelectOption value="Agresiva">Agresiva</IonSelectOption>
+              <IonSelectOption value="Empática">Empática</IonSelectOption>
+              <IonSelectOption value="Flexible">Flexible</IonSelectOption>
+              <IonSelectOption value="Inflexible">Inflexible</IonSelectOption>
+              <IonSelectOption value="Moralista">Moralista</IonSelectOption>
+              <IonSelectOption value="Nihilista">Nihilista</IonSelectOption>
+              <IonSelectOption value="Suspicaz">Suspicaz</IonSelectOption>
             </IonSelect>
           </IonItem>
           {errors.attitude?.message && (

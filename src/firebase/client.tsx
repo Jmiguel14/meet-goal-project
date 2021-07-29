@@ -103,22 +103,17 @@ export function EditPositionData(
   });
 }
 
-export async function EditPsycoParameters(
+export function EditPsycoParameters(
   character: string,
   personality: Object,
   attitude: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      character: character,
-      personality: personality,
-      attitude: attitude,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+      character,
+      personality,
+      attitude,
+  });
 }
 export async function EditChannelsLinks(
   facebook: string,

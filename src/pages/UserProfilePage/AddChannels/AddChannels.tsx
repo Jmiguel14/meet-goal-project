@@ -22,10 +22,28 @@ import {
   logoVimeo,
   logoYoutube,
 } from "ionicons/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import styles from "./styles.module.css";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { ERROR_MESSAGES } from "constants/errorMessages";
+interface ChanelsForm {
+  facebook: string
+  twitter: string
+  instagram: string
+  vimeo: string
+  youtube: string
+}
+
+const schema = yup.object().shape({
+  facebook: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  twitter: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  instagram: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  vimeo: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  youtube: yup.string().required(ERROR_MESSAGES.REQUIRED),
+});
 
 const AddChannels: React.FC = () => {
   const [facebook, setFacebook] = useState<string>("");
@@ -33,30 +51,55 @@ const AddChannels: React.FC = () => {
   const [instagram, setInstagram] = useState<string>("");
   const [vimeo, setVimeo] = useState<string>("");
   const [youtube, setYoutube] = useState<string>("");
-  const { reset, handleSubmit } = useForm();
   const [present] = useIonToast();
   const history = useHistory();
   const { currentUser } = useAuth();
+  const {
+    handleSubmit,
+    register,
+    clearErrors,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const onSubmit = async () => {
-    if (await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo)) {
+  useEffect(() => {
+    const errorlength = Object.keys(errors).length
+    console.log(errorlength)
+    if(errorlength === 5){
       present({
-        message: "Se ha actualizado la inforamción de tus redes",
-        duration: 1000,
+        message: "Debe ingresar al menos un canal",
+        duration: 3000,
         position: "top",
-        color: "success",
+        color: "warning",
       });
-      history.goBack();
-    } else {
-      present({
-        message: "Error al actualizar la información. Intentelo nuevamente...",
-        duration: 1000,
-        position: "top",
-        color: "success",
-      });
-    }
-    reset();
+    } 
+  }, [errors])
+  
+
+  const onSubmit = async (data: ChanelsForm) => {
+    console.log('data', data)
+    const errorlength = errors.length
+    console.log(errorlength)
+    // if (await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo)) {
+    //   present({
+    //     message: "Se ha actualizado la inforamción de tus redes",
+    //     duration: 1000,
+    //     position: "top",
+    //     color: "success",
+    //   });
+    //   history.goBack();
+    // } else {
+    //   present({
+    //     message: "Error al actualizar la información. Intentelo nuevamente...",
+    //     duration: 1000,
+    //     position: "top",
+    //     color: "success",
+    //   });
+    // }
   };
+
   return (
     <IonPage>
       <IonHeader>
@@ -90,8 +133,9 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoFacebook}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Facebook: Ej. www.facebook.com/meet-goal-official-page"
-              onIonChange={(e: any) => setFacebook(e.currentTarget.value)}
+              placeholder="Ej. www.facebook.com/meet-goal-official-page"
+              {...register('facebook')}
+              onIonChange={() => clearErrors()}
             ></IonInput>
           </IonItem>
           <IonItem className={styles.network}>
@@ -99,8 +143,9 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoTwitter}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Twitter: Ej. www.twitter.com/MeetGoalOfficial"
-              onIonChange={(e: any) => setTwitter(e.currentTarget.value)}
+              placeholder="Ej. www.twitter.com/MeetGoalOfficial"
+              {...register('twitter')}
+              onIonChange={() => clearErrors()}
             ></IonInput>
           </IonItem>
           <IonItem className={styles.network}>
@@ -108,8 +153,9 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoInstagram}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Instagram: Ej. www.instagram.com/MeetGoalOfficial"
-              onIonChange={(e: any) => setInstagram(e.currentTarget.value)}
+              placeholder="Ej. www.instagram.com/MeetGoalOfficial"
+              {...register('instagram')}
+              onIonChange={() => clearErrors()}
             ></IonInput>
           </IonItem>
           <IonItem className={styles.network}>
@@ -117,8 +163,9 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoYoutube}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Youtube: Ej. www.youtube.com/channel/UcsqpqcxtErZpw"
-              onIonChange={(e: any) => setYoutube(e.currentTarget.value)}
+              placeholder="Ej. www.youtube.com/channel/UcsqpqcxtErZpw"
+              {...register('youtube')}
+              onIonChange={() => clearErrors()}
             ></IonInput>
           </IonItem>
           <IonItem className={styles.network}>
@@ -126,8 +173,9 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoVimeo}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Vimeo: Ej. www.vimeo.com/userZZZZZZZZ"
-              onIonChange={(e: any) => setVimeo(e.currentTarget.value)}
+              placeholder="Ej. www.vimeo.com/user"
+              {...register('vimeo')}
+              onIonChange={() => clearErrors()}
             ></IonInput>
           </IonItem>
         </form>
