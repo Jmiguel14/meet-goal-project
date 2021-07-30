@@ -17,7 +17,7 @@ import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import { SportsGoalsDataForm } from "types";
 import { EditSportsGoalsData } from "firebase/client";
@@ -33,27 +33,30 @@ const schema = yup.object().shape({
 });
 
 export const EditSportsGoalsInfo: React.FC = () => {
-  const initialValues = {
-    maxNacGoal: "",
-    maxIntGoal: "",
-  };
   const [present] = useIonToast();
   const history = useHistory();
-  const { currentUser } = useAuth();
+  const { currentUser, data } = useAuth();
+
   const {
     register,
     handleSubmit,
     clearErrors,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm<SportsGoalsDataForm>({ resolver: yupResolver(schema) });
 
+  useEffect(() => {
+    setValue("totalWins", data?.totalWins);
+    setValue("maxNacGoal", data?.maxNacGoal);
+    setValue("maxIntGoal", data?.maxIntGoal);
+  }, [data]);
+
   const onSubmit = async (
-    data: SportsGoalsDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
+    data: SportsGoalsDataForm
   ) => {
     const { totalWins, maxNacGoal, maxIntGoal } = data;
-    if (await EditSportsGoalsData(totalWins, maxNacGoal, maxIntGoal)) {
+    try {
+      await EditSportsGoalsData(totalWins, maxNacGoal, maxIntGoal)
       present({
         message: "Se agrego el club a tu experiencia",
         duration: 1000,
@@ -61,7 +64,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
         color: "success",
       });
       history.goBack();
-    } else {
+    } catch {
       present({
         message: "Error al agregar la información intentelo nuevamente...",
         duration: 1000,
@@ -69,7 +72,6 @@ export const EditSportsGoalsInfo: React.FC = () => {
         color: "danger",
       });
     }
-    e?.target.reset();
   };
   return (
     <IonPage>

@@ -67,26 +67,20 @@ export function SetPersonalData(
 
 export async function SetInstitutionalData(
   socialName: string,
-  email: string,
   city: string,
   country: string,
   phone: number,
   foundation: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      socialName,
-      email,
-      city,
-      country,
-      phone,
-      foundation,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    socialName,
+    city,
+    country,
+    phone,
+    foundation,
+  });
 }
 
 export function EditPositionData(
@@ -133,22 +127,18 @@ export function EditChannelsLinks(
   });
 }
 
-export async function EditSportsGoalsData(
+export function EditSportsGoalsData(
   totalWins: number,
   maxNacGoal: string,
   maxIntGoal: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      totalWins,
-      maxNacGoal,
-      maxIntGoal,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    totalWins,
+    maxNacGoal,
+    maxIntGoal,
+  });
 }
 
 export async function AddClubExperience(
