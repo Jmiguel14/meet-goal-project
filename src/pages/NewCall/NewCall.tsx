@@ -41,9 +41,6 @@ const schema = yup.object().shape({
 
 const NewCall: React.FC = () => {
   const [present] = useIonToast();
-  const [selectedDateStart, setSelectedDateStart] = useState<string>("");
-  const [selectedDateEnd, setSelectedDateEnd] = useState<string>("");
-  const [text, setText] = useState<string>("");
   const { currentUser } = useAuth();
   const history = useHistory();
 
@@ -59,8 +56,6 @@ const NewCall: React.FC = () => {
     register,
     handleSubmit,
     clearErrors,
-    reset,
-    setValue,
     formState: { errors },
   } = useForm<NewCallDataForm>({
     defaultValues: initialValues,
@@ -68,11 +63,11 @@ const NewCall: React.FC = () => {
   });
 
   const onSubmit = async (
-    data: NewCallDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
+    data: NewCallDataForm
   ) => {
+    console.log('data', data)
     const { ageRequired, posRequired, startDate, endDate, extraDetails } = data;
-    if (
+    try {
       await addNewClubCall(
         currentUser.uid,
         ageRequired,
@@ -81,32 +76,23 @@ const NewCall: React.FC = () => {
         endDate,
         extraDetails
       )
-    ) {
       present({
         message: "Se agrego su convocatoria correctamente",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
-      e?.target.reset();
-      history.push("/tabs/convocatorias-creadas");
-    } else {
+      history.goBack();
+    } catch {
       present({
         message: "Error al crear la convocatoria",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });
     }
   };
 
-  useIonViewWillEnter(() => {
-    setValue("ageRequired", "");
-    setValue("posRequired", "");
-    setValue("startDate", "");
-    setValue("endDate", "");
-    setValue("extraDetails", "");
-  });
   return (
     <IonPage>
       <IonHeader>
@@ -251,7 +237,6 @@ const NewCall: React.FC = () => {
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("startDate")}
                     onIonChange={(e) => {
-                      setSelectedDateStart(e.detail.value!);
                       clearErrors("startDate");
                     }}
                   ></IonDatetime>
@@ -271,7 +256,6 @@ const NewCall: React.FC = () => {
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("endDate")}
                     onIonChange={(e) => {
-                      setSelectedDateEnd(e.detail.value!);
                       clearErrors("endDate");
                     }}
                   ></IonDatetime>
@@ -291,9 +275,7 @@ const NewCall: React.FC = () => {
                 <IonTextarea
                   className={styles.extra}
                   placeholder="Describa aquí detalles extras de la convocatoria"
-                  value={text}
                   {...register("extraDetails")}
-                  onIonChange={(e) => setText(e.detail.value!)}
                 ></IonTextarea>
               </IonItem>
             </IonRow>

@@ -133,7 +133,6 @@ const AddInjury: React.FC = () => {
               onIonChange={(e) => {
                 const isChecked = e.detail.checked
                 setIsChecked(isChecked)
-                console.log('ToggelValue', isChecked)
               }}
             />
           </IonItem>

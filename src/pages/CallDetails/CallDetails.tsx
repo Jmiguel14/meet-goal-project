@@ -28,6 +28,7 @@ import { useAuth } from "contexts/AuthContext";
 import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
+import { converterDate } from "utils/converterDate";
 
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
@@ -130,6 +131,7 @@ const CallDetails: React.FC = () => {
               </h1>
             </IonLabel>
             <IonText className={styles.club_location}>{clubData?.name}</IonText>
+            <IonText className={styles.endDate}>Termina el {converterDate(callData?.endDate)}</IonText>
           </IonItem>
           <IonItemDivider color="primary">
             <div className={styles.request}>Requerimos</div>

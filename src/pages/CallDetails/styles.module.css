@@ -28,6 +28,7 @@
   font-style: normal;
 }
 .club_location {
+  padding-top: 5px;
   font-size: 18px !important;
   font-style: normal;
 }
@@ -77,4 +78,8 @@
   font-size: 16px !important;
   font-style: normal;
   color: #c8aba4;
+}
+
+.endDate {
+  padding-top: 10px;
 }

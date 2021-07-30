@@ -1,6 +1,5 @@
 import {
   IonBackButton,
-  IonButton,
   IonButtons,
   IonCol,
   IonContent,
@@ -21,13 +20,11 @@ import {
   useIonToast,
 } from "@ionic/react";
 import {
-  arrowBack,
   calendarClearOutline,
   calendarOutline,
 } from "ionicons/icons";
 import styles from "./styles.module.css";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { useAuth } from "contexts/AuthContext";
+import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { getACallData, saveCallChanges } from "firebase/callServices";
@@ -45,14 +42,10 @@ const schema = yup.object().shape({
 });
 
 const EditCall: React.FC = () => {
-  const { id } = useParams<{ id?: string }>();
-  const { currentUser } = useAuth();
+  const { id } = useParams<{ id: string }>();
   const [present] = useIonToast();
   const history = useHistory();
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
-  const [selectedDateStart, setSelectedDateStart] = useState<string>("");
-  const [selectedDateEnd, setSelectedDateEnd] = useState<string>("");
-  const [text, setText] = useState<string>("");
 
   useEffect(() => {
     const unsubscribe = getACallData(id, (data) => {
@@ -65,40 +58,52 @@ const EditCall: React.FC = () => {
     register,
     handleSubmit,
     clearErrors,
-    reset,
     setValue,
     formState: { errors },
   } = useForm<NewCallDataForm>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (
-    data: NewCallDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
-  ) => {
+  useEffect(() => {
+    if (callData) {
+      const parseStartDate = new Date(
+        callData.startDate.seconds * 1000
+      ).toISOString();
+      const parseEndDate = new Date(
+        callData.endDate.seconds * 1000
+      ).toISOString();
+      setValue("startDate", parseStartDate);
+      setValue("endDate", parseEndDate);
+      setValue("ageRequired", callData.ageRequired);
+      setValue("posRequired", callData.posRequired);
+      callData.extraDetails === undefined
+        ? setValue("extraDetails", "")
+        : setValue("extraDetails", callData.extraDetails);
+    }
+  }, [callData]);
+
+  const onSubmit = async (data: NewCallDataForm) => {
     const { ageRequired, posRequired, startDate, endDate, extraDetails } = data;
-    if (
+    try {
       await saveCallChanges(
-        id!,
+        id,
         ageRequired,
         posRequired,
         startDate,
         endDate,
         extraDetails
-      )
-    ) {
+      );
       present({
         message: "Se edito convocatoria correctamente",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
-      e?.target.reset();
       history.goBack();
-    } else {
+    } catch {
       present({
         message: "Error al edtar la convocatoria",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });
@@ -110,7 +115,10 @@ const EditCall: React.FC = () => {
       <IonHeader>
         <IonToolbar className={styles.back}>
           <IonButtons slot="start">
-            <IonBackButton defaultHref={`/tabs/convocatoria/${id}`} className={styles.icon_back} />
+            <IonBackButton
+              defaultHref={`/tabs/convocatoria/${id}`}
+              className={styles.icon_back}
+            />
           </IonButtons>
           <IonRow className={styles.title}>
             <IonCol size="auto">
@@ -250,8 +258,7 @@ const EditCall: React.FC = () => {
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("startDate")}
-                    onIonChange={(e) => {
-                      setSelectedDateStart(e.detail.value!);
+                    onIonChange={() => {
                       clearErrors("startDate");
                     }}
                   ></IonDatetime>
@@ -270,8 +277,7 @@ const EditCall: React.FC = () => {
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("endDate")}
-                    onIonChange={(e) => {
-                      setSelectedDateEnd(e.detail.value!);
+                    onIonChange={() => {
                       clearErrors("endDate");
                     }}
                   ></IonDatetime>
@@ -291,9 +297,7 @@ const EditCall: React.FC = () => {
                 <IonTextarea
                   className={styles.extra}
                   placeholder="Describa aquí detalles extras de la convocatoria"
-                  value={text}
                   {...register("extraDetails")}
-                  onIonChange={(e) => setText(e.detail.value!)}
                 ></IonTextarea>
               </IonItem>
             </IonRow>
