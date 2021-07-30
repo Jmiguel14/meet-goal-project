@@ -110,32 +110,29 @@ export function EditPsycoParameters(
 ) {
   const id = auth.currentUser?.uid;
   firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      character,
-      personality,
-      attitude,
+    character,
+    personality,
+    attitude,
   });
 }
-export async function EditChannelsLinks(
+export function EditChannelsLinks(
   facebook: string,
   twitter: string,
   instagram: string,
   youtube: string,
   vimeo: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      facebook: facebook,
-      twitter: twitter,
-      instagram: instagram,
-      youtube: youtube,
-      vimeo: vimeo,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    facebook,
+    twitter,
+    instagram,
+    youtube,
+    vimeo,
+  });
 }
+
 export async function EditSportsGoalsData(
   totalWins: number,
   maxNacGoal: string,

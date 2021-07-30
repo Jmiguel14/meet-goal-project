@@ -22,13 +22,10 @@ import {
   logoVimeo,
   logoYoutube,
 } from "ionicons/icons";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import styles from "./styles.module.css";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { ERROR_MESSAGES } from "constants/errorMessages";
 interface ChanelsForm {
   facebook: string;
   twitter: string;
@@ -37,75 +34,78 @@ interface ChanelsForm {
   youtube: string;
 }
 
-// const schema = yup.object().shape({
-//   facebook: yup.string().required(ERROR_MESSAGES.REQUIRED),
-//   twitter: yup.string().required(ERROR_MESSAGES.REQUIRED),
-//   instagram: yup.string().required(ERROR_MESSAGES.REQUIRED),
-//   vimeo: yup.string().required(ERROR_MESSAGES.REQUIRED),
-//   youtube: yup.string().required(ERROR_MESSAGES.REQUIRED),
-// });
-
 const AddChannels: React.FC = () => {
-  const [facebook, setFacebook] = useState<string>("");
-  const [twitter, setTwitter] = useState<string>("");
-  const [instagram, setInstagram] = useState<string>("");
-  const [vimeo, setVimeo] = useState<string>("");
-  const [youtube, setYoutube] = useState<string>("");
   const [present] = useIonToast();
   const history = useHistory();
-  const [isFormSet, setIsFormSet] = useState(false);
-  const { currentUser } = useAuth();
-  const {
-    handleSubmit,
-    register,
-    clearErrors,
-    setValue,
-    formState: { errors },
-  } = useForm();
+  const { currentUser, data } = useAuth();
+
+  const initialValues = {
+    facebook: "",
+    twitter: "",
+    instagram: "",
+    vimeo: "",
+    youtube: "",
+  };
 
   useEffect(() => {
-    const errorlength = Object.keys(errors).length;
-    console.log(errorlength);
-    if (errorlength === 5) {
-      present({
-        message: "Debe ingresar al menos un canal",
-        duration: 3000,
-        position: "top",
-        color: "warning",
-      });
+    if (data) {
+      const { facebook, twitter, instagram, youtube, vimeo } = data;
+      facebook === undefined
+        ? setValue("facebook", "")
+        : setValue("facebook", facebook);
+      twitter === undefined
+        ? setValue("twitter", "")
+        : setValue("twitter", twitter);
+      instagram === undefined
+        ? setValue("instagram", "")
+        : setValue("instagram", instagram);
+      vimeo === undefined ? setValue("vimeo", "") : setValue("vimeo", vimeo);
+      youtube === undefined
+        ? setValue("youtube", "")
+        : setValue("youtube", youtube);
     }
-  }, [errors]);
+  }, [data]);
+
+  const { handleSubmit, register, setValue } = useForm({
+    defaultValues: initialValues,
+  });
 
   const onSubmit = async (data: ChanelsForm) => {
-    const errorlength = errors.length;
-    console.log(errorlength);
-    console.log("isFormSet", isFormSet);
-    if (isFormSet) {
-      console.log("data", data);
-    } else {
+    const { facebook, twitter, instagram, youtube, vimeo } = data;
+
+    if (
+      facebook === "" &&
+      twitter === "" &&
+      instagram === "" &&
+      youtube === "" &&
+      vimeo === ""
+    ) {
       present({
         message: "Debe ingresar al menos un canal",
         duration: 3000,
         position: "top",
         color: "warning",
       });
+    } else {
+      try {
+        await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo);
+        present({
+          message: "Se ha actualizado la inforamción de tus redes",
+          duration: 3000,
+          position: "top",
+          color: "success",
+        });
+        history.goBack();
+      } catch {
+        present({
+          message:
+            "Error al actualizar la información. Intentelo nuevamente...",
+          duration: 3000,
+          position: "top",
+          color: "danger",
+        });
+      }
     }
-    // if (await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo)) {
-    //   present({
-    //     message: "Se ha actualizado la inforamción de tus redes",
-    //     duration: 1000,
-    //     position: "top",
-    //     color: "success",
-    //   });
-    //   history.goBack();
-    // } else {
-    //   present({
-    //     message: "Error al actualizar la información. Intentelo nuevamente...",
-    //     duration: 1000,
-    //     position: "top",
-    //     color: "success",
-    //   });
-    // }
   };
 
   return (
@@ -143,10 +143,6 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. www.facebook.com/meet-goal-official-page"
               {...register("facebook")}
-              onIonChange={(e) => {
-                const value = e.detail.value;
-                value === "" ? setIsFormSet(false) : setIsFormSet(true);
-              }}
             ></IonInput>
           </IonItem>
           <IonItem className={styles.network}>
@@ -156,10 +152,6 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. www.twitter.com/MeetGoalOfficial"
               {...register("twitter")}
-              onIonChange={(e) => {
-                const value = e.detail.value;
-                value === "" ? setIsFormSet(false) : setIsFormSet(true);
-              }}
             ></IonInput>
           </IonItem>
           <IonItem className={styles.network}>
@@ -169,10 +161,6 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. www.instagram.com/MeetGoalOfficial"
               {...register("instagram")}
-              onIonChange={(e) => {
-                const value = e.detail.value;
-                value === "" ? setIsFormSet(false) : setIsFormSet(true);
-              }}
             ></IonInput>
           </IonItem>
           <IonItem className={styles.network}>
@@ -182,10 +170,6 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. www.youtube.com/channel/UcsqpqcxtErZpw"
               {...register("youtube")}
-              onIonChange={(e) => {
-                const value = e.detail.value;
-                value === "" ? setIsFormSet(false) : setIsFormSet(true);
-              }}
             ></IonInput>
           </IonItem>
           <IonItem className={styles.network}>
@@ -195,10 +179,6 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. www.vimeo.com/user"
               {...register("vimeo")}
-              onIonChange={(e) => {
-                const value = e.detail.value;
-                value === "" ? setIsFormSet(false) : setIsFormSet(true);
-              }}
             ></IonInput>
           </IonItem>
         </form>
