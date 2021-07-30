@@ -8,6 +8,7 @@ export const useCurrentUserData = () => {
   const [currentUserData, setCurrentUserData] = useState<
     firebase.firestore.DocumentData | undefined
   >();
+
   useEffect(() => {
     let unsubscribe: any;
     if (currentUser) {

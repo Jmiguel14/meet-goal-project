@@ -8,9 +8,11 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonInput,
   IonItem,
   IonItemDivider,
   IonLabel,
+  IonList,
   IonPage,
   IonRow,
   IonText,
@@ -18,7 +20,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import { create } from "ionicons/icons";
+import { checkmarkOutline, closeOutline, create } from "ionicons/icons";
 import styles from "./styles.module.css";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -28,7 +30,15 @@ import { useAuth } from "contexts/AuthContext";
 import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
+
 import { converterDate } from "utils/converterDate";
+
+import { Player } from "types";
+import {
+  getPlayersPostulationData,
+  selectPostulant,
+} from "firebase/PostulateServices";
+
 
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
@@ -39,6 +49,8 @@ const CallDetails: React.FC = () => {
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
   const [existPostulation, setExistPostulation] = useState<boolean>(false);
+  const [playersData, setPlayersData] =
+    useState<firebase.firestore.DocumentData>([]);
 
   useEffect(() => {
     const unsubscribe = getACallData(id, (data) => {
@@ -48,9 +60,11 @@ const CallDetails: React.FC = () => {
   }, [id]);
 
   useEffect(() => {
-    const unsubscribe = getOwnCallData(callData?.clubId, (data) => {
-      setClubData(data);
-    });
+    if (callData) {
+      const unsubscribe = getOwnCallData(callData?.clubId, (data) => {
+        setClubData(data);
+      });
+    }
   }, [callData]);
 
   useEffect(() => {
@@ -69,7 +83,18 @@ const CallDetails: React.FC = () => {
     }
   }, [callData, id, currentUser]);
 
-  const postMyPostulation = async () => {
+  useEffect(() => {
+    if (callData && callData.postulatedPlayersId != undefined) {
+      const unsuscribe = getPlayersPostulationData(
+        callData?.postulatedPlayersId,
+        (data) => {
+          setPlayersData(data);
+        }
+      );
+    }
+  }, [callData]);
+
+  const postPlayerPostulation = async () => {
     if (await setPostulation(id!, currentUser.uid)) {
       present({
         message: "Te has registrado a la convocatoria",
@@ -81,6 +106,23 @@ const CallDetails: React.FC = () => {
     } else {
       present({
         message: "Error al registrarte a la convocatoria",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
+    }
+  };
+
+  const selectPostulationsPlayers = async (
+    callId: string,
+    playerId: string,
+    isSelected: false
+  ) => {
+    try {
+      await selectPostulant(callId, playerId, isSelected);
+    } catch (e) {
+      present({
+        message: "Error, intente nuevamente",
         duration: 1000,
         position: "top",
         color: "danger",
@@ -163,10 +205,6 @@ const CallDetails: React.FC = () => {
             </IonText>
           </IonItem>
         </IonCard>
-        <IonItemDivider color="primary">
-          <div className={styles.request}>Futbolistas Postulantes</div>
-        </IonItemDivider>
-        <IonItem>Futbolista 1</IonItem>
         {currentUserData?.userType === USER_TYPES.JUGADOR ? (
           existPostulation ? (
             ""
@@ -176,7 +214,7 @@ const CallDetails: React.FC = () => {
               expand="block"
               size="default"
               className="ion-padding"
-              onClick={() => postMyPostulation()}
+              onClick={() => postPlayerPostulation()}
             >
               Postularme
             </IonButton>
@@ -184,6 +222,61 @@ const CallDetails: React.FC = () => {
         ) : (
           ""
         )}
+        <br />
+        <IonItemDivider color="primary">
+          <div className={styles.request}>Futbolistas Postulantes</div>
+        </IonItemDivider>
+        <IonList>
+          {callData?.postulatedPlayers &&
+            playersData.map((player: Player, index: number) => {
+              return (
+                <IonItem key={index}>
+                  {currentUserData?.id === callData.clubId
+                    ? callData.postulatedPlayers.map((postulation: any) =>
+                        postulation.playerId === player.id ? (
+                          <IonButton
+                            key={player.id}
+                            color={
+                              postulation.isSelected ? "danger" : "success"
+                            }
+                            onClick={() =>
+                              selectPostulationsPlayers(
+                                callData?.id,
+                                postulation.playerId,
+                                postulation.isSelected
+                              )
+                            }
+                          >
+                            <IonIcon
+                              icon={
+                                postulation.isSelected
+                                  ? closeOutline
+                                  : checkmarkOutline
+                              }
+                            ></IonIcon>
+                          </IonButton>
+                        ) : (
+                          ""
+                        )
+                      )
+                    : ""}
+                  <IonLabel>{player.name}</IonLabel>
+                  {currentUserData?.id === callData.clubId ? (
+                    <IonButton
+                      slot="end"
+                      fill="clear"
+                      size="small"
+                      routerLink={`/tabs/perfil/${player.id}`}
+                    >
+                      Ver
+                    </IonButton>
+                  ) : (
+                    ""
+                  )}
+                </IonItem>
+              );
+            })}
+        </IonList>
       </IonContent>
     </IonPage>
   );
