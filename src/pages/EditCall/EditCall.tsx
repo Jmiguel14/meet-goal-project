@@ -19,10 +19,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import {
-  calendarClearOutline,
-  calendarOutline,
-} from "ionicons/icons";
+import { calendarClearOutline, calendarOutline } from "ionicons/icons";
 import styles from "./styles.module.css";
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";

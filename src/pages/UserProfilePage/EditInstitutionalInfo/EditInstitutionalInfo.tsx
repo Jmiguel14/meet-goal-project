@@ -36,7 +36,7 @@ const schema = yup.object().shape({
 export const EditInstitutionalInfo: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
-  const { currentUser, data } = useAuth()
+  const { currentUser, data } = useAuth();
 
   const {
     register,
@@ -56,18 +56,10 @@ export const EditInstitutionalInfo: React.FC = () => {
     setValue("foundation", data?.foundation);
   }, [data]);
 
-  const onSubmit = async (
-    data: InstitutionalDataForm
-  ) => {
+  const onSubmit = async (data: InstitutionalDataForm) => {
     const { socialName, city, country, phone, foundation } = data;
     try {
-      await SetInstitutionalData(
-        socialName,
-        city,
-        country,
-        phone,
-        foundation
-      )
+      await SetInstitutionalData(socialName, city, country, phone, foundation);
       present({
         message: "Se actualizó la información exitosamente",
         duration: 1000,

@@ -131,7 +131,9 @@ const CallDetails: React.FC = () => {
               </h1>
             </IonLabel>
             <IonText className={styles.club_location}>{clubData?.name}</IonText>
-            <IonText className={styles.endDate}>Termina el {converterDate(callData?.endDate)}</IonText>
+            <IonText className={styles.endDate}>
+              Termina el {converterDate(callData?.endDate)}
+            </IonText>
           </IonItem>
           <IonItemDivider color="primary">
             <div className={styles.request}>Requerimos</div>

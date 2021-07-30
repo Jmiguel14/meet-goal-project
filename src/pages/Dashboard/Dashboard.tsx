@@ -18,7 +18,7 @@ import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 
 const PlayerDashboard: React.FC = () => {
-  const currentUserData = useCurrentUserData()
+  const currentUserData = useCurrentUserData();
 
   return (
     <IonPage>

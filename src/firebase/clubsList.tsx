@@ -20,12 +20,12 @@ export const listtenFirstClubsBatch = (
       let lastKey = {} as firebase.firestore.Timestamp;
       const newData = snapshot.docs.map((doc) => {
         const data = doc.data();
-        const id = doc.id
+        const id = doc.id;
         const { createdAt } = data;
         lastKey = createdAt;
         return {
           ...data,
-          id
+          id,
         };
       });
       callback(newData);
@@ -52,12 +52,12 @@ export const listtenNextClubsBatch = (
       let lastKey = {} as firebase.firestore.Timestamp | undefined;
       const newData = snapshot.docs.map((doc) => {
         const data = doc.data();
-        const id = doc.id
+        const id = doc.id;
         const { createAt } = data;
         lastKey = createAt;
         return {
           ...data,
-          id
+          id,
         };
       });
       callback(newData);
@@ -76,10 +76,10 @@ export const listtenAllClubs = (
     .onSnapshot((snapshot) => {
       const newData = snapshot.docs.map((doc) => {
         const data = doc.data();
-        const id = doc.id
+        const id = doc.id;
         return {
           ...data,
-          id
+          id,
         };
       });
       callback(newData);

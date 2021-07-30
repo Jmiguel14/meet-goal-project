@@ -10,22 +10,31 @@ import {
   IonButton,
 } from "@ionic/react";
 import { USER_TYPES } from "constants/userTypes";
-import { UseFormRegister, UseFormHandleSubmit, UseFormClearErrors, DeepMap, FieldError } from "react-hook-form";
+import {
+  UseFormRegister,
+  UseFormHandleSubmit,
+  UseFormClearErrors,
+  DeepMap,
+  FieldError,
+} from "react-hook-form";
 import { SignupFormInputs } from "types";
 
 interface SignUpFormProps {
-  register: UseFormRegister<SignupFormInputs>
-  handleSubmit: UseFormHandleSubmit<SignupFormInputs>
-  clearErrors: UseFormClearErrors<SignupFormInputs>
-  errors: DeepMap<SignupFormInputs, FieldError>
-  onHandleSubmit: (data: SignupFormInputs, e: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
+  register: UseFormRegister<SignupFormInputs>;
+  handleSubmit: UseFormHandleSubmit<SignupFormInputs>;
+  clearErrors: UseFormClearErrors<SignupFormInputs>;
+  errors: DeepMap<SignupFormInputs, FieldError>;
+  onHandleSubmit: (
+    data: SignupFormInputs,
+    e: React.BaseSyntheticEvent<object, any, any> | undefined
+  ) => Promise<void>;
 }
 export const SignUpForm = ({
   register,
   handleSubmit,
   clearErrors,
   errors,
-  onHandleSubmit
+  onHandleSubmit,
 }: SignUpFormProps) => {
   return (
     <form onSubmit={handleSubmit(onHandleSubmit)}>

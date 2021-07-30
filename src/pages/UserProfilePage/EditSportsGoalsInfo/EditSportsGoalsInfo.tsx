@@ -51,12 +51,10 @@ export const EditSportsGoalsInfo: React.FC = () => {
     setValue("maxIntGoal", data?.maxIntGoal);
   }, [data]);
 
-  const onSubmit = async (
-    data: SportsGoalsDataForm
-  ) => {
+  const onSubmit = async (data: SportsGoalsDataForm) => {
     const { totalWins, maxNacGoal, maxIntGoal } = data;
     try {
-      await EditSportsGoalsData(totalWins, maxNacGoal, maxIntGoal)
+      await EditSportsGoalsData(totalWins, maxNacGoal, maxIntGoal);
       present({
         message: "Se agrego el club a tu experiencia",
         duration: 1000,

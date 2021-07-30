@@ -45,13 +45,11 @@ const AddInjury: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (
-    data: InjuryDataForm
-  ) => {
+  const onSubmit = async (data: InjuryDataForm) => {
     const { injuryName, recoveryTime } = data;
-    const surgery = isChecked
+    const surgery = isChecked;
     try {
-      await AddInjuryExperienced(injuryName, recoveryTime, surgery)
+      await AddInjuryExperienced(injuryName, recoveryTime, surgery);
       present({
         message: "Se ha registrado la inforamción ha tu historial médico",
         duration: 1000,
@@ -131,8 +129,8 @@ const AddInjury: React.FC = () => {
               checked={isChecked}
               {...register("surgery")}
               onIonChange={(e) => {
-                const isChecked = e.detail.checked
-                setIsChecked(isChecked)
+                const isChecked = e.detail.checked;
+                setIsChecked(isChecked);
               }}
             />
           </IonItem>

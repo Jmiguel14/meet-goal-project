@@ -89,5 +89,5 @@ export function saveCallChanges(
       startDate: firebase.firestore.Timestamp.fromDate(new Date(startDate)),
       endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
       extraDetails,
-  });
+    });
 }

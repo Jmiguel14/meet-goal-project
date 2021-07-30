@@ -62,10 +62,8 @@ const NewCall: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (
-    data: NewCallDataForm
-  ) => {
-    console.log('data', data)
+  const onSubmit = async (data: NewCallDataForm) => {
+    console.log("data", data);
     const { ageRequired, posRequired, startDate, endDate, extraDetails } = data;
     try {
       await addNewClubCall(
@@ -75,7 +73,7 @@ const NewCall: React.FC = () => {
         startDate,
         endDate,
         extraDetails
-      )
+      );
       present({
         message: "Se agrego su convocatoria correctamente",
         duration: 3000,
