@@ -14,7 +14,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -27,53 +27,39 @@ import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
   socialName: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  mail: yup
-    .string()
-    .required(ERROR_MESSAGES.REQUIRED)
-    .email(ERROR_MESSAGES.EMAIL),
   country: yup.string().required(ERROR_MESSAGES.REQUIRED),
   city: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  phone: yup.string().required(ERROR_MESSAGES.REQUIRED),
   foundation: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
 
 export const EditInstitutionalInfo: React.FC = () => {
   const [present] = useIonToast();
-  const [selectedDate, setSelectedDate] = useState<string>("");
   const history = useHistory();
-  const { currentUser } = useAuth();
-  const initialValues = {
-    socialName: "",
-    mail: "",
-    country: "",
-    city: "",
-  };
+  const { currentUser, data } = useAuth();
 
   const {
     register,
     handleSubmit,
     clearErrors,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm<InstitutionalDataForm>({
-    defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (
-    data: InstitutionalDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
-  ) => {
-    const { socialName, mail, city, country, phone, foundation } = data;
-    if (
-      await SetInstitutionalData(
-        socialName,
-        mail,
-        city,
-        country,
-        phone,
-        foundation
-      )
-    ) {
+  useEffect(() => {
+    setValue("socialName", data?.socialName);
+    setValue("country", data?.country);
+    setValue("city", data?.city);
+    setValue("phone", data?.phone);
+    setValue("foundation", data?.foundation);
+  }, [data]);
+
+  const onSubmit = async (data: InstitutionalDataForm) => {
+    const { socialName, city, country, phone, foundation } = data;
+    try {
+      await SetInstitutionalData(socialName, city, country, phone, foundation);
       present({
         message: "Se actualizó la información exitosamente",
         duration: 1000,
@@ -81,7 +67,7 @@ export const EditInstitutionalInfo: React.FC = () => {
         color: "success",
       });
       history.goBack();
-    } else {
+    } catch {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
         duration: 1000,
@@ -89,7 +75,6 @@ export const EditInstitutionalInfo: React.FC = () => {
         color: "danger",
       });
     }
-    e?.target.reset();
   };
 
   return (
@@ -141,20 +126,6 @@ export const EditInstitutionalInfo: React.FC = () => {
           )}
           <IonItem className={styles.institutional_data}>
             <IonInput
-              placeholder="Correo Electrónico"
-              type="text"
-              clearInput={true}
-              {...register("mail")}
-              onIonChange={() => {
-                clearErrors("mail");
-              }}
-            ></IonInput>
-          </IonItem>
-          {errors.mail?.message && (
-            <IonNote color="danger">{errors.mail?.message}</IonNote>
-          )}
-          <IonItem className={styles.institutional_data}>
-            <IonInput
               placeholder="País"
               type="text"
               clearInput={true}
@@ -164,7 +135,6 @@ export const EditInstitutionalInfo: React.FC = () => {
               }}
             ></IonInput>
           </IonItem>
-
           {errors.country?.message && (
             <IonNote color="danger">{errors.country?.message}</IonNote>
           )}
@@ -206,9 +176,14 @@ export const EditInstitutionalInfo: React.FC = () => {
               displayFormat="MMM/DD/YY"
               monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
               {...register("foundation")}
-              onIonChange={(e) => setSelectedDate(e.detail.value!)}
+              onIonChange={() => {
+                clearErrors("foundation");
+              }}
             ></IonDatetime>
           </IonItem>
+          {errors.foundation?.message && (
+            <IonNote color="danger">{errors.foundation?.message}</IonNote>
+          )}
         </form>
       </IonContent>
     </IonPage>

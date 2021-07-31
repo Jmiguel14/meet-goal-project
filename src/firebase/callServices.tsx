@@ -2,7 +2,7 @@ import { COLLECTIONS } from "constants/collections";
 import firebase from "firebase/app";
 import { auth, firestore } from "./client";
 
-export async function addNewClubCall(
+export function addNewClubCall(
   clubId: string,
   ageRequired: string,
   posRequired: string,
@@ -10,21 +10,16 @@ export async function addNewClubCall(
   endDate: string,
   extraDetails: string
 ) {
-  try {
-    await firestore.collection(COLLECTIONS.CALLS).add({
-      clubId,
-      ageRequired,
-      posRequired,
-      startDate: firebase.firestore.Timestamp.fromDate(new Date(startDate)),
-      endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
-      extraDetails,
-      createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-      postulatedPlayers: {},
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  firestore.collection(COLLECTIONS.CALLS).add({
+    clubId,
+    ageRequired,
+    posRequired,
+    startDate: firebase.firestore.Timestamp.fromDate(new Date(startDate)),
+    endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
+    extraDetails,
+    createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+    postulatedPlayers: {},
+  });
 }
 export const getCallsData = (
   callback: React.Dispatch<
@@ -77,7 +72,7 @@ export const getOwnCallData = (
     });
 };
 
-export async function saveCallChanges(
+export function saveCallChanges(
   id: string,
   ageRequired: string,
   posRequired: string,
@@ -85,19 +80,14 @@ export async function saveCallChanges(
   endDate: string,
   extraDetails: string
 ) {
-  try {
-    const save = firestore
-      .collection(COLLECTIONS.CALLS)
-      .doc(id)
-      .update({
-        ageRequired,
-        posRequired,
-        startDate: firebase.firestore.Timestamp.fromDate(new Date(startDate)),
-        endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
-        extraDetails,
-      });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  firestore
+    .collection(COLLECTIONS.CALLS)
+    .doc(id)
+    .update({
+      ageRequired,
+      posRequired,
+      startDate: firebase.firestore.Timestamp.fromDate(new Date(startDate)),
+      endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
+      extraDetails,
+    });
 }

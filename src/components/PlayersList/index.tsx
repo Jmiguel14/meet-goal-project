@@ -1,6 +1,7 @@
 import {
   IonAvatar,
   IonButton,
+  IonContent,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   IonItem,
@@ -24,36 +25,41 @@ export const PlayersList = ({
   onSearchNext,
 }: PlayersListProps) => {
   return (
-    <IonList>
-      {players &&
-        players.map((player: Player, index: number) => {
-          return (
-            <IonItem key={index}>
-              <IonAvatar slot="start">
-                <img src={player.avatarURL} />
-              </IonAvatar>
-              <IonLabel>
-                <IonText>{player.name}</IonText>
-                <br />
-                <IonNote>{player.pospri}</IonNote>
-              </IonLabel>
-              <IonButton
-                slot="end"
-                fill="clear"
-                size="small"
-                routerLink={`/tabs/perfil/${player.id}`}
-              >
-                Ver
-              </IonButton>
-            </IonItem>
-          );
-        })}
-      <IonInfiniteScroll
-        disabled={disableInfinitiScroll}
-        onIonInfinite={(e: CustomEvent<void>) => onSearchNext(e)}
-      >
-        <IonInfiniteScrollContent loadingText="Loading..."></IonInfiniteScrollContent>
-      </IonInfiniteScroll>
-    </IonList>
+    <>
+      <IonList>
+        {players &&
+          players.map((player: Player, index: number) => {
+            return (
+              <IonItem key={index}>
+                <IonAvatar slot="start">
+                  <img src={player.avatarURL} />
+                </IonAvatar>
+                <IonLabel>
+                  <IonText>{player.name}</IonText>
+                  <br />
+                  <IonNote>{player.pospri}</IonNote>
+                </IonLabel>
+                <IonButton
+                  slot="end"
+                  fill="clear"
+                  size="small"
+                  routerLink={`/tabs/perfil/${player.id}`}
+                >
+                  Ver
+                </IonButton>
+              </IonItem>
+            );
+          })}
+        <IonInfiniteScroll
+          disabled={disableInfinitiScroll}
+          onIonInfinite={(e: CustomEvent<void>) => onSearchNext(e)}
+        >
+          <IonInfiniteScrollContent
+            loadingSpinner="bubbles"
+            loadingText="Loading..."
+          ></IonInfiniteScrollContent>
+        </IonInfiniteScroll>
+      </IonList>
+    </>
   );
 };

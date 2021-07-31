@@ -16,7 +16,7 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./styles.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -28,10 +28,6 @@ import { PersonalDataForm } from "types";
 import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
-  mail: yup
-    .string()
-    .required(ERROR_MESSAGES.REQUIRED)
-    .email(ERROR_MESSAGES.EMAIL),
   country: yup.string().required(ERROR_MESSAGES.REQUIRED),
   city: yup.string().required(ERROR_MESSAGES.REQUIRED),
   birth: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -40,61 +36,57 @@ const schema = yup.object().shape({
 
 export const EditPersonalInfo: React.FC = () => {
   const [present] = useIonToast();
-  const [selectedDate, setSelectedDate] = useState<string>("");
   const history = useHistory();
-  const { currentUser } = useAuth();
-  const initialValues = {
-    mail: "",
-    country: "",
-    city: "",
-    contract: "",
-    marketTransfer: "",
-  };
+  const { currentUser, data } = useAuth();
 
   const {
     register,
     handleSubmit,
     clearErrors,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm<PersonalDataForm>({
-    defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (
-    data: PersonalDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
-  ) => {
-    const { mail, phone, country, city, birth, contract, marketTransfer } =
-      data;
-    if (
+  useEffect(() => {
+    setValue("phone", data?.phone);
+    setValue("country", data?.country);
+    setValue("city", data?.city);
+    setValue("contract", data?.contract);
+    setValue("marketTransfer", data?.marketTransfer);
+    setValue("birth", data?.birth);
+  }, [data]);
+
+  const onSubmit = async (data: PersonalDataForm) => {
+    const { phone, country, city, birth, contract } = data;
+    console.log("data", data);
+    const marketTransfer =
+      data.marketTransfer === undefined ? "" : data.marketTransfer;
+    try {
       await SetPersonalData(
-        mail,
         country,
         city,
         birth,
         contract,
         phone,
         marketTransfer
-      )
-    ) {
+      );
       present({
         message: "Se actualizó la información exitosamente",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
       history.goBack();
-    } else {
+    } catch {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });
     }
-    e?.target.reset();
   };
 
   return (
@@ -121,6 +113,7 @@ export const EditPersonalInfo: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className={styles.back}>
+        {console.log("render")}
         <IonItemDivider color="primary">
           <div className={styles.subtitle}>
             Edita aquí tu Información Personal
@@ -128,22 +121,10 @@ export const EditPersonalInfo: React.FC = () => {
         </IonItemDivider>
         <form onSubmit={handleSubmit(onSubmit)} id="edit-personal-info-form">
           <IonItem className={styles.personal_data}>
+            <IonLabel color="medium" position="floating">
+              País
+            </IonLabel>
             <IonInput
-              placeholder="Correo Electrónico"
-              type="text"
-              clearInput={true}
-              {...register("mail")}
-              onIonChange={() => {
-                clearErrors("mail");
-              }}
-            ></IonInput>
-          </IonItem>
-          {errors.mail?.message && (
-            <IonNote color="danger">{errors.mail?.message}</IonNote>
-          )}
-          <IonItem className={styles.personal_data}>
-            <IonInput
-              placeholder="País"
               type="text"
               clearInput={true}
               {...register("country")}
@@ -152,14 +133,15 @@ export const EditPersonalInfo: React.FC = () => {
               }}
             ></IonInput>
           </IonItem>
-
           {errors.country?.message && (
             <IonNote color="danger">{errors.country?.message}</IonNote>
           )}
 
           <IonItem className={styles.personal_data}>
+            <IonLabel color="medium" position="floating">
+              Ciudad
+            </IonLabel>
             <IonInput
-              placeholder="Ciudad"
               type="text"
               clearInput={true}
               {...register("city")}
@@ -173,8 +155,10 @@ export const EditPersonalInfo: React.FC = () => {
           )}
 
           <IonItem className={styles.personal_data}>
+            <IonLabel color="medium" position="floating">
+              Teléfono
+            </IonLabel>
             <IonInput
-              placeholder="Teléfono"
               type="text"
               clearInput={true}
               {...register("phone")}
@@ -194,9 +178,15 @@ export const EditPersonalInfo: React.FC = () => {
               displayFormat="MMM/DD/YY"
               monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
               {...register("birth")}
-              onIonChange={(e) => setSelectedDate(e.detail.value!)}
+              onIonChange={() => {
+                clearErrors("birth");
+              }}
             ></IonDatetime>
           </IonItem>
+          {errors.birth?.message && (
+            <IonNote color="danger">{errors.birth?.message}</IonNote>
+          )}
+
           <IonItem className={styles.personal_data}>
             <IonLabel color="medium">Estado Contractual</IonLabel>
             <IonSelect
@@ -217,8 +207,10 @@ export const EditPersonalInfo: React.FC = () => {
           )}
 
           <IonItem className={styles.personal_data}>
+            <IonLabel color="medium" position="floating">
+              Enlace de Market Transfer
+            </IonLabel>
             <IonInput
-              placeholder="Pega aquí tu link de MarketTransfer"
               type="text"
               clearInput={true}
               {...register("marketTransfer")}

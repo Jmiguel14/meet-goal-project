@@ -33,32 +33,23 @@ const schema = yup.object().shape({
 const AddInjury: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
-  const [checked, setChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const { currentUser } = useAuth();
-
-  const initialValues = {
-    injuryName: "",
-    recoveryTime: "",
-    surgery: false,
-  };
 
   const {
     register,
-    reset,
     handleSubmit,
     clearErrors,
     formState: { errors },
   } = useForm<InjuryDataForm>({
-    defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (
-    data: InjuryDataForm,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
-  ) => {
-    const { injuryName, recoveryTime, surgery } = data;
-    if (await AddInjuryExperienced(injuryName, recoveryTime, surgery)) {
+  const onSubmit = async (data: InjuryDataForm) => {
+    const { injuryName, recoveryTime } = data;
+    const surgery = isChecked;
+    try {
+      await AddInjuryExperienced(injuryName, recoveryTime, surgery);
       present({
         message: "Se ha registrado la inforamción ha tu historial médico",
         duration: 1000,
@@ -66,7 +57,7 @@ const AddInjury: React.FC = () => {
         color: "success",
       });
       history.goBack();
-    } else {
+    } catch {
       present({
         message: "Error al agregar la información. Intentelo nuevamente...",
         duration: 1000,
@@ -74,8 +65,8 @@ const AddInjury: React.FC = () => {
         color: "danger",
       });
     }
-    e?.target.reset();
   };
+
   return (
     <IonPage>
       <IonHeader>
@@ -124,6 +115,9 @@ const AddInjury: React.FC = () => {
               placeholder="Tiempo de recuperación"
               clearInput={true}
               {...register("recoveryTime")}
+              onIonChange={() => {
+                clearErrors("recoveryTime");
+              }}
             ></IonInput>
           </IonItem>
           {errors.recoveryTime && (
@@ -132,9 +126,12 @@ const AddInjury: React.FC = () => {
           <IonItem className={styles.injury_field}>
             <IonLabel color="medium">Proceso Quirúrgico</IonLabel>
             <IonToggle
-              checked={checked}
+              checked={isChecked}
               {...register("surgery")}
-              onIonChange={(e) => setChecked(e.detail.checked)}
+              onIonChange={(e) => {
+                const isChecked = e.detail.checked;
+                setIsChecked(isChecked);
+              }}
             />
           </IonItem>
         </form>

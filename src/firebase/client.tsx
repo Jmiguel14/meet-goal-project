@@ -45,141 +45,103 @@ export const getUserDoc = (
     });
 };
 
-export async function fetchUserDoc() {
-  return await firestore
-    .collection(COLLECTIONS.USERS)
-    .doc(auth.currentUser?.uid)
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        return getDataToUserDoc(doc);
-      }
-    });
-}
-
-export async function SetPersonalData(
-  email: string,
+export function SetPersonalData(
   country: string,
   city: string,
   birth: string,
   contract: string,
   phone: number,
-  marketTransfer: string
+  marketTransfer?: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      email: email,
-      phone: phone,
-      country: country,
-      city: city,
-      contract: contract,
-      birth: birth,
-      marketTransfer: marketTransfer,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    phone,
+    country,
+    city,
+    contract,
+    birth,
+    marketTransfer,
+  });
 }
 
 export async function SetInstitutionalData(
   socialName: string,
-  email: string,
   city: string,
   country: string,
   phone: number,
   foundation: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      socialName,
-      email,
-      city,
-      country,
-      phone,
-      foundation,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    socialName,
+    city,
+    country,
+    phone,
+    foundation,
+  });
 }
 
-export async function EditPositionData(
+export function EditPositionData(
   pospri: string,
   possec: string,
   goals: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      pospri: pospri,
-      possec: possec,
-      goals: goals,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    pospri,
+    possec,
+    goals,
+  });
 }
-export async function EditPsycoParameters(
+
+export function EditPsycoParameters(
   character: string,
   personality: Object,
   attitude: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      character: character,
-      personality: personality,
-      attitude: attitude,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    character,
+    personality,
+    attitude,
+  });
 }
-export async function EditChannelsLinks(
+export function EditChannelsLinks(
   facebook: string,
   twitter: string,
   instagram: string,
   youtube: string,
   vimeo: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      facebook: facebook,
-      twitter: twitter,
-      instagram: instagram,
-      youtube: youtube,
-      vimeo: vimeo,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    facebook,
+    twitter,
+    instagram,
+    youtube,
+    vimeo,
+  });
 }
-export async function EditSportsGoalsData(
+
+export function EditSportsGoalsData(
   totalWins: number,
   maxNacGoal: string,
   maxIntGoal: string
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const save = await firestore.collection(COLLECTIONS.USERS).doc(id).update({
-      totalWins,
-      maxNacGoal,
-      maxIntGoal,
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const id = auth.currentUser?.uid;
+
+  firestore.collection(COLLECTIONS.USERS).doc(id).update({
+    totalWins,
+    maxNacGoal,
+    maxIntGoal,
+  });
 }
-export async function AddCubExperience(
+
+export async function AddClubExperience(
   clubName: string,
   countryClub: string,
   season: number,
@@ -191,50 +153,46 @@ export async function AddCubExperience(
   TA: number,
   TR: number
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
-    res.get().then((doc) => {
-      if (doc.exists) {
-        if (typeof doc.data()?.club === undefined) {
-          res.update({
-            clubs: [
-              {
-                clubName: clubName,
-                countryClub: countryClub,
-                season: season,
-                subPlayer: subPlayer,
-                catTournament: catTournament,
-                PJ: PJ,
-                G: G,
-                A: A,
-                TA: TA,
-                TR: TR,
-              },
-            ],
-          });
-        } else {
-          res.update({
-            clubs: firebase.firestore.FieldValue.arrayUnion({
-              clubName: clubName,
-              countryClub: countryClub,
-              season: season,
-              subPlayer: subPlayer,
-              catTournament: catTournament,
-              PJ: PJ,
-              G: G,
-              A: A,
-              TA: TA,
-              TR: TR,
-            }),
-          });
-        }
+  const id = auth.currentUser?.uid;
+
+  const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
+  res.get().then((doc) => {
+    if (doc.exists) {
+      if (typeof doc.data()?.club === undefined) {
+        res.update({
+          clubs: [
+            {
+              clubName,
+              countryClub,
+              season,
+              subPlayer,
+              catTournament,
+              PJ,
+              G,
+              A,
+              TA,
+              TR,
+            },
+          ],
+        });
+      } else {
+        res.update({
+          clubs: firebase.firestore.FieldValue.arrayUnion({
+            clubName,
+            countryClub,
+            season,
+            subPlayer,
+            catTournament,
+            PJ,
+            G,
+            A,
+            TA,
+            TR,
+          }),
+        });
       }
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+    }
+  });
 }
 
 export async function AddInjuryExperienced(
@@ -242,36 +200,31 @@ export async function AddInjuryExperienced(
   recoveryTime: string,
   surgery: boolean
 ) {
-  let id = auth.currentUser?.uid;
-  try {
-    const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
-    res.get().then((doc) => {
-      if (doc.exists) {
-        if (typeof doc.data()?.injuries === undefined) {
-          res.update({
-            injuries: [
-              {
-                injuryName: injuryName,
-                recoveryTime: recoveryTime,
-                surgery: surgery,
-              },
-            ],
-          });
-        } else {
-          res.update({
-            injuries: firebase.firestore.FieldValue.arrayUnion({
-              injuryName: injuryName,
-              recoveryTime: recoveryTime,
-              surgery: surgery,
-            }),
-          });
-        }
+  const id = auth.currentUser?.uid;
+  const res = await firestore.collection(COLLECTIONS.USERS).doc(id);
+  res.get().then((doc) => {
+    if (doc.exists) {
+      if (typeof doc.data()?.injuries === undefined) {
+        res.update({
+          injuries: [
+            {
+              injuryName,
+              recoveryTime,
+              surgery,
+            },
+          ],
+        });
+      } else {
+        res.update({
+          injuries: firebase.firestore.FieldValue.arrayUnion({
+            injuryName,
+            recoveryTime,
+            surgery,
+          }),
+        });
       }
-    });
-    return true;
-  } catch (e) {
-    return false;
-  }
+    }
+  });
 }
 
 export async function EditTacticalAttributes(
