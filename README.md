@@ -23,11 +23,11 @@ Mobile App that allows sports clubs to filter their players through calls, and i
 
 ![1](https://user-images.githubusercontent.com/56648593/127067231-9de728a9-ebfc-48c3-aaff-a2cfb04892a4.png) ![3](https://user-images.githubusercontent.com/56648593/127071720-4d8878e5-e1de-4628-896d-6357c1af4fe0.png) ![2](https://user-images.githubusercontent.com/56648593/127067238-def5e220-3a5b-4e7a-8c64-a4cc8df2eacc.png)
 
-- Usuario jugador
+- Player user
 
 ![5](https://user-images.githubusercontent.com/56648593/127086540-ad7582ce-870c-48c2-8e4f-7addc81c8031.png) ![6](https://user-images.githubusercontent.com/56648593/127086576-835e0cce-af19-4fa7-a658-da301b903854.png) ![7](https://user-images.githubusercontent.com/56648593/127086844-525f018d-b18b-4413-aea4-1f005eaef87d.png) ![8](https://user-images.githubusercontent.com/56648593/127086886-c579c6e1-a0e7-4276-92f9-779396ae5a6b.png) ![9](https://user-images.githubusercontent.com/56648593/127087019-2187cfef-34e3-4191-b91d-b346d1eb9162.png) ![10](https://user-images.githubusercontent.com/56648593/127087060-6e9240f4-ff45-4e42-abb8-2ce00ea21675.png)
 
-- Usuario club
+- Club user
 
 ![11](https://user-images.githubusercontent.com/56648593/127087471-38690307-adb9-4645-85d8-6e1cab63cf48.png) ![12](https://user-images.githubusercontent.com/56648593/127087548-6d8e0734-0656-4453-bb4b-a71d2841eb94.png) ![13](https://user-images.githubusercontent.com/56648593/127087709-34965d0e-49c8-4d2a-ac99-45dd4c41f709.png) ![14](https://user-images.githubusercontent.com/56648593/127087745-fee06dd9-7a02-4c09-9bbe-41b5a92adcb9.png) ![15](https://user-images.githubusercontent.com/56648593/127087768-743da96d-ae78-4c52-bc34-8404a34a8448.png)
 
