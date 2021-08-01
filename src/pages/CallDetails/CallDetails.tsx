@@ -26,7 +26,7 @@ import styles from "./styles.module.css";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
-import { getACallData, getOwnCallData } from "firebase/callServices";
+import { CloseCall, getACallData, getOwnCallData } from "firebase/callServices";
 import { useAuth } from "contexts/AuthContext";
 import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
@@ -157,6 +157,8 @@ const CallDetails: React.FC = () => {
         position: "top",
         color: "success",
       });
+      CloseCall(callData?.id);
+      setMessageNotification("");
     } else {
       present({
         message: "Seleccione al menos (1) jugador postulados",
