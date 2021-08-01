@@ -52,18 +52,22 @@ const Notifications: React.FC = () => {
             </IonLabel>
           </div>
         ) : (
-          notificationList?.map((notification: any, index: number) => (
-            <IonCard key={index} className={styles.back}>
-              <IonItem className={styles.details}>
-                <IonLabel>
-                  <h1 className={styles.data}>{`${notification.title}`}</h1>
-                </IonLabel>
-                <IonText className={styles.date}>{`${converterDate(
-                  notification.createdAt
-                )}`}</IonText>
-              </IonItem>
-            </IonCard>
-          ))
+          notificationList?.map((notification: any, index: number) =>
+            !notification.isSeen ? (
+              <IonCard key={index} className={styles.back}>
+                <IonItem className={styles.details}>
+                  <IonLabel>
+                    <h1 className={styles.data}>{`${notification.title}`}</h1>
+                  </IonLabel>
+                  <IonText className={styles.date}>{`${converterDate(
+                    notification.createdAt
+                  )}`}</IonText>
+                </IonItem>
+              </IonCard>
+            ) : (
+              ""
+            )
+          )
         )}
       </IonContent>
     </IonPage>

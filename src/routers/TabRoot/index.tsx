@@ -252,10 +252,7 @@ export const TabRoot: React.FC = () => {
           >
             <IonIcon icon={searchOutline}></IonIcon>
           </IonTabButton>
-          <IonTabButton
-            tab="notificaciones-jugador"
-            href={Routes.NOTIFICATIONS}
-          >
+          <IonTabButton tab="notificaciones" href={Routes.NOTIFICATIONS}>
             <IonBadge color="danger"></IonBadge>
             <IonIcon icon={notificationsOutline}></IonIcon>
           </IonTabButton>

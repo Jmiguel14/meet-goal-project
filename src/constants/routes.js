@@ -13,7 +13,7 @@ const PrivateRoutes = {
   SEARCH_CLUBS: "/tabs/busqueda/clubs",
   SEARCH_CALLS: "/tabs/busqueda/calls",
   SEARCH_PLAYERS: "/tabs/busqueda/players",
-  NOTIFICATIONS: "/tabs/notificaciones-jugador",
+  NOTIFICATIONS: "/tabs/notificaciones",
   MESSAGES: "/tabs/mensajes-jugador",
   PROFILE: "/tabs/perfil/:id",
   EDITPERSONALINFO: "/tabs/editar-info-personal-jugador",
