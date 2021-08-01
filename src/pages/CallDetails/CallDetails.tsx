@@ -16,6 +16,7 @@ import {
   IonPage,
   IonRow,
   IonText,
+  IonTextarea,
   IonTitle,
   IonToolbar,
   useIonToast,
@@ -31,14 +32,13 @@ import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 
-import { converterDate } from "utils/converterDate";
+import { compareDates, converterDate } from "utils/converterDate";
 
 import { Player } from "types";
 import {
   getPlayersPostulationData,
   selectPostulant,
 } from "firebase/PostulateServices";
-
 
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
@@ -205,7 +205,8 @@ const CallDetails: React.FC = () => {
             </IonText>
           </IonItem>
         </IonCard>
-        {currentUserData?.userType === USER_TYPES.JUGADOR ? (
+        {currentUserData?.userType === USER_TYPES.JUGADOR &&
+        compareDates(callData?.endDate) ? (
           existPostulation ? (
             ""
           ) : (
@@ -231,7 +232,8 @@ const CallDetails: React.FC = () => {
             playersData.map((player: Player, index: number) => {
               return (
                 <IonItem key={index}>
-                  {currentUserData?.id === callData.clubId
+                  {callData.postulatedPlayers &&
+                  currentUserData?.id === callData.clubId
                     ? callData.postulatedPlayers.map((postulation: any) =>
                         postulation.playerId === player.id ? (
                           <IonButton
@@ -277,6 +279,35 @@ const CallDetails: React.FC = () => {
               );
             })}
         </IonList>
+        <br />
+        {currentUser.uid === callData?.clubId &&
+        !compareDates(callData.endDate) ? (
+          <>
+            <IonItemDivider color="primary">
+              <div className={styles.request}>
+                Notificar a los seleccionados
+              </div>
+            </IonItemDivider>
+            <IonItem lines="none">
+              <IonTextarea
+                className={styles.postulant_notify}
+                placeholder="Registre los detalles que desea notificar a los jugadores seleccionados"
+              ></IonTextarea>
+            </IonItem>
+            <br />
+            <IonButton
+              shape="round"
+              expand="block"
+              size="default"
+              className="ion-padding-horizontal"
+            >
+              Notificar
+            </IonButton>
+            <br />
+          </>
+        ) : (
+          ""
+        )}
       </IonContent>
     </IonPage>
   );
