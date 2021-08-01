@@ -40,6 +40,7 @@ import {
   selectPostulant,
 } from "firebase/PostulateServices";
 import { newNotification } from "firebase/notificationsServices";
+import { NOTIFYTITLES } from "constants/notificationsTitles";
 
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
@@ -140,7 +141,11 @@ const CallDetails: React.FC = () => {
     ) {
       callData?.postulatedPlayers.map((player: any) => {
         if (player.isSelected) {
-          newNotification(player.playerId, messageNotification);
+          newNotification(
+            player.playerId,
+            messageNotification,
+            NOTIFYTITLES.PLAYERACCEPT
+          );
           flag = true;
         }
       });
