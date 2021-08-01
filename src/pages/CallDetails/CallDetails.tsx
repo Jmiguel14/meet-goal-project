@@ -39,6 +39,7 @@ import {
   getPlayersPostulationData,
   selectPostulant,
 } from "firebase/PostulateServices";
+import { newNotification } from "firebase/notificationsServices";
 
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
@@ -49,6 +50,7 @@ const CallDetails: React.FC = () => {
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
   const [clubData, setClubData] = useState<firebase.firestore.DocumentData>();
   const [existPostulation, setExistPostulation] = useState<boolean>(false);
+  const [messageNotification, setMessageNotification] = useState<string>("");
   const [playersData, setPlayersData] =
     useState<firebase.firestore.DocumentData>([]);
 
@@ -123,6 +125,36 @@ const CallDetails: React.FC = () => {
     } catch (e) {
       present({
         message: "Error, intente nuevamente",
+        duration: 1000,
+        position: "top",
+        color: "danger",
+      });
+    }
+  };
+
+  const sendPostulantsNotifications = () => {
+    let flag = false;
+    if (
+      callData?.postulatedPlayers !== "" ||
+      callData?.postulatedPlayers !== undefined
+    ) {
+      callData?.postulatedPlayers.map((player: any) => {
+        if (player.isSelected) {
+          newNotification(player.playerId, messageNotification);
+          flag = true;
+        }
+      });
+    }
+    if (flag) {
+      present({
+        message: "Se ha enviado la notificación a los jugadores",
+        duration: 1000,
+        position: "top",
+        color: "success",
+      });
+    } else {
+      present({
+        message: "Seleccione al menos (1) jugador postulados",
         duration: 1000,
         position: "top",
         color: "danger",
@@ -291,6 +323,8 @@ const CallDetails: React.FC = () => {
             <IonItem lines="none">
               <IonTextarea
                 className={styles.postulant_notify}
+                value={messageNotification}
+                onIonChange={(e) => setMessageNotification(e.detail.value!)}
                 placeholder="Registre los detalles que desea notificar a los jugadores seleccionados"
               ></IonTextarea>
             </IonItem>
@@ -300,6 +334,10 @@ const CallDetails: React.FC = () => {
               expand="block"
               size="default"
               className="ion-padding-horizontal"
+              onClick={() => {
+                sendPostulantsNotifications();
+              }}
+              routerLink="/tabs/panel-noticias"
             >
               Notificar
             </IonButton>
