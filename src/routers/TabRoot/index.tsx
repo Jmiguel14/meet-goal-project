@@ -1,8 +1,15 @@
-import { IonTabBar, IonTabs, IonTabButton, IonIcon } from "@ionic/react";
-import React from "react";
+import {
+  IonTabBar,
+  IonTabs,
+  IonTabButton,
+  IonIcon,
+  IonBadge,
+} from "@ionic/react";
+import React, { useEffect, useState } from "react";
 import { IonRouterOutlet } from "@ionic/react";
 import { PrivateRoutes } from "routers/PrivateRoutes";
 import { Route, Redirect, useLocation } from "react-router";
+import firebase from "firebase/app";
 import {
   homeOutline,
   mailOutline,
@@ -249,6 +256,7 @@ export const TabRoot: React.FC = () => {
             tab="notificaciones-jugador"
             href={Routes.NOTIFICATIONS}
           >
+            <IonBadge color="danger"></IonBadge>
             <IonIcon icon={notificationsOutline}></IonIcon>
           </IonTabButton>
           <IonTabButton tab="mensajes-jugador" href={Routes.MESSAGES}>

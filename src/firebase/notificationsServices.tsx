@@ -15,3 +15,22 @@ export async function newNotification(
     createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
   });
 }
+
+export const getUserNotifications = (
+  callback: React.Dispatch<
+    React.SetStateAction<firebase.firestore.DocumentData | undefined>
+  >
+) => {
+  let id = auth.currentUser?.uid;
+  return firestore
+    .collection(COLLECTIONS.NOTIFICATIONS)
+    .where("receiverId", "==", id)
+    .orderBy("createdAt", "desc")
+    .onSnapshot((snapshot) => {
+      const newData = snapshot.docs.map((doc) => {
+        const data = { id: doc.id, ...doc.data() };
+        return data;
+      });
+      callback(newData);
+    });
+};
