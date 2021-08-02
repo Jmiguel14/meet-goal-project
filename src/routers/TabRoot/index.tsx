@@ -21,6 +21,8 @@ import { Menu } from "components/Menu";
 import loadable from "@loadable/component";
 import { IonLoading } from "@ionic/react";
 import { Routes } from "constants/routes";
+import { getUserNotifications } from "firebase/notificationsServices";
+import useNotification from "hooks/useNotification";
 
 const loadableOptions = { fallback: <IonLoading isOpen={true} /> };
 
@@ -118,6 +120,8 @@ const AsyncMyPostulations = loadable(
 
 export const TabRoot: React.FC = () => {
   const location = useLocation();
+  const notification = useNotification();
+
   return (
     <>
       <Menu />
@@ -253,6 +257,7 @@ export const TabRoot: React.FC = () => {
             <IonIcon icon={searchOutline}></IonIcon>
           </IonTabButton>
           <IonTabButton tab="notificaciones" href={Routes.NOTIFICATIONS}>
+            {notification === false ? "" : <IonBadge color="danger"></IonBadge>}
             <IonIcon icon={notificationsOutline}></IonIcon>
           </IonTabButton>
           <IonTabButton tab="mensajes-jugador" href={Routes.MESSAGES}>
