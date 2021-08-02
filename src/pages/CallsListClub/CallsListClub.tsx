@@ -64,35 +64,28 @@ const CallsListClub: React.FC = () => {
             Listado de las convocatorias creadas
           </div>
         </IonItemDivider>
-        {callsList?.map((call: any, key: any) =>
-          !call.isClosed ? (
-            <IonCard key={key} className={styles.back}>
-              <IonCardTitle
-                className={styles.title_calls_details}
-              >{`POSICIÓN: ${call.posRequired}`}</IonCardTitle>
-              <IonItem className={styles.calls_details}>
-                <IonLabel position="stacked">
-                  <h1
-                    className={styles.calls_data}
-                  >{`Cat: ${call.ageRequired}`}</h1>
-                </IonLabel>
-                <IonText
-                  className={styles.end_date}
-                >{`F. de Cierre: ${converterDate(call.endDate)}`}</IonText>
-                <IonButton
-                  slot="end"
-                  fill="clear"
-                  size="small"
-                  color="tertiary"
-                >
-                  <Link to={`/tabs/convocatoria/${call.id}`}>Ver</Link>
-                </IonButton>
-              </IonItem>
-            </IonCard>
-          ) : (
-            ""
-          )
-        )}
+        {callsList?.map((call: any, key: any) => (
+          <IonCard key={key} className={styles.back}>
+            <IonCardTitle
+              className={styles.title_calls_details}
+            >{`POSICIÓN: ${call.posRequired}`}</IonCardTitle>
+            <IonItem className={styles.calls_details}>
+              <IonLabel position="stacked">
+                <h1
+                  className={styles.calls_data}
+                >{`Cat: ${call.ageRequired}`}</h1>
+              </IonLabel>
+              <IonText className={styles.end_date}>
+                {call.isClosed === true
+                  ? "CERRADA"
+                  : `F. de Cierre: ${converterDate(call.endDate)}`}
+              </IonText>
+              <IonButton slot="end" fill="clear" size="small" color="tertiary">
+                <Link to={`/tabs/convocatoria/${call.id}`}>Ver</Link>
+              </IonButton>
+            </IonItem>
+          </IonCard>
+        ))}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton routerLink="/tabs/nueva-convocatoria">
             <IonIcon icon={add} />

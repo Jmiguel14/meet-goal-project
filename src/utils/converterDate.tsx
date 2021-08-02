@@ -7,10 +7,10 @@ export function converterDate(date: firebase.firestore.Timestamp) {
   return newDate;
 }
 
-export function compareDates(endDate: firebase.firestore.Timestamp) {
+export function isCallClosed(endDate: firebase.firestore.Timestamp) {
   let endConvertedDate = endDate?.toDate();
-  let actualDate = new Date();
-  if (actualDate < endConvertedDate) {
+  let currentDate = new Date();
+  if (currentDate < endConvertedDate) {
     return true;
   } else {
     return false;

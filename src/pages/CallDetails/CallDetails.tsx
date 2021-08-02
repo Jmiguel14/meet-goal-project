@@ -32,7 +32,7 @@ import { setPostulation } from "firebase/postulationsServices";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 
-import { compareDates, converterDate } from "utils/converterDate";
+import { isCallClosed, converterDate } from "utils/converterDate";
 
 import { Player } from "types";
 import {
@@ -144,7 +144,7 @@ const CallDetails: React.FC = () => {
           newNotification(
             player.playerId,
             messageNotification,
-            NOTIFYTITLES.PLAYERACCEPT
+            NOTIFYTITLES.PLAYERACCEPTED
           );
           flag = true;
         }
@@ -191,7 +191,8 @@ const CallDetails: React.FC = () => {
                 Detalles de la Convocatoria
               </h1>
             </IonLabel>
-            {currentUser.uid === callData?.clubId ? (
+            {currentUser.uid === callData?.clubId &&
+            callData.isClosed === false ? (
               <Link to={`/tabs/editar-convocatoria/${callData?.id}`}>
                 <IonIcon icon={create} size="medium" color="primary"></IonIcon>
               </Link>
@@ -212,9 +213,13 @@ const CallDetails: React.FC = () => {
               </h1>
             </IonLabel>
             <IonText className={styles.club_location}>{clubData?.name}</IonText>
-            <IonText className={styles.endDate}>
-              Termina el {converterDate(callData?.endDate)}
-            </IonText>
+            {callData?.isClosed === true ? (
+              <IonText className={styles.endDate}>CERRADA</IonText>
+            ) : (
+              <IonText className={styles.endDate}>
+                Termina el {converterDate(callData?.endDate)}
+              </IonText>
+            )}
           </IonItem>
           <IonItemDivider color="primary">
             <div className={styles.request}>Requerimos</div>
@@ -245,7 +250,7 @@ const CallDetails: React.FC = () => {
           </IonItem>
         </IonCard>
         {currentUserData?.userType === USER_TYPES.JUGADOR &&
-        compareDates(callData?.endDate) ? (
+        isCallClosed(callData?.endDate) ? (
           existPostulation ? (
             ""
           ) : (
@@ -267,60 +272,65 @@ const CallDetails: React.FC = () => {
           <div className={styles.request}>Futbolistas Postulantes</div>
         </IonItemDivider>
         <IonList>
-          {callData?.postulatedPlayers &&
-            playersData.map((player: Player, index: number) => {
-              return (
-                <IonItem key={index}>
-                  {callData.postulatedPlayers &&
-                  currentUserData?.id === callData.clubId
-                    ? callData.postulatedPlayers.map((postulation: any) =>
-                        postulation.playerId === player.id ? (
-                          <IonButton
-                            key={player.id}
-                            color={
-                              postulation.isSelected ? "danger" : "success"
-                            }
-                            onClick={() =>
-                              selectPostulationsPlayers(
-                                callData?.id,
-                                postulation.playerId,
-                                postulation.isSelected
-                              )
-                            }
-                          >
-                            <IonIcon
-                              icon={
-                                postulation.isSelected
-                                  ? closeOutline
-                                  : checkmarkOutline
+          {callData?.postulatedPlayers
+            ? playersData.map((player: Player, index: number) => {
+                return (
+                  <IonItem key={index}>
+                    {callData.postulatedPlayers &&
+                    currentUserData?.id === callData.clubId
+                      ? callData.postulatedPlayers.map((postulation: any) =>
+                          postulation.playerId === player.id ? (
+                            <IonButton
+                              key={player.id}
+                              color={
+                                postulation.isSelected ? "danger" : "success"
                               }
-                            ></IonIcon>
-                          </IonButton>
-                        ) : (
-                          ""
+                              disabled={
+                                callData.isClosed === true ? true : false
+                              }
+                              onClick={() =>
+                                selectPostulationsPlayers(
+                                  callData?.id,
+                                  postulation.playerId,
+                                  postulation.isSelected
+                                )
+                              }
+                            >
+                              <IonIcon
+                                icon={
+                                  postulation.isSelected
+                                    ? closeOutline
+                                    : checkmarkOutline
+                                }
+                              ></IonIcon>
+                            </IonButton>
+                          ) : (
+                            ""
+                          )
                         )
-                      )
-                    : ""}
-                  <IonLabel>{player.name}</IonLabel>
-                  {currentUserData?.id === callData.clubId ? (
-                    <IonButton
-                      slot="end"
-                      fill="clear"
-                      size="small"
-                      routerLink={`/tabs/perfil/${player.id}`}
-                    >
-                      Ver
-                    </IonButton>
-                  ) : (
-                    ""
-                  )}
-                </IonItem>
-              );
-            })}
+                      : ""}
+                    <IonLabel>{player.name}</IonLabel>
+                    {currentUserData?.id === callData.clubId ? (
+                      <IonButton
+                        slot="end"
+                        fill="clear"
+                        size="small"
+                        routerLink={`/tabs/perfil/${player.id}`}
+                      >
+                        Ver
+                      </IonButton>
+                    ) : (
+                      ""
+                    )}
+                  </IonItem>
+                );
+              })
+            : ""}
         </IonList>
         <br />
         {currentUser.uid === callData?.clubId &&
-        !compareDates(callData.endDate) ? (
+        !isCallClosed(callData.endDate) &&
+        callData.isClosed === false ? (
           <>
             <IonItemDivider color="primary">
               <div className={styles.request}>
