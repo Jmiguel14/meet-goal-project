@@ -105,6 +105,14 @@ const CallDetails: React.FC = () => {
         position: "top",
         color: "success",
       });
+      newNotification(
+        currentUser.uid,
+        `${NOTIFYTITLES.POSTULATION} del ${clubData?.name}. Donde requiere un ${callData?.posRequired} de la categoria ${callData?.ageRequired}`,
+        NOTIFYTITLES.POSTULATION,
+        clubData?.name,
+        callData?.posRequired,
+        callData?.ageRequired
+      );
       history.push("/tabs/mis-postulaciones");
     } else {
       present({
@@ -144,7 +152,10 @@ const CallDetails: React.FC = () => {
           newNotification(
             player.playerId,
             messageNotification,
-            NOTIFYTITLES.PLAYERACCEPTED
+            NOTIFYTITLES.PLAYERACCEPTED,
+            clubData?.name,
+            callData.posRequired,
+            callData.ageRequired
           );
           flag = true;
         }

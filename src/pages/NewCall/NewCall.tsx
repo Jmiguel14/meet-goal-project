@@ -31,6 +31,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ERROR_MESSAGES } from "constants/errorMessages";
 import { addNewClubCall } from "firebase/callServices";
+import { newNotification } from "firebase/notificationsServices";
+import { NOTIFYTITLES } from "constants/notificationsTitles";
+import { useCurrentUserData } from "hooks/useCurrentUserData";
 
 const schema = yup.object().shape({
   ageRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
@@ -42,6 +45,7 @@ const schema = yup.object().shape({
 const NewCall: React.FC = () => {
   const [present] = useIonToast();
   const { currentUser } = useAuth();
+  const currentUserData = useCurrentUserData();
   const history = useHistory();
 
   const initialValues = {
@@ -80,6 +84,14 @@ const NewCall: React.FC = () => {
         position: "top",
         color: "success",
       });
+      newNotification(
+        currentUser.uid,
+        `${NOTIFYTITLES.NEWCALL} Requieres un ${posRequired} de la categoria ${ageRequired}`,
+        NOTIFYTITLES.NEWCALL,
+        currentUserData?.name,
+        posRequired,
+        ageRequired
+      );
       history.goBack();
     } catch {
       present({

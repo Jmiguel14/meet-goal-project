@@ -13,6 +13,8 @@ import firebase from "firebase";
 import styles from "./styles.module.css";
 import { getNotificationDetails } from "firebase/notificationsServices";
 import CongratPoster from "assets/CongratsPlayerAccepted.png";
+import CallPoster from "assets/NewCallPoster.png";
+import PostulationPoster from "assets/PostulationPoster.png";
 import { NOTIFYTITLES } from "constants/notificationsTitles";
 
 export interface props {
@@ -38,7 +40,17 @@ const NotificationModal = (props: props) => {
       </IonHeader>
       <IonContent className={styles.back_modal}>
         <IonItem className={styles.back} lines="none">
-          <IonLabel className={styles.title}>{notifyData?.title}</IonLabel>
+          <IonLabel className={styles.title}>
+            {notifyData?.title === NOTIFYTITLES.PLAYERACCEPTED
+              ? `${notifyData?.title} del ${notifyData?.name}. Donde requiere un ${notifyData?.posRequired} de la categoria ${notifyData?.ageRequired}`
+              : ""}
+            {notifyData?.title === NOTIFYTITLES.NEWCALL
+              ? `${notifyData?.title}`
+              : ""}
+            {notifyData?.title === NOTIFYTITLES.POSTULATION
+              ? `${notifyData?.title}`
+              : ""}
+          </IonLabel>
         </IonItem>
         <IonItem className={styles.back} lines="none">
           <IonLabel position="stacked" className={styles.field}>
@@ -50,6 +62,19 @@ const NotificationModal = (props: props) => {
         </IonItem>
         {notifyData?.title === NOTIFYTITLES.PLAYERACCEPTED ? (
           <IonImg src={CongratPoster} className="ion-padding-vertical"></IonImg>
+        ) : (
+          ""
+        )}
+        {notifyData?.title === NOTIFYTITLES.NEWCALL ? (
+          <IonImg src={CallPoster} className="ion-padding-vertical"></IonImg>
+        ) : (
+          ""
+        )}
+        {notifyData?.title === NOTIFYTITLES.POSTULATION ? (
+          <IonImg
+            src={PostulationPoster}
+            className="ion-padding-vertical"
+          ></IonImg>
         ) : (
           ""
         )}

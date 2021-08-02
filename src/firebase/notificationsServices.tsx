@@ -5,7 +5,10 @@ import { auth, firestore } from "./client";
 export async function newNotification(
   receiverId: string,
   notification: string,
-  title: string
+  title: string,
+  name?: string,
+  posRequired?: string,
+  ageRequired?: string
 ) {
   await firestore.collection(COLLECTIONS.NOTIFICATIONS).add({
     receiverId,
@@ -13,6 +16,9 @@ export async function newNotification(
     notification,
     isSeen: false,
     createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+    name: name,
+    posRequired: posRequired,
+    ageRequired: ageRequired,
   });
 }
 

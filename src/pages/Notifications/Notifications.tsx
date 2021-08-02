@@ -6,6 +6,7 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonImg,
   IonItem,
   IonItemDivider,
   IonLabel,
@@ -24,6 +25,10 @@ import {
 } from "firebase/notificationsServices";
 import { converterDate } from "utils/converterDate";
 import NotificationModal from "components/NotificationModal/NotificationModal";
+import NotificationPoster from "assets/notificationPoster.svg";
+import NotificationIcon from "icons/Notification.png";
+import { notifications } from "ionicons/icons";
+import { NOTIFYTITLES } from "constants/notificationsTitles";
 
 const Notifications: React.FC = () => {
   const [notificationList, setNotificationList] =
@@ -63,30 +68,48 @@ const Notifications: React.FC = () => {
         </IonItemDivider>
         {notificationList?.length === 0 ? (
           <div className={styles.container_message}>
+            <img src={NotificationPoster} className="ion-padding"></img>
             <IonLabel className={styles.message_not_found}>
               Aún no registra ninguna notificación
             </IonLabel>
           </div>
         ) : (
-          notificationList?.map((notification: any, index: number) =>
-            !notification.isSeen ? (
-              <IonCard key={index} className={styles.back}>
-                <IonItem
-                  className={styles.details}
-                  onClick={() => passNotificationId(notification.id)}
-                >
-                  <IonLabel>
-                    <h1 className={styles.data}>{`${notification.title}`}</h1>
-                  </IonLabel>
-                  <IonText className={styles.date}>{`${converterDate(
-                    notification.createdAt
-                  )}`}</IonText>
-                </IonItem>
-              </IonCard>
-            ) : (
-              ""
-            )
-          )
+          notificationList?.map((notification: any, index: number) => (
+            <IonCard key={index} className={styles.back}>
+              <IonItem
+                className={styles.details}
+                onClick={() => passNotificationId(notification.id)}
+              >
+                <IonIcon
+                  icon={notifications}
+                  size="medium"
+                  color={notification.isSeen === false ? "primary" : "medium"}
+                ></IonIcon>
+                <IonLabel>
+                  <h1
+                    className={
+                      notification.isSeen === false
+                        ? styles.data_not_seen
+                        : styles.data_seen
+                    }
+                  >
+                    {notification.title === NOTIFYTITLES.PLAYERACCEPTED
+                      ? `${notification.title} por el  ${notification.name}`
+                      : ""}
+                    {notification.title === NOTIFYTITLES.NEWCALL
+                      ? `${notification.title} Requieres un  ${notification.posRequired}`
+                      : ""}
+                    {notification.title === NOTIFYTITLES.POSTULATION
+                      ? `${notification.title} del ${notification.name}`
+                      : ""}
+                  </h1>
+                </IonLabel>
+                <IonText className={styles.date}>{`${converterDate(
+                  notification.createdAt
+                )}`}</IonText>
+              </IonItem>
+            </IonCard>
+          ))
         )}
         <IonModal isOpen={showModal}>
           {notifyId !== "" || notifyId !== undefined ? (

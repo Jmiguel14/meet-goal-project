@@ -17,11 +17,20 @@
 .details {
   --background: #fafafa;
 }
-.data {
+.data_not_seen {
   font-style: normal !important;
   font-weight: bold !important;
   line-height: 20px !important;
   color: #315c79 !important;
+  width: 100% !important;
+  font-size: 14px !important;
+  white-space: normal !important;
+}
+.data_seen {
+  font-style: normal !important;
+  font-weight: bold !important;
+  line-height: 20px !important;
+  color: darkgrey !important;
   width: 100% !important;
   font-size: 14px !important;
   white-space: normal !important;
