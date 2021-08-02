@@ -9,25 +9,41 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,
+  IonModal,
   IonPage,
   IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { arrowBackOutline } from "ionicons/icons";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
-import { getUserNotifications } from "firebase/notificationsServices";
+import {
+  getUserNotifications,
+  updateNotificationState,
+} from "firebase/notificationsServices";
 import { converterDate } from "utils/converterDate";
+import NotificationModal from "components/NotificationModal/NotificationModal";
 
 const Notifications: React.FC = () => {
   const [notificationList, setNotificationList] =
     useState<firebase.firestore.DocumentData>();
+  const [notifyId, setNotifyId] = useState("");
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     const unsubscribe = getUserNotifications(setNotificationList);
     return () => unsubscribe && unsubscribe();
   }, []);
+
+  function passNotificationId(id: string) {
+    setNotifyId(id);
+    try {
+      updateNotificationState(id);
+      setShowModal(true);
+    } catch (e) {
+      setShowModal(false);
+    }
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -55,7 +71,10 @@ const Notifications: React.FC = () => {
           notificationList?.map((notification: any, index: number) =>
             !notification.isSeen ? (
               <IonCard key={index} className={styles.back}>
-                <IonItem className={styles.details}>
+                <IonItem
+                  className={styles.details}
+                  onClick={() => passNotificationId(notification.id)}
+                >
                   <IonLabel>
                     <h1 className={styles.data}>{`${notification.title}`}</h1>
                   </IonLabel>
@@ -69,6 +88,14 @@ const Notifications: React.FC = () => {
             )
           )
         )}
+        <IonModal isOpen={showModal}>
+          {notifyId !== "" || notifyId !== undefined ? (
+            <NotificationModal id={notifyId}></NotificationModal>
+          ) : (
+            ""
+          )}
+          <IonButton onClick={() => setShowModal(false)}>Cerrar</IonButton>
+        </IonModal>
       </IonContent>
     </IonPage>
   );

@@ -6,16 +6,20 @@ export const useNotifications = () => {
   const [notificationList, setNotificationList] =
     useState<firebase.firestore.DocumentData>();
   const [flag, setFlag] = useState<boolean>(false);
+
   useEffect(() => {
     const unsubscribe = getUserNotifications(setNotificationList);
     return () => unsubscribe && unsubscribe();
   }, []);
+
   useEffect(() => {
-    notificationList?.map((notification: any) => {
-      if (!notification.isSeen) {
-        setFlag(true);
-      }
-    });
+    if (notificationList) {
+      notificationList?.map((notification: any) => {
+        if (notification.isSeen === false) {
+          setFlag(true);
+        }
+      });
+    }
   }, [notificationList]);
 
   return flag;

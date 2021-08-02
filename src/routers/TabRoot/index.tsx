@@ -119,7 +119,7 @@ const AsyncMyPostulations = loadable(
 
 export const TabRoot: React.FC = () => {
   const location = useLocation();
-  //const notification = useNotifications();
+  const notification = useNotifications();
   return (
     <>
       <Menu />
@@ -255,6 +255,7 @@ export const TabRoot: React.FC = () => {
             <IonIcon icon={searchOutline}></IonIcon>
           </IonTabButton>
           <IonTabButton tab="notificaciones" href={Routes.NOTIFICATIONS}>
+            {notification === false ? "" : <IonBadge color="danger"></IonBadge>}
             <IonIcon icon={notificationsOutline}></IonIcon>
           </IonTabButton>
           <IonTabButton tab="mensajes-jugador" href={Routes.MESSAGES}>

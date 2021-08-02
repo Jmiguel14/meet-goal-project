@@ -16,6 +16,12 @@ export async function newNotification(
   });
 }
 
+export function updateNotificationState(notifyId: string) {
+  firestore.collection(COLLECTIONS.NOTIFICATIONS).doc(notifyId).update({
+    isSeen: true,
+  });
+}
+
 export const getUserNotifications = (
   callback: React.Dispatch<
     React.SetStateAction<firebase.firestore.DocumentData | undefined>
@@ -32,5 +38,20 @@ export const getUserNotifications = (
         return data;
       });
       callback(newData);
+    });
+};
+
+export const getNotificationDetails = (
+  id: string | undefined,
+  callback: React.Dispatch<
+    React.SetStateAction<firebase.firestore.DocumentData | undefined>
+  >
+) => {
+  return firestore
+    .collection(COLLECTIONS.NOTIFICATIONS)
+    .doc(id)
+    .onSnapshot((doc) => {
+      const data = { id: doc.id, ...doc.data() };
+      callback(data);
     });
 };
