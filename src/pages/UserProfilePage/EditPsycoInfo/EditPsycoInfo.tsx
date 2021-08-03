@@ -57,7 +57,7 @@ const EditPsycoInfo: React.FC = () => {
       await EditPsycoParameters(character, personality, attitude);
       present({
         message: "Se actualizó la información exitosamente",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
@@ -65,7 +65,7 @@ const EditPsycoInfo: React.FC = () => {
     } catch {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });

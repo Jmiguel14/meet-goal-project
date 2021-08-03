@@ -68,7 +68,7 @@ const EditAttributes: React.FC = () => {
     ) {
       present({
         message: "Se actualizó la información exitosamente",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
@@ -76,7 +76,7 @@ const EditAttributes: React.FC = () => {
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });

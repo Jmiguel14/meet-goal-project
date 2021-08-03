@@ -51,7 +51,7 @@ const UpdatePhotos: React.FC = () => {
       const onComplete = () => {
         present({
           message: "Se ha cambiado su foto correctamente",
-          duration: 1000,
+          duration: 3000,
           position: "top",
           color: "success",
         });

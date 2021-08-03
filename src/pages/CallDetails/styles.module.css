@@ -83,3 +83,14 @@
 .endDate {
   padding-top: 10px;
 }
+
+.postulant_notify {
+  --background: #fafafa;
+  --placeholder-color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.submit_notify {
+  margin-top: 10px;
+}

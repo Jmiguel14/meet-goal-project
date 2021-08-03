@@ -1,0 +1,24 @@
+.back {
+  --background: #fafafa;
+}
+.back_modal {
+  --background: #fafafa;
+  padding: 20px;
+}
+.title {
+  font-size: 20px !important;
+  color: #315c79 !important;
+  white-space: normal !important;
+  text-align: center !important;
+}
+.message {
+  font-weight: bold !important;
+  font-size: 18px !important;
+  font-style: normal !important;
+}
+.field {
+  font-style: normal !important;
+  font-size: 16px !important;
+  color: darkgrey !important;
+  padding-bottom: 5px !important;
+}

@@ -52,7 +52,7 @@ const AddInjury: React.FC = () => {
       await AddInjuryExperienced(injuryName, recoveryTime, surgery);
       present({
         message: "Se ha registrado la inforamción ha tu historial médico",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
@@ -60,7 +60,7 @@ const AddInjury: React.FC = () => {
     } catch {
       present({
         message: "Error al agregar la información. Intentelo nuevamente...",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });

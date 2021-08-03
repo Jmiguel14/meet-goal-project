@@ -55,7 +55,7 @@ const Beginning: React.FC = () => {
     if (await EditPersonalValues(values[0], values[1], values[2])) {
       present({
         message: "Se actualizó la información exitosamente",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
@@ -63,7 +63,7 @@ const Beginning: React.FC = () => {
     } else {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });

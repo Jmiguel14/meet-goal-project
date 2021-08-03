@@ -19,6 +19,7 @@ export function addNewClubCall(
     extraDetails,
     createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
     postulatedPlayers: {},
+    isClosed: false,
   });
 }
 export const getCallsData = (
@@ -90,4 +91,10 @@ export function saveCallChanges(
       endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
       extraDetails,
     });
+}
+
+export function CloseCall(callId: string) {
+  firestore.collection(COLLECTIONS.CALLS).doc(callId).update({
+    isClosed: true,
+  });
 }

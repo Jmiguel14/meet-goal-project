@@ -75,9 +75,11 @@ const CallsListClub: React.FC = () => {
                   className={styles.calls_data}
                 >{`Cat: ${call.ageRequired}`}</h1>
               </IonLabel>
-              <IonText
-                className={styles.end_date}
-              >{`F. de Cierre: ${converterDate(call.endDate)}`}</IonText>
+              <IonText className={styles.end_date}>
+                {call.isClosed === true
+                  ? "CERRADA"
+                  : `F. de Cierre: ${converterDate(call.endDate)}`}
+              </IonText>
               <IonButton slot="end" fill="clear" size="small" color="tertiary">
                 <Link to={`/tabs/convocatoria/${call.id}`}>Ver</Link>
               </IonButton>
