@@ -100,7 +100,7 @@ export const AddClub: React.FC = () => {
       );
       present({
         message: "Se agregó el club a tu experiencia",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
@@ -108,7 +108,7 @@ export const AddClub: React.FC = () => {
     } catch {
       present({
         message: "Error al agregar la información intentelo nuevamente...",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });

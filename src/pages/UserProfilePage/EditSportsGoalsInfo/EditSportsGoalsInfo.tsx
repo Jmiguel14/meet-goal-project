@@ -57,7 +57,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
       await EditSportsGoalsData(totalWins, maxNacGoal, maxIntGoal);
       present({
         message: "Se agrego el club a tu experiencia",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
@@ -65,7 +65,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
     } catch {
       present({
         message: "Error al agregar la información intentelo nuevamente...",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });

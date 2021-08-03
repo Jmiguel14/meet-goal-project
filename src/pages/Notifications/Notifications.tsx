@@ -53,12 +53,6 @@ const Notifications: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar className={styles.back}>
-          <IonButtons slot="start">
-            <IonBackButton
-              defaultHref="/tabs/panel-noticias"
-              className={styles.icon_back}
-            />
-          </IonButtons>
           <IonTitle>Notificaciones</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -94,13 +88,13 @@ const Notifications: React.FC = () => {
                     }
                   >
                     {notification.title === NOTIFYTITLES.PLAYERACCEPTED
-                      ? `${notification.title} por el  ${notification.name}`
+                      ? `${notification.title} por el club ${notification.clubName}`
                       : ""}
                     {notification.title === NOTIFYTITLES.NEWCALL
                       ? `${notification.title} Requieres un  ${notification.posRequired}`
                       : ""}
                     {notification.title === NOTIFYTITLES.POSTULATION
-                      ? `${notification.title} del ${notification.name}`
+                      ? `${notification.title} del ${notification.clubName}`
                       : ""}
                   </h1>
                 </IonLabel>

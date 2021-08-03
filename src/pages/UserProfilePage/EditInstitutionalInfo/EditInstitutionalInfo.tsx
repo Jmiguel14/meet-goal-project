@@ -62,7 +62,7 @@ export const EditInstitutionalInfo: React.FC = () => {
       await SetInstitutionalData(socialName, city, country, phone, foundation);
       present({
         message: "Se actualizó la información exitosamente",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
@@ -70,7 +70,7 @@ export const EditInstitutionalInfo: React.FC = () => {
     } catch {
       present({
         message: "Error al actualizar la información. Intentelo nuevamente...",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });

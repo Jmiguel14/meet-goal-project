@@ -42,7 +42,7 @@ const NotificationModal = (props: props) => {
         <IonItem className={styles.back} lines="none">
           <IonLabel className={styles.title}>
             {notifyData?.title === NOTIFYTITLES.PLAYERACCEPTED
-              ? `${notifyData?.title} del ${notifyData?.name}. Donde requiere un ${notifyData?.posRequired} de la categoria ${notifyData?.ageRequired}`
+              ? `${notifyData?.title} del ${notifyData?.clubName}. Donde requiere un ${notifyData?.posRequired} de la categoria ${notifyData?.ageRequired}`
               : ""}
             {notifyData?.title === NOTIFYTITLES.NEWCALL
               ? `${notifyData?.title}`

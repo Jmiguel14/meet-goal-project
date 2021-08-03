@@ -6,7 +6,7 @@ export async function newNotification(
   receiverId: string,
   notification: string,
   title: string,
-  name?: string,
+  clubName?: string,
   posRequired?: string,
   ageRequired?: string
 ) {
@@ -16,7 +16,7 @@ export async function newNotification(
     notification,
     isSeen: false,
     createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-    name: name,
+    clubName,
     posRequired: posRequired,
     ageRequired: ageRequired,
   });

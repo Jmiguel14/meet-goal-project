@@ -77,7 +77,7 @@ const CallDetails: React.FC = () => {
           setExistPostulation(true);
           present({
             message: "Ya esta registrado en esta convocatoria",
-            duration: 1000,
+            duration: 3000,
             position: "top",
             color: "danger",
           });
@@ -101,7 +101,7 @@ const CallDetails: React.FC = () => {
     if (await setPostulation(id!, currentUser.uid)) {
       present({
         message: "Te has registrado a la convocatoria",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
@@ -117,7 +117,7 @@ const CallDetails: React.FC = () => {
     } else {
       present({
         message: "Error al registrarte a la convocatoria",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });
@@ -134,7 +134,7 @@ const CallDetails: React.FC = () => {
     } catch (e) {
       present({
         message: "Error, intente nuevamente",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });
@@ -164,7 +164,7 @@ const CallDetails: React.FC = () => {
     if (flag) {
       present({
         message: "Se ha enviado la notificación a los jugadores",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "success",
       });
@@ -173,7 +173,7 @@ const CallDetails: React.FC = () => {
     } else {
       present({
         message: "Seleccione al menos (1) jugador postulados",
-        duration: 1000,
+        duration: 3000,
         position: "top",
         color: "danger",
       });

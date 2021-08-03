@@ -67,7 +67,6 @@ const NewCall: React.FC = () => {
   });
 
   const onSubmit = async (data: NewCallDataForm) => {
-    console.log("data", data);
     const { ageRequired, posRequired, startDate, endDate, extraDetails } = data;
     try {
       await addNewClubCall(
