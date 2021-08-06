@@ -5,4 +5,5 @@ export const COLLECTIONS = {
   CALLS: "calls",
   NOTIFICATIONS: "notifications",
   MESSAGES: "messages",
+  CHATS: "chats",
 };

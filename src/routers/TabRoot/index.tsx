@@ -117,6 +117,10 @@ const AsyncMyPostulations = loadable(
   () => import("pages/MyPostulations/MyPostulations"),
   loadableOptions
 );
+const AsyncMyChatRoom = loadable(
+  () => import("pages/Messages/ChatMessages/ChatMessages"),
+  loadableOptions
+);
 
 export const TabRoot: React.FC = () => {
   const location = useLocation();
@@ -228,6 +232,11 @@ export const TabRoot: React.FC = () => {
             path={Routes.MYPOSTULATIONS}
             component={AsyncMyPostulations}
           />
+          <PrivateRoutes
+            exact
+            path={Routes.CHATROOM}
+            component={AsyncMyChatRoom}
+          />
           <Route
             path="/tabs"
             render={() => <Redirect to={{ pathname: Routes.DASHBOARD }} />}
@@ -260,7 +269,7 @@ export const TabRoot: React.FC = () => {
             {notification === false ? "" : <IonBadge color="danger"></IonBadge>}
             <IonIcon icon={notificationsOutline}></IonIcon>
           </IonTabButton>
-          <IonTabButton tab="mensajes-jugador" href={Routes.MESSAGES}>
+          <IonTabButton tab="chats" href={Routes.MESSAGES}>
             <IonIcon icon={mailOutline}></IonIcon>
           </IonTabButton>
         </IonTabBar>

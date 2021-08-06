@@ -1,0 +1,30 @@
+.back {
+  --background: #fafafa;
+}
+.input_container {
+  position: absolute;
+  bottom: 9%;
+  left: 0;
+  width: 100%;
+}
+.message_input {
+  width: 70%;
+  border-color: darkgrey;
+}
+.send_button {
+  background-color: #315c79;
+  color: #ffffff;
+  width: 25%;
+  text-align: center;
+  font-style: normal;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.message_box_receiver {
+  float: left !important;
+  width: 50%;
+}
+.message_box_sender {
+  float: right !important;
+  width: 50%;
+}
