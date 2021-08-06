@@ -1,4 +1,5 @@
 import {
+  IonAvatar,
   IonBackButton,
   IonButton,
   IonButtons,
@@ -7,8 +8,10 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonImg,
   IonInput,
   IonLabel,
+  IonList,
   IonPage,
   IonRow,
   IonTitle,
@@ -18,10 +21,16 @@ import {
 import styles from "./styles.module.css";
 import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
-import { getChatMessages, newMessage } from "firebase/messagesServices";
+import {
+  getAChatRoomData,
+  getChatMessages,
+  getUserChatData,
+  newMessage,
+} from "firebase/messagesServices";
 import { useParams } from "react-router";
 import { useForm } from "react-hook-form";
 import { useAuth } from "contexts/AuthContext";
+import { Avatar } from "components/Avatar";
 
 const ChatMessages = () => {
   const { id } = useParams<{ id?: string }>();
@@ -30,11 +39,45 @@ const ChatMessages = () => {
   const [messagesList, setMessagesList] =
     useState<firebase.firestore.DocumentData>();
 
+  const [chatRoomData, setChatRoomData] =
+    useState<firebase.firestore.DocumentData>();
+
+  const [senderData, setSenderData] =
+    useState<firebase.firestore.DocumentData>();
+
+  const [receiverData, setReceiverData] =
+    useState<firebase.firestore.DocumentData>();
+
   useEffect(() => {
     getChatMessages(id!, (data) => {
       setMessagesList(data);
     });
   }, [id]);
+
+  useEffect(() => {
+    getAChatRoomData(id!, (data) => {
+      setChatRoomData(data);
+    });
+  }, [id]);
+
+  useEffect(() => {
+    getUserChatData(currentUser.uid, setSenderData);
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (chatRoomData?.playerId !== currentUser.uid) {
+      getUserChatData(chatRoomData?.playerId, (data) => {
+        setReceiverData(data);
+      });
+    } else {
+      getUserChatData(chatRoomData?.clubId, (data) => {
+        setReceiverData(data);
+      });
+    }
+  }, [chatRoomData]);
+  console.log("chatRoomData", chatRoomData);
+  console.log("senderData", senderData);
+  console.log("receiverData", receiverData);
 
   const { register, handleSubmit, setValue } = useForm({});
 
@@ -68,9 +111,10 @@ const ChatMessages = () => {
           <IonTitle>Chat</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className={styles.back}>
+      <IonContent>
         {messagesList?.map((message: any, index: number) => (
           <IonCard
+            id="message"
             key={index}
             className={
               message.senderId === currentUser.uid
@@ -78,7 +122,33 @@ const ChatMessages = () => {
                 : styles.message_box_receiver
             }
           >
-            <IonLabel>{message.message}</IonLabel>
+            <div className={styles.message_text_container}>
+              <IonRow>
+                <IonCol size="auto">
+                  <IonAvatar className={styles.avatar}>
+                    <img
+                      src={
+                        message?.senderId === currentUser.uid
+                          ? `${senderData?.avatarURL}`
+                          : `${receiverData?.avatarURL}`
+                      }
+                    ></img>
+                  </IonAvatar>
+                </IonCol>
+                <IonCol>
+                  <IonLabel className={styles.userName_message}>
+                    {message?.senderId === currentUser.uid
+                      ? senderData?.name
+                      : receiverData?.name}
+                  </IonLabel>
+                </IonCol>
+              </IonRow>
+              <div>
+                <IonLabel className={styles.message_text}>
+                  {message.message}
+                </IonLabel>
+              </div>
+            </div>
           </IonCard>
         ))}
         <div className={styles.input_container}>

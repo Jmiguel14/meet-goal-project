@@ -1,6 +1,7 @@
 import { COLLECTIONS } from "constants/collections";
 import { firestore } from "./client";
 import firebase from "firebase/app";
+import { USER_TYPES } from "constants/userTypes";
 
 export async function discoveringChatRoom(clubId: string, playerId: string) {
   let chatId;
@@ -35,6 +36,7 @@ export async function newChatRoom(clubId: string, playerId: string) {
     .add({
       clubId,
       playerId,
+      createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
     })
     .then((docRef) => {
       chatId = docRef.id;
@@ -76,4 +78,68 @@ export async function newMessage(
     message,
     createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
   });
+}
+
+export async function getMyChatsRooms(
+  userId: string,
+  userType: string,
+  callback: React.Dispatch<
+    React.SetStateAction<firebase.firestore.DocumentData | undefined>
+  >
+) {
+  if (userType === USER_TYPES.JUGADOR) {
+    return firestore
+      .collection(COLLECTIONS.CHATS)
+      .where("playerId", "==", userId)
+      .orderBy("createdAt", "desc")
+      .onSnapshot((snapshot) => {
+        const newData = snapshot.docs.map((doc) => {
+          const data = { id: doc.id, ...doc.data() };
+          return data;
+        });
+        callback(newData);
+      });
+  } else {
+    return firestore
+      .collection(COLLECTIONS.CHATS)
+      .where("clubId", "==", userId)
+      .orderBy("createdAt", "desc")
+      .onSnapshot((snapshot) => {
+        const newData = snapshot.docs.map((doc) => {
+          const data = { id: doc.id, ...doc.data() };
+          return data;
+        });
+        callback(newData);
+      });
+  }
+}
+
+export async function getUserChatData(
+  id: string,
+  callback: React.Dispatch<
+    React.SetStateAction<firebase.firestore.DocumentData | undefined>
+  >
+) {
+  return firestore
+    .collection(COLLECTIONS.USERS)
+    .doc(id)
+    .onSnapshot((doc) => {
+      const data = { id: doc.id, ...doc.data() };
+      callback(data);
+    });
+}
+
+export async function getAChatRoomData(
+  chatRoomId: string,
+  callback: React.Dispatch<
+    React.SetStateAction<firebase.firestore.DocumentData | undefined>
+  >
+) {
+  return firestore
+    .collection(COLLECTIONS.CHATS)
+    .doc(chatRoomId)
+    .onSnapshot((doc) => {
+      const data = { id: doc.id, ...doc.data() };
+      callback(data);
+    });
 }
