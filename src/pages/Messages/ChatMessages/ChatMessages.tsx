@@ -6,6 +6,7 @@ import {
   IonCard,
   IonCol,
   IonContent,
+  IonGrid,
   IonHeader,
   IonIcon,
   IonImg,
@@ -19,7 +20,7 @@ import {
   useIonToast,
 } from "@ionic/react";
 import styles from "./styles.module.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import firebase from "firebase/app";
 import {
   getAChatRoomData,
@@ -31,11 +32,11 @@ import { useParams } from "react-router";
 import { useForm } from "react-hook-form";
 import { useAuth } from "contexts/AuthContext";
 import { Avatar } from "components/Avatar";
+import SendMessage from "components/SendMessage/SendMessage";
 
 const ChatMessages = () => {
   const { id } = useParams<{ id?: string }>();
   const { currentUser } = useAuth();
-  const [present] = useIonToast();
   const [messagesList, setMessagesList] =
     useState<firebase.firestore.DocumentData>();
 
@@ -58,49 +59,30 @@ const ChatMessages = () => {
     getAChatRoomData(id!, (data) => {
       setChatRoomData(data);
     });
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     getUserChatData(currentUser.uid, setSenderData);
   }, [currentUser]);
 
   useEffect(() => {
-    if (chatRoomData?.playerId !== currentUser.uid) {
-      getUserChatData(chatRoomData?.playerId, (data) => {
-        setReceiverData(data);
-      });
+    if (chatRoomData?.clubId === currentUser.uid) {
+      const receiverId = chatRoomData?.playerId;
+      readReceiverData(receiverId);
     } else {
-      getUserChatData(chatRoomData?.clubId, (data) => {
-        setReceiverData(data);
-      });
+      if (chatRoomData?.playerId === currentUser.uid) {
+        const receiverId = chatRoomData?.clubId;
+        readReceiverData(receiverId);
+      }
     }
-  }, [chatRoomData]);
+    async function readReceiverData(receiverId: string) {
+      await getUserChatData(receiverId, setReceiverData);
+    }
+  }, [currentUser, chatRoomData]);
+
   console.log("chatRoomData", chatRoomData);
-  console.log("senderData", senderData);
-  console.log("receiverData", receiverData);
-
-  const { register, handleSubmit, setValue } = useForm({});
-
-  const onSubmit = async (
-    data: any,
-    e: React.BaseSyntheticEvent<object, any, any> | undefined
-  ) => {
-    const { message } = data;
-    try {
-      await newMessage(id!, currentUser.uid, message);
-      setValue("message", "");
-    } catch (e) {
-      present({
-        message: "Error al enviar el mensaje...",
-        duration: 3000,
-        position: "top",
-        color: "danger",
-      });
-    }
-  };
-  console.log(id);
-
-  console.log(messagesList);
+  console.log("senderData", senderData?.id);
+  console.log("receiverData", receiverData?.id);
   return (
     <IonPage>
       <IonHeader>
@@ -112,60 +94,49 @@ const ChatMessages = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {messagesList?.map((message: any, index: number) => (
-          <IonCard
-            id="message"
-            key={index}
-            className={
-              message.senderId === currentUser.uid
-                ? styles.message_box_sender
-                : styles.message_box_receiver
-            }
-          >
-            <div className={styles.message_text_container}>
-              <IonRow>
-                <IonCol size="auto">
-                  <IonAvatar className={styles.avatar}>
-                    <img
-                      src={
-                        message?.senderId === currentUser.uid
-                          ? `${senderData?.avatarURL}`
-                          : `${receiverData?.avatarURL}`
-                      }
-                    ></img>
-                  </IonAvatar>
-                </IonCol>
-                <IonCol>
-                  <IonLabel className={styles.userName_message}>
-                    {message?.senderId === currentUser.uid
-                      ? senderData?.name
-                      : receiverData?.name}
-                  </IonLabel>
-                </IonCol>
-              </IonRow>
-              <div>
-                <IonLabel className={styles.message_text}>
-                  {message.message}
-                </IonLabel>
-              </div>
-            </div>
-          </IonCard>
-        ))}
-        <div className={styles.input_container}>
-          <form onSubmit={handleSubmit(onSubmit)} id="send-message-form">
-            <IonRow>
-              <IonInput
-                type="text"
-                className={styles.message_input}
-                placeholder="Escriba el mensaje"
-                clearInput={true}
-                {...register("message")}
-              ></IonInput>
-              <button className={styles.send_button} form="send-message-form">
-                Enviar
-              </button>
-            </IonRow>
-          </form>
+        <div>
+          <div className={styles.message_container}>
+            {messagesList?.map((message: any, index: number) => (
+              <IonCard
+                id="message"
+                key={index}
+                className={
+                  message.senderId === currentUser.uid
+                    ? styles.message_box_sender
+                    : styles.message_box_receiver
+                }
+              >
+                <div className={styles.message_text_container}>
+                  <IonRow>
+                    <IonCol size="auto">
+                      <IonAvatar className={styles.avatar}>
+                        <img
+                          src={
+                            message?.senderId === currentUser.uid
+                              ? `${senderData?.avatarURL}`
+                              : `${receiverData?.avatarURL}`
+                          }
+                        ></img>
+                      </IonAvatar>
+                    </IonCol>
+                    <IonCol>
+                      <IonLabel className={styles.userName_message}>
+                        {message?.senderId === currentUser.uid
+                          ? senderData?.name
+                          : receiverData?.name}
+                      </IonLabel>
+                    </IonCol>
+                  </IonRow>
+                  <div>
+                    <IonLabel className={styles.message_text}>
+                      {message.message}
+                    </IonLabel>
+                  </div>
+                </div>
+              </IonCard>
+            ))}
+          </div>
+          <SendMessage chatRoomId={id}></SendMessage>
         </div>
       </IonContent>
     </IonPage>

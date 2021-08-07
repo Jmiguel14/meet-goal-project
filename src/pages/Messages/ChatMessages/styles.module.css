@@ -1,26 +1,6 @@
 .back {
   --background: #fafafa;
 }
-.input_container {
-  position: sticky;
-  top: 92%;
-  left: 0;
-  width: 100%;
-}
-.message_input {
-  width: 70%;
-  border-color: darkgrey;
-  background-color: #ffffff;
-}
-.send_button {
-  background-color: #315c79;
-  color: #ffffff;
-  width: 25%;
-  text-align: center;
-  font-style: normal;
-  font-size: 16px;
-  border-radius: 5px;
-}
 .message_box_receiver {
   float: left !important;
   width: 50%;
@@ -36,7 +16,7 @@
 }
 .message_text {
   white-space: normal !important;
-  color: #c70039;
+  color: #900c3f;
 }
 .message_text_container {
   padding: 3px;
@@ -46,5 +26,9 @@
   height: 20px;
 }
 .userName_message {
-  color: #900c3f;
+  color: #c70039;
+}
+.message_container {
+  width: 100%;
+  height: 90%;
 }

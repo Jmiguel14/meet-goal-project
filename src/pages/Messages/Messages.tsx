@@ -17,6 +17,7 @@ import { getMyChatsRooms } from "firebase/messagesServices";
 import { useAuth } from "contexts/AuthContext";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import { Link } from "react-router-dom";
+import ChatRoomDetails from "components/ChatRoomDetails/ChatRoomDetails";
 
 const Messages: React.FC = () => {
   const { currentUser } = useAuth();
@@ -44,11 +45,7 @@ const Messages: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         {chatsRoomsList?.map((chatRoom: any, index: number) => (
-          <Link to={`/tabs/chats/${chatRoom.id}`} key={index}>
-            <IonCard key={index}>
-              <IonLabel>{chatRoom.id}</IonLabel>
-            </IonCard>
-          </Link>
+          <ChatRoomDetails id={chatRoom.id} key={index}></ChatRoomDetails>
         ))}
       </IonContent>
     </IonPage>
