@@ -1,0 +1,17 @@
+.message_details {
+  --ion-background-color: #fafafa !important;
+}
+.userName {
+  font-size: 20px !important;
+  font-weight: bold !important;
+  font-style: normal !important;
+  color: #315c79 !important;
+}
+.goChat {
+  text-decoration: none !important;
+}
+.message {
+  white-space: normal !important;
+  padding: 5px;
+  color: #900c3f;
+}

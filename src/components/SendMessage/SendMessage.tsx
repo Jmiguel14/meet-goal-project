@@ -7,10 +7,11 @@ import styles from "./styles.module.css";
 
 export interface props {
   chatRoomId: string | undefined;
+  scroll: any;
 }
 
 const SendMessage = (props: props) => {
-  const { chatRoomId } = props;
+  const { chatRoomId, scroll } = props;
   const { currentUser } = useAuth();
   const [present] = useIonToast();
 
@@ -32,6 +33,7 @@ const SendMessage = (props: props) => {
         color: "danger",
       });
     }
+    scroll.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -46,7 +48,11 @@ const SendMessage = (props: props) => {
               clearInput={true}
               {...register("message")}
             ></IonInput>
-            <button className={styles.send_button} form="send-message-form">
+            <button
+              className={styles.send_button}
+              type="submit"
+              form="send-message-form"
+            >
               Enviar
             </button>
           </IonRow>

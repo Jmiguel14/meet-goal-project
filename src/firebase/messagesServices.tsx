@@ -143,3 +143,22 @@ export async function getAChatRoomData(
       callback(data);
     });
 }
+
+export async function getLastChatMessage(
+  chatRoomId: string,
+  callback: React.Dispatch<
+    React.SetStateAction<firebase.firestore.DocumentData | undefined>
+  >
+) {
+  return firestore
+    .collection(COLLECTIONS.MESSAGES)
+    .where("chatId", "==", chatRoomId)
+    .orderBy("createdAt", "desc")
+    .limit(1)
+    .onSnapshot((snapshot) => {
+      snapshot.forEach((doc) => {
+        const data = { id: doc.id, ...doc.data() };
+        callback(data);
+      });
+    });
+}
