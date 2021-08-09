@@ -56,7 +56,16 @@ const ChatMessages = () => {
   }, [id]);
 
   useEffect(() => {
-    getUserChatData(currentUser.uid, setSenderData);
+    let unMounted = false;
+    if (!unMounted) {
+      senderData();
+    }
+    async function senderData() {
+      await getUserChatData(currentUser.uid, setSenderData);
+    }
+    return () => {
+      unMounted = true;
+    };
   }, [currentUser]);
 
   useEffect(() => {
@@ -72,7 +81,7 @@ const ChatMessages = () => {
     async function readReceiverData(receiverId: string) {
       await getUserChatData(receiverId, setReceiverData);
     }
-  }, [currentUser, chatRoomData]);
+  }, [chatRoomData, currentUser]);
 
   return (
     <IonPage>

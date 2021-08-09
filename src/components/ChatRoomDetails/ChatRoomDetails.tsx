@@ -16,7 +16,7 @@ import {
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { caretForward, caretForwardCircle } from "ionicons/icons";
+import { caretForward } from "ionicons/icons";
 
 export interface props {
   id: string;
@@ -41,25 +41,36 @@ const ChatRoomDetails = (props: props) => {
   }, [id]);
 
   useEffect(() => {
-    getLastChatMessage(id!, (data) => {
-      setLastMessage(data);
-    });
-  }, [id]);
-
-  useEffect(() => {
-    if (chatRoomData?.clubId === currentUser.uid) {
-      const receiverId = chatRoomData?.playerId;
-      readReceiverData(receiverId);
-    } else {
-      if (chatRoomData?.playerId === currentUser.uid) {
-        const receiverId = chatRoomData?.clubId;
+    let unMounted = false;
+    if (!unMounted) {
+      if (chatRoomData?.clubId === currentUser.uid) {
+        const receiverId = chatRoomData?.playerId;
         readReceiverData(receiverId);
+      } else {
+        if (chatRoomData?.playerId === currentUser.uid) {
+          const receiverId = chatRoomData?.clubId;
+          readReceiverData(receiverId);
+        }
       }
     }
     async function readReceiverData(receiverId: string) {
       await getUserChatData(receiverId, setReceiverData);
     }
+    return () => {
+      unMounted = true;
+    };
   }, [currentUser, chatRoomData]);
+
+  useEffect(() => {
+    getLastChatMessage(id!, (data) => {
+      setLastMessage(data);
+    });
+  }, [id]);
+
+  console.log("id", id);
+  console.log("lastMessage", lastMessage);
+  console.log("chatRoomData", chatRoomData);
+  console.log("receiverData", receiverData);
   return (
     <>
       <Link to={`/tabs/chats/${id}`} className={styles.goChat}>

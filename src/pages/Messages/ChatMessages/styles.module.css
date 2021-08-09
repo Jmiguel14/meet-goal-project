@@ -13,6 +13,7 @@
   background-color: lightyellow;
   color: black;
   font-size: 14px;
+  text-align: end;
 }
 .message_text {
   white-space: normal !important;
@@ -30,5 +31,10 @@
 }
 .message_container {
   width: 100%;
-  height: 90% !important;
+  height: 80%;
+  flex-direction: column;
+  position: absolute;
+}
+.content_message {
+  height: 80% !important;
 }
