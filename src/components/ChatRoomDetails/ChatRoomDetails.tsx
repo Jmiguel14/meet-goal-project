@@ -1,11 +1,3 @@
-import React, { useEffect, useState } from "react";
-import firebase from "firebase/app";
-import {
-  getAChatRoomData,
-  getLastChatMessage,
-  getUserChatData,
-} from "firebase/messagesServices";
-import { useAuth } from "contexts/AuthContext";
 import {
   IonAvatar,
   IonCard,
@@ -14,9 +6,17 @@ import {
   IonLabel,
   IonText,
 } from "@ionic/react";
+import { useAuth } from "contexts/AuthContext";
+import firebase from "firebase/app";
+import {
+  getAChatRoomData,
+  getLastChatMessage,
+  getUserChatData,
+} from "firebase/messagesServices";
+import { caretForward } from "ionicons/icons";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { caretForward } from "ionicons/icons";
 
 export interface props {
   id: string;
@@ -35,9 +35,15 @@ const ChatRoomDetails = (props: props) => {
     useState<firebase.firestore.DocumentData>();
 
   useEffect(() => {
-    getAChatRoomData(id!, (data) => {
-      setChatRoomData(data);
-    });
+    let unMounted = false;
+    if (!unMounted) {
+      getAChatRoomData(id!, (data) => {
+        setChatRoomData(data);
+      });
+      return () => {
+        unMounted = true;
+      };
+    }
   }, [id]);
 
   useEffect(() => {
@@ -66,11 +72,6 @@ const ChatRoomDetails = (props: props) => {
       setLastMessage(data);
     });
   }, [id]);
-
-  console.log("id", id);
-  console.log("lastMessage", lastMessage);
-  console.log("chatRoomData", chatRoomData);
-  console.log("receiverData", receiverData);
   return (
     <>
       <Link to={`/tabs/chats/${id}`} className={styles.goChat}>

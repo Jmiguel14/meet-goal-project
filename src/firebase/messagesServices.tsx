@@ -16,16 +16,13 @@ export async function discoveringChatRoom(clubId: string, playerId: string) {
         if (doc.exists) {
           cont++;
           chatId = doc.id;
-          console.log(chatId);
         }
       });
       if (cont === 0) {
         const Id = await newChatRoom(clubId, playerId);
-        console.log(Id);
         chatId = Id;
       }
     });
-  console.log(chatId);
   return chatId;
 }
 
@@ -40,7 +37,6 @@ export async function newChatRoom(clubId: string, playerId: string) {
     })
     .then((docRef) => {
       chatId = docRef.id;
-      console.log(chatId);
     })
     .catch((e) => {
       console.log(e);
@@ -99,7 +95,7 @@ export async function getMyChatsRooms(
         });
         callback(newData);
       });
-  } else {
+  } else if (userType === USER_TYPES.CLUB) {
     return firestore
       .collection(COLLECTIONS.CHATS)
       .where("clubId", "==", userId)

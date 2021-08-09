@@ -21,8 +21,14 @@ export const PhotoUser: React.FC = () => {
   const currentUserData = useCurrentUserData();
 
   async function verifyChatRoom() {
-    const chatId = await discoveringChatRoom(currentUser.uid, data?.id);
-    history.push(`/tabs/chats/${chatId}`);
+    let unMounted = false;
+    if (!unMounted) {
+      const chatId = await discoveringChatRoom(currentUser.uid, data?.id);
+      history.push(`/tabs/chats/${chatId}`);
+    }
+    return () => {
+      unMounted = true;
+    };
   }
 
   return (
@@ -56,6 +62,3 @@ export const PhotoUser: React.FC = () => {
 };
 
 export default PhotoUser;
-function ionViewDidEnter(arg0: () => void) {
-  throw new Error("Function not implemented.");
-}

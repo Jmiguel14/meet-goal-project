@@ -44,15 +44,27 @@ const ChatMessages = () => {
     useState<firebase.firestore.DocumentData>();
 
   useEffect(() => {
-    getChatMessages(id!, (data) => {
-      setMessagesList(data);
-    });
+    let unMounted = false;
+    if (!unMounted) {
+      getChatMessages(id!, (data) => {
+        setMessagesList(data);
+      });
+    }
+    return () => {
+      unMounted = true;
+    };
   }, [id]);
 
   useEffect(() => {
-    getAChatRoomData(id!, (data) => {
-      setChatRoomData(data);
-    });
+    let unMounted = false;
+    if (!unMounted) {
+      getAChatRoomData(id!, (data) => {
+        setChatRoomData(data);
+      });
+    }
+    return () => {
+      unMounted = true;
+    };
   }, [id]);
 
   useEffect(() => {
@@ -69,18 +81,24 @@ const ChatMessages = () => {
   }, [currentUser]);
 
   useEffect(() => {
-    if (chatRoomData?.clubId === currentUser.uid) {
-      const receiverId = chatRoomData?.playerId;
-      readReceiverData(receiverId);
-    } else {
-      if (chatRoomData?.playerId === currentUser.uid) {
-        const receiverId = chatRoomData?.clubId;
+    let unMounted = false;
+    if (!unMounted) {
+      if (chatRoomData?.clubId === currentUser.uid) {
+        const receiverId = chatRoomData?.playerId;
         readReceiverData(receiverId);
+      } else {
+        if (chatRoomData?.playerId === currentUser.uid) {
+          const receiverId = chatRoomData?.clubId;
+          readReceiverData(receiverId);
+        }
       }
     }
     async function readReceiverData(receiverId: string) {
       await getUserChatData(receiverId, setReceiverData);
     }
+    return () => {
+      unMounted = true;
+    };
   }, [chatRoomData, currentUser]);
 
   return (

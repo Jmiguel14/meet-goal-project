@@ -22,9 +22,15 @@ const Messages: React.FC = () => {
     useState<firebase.firestore.DocumentData>();
 
   useEffect(() => {
-    getMyChatsRooms(currentUser.uid, currentUserData?.userType, (data) => {
-      setChatsRoomsList(data);
-    });
+    let unMounted = false;
+    if (!unMounted) {
+      getMyChatsRooms(currentUser.uid, currentUserData?.userType, (data) => {
+        setChatsRoomsList(data);
+      });
+    }
+    return () => {
+      unMounted = true;
+    };
   }, [currentUserData, currentUser]);
 
   return (
