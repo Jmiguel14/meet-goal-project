@@ -9,6 +9,7 @@ import {
   IonHeader,
   IonIcon,
   IonLabel,
+  IonList,
   IonPage,
   IonRow,
   IonTitle,
@@ -50,6 +51,7 @@ const ChatMessages = () => {
         setMessagesList(data);
       });
     }
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
     return () => {
       unMounted = true;
     };
@@ -113,51 +115,53 @@ const ChatMessages = () => {
           <IonTitle>Chat</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        <div className={styles.message_container}>
-          {messagesList?.map((message: any, index: number) => (
-            <IonCard
-              id="message"
-              key={index}
-              className={
-                message.senderId === currentUser.uid
-                  ? styles.message_box_sender
-                  : styles.message_box_receiver
-              }
-            >
-              <div className={styles.message_text_container}>
-                <IonRow>
-                  <IonCol size="auto">
-                    <IonAvatar className={styles.avatar}>
-                      <img
-                        src={
-                          message?.senderId === currentUser.uid
-                            ? `${senderData?.avatarURL}`
-                            : `${receiverData?.avatarURL}`
-                        }
-                      ></img>
-                    </IonAvatar>
-                  </IonCol>
-                  <IonCol>
-                    <IonLabel className={styles.userName_message}>
-                      {message?.senderId === currentUser.uid
-                        ? senderData?.name
-                        : receiverData?.name}
+      <IonContent scrollEvents={true} onIonScrollEnd={() => {}}>
+        <IonList>
+          <div className={styles.message_container}>
+            {messagesList?.map((message: any, index: number) => (
+              <IonCard
+                id="message"
+                key={index}
+                className={
+                  message.senderId === currentUser.uid
+                    ? styles.message_box_sender
+                    : styles.message_box_receiver
+                }
+              >
+                <div className={styles.message_text_container}>
+                  <IonRow>
+                    <IonCol size="auto">
+                      <IonAvatar className={styles.avatar}>
+                        <img
+                          src={
+                            message?.senderId === currentUser.uid
+                              ? `${senderData?.avatarURL}`
+                              : `${receiverData?.avatarURL}`
+                          }
+                        ></img>
+                      </IonAvatar>
+                    </IonCol>
+                    <IonCol>
+                      <IonLabel className={styles.userName_message}>
+                        {message?.senderId === currentUser.uid
+                          ? senderData?.name
+                          : receiverData?.name}
+                      </IonLabel>
+                    </IonCol>
+                  </IonRow>
+                  <div>
+                    <IonLabel className={styles.message_text}>
+                      {message.message}
                     </IonLabel>
-                  </IonCol>
-                </IonRow>
-                <div>
-                  <IonLabel className={styles.message_text}>
-                    {message.message}
-                  </IonLabel>
+                  </div>
                 </div>
-              </div>
-            </IonCard>
-          ))}
-        </div>
-        <SendMessage chatRoomId={id} scroll={scroll}></SendMessage>
-        <div ref={scroll}></div>
+              </IonCard>
+            ))}
+          </div>
+        </IonList>
+        <div ref={scroll} className={styles.messages}></div>
       </IonContent>
+      <SendMessage chatRoomId={id} scroll={scroll}></SendMessage>
     </IonPage>
   );
 };

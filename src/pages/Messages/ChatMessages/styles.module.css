@@ -4,20 +4,23 @@
 .message_box_receiver {
   float: left !important;
   width: 50%;
-  background-color: #c8fab2;
-  color: black;
+  background-color: #fedcd2;
+  color: white;
+  border-bottom-right-radius: 20px;
 }
 .message_box_sender {
   float: right !important;
   width: 50%;
-  background-color: lightyellow;
-  color: black;
+  background-color: #daf0eb;
+  color: white !important;
   font-size: 14px;
   text-align: end;
+  border-bottom-left-radius: 20px;
 }
 .message_text {
   white-space: normal !important;
-  color: #900c3f;
+  color: #0e0b16;
+  padding-left: 10px;
 }
 .message_text_container {
   padding: 3px;
@@ -27,14 +30,13 @@
   height: 20px;
 }
 .userName_message {
-  color: #c70039;
+  color: #373737;
 }
 .message_container {
   width: 100%;
-  height: 80%;
   flex-direction: column;
-  position: absolute;
+  position: relative;
 }
-.content_message {
-  height: 80% !important;
+.messages {
+  padding-bottom: 12% !important;
 }

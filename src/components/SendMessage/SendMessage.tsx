@@ -21,6 +21,7 @@ const SendMessage = (props: props) => {
     data: any,
     e: React.BaseSyntheticEvent<object, any, any> | undefined
   ) => {
+    e?.preventDefault();
     const { message } = data;
     try {
       await newMessage(chatRoomId!, currentUser.uid, message);
@@ -39,7 +40,7 @@ const SendMessage = (props: props) => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} id="send-message-form">
-        <div className={styles.input_container}>
+        <div className={styles.input_container} slot="bottom">
           <IonRow>
             <IonInput
               type="text"
