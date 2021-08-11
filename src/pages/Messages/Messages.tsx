@@ -14,6 +14,7 @@ import { getMyChatsRooms } from "firebase/messagesServices";
 import { useAuth } from "contexts/AuthContext";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import ChatRoomDetails from "components/ChatRoomDetails/ChatRoomDetails";
+import { chatRoom } from "types";
 
 const Messages: React.FC = () => {
   const { currentUser } = useAuth();
@@ -45,7 +46,7 @@ const Messages: React.FC = () => {
           <div className="title_divider">Buzón de Mensajería</div>
         </IonItemDivider>
         <IonList>
-          {chatsRoomsList?.map((chatRoom: any, index: number) => (
+          {chatsRoomsList?.map((chatRoom: chatRoom, index: number) => (
             <ChatRoomDetails id={chatRoom.id} key={index}></ChatRoomDetails>
           ))}
         </IonList>

@@ -10,7 +10,7 @@
   margin-top: 10%;
 }
 .message_input {
-  width: 75%;
+  width: 80%;
   border-color: darkgrey;
   background-color: #ffffff;
   margin-bottom: "-3px";
@@ -18,7 +18,7 @@
 .send_button {
   background-color: #315c79;
   color: #ffffff;
-  width: 25%;
+  width: 20%;
   text-align: center;
   font-style: normal;
   font-size: 16px;

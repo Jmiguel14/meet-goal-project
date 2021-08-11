@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
 export interface props {
-  id: string;
+  id?: string;
 }
 
 const ChatRoomDetails = (props: props) => {

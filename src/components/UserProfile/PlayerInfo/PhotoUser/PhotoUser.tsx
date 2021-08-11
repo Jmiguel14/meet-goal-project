@@ -21,14 +21,8 @@ export const PhotoUser: React.FC = () => {
   const currentUserData = useCurrentUserData();
 
   async function verifyChatRoom() {
-    let unMounted = false;
-    if (!unMounted) {
-      const chatId = await discoveringChatRoom(currentUser.uid, data?.id);
-      history.push(`/tabs/chats/${chatId}`);
-    }
-    return () => {
-      unMounted = true;
-    };
+    const chatId = await discoveringChatRoom(currentUser.uid, data?.id);
+    history.push(`/tabs/chats/${chatId}`);
   }
 
   return (
