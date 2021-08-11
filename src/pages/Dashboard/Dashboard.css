@@ -5,3 +5,29 @@ ion-menu-button {
 .menu-icon {
   position: absolute;
 }
+.back_card {
+  --background: url("../../assets/backNew.png") !important;
+  width: 300px;
+}
+.cover {
+  height: 150px;
+  padding: 3px;
+}
+.cover_container {
+  --background: transparent;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 5px;
+}
+.new_title {
+  font-size: 18px !important;
+  color: white;
+  font-weight: 400 !important;
+  padding: 5px;
+}
+.new_description {
+  color: white;
+  font-size: 14px !important;
+  white-space: normal !important;
+  padding: 5px;
+}
