@@ -14,7 +14,7 @@ const PrivateRoutes = {
   SEARCH_CALLS: "/tabs/busqueda/calls",
   SEARCH_PLAYERS: "/tabs/busqueda/players",
   NOTIFICATIONS: "/tabs/notificaciones",
-  MESSAGES: "/tabs/mensajes-jugador",
+  MESSAGES: "/tabs/chats",
   PROFILE: "/tabs/perfil/:id",
   EDITPERSONALINFO: "/tabs/editar-info-personal-jugador",
   EDITTACTICALINFO: "/tabs/editar-info-tactica-jugador",
@@ -32,6 +32,7 @@ const PrivateRoutes = {
   CALLDETAILS: "/tabs/convocatoria/:id",
   EDITCALLDETAILS: "/tabs/editar-convocatoria/:id",
   MYPOSTULATIONS: "/tabs/mis-postulaciones",
+  CHATROOM: "/tabs/chats/:id",
 };
 
 export const Routes = {

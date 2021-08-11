@@ -1,27 +1,58 @@
 import {
-  IonButton,
   IonContent,
   IonHeader,
-  IonIcon,
+  IonItemDivider,
+  IonList,
   IonPage,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { arrowBackOutline } from "ionicons/icons";
+import { useEffect, useState } from "react";
+import firebase from "firebase/app";
 import "./Messages.css";
+import { getMyChatsRooms } from "firebase/messagesServices";
+import { useAuth } from "contexts/AuthContext";
+import { useCurrentUserData } from "hooks/useCurrentUserData";
+import ChatRoomDetails from "components/ChatRoomDetails/ChatRoomDetails";
+import { chatRoom } from "types";
 
-const Messages: React.FC = () => (
-  <IonPage>
-    <IonHeader>
-      <IonToolbar class="regresar">
-        <IonButton slot="start" fill="clear">
-          <IonIcon icon={arrowBackOutline} />
-        </IonButton>
-        <IonTitle>Mensajes</IonTitle>
-      </IonToolbar>
-    </IonHeader>
-    <IonContent fullscreen></IonContent>
-  </IonPage>
-);
+const Messages: React.FC = () => {
+  const { currentUser } = useAuth();
+  const currentUserData = useCurrentUserData();
+  const [chatsRoomsList, setChatsRoomsList] =
+    useState<firebase.firestore.DocumentData>();
+
+  useEffect(() => {
+    let unMounted = false;
+    if (!unMounted) {
+      getMyChatsRooms(currentUser.uid, currentUserData?.userType, (data) => {
+        setChatsRoomsList(data);
+      });
+    }
+    return () => {
+      unMounted = true;
+    };
+  }, [currentUserData, currentUser]);
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar class="regresar">
+          <IonTitle>Mensajes</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen>
+        <IonItemDivider color="primary">
+          <div className="title_divider">Buzón de Mensajería</div>
+        </IonItemDivider>
+        <IonList>
+          {chatsRoomsList?.map((chatRoom: chatRoom, index: number) => (
+            <ChatRoomDetails id={chatRoom.id} key={index}></ChatRoomDetails>
+          ))}
+        </IonList>
+      </IonContent>
+    </IonPage>
+  );
+};
 
 export default Messages;

@@ -1,0 +1,42 @@
+.back {
+  --background: #fafafa;
+}
+.message_box_receiver {
+  float: left !important;
+  width: 50%;
+  background-color: #fedcd2;
+  color: white;
+  border-bottom-right-radius: 20px;
+}
+.message_box_sender {
+  float: right !important;
+  width: 50%;
+  background-color: #daf0eb;
+  color: white !important;
+  font-size: 14px;
+  text-align: end;
+  border-bottom-left-radius: 20px;
+}
+.message_text {
+  white-space: normal !important;
+  color: #0e0b16;
+  padding-left: 10px;
+}
+.message_text_container {
+  padding: 3px;
+}
+.avatar {
+  width: 20px;
+  height: 20px;
+}
+.userName_message {
+  color: #373737;
+}
+.message_container {
+  width: 100%;
+  flex-direction: column;
+  position: relative;
+}
+.messages {
+  padding-bottom: 12% !important;
+}

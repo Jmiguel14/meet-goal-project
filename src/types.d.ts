@@ -105,3 +105,9 @@ export interface Club {
   nationalAchievements: number;
   internationalAchievements: number;
 }
+export interface chatRoom {
+  id?: string;
+  clubId: string;
+  playerId: string;
+  createdAt?: string;
+}
