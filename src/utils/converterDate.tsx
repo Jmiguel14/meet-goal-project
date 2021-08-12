@@ -16,3 +16,11 @@ export function isCallClosed(endDate: firebase.firestore.Timestamp) {
     return false;
   }
 }
+
+export function newsCreatedDate(date: firebase.firestore.Timestamp) {
+  let convertDate = date?.toDate();
+  let newDate = `${convertDate?.getDate()} / ${
+    convertDate?.getUTCMonth() + 1
+  } / ${convertDate?.getUTCFullYear()}  ${convertDate.getHours()} : ${convertDate.getUTCMinutes()}`;
+  return newDate;
+}

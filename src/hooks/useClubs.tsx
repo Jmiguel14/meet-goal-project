@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import firebase from "firebase";
-import { listtenAllPlayers } from "firebase/playersList";
 import { listtenAllClubs } from "firebase/clubsList";
 
 export const useClubs = () => {

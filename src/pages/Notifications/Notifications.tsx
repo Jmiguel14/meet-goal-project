@@ -1,12 +1,9 @@
 import {
-  IonBackButton,
   IonButton,
-  IonButtons,
   IonCard,
   IonContent,
   IonHeader,
   IonIcon,
-  IonImg,
   IonItem,
   IonItemDivider,
   IonLabel,
@@ -26,7 +23,6 @@ import {
 import { converterDate } from "utils/converterDate";
 import NotificationModal from "components/NotificationModal/NotificationModal";
 import NotificationPoster from "assets/notificationPoster.svg";
-import NotificationIcon from "icons/Notification.png";
 import { notifications } from "ionicons/icons";
 import { NOTIFYTITLES } from "constants/notificationsTitles";
 

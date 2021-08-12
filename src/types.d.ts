@@ -111,3 +111,11 @@ export interface chatRoom {
   playerId: string;
   createdAt?: string;
 }
+export interface NewFormData {
+  id?: string;
+  title: string;
+  description: string;
+  source: string;
+  image: string;
+  createdAt?: firebase.firestore.Timestamp;
+}
