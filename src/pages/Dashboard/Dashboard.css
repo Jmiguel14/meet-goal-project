@@ -65,3 +65,12 @@ ion-menu-button {
 .new_icon {
   width: 10px !important;
 }
+.news_label {
+  color: #315c79 !important;
+}
+.info_label {
+  text-align: center !important;
+}
+.star_icon {
+  width: 25px;
+}

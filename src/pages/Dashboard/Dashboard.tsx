@@ -15,17 +15,21 @@ import {
   IonLabel,
   IonList,
   IonText,
+  IonImg,
 } from "@ionic/react";
 import MeetGoal from "icons/MeetGoal";
 import "./Dashboard.css";
-import { add, newspaper, time } from "ionicons/icons";
+import { add, newspaper, starHalfSharp, time } from "ionicons/icons";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { getNewsData } from "firebase/newsServices";
 import { NewFormData } from "types";
-import { converterDate } from "utils/converterDate";
+import { converterDate, newsCreatedDate } from "utils/converterDate";
+import { SkeletonList } from "components/Skeletons/SkeletonList";
+import { SkeletonNews } from "components/Skeletons/SkeletonNews";
+import StarIcon from "icons/starIcon.png";
 
 const PlayerDashboard: React.FC = () => {
   const currentUserData = useCurrentUserData();
@@ -56,51 +60,68 @@ const PlayerDashboard: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <IonList>
-          {newsData?.map((newData: NewFormData, index: number) => (
-            <IonCard key={index} className="back_card">
-              <IonRow>
-                <div className="cover_container">
-                  <img src={newData.image} className="cover"></img>
-                </div>
-              </IonRow>
-              <IonRow>
-                <div>
-                  <IonLabel>
-                    <h1 className="new_title">{newData.title}</h1>
-                  </IonLabel>
-                  <IonLabel>
-                    <h1 className="new_source">
-                      {newData.source !== "" || undefined
-                        ? `Fuente: ${newData.source}`
-                        : ""}
-                    </h1>
-                  </IonLabel>
-                </div>
-              </IonRow>
-              <hr className="divider"></hr>
-              <IonRow>
-                <div>
-                  <IonText>
-                    <h1 className="new_description">{newData.description}</h1>
-                  </IonText>
-                </div>
-              </IonRow>
-              <IonRow>
-                <div>
-                  <IonItem>
-                    <IonIcon icon={time} size="small"></IonIcon>
-                    <IonLabel>
-                      <h1 className="new_date">
-                        {converterDate(newData.createdAt)}
-                      </h1>
-                    </IonLabel>
-                  </IonItem>
-                </div>
-              </IonRow>
-            </IonCard>
-          ))}
-        </IonList>
+        {newsData ? (
+          <>
+            <IonItem lines="none" className="info_label">
+              <IonImg
+                src={StarIcon}
+                slot="start"
+                className="star_icon"
+              ></IonImg>
+              <IonLabel className="news_label">Noticias destacadas</IonLabel>
+              <IonImg src={StarIcon} slot="end" className="star_icon"></IonImg>
+            </IonItem>
+            <IonList>
+              {newsData?.map((newData: NewFormData, index: number) => (
+                <IonCard key={index} className="back_card">
+                  <IonRow>
+                    <div className="cover_container">
+                      <img src={newData.image} className="cover"></img>
+                    </div>
+                  </IonRow>
+                  <IonRow>
+                    <div>
+                      <IonLabel>
+                        <h1 className="new_title">{newData.title}</h1>
+                      </IonLabel>
+                      <IonLabel>
+                        <h1 className="new_source">
+                          {newData.source !== "" || undefined
+                            ? `Fuente: ${newData.source}`
+                            : ""}
+                        </h1>
+                      </IonLabel>
+                    </div>
+                  </IonRow>
+                  <hr className="divider"></hr>
+                  <IonRow>
+                    <div>
+                      <IonText>
+                        <h1 className="new_description">
+                          {newData.description}
+                        </h1>
+                      </IonText>
+                    </div>
+                  </IonRow>
+                  <IonRow>
+                    <div>
+                      <IonItem>
+                        <IonIcon icon={time} size="small"></IonIcon>
+                        <IonLabel>
+                          <h1 className="new_date">
+                            {newsCreatedDate(newData.createdAt)}
+                          </h1>
+                        </IonLabel>
+                      </IonItem>
+                    </div>
+                  </IonRow>
+                </IonCard>
+              ))}
+            </IonList>
+          </>
+        ) : (
+          <SkeletonNews />
+        )}
         {currentUserData?.userType !== USER_TYPES.JUGADOR ? (
           <IonFab vertical="bottom" horizontal="end" slot="fixed">
             <IonFabButton routerLink="/tabs/nueva-convocatoria">
