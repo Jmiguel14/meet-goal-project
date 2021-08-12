@@ -59,7 +59,7 @@ const PlayerDashboard: React.FC = () => {
           </IonRow>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className="ion-padding">
+      <IonContent fullscreen>
         {newsData ? (
           <>
             <IonItem lines="none" className="info_label">
@@ -73,49 +73,51 @@ const PlayerDashboard: React.FC = () => {
             </IonItem>
             <IonList>
               {newsData?.map((newData: NewFormData, index: number) => (
-                <IonCard key={index} className="back_card">
-                  <IonRow>
-                    <div className="cover_container">
-                      <img src={newData.image} className="cover"></img>
-                    </div>
-                  </IonRow>
-                  <IonRow>
-                    <div>
-                      <IonLabel>
-                        <h1 className="new_title">{newData.title}</h1>
-                      </IonLabel>
-                      <IonLabel>
-                        <h1 className="new_source">
-                          {newData.source !== "" || undefined
-                            ? `Fuente: ${newData.source}`
-                            : ""}
-                        </h1>
-                      </IonLabel>
-                    </div>
-                  </IonRow>
-                  <hr className="divider"></hr>
-                  <IonRow>
-                    <div>
-                      <IonText>
-                        <h1 className="new_description">
-                          {newData.description}
-                        </h1>
-                      </IonText>
-                    </div>
-                  </IonRow>
-                  <IonRow>
-                    <div>
-                      <IonItem>
-                        <IonIcon icon={time} size="small"></IonIcon>
+                <div className="news" key={index}>
+                  <IonCard key={index} className="back_card">
+                    <IonRow>
+                      <div className="cover_container">
+                        <img src={newData.image} className="cover"></img>
+                      </div>
+                    </IonRow>
+                    <IonRow>
+                      <div>
                         <IonLabel>
-                          <h1 className="new_date">
-                            {newsCreatedDate(newData.createdAt)}
+                          <h1 className="new_title">{newData.title}</h1>
+                        </IonLabel>
+                        <IonLabel>
+                          <h1 className="new_source">
+                            {newData.source !== "" || undefined
+                              ? `Fuente: ${newData.source}`
+                              : ""}
                           </h1>
                         </IonLabel>
-                      </IonItem>
-                    </div>
-                  </IonRow>
-                </IonCard>
+                      </div>
+                    </IonRow>
+                    <hr className="divider"></hr>
+                    <IonRow>
+                      <div>
+                        <IonText>
+                          <h1 className="new_description">
+                            {newData.description}
+                          </h1>
+                        </IonText>
+                      </div>
+                    </IonRow>
+                    <IonRow>
+                      <div>
+                        <IonItem>
+                          <IonIcon icon={time} size="small"></IonIcon>
+                          <IonLabel>
+                            <h1 className="new_date">
+                              {newsCreatedDate(newData.createdAt)}
+                            </h1>
+                          </IonLabel>
+                        </IonItem>
+                      </div>
+                    </IonRow>
+                  </IonCard>
+                </div>
               ))}
             </IonList>
           </>

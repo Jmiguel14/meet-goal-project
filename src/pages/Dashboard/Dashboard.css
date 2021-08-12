@@ -7,8 +7,9 @@ ion-menu-button {
 }
 .back_card {
   --ion-background-color: #ffffff !important;
-  width: 98%;
+  width: 90%;
   border-radius: 15px;
+  padding: 0px !important;
 }
 .cover {
   border-top-left-radius: 15px;
@@ -73,4 +74,9 @@ ion-menu-button {
 }
 .star_icon {
   width: 25px;
+}
+.news {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
