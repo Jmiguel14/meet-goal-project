@@ -6,28 +6,62 @@ ion-menu-button {
   position: absolute;
 }
 .back_card {
-  --background: url("../../assets/backNew.png") !important;
-  width: 300px;
+  --ion-background-color: #ffffff !important;
+  width: 98%;
+  border-radius: 15px;
 }
 .cover {
-  height: 150px;
-  padding: 3px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  position: absolute;
+  left: -100%;
+  right: -100%;
+  top: -100%;
+  bottom: -100%;
+  margin: auto;
+  min-height: 100%;
+  min-width: 100%;
 }
 .cover_container {
-  --background: transparent;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: center !important;
   width: 100%;
-  text-align: center;
-  padding-bottom: 5px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
 }
 .new_title {
-  font-size: 18px !important;
-  color: white;
-  font-weight: 400 !important;
-  padding: 5px;
+  font-size: 16px !important;
+  color: #213e52;
+  font-weight: 600 !important;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .new_description {
-  color: white;
+  color: #213e52;
   font-size: 14px !important;
   white-space: normal !important;
   padding: 5px;
+  margin: 5px;
+}
+.divider {
+  background-color: #3f4244 !important;
+  width: 100%;
+}
+.new_date {
+  font-size: 11px !important;
+  padding: 8px !important;
+  color: #737373;
+  vertical-align: middle;
+  height: 20px;
+}
+.new_source {
+  font-size: 9px !important;
+  padding: 5px;
+  color: #737373;
+}
+.new_icon {
+  width: 10px !important;
 }

@@ -18,13 +18,14 @@ import {
 } from "@ionic/react";
 import MeetGoal from "icons/MeetGoal";
 import "./Dashboard.css";
-import { add } from "ionicons/icons";
+import { add, newspaper, time } from "ionicons/icons";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { getNewsData } from "firebase/newsServices";
 import { NewFormData } from "types";
+import { converterDate } from "utils/converterDate";
 
 const PlayerDashboard: React.FC = () => {
   const currentUserData = useCurrentUserData();
@@ -68,13 +69,33 @@ const PlayerDashboard: React.FC = () => {
                   <IonLabel>
                     <h1 className="new_title">{newData.title}</h1>
                   </IonLabel>
+                  <IonLabel>
+                    <h1 className="new_source">
+                      {newData.source !== "" || undefined
+                        ? `Fuente: ${newData.source}`
+                        : ""}
+                    </h1>
+                  </IonLabel>
                 </div>
               </IonRow>
+              <hr className="divider"></hr>
               <IonRow>
                 <div>
                   <IonText>
                     <h1 className="new_description">{newData.description}</h1>
                   </IonText>
+                </div>
+              </IonRow>
+              <IonRow>
+                <div>
+                  <IonItem>
+                    <IonIcon icon={time} size="small"></IonIcon>
+                    <IonLabel>
+                      <h1 className="new_date">
+                        {converterDate(newData.createdAt)}
+                      </h1>
+                    </IonLabel>
+                  </IonItem>
                 </div>
               </IonRow>
             </IonCard>

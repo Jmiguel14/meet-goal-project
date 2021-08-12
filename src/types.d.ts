@@ -117,4 +117,5 @@ export interface NewFormData {
   description: string;
   source: string;
   image: string;
+  createdAt?: firebase.firestore.Timestamp;
 }
