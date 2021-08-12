@@ -2,13 +2,10 @@ import React from "react";
 import {
   IonAvatar,
   IonCard,
-  IonCol,
   IonItem,
   IonLabel,
   IonList,
-  IonRow,
   IonSkeletonText,
-  IonText,
 } from "@ionic/react";
 
 export const SkeletonNews = () => {

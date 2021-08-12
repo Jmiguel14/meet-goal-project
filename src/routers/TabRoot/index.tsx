@@ -5,11 +5,10 @@ import {
   IonIcon,
   IonBadge,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IonRouterOutlet } from "@ionic/react";
 import { PrivateRoutes } from "routers/PrivateRoutes";
 import { Route, Redirect, useLocation } from "react-router";
-import firebase from "firebase/app";
 import {
   homeOutline,
   mailOutline,
@@ -21,7 +20,6 @@ import { Menu } from "components/Menu";
 import loadable from "@loadable/component";
 import { IonLoading } from "@ionic/react";
 import { Routes } from "constants/routes";
-import { getUserNotifications } from "firebase/notificationsServices";
 import useNotification from "hooks/useNotification";
 
 const loadableOptions = { fallback: <IonLoading isOpen={true} /> };

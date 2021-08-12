@@ -1,5 +1,5 @@
 import { COLLECTIONS } from "constants/collections";
-import { auth, firestore } from "./client";
+import { firestore } from "./client";
 import firebase from "firebase/app";
 
 export async function setPostulation(callId: string, playerId: string) {

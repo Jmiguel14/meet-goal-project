@@ -27,8 +27,6 @@ import { useLocation } from "react-router";
 import { useAuth } from "contexts/AuthContext";
 import { USER_TYPES } from "constants/userTypes";
 import { Routes } from "constants/routes";
-import { getUserDoc } from "firebase/client";
-import firebase from "firebase/app";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 
 interface AppPage {

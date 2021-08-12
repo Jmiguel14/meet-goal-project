@@ -1,9 +1,4 @@
-import {
-  IonContent,
-  IonLabel,
-  IonSegment,
-  IonSegmentButton,
-} from "@ionic/react";
+import { IonLabel, IonSegment, IonSegmentButton } from "@ionic/react";
 import React, { useState } from "react";
 import InstitutionalInfo from "../InstitutionalInfo/InstitutionalInfo";
 import SportsGoalsInfo from "../SportsGoalsInfo/SportsGoalsInfo";

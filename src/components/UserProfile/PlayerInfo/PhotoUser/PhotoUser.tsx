@@ -1,17 +1,9 @@
-import {
-  IonAvatar,
-  IonImg,
-  IonCol,
-  IonRow,
-  IonIcon,
-  useIonToast,
-  useIonViewWillEnter,
-} from "@ionic/react";
+import { IonAvatar, IonImg, IonCol, IonRow, IonIcon } from "@ionic/react";
 import "./PhotoUser.css";
 import { useAuth } from "contexts/AuthContext";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import { USER_TYPES } from "constants/userTypes";
-import { chatbubbles, disc } from "ionicons/icons";
+import { chatbubbles } from "ionicons/icons";
 import { discoveringChatRoom } from "firebase/messagesServices";
 import { useHistory } from "react-router";
 

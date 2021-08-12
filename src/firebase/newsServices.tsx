@@ -1,7 +1,6 @@
 import { COLLECTIONS } from "constants/collections";
 import { firestore } from "./client";
 import firebase from "firebase/app";
-import { USER_TYPES } from "constants/userTypes";
 
 export const getNewsData = (
   callback: React.Dispatch<

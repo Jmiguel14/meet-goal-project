@@ -1,7 +1,6 @@
 import {
   IonAvatar,
   IonButton,
-  IonContent,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   IonItem,

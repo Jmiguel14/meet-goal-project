@@ -19,15 +19,14 @@ import {
 } from "@ionic/react";
 import MeetGoal from "icons/MeetGoal";
 import "./Dashboard.css";
-import { add, newspaper, starHalfSharp, time } from "ionicons/icons";
+import { add, time } from "ionicons/icons";
 import { USER_TYPES } from "constants/userTypes";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { getNewsData } from "firebase/newsServices";
 import { NewFormData } from "types";
-import { converterDate, newsCreatedDate } from "utils/converterDate";
-import { SkeletonList } from "components/Skeletons/SkeletonList";
+import { newsCreatedDate } from "utils/converterDate";
 import { SkeletonNews } from "components/Skeletons/SkeletonNews";
 import StarIcon from "icons/starIcon.png";
 

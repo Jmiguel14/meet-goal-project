@@ -8,7 +8,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import firebase from "firebase";
 import styles from "./styles.module.css";
 import { getNotificationDetails } from "firebase/notificationsServices";
