@@ -24,8 +24,9 @@ interface IAuthProvider {
     password: string
   ) => Promise<firebase.auth.UserCredential>;
   createUserDocument: (
-    currentUser: firebase.User,
-    userProperties: user
+    userProperties: user | null,
+    UserCredential?: firebase.auth.UserCredential,
+    userType?: string
   ) => Promise<void>;
   login: (
     email: string,
@@ -77,31 +78,48 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const createUserDocument = async (
-    currentUser: firebase.User,
-    userProperties: user
+    userProperties: user | null,
+    UserCredential?: firebase.auth.UserCredential,
+    userType?: string
   ) => {
     if (!currentUser) return;
 
     const userRef = firestore.doc(`users/${currentUser.uid}`);
 
     const snapshot = await userRef.get();
-
+    console.log("userPropreties1", userProperties);
     if (!snapshot.exists) {
-      const { email } = currentUser;
-      const { name, phone, userType } = userProperties;
+      const { email, displayName, phoneNumber, photoURL } = currentUser;
       try {
-        userRef.set({
-          email,
-          name,
-          phone,
-          userType,
-          createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-        });
-        defaultAvatar(currentUser.uid);
-        defaultCover(currentUser.uid);
-      } catch (error) {
+        if (UserCredential) {
+          userRef.set({
+            email,
+            name: displayName,
+            phone: phoneNumber,
+            userType,
+            avatarURL: photoURL,
+            createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+          });
+          defaultCover(currentUser.uid);
+        } else {
+          console.log("userPropreties2", userProperties);
+          if(userProperties) {
+            const { name, phone, userType } = userProperties;
+            console.log("userPropreties3", userProperties);
+            userRef.set({
+              email,
+              name,
+              phone,
+              userType,
+              createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+            });
+            defaultAvatar(currentUser.uid);
+            defaultCover(currentUser.uid);
+          }
+        }
+      } catch(e) {
         present({
-          message: "Ocurrió un error al crear la cuenta",
+          message: `Ocurrió un error al crear el usuario de tipo ${e}`,
           duration: 3000,
           position: "top",
           color: "danger",

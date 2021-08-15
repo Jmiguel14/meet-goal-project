@@ -111,7 +111,7 @@ const PlayersSegment = () => {
             <>
               <IonRow
                 className={
-                  currentUserData?.userType === USER_TYPES.JUGADOR
+                  currentUserData?.userType === USER_TYPES.PLAYER
                     ? styles.searchBarPlayer
                     : styles.searchBarClub
                 }

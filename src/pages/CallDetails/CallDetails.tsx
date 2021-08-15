@@ -259,7 +259,7 @@ const CallDetails: React.FC = () => {
             </IonText>
           </IonItem>
         </IonCard>
-        {currentUserData?.userType === USER_TYPES.JUGADOR &&
+        {currentUserData?.userType === USER_TYPES.PLAYER &&
         isCallClosed(callData?.endDate) ? (
           existPostulation ? (
             ""

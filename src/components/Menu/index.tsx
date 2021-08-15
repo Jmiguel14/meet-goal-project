@@ -120,7 +120,7 @@ export const Menu: React.FC = () => {
             </IonRow>
           </IonListHeader>
           <IonItemDivider></IonItemDivider>
-          {currentUserData?.userType === USER_TYPES.JUGADOR
+          {currentUserData?.userType === USER_TYPES.PLAYER
             ? appPagesPlayer.map((appPage, key) => {
                 return (
                   <IonMenuToggle key={key} autoHide={false}>

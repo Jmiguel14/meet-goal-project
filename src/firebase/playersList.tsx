@@ -13,7 +13,7 @@ export const listtenFirstPlayersBatch = (
 ) => {
   return firestore
     .collection(COLLECTIONS.USERS)
-    .where("userType", "==", USER_TYPES.JUGADOR)
+    .where("userType", "==", USER_TYPES.PLAYER)
     .orderBy("createdAt", "desc")
     .limit(15)
     .onSnapshot((snapshot) => {
@@ -44,7 +44,7 @@ export const listtenNextPlayersBatch = (
 ) => {
   return firestore
     .collection(COLLECTIONS.USERS)
-    .where("userType", "==", USER_TYPES.JUGADOR)
+    .where("userType", "==", USER_TYPES.PLAYER)
     .orderBy("createdAt", "desc")
     .startAfter(key)
     .limit(15)
@@ -72,7 +72,7 @@ export const listtenAllPlayers = (
 ) => {
   return firestore
     .collection(COLLECTIONS.USERS)
-    .where("userType", "==", USER_TYPES.JUGADOR)
+    .where("userType", "==", USER_TYPES.PLAYER)
     .onSnapshot((snapshot) => {
       const newData = snapshot.docs.map((doc) => {
         const data = doc.data();
