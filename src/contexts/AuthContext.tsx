@@ -103,7 +103,7 @@ export const AuthProvider: React.FC = ({ children }) => {
           defaultCover(currentUser.uid);
         } else {
           console.log("userPropreties2", userProperties);
-          if(userProperties) {
+          if (userProperties) {
             const { name, phone, userType } = userProperties;
             console.log("userPropreties3", userProperties);
             userRef.set({
@@ -117,7 +117,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             defaultCover(currentUser.uid);
           }
         }
-      } catch(e) {
+      } catch (e) {
         present({
           message: `Ocurrió un error al crear el usuario de tipo ${e}`,
           duration: 3000,

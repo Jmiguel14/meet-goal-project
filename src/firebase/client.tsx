@@ -5,9 +5,9 @@ import "firebase/storage";
 import Avatar from "icons/avatar.png";
 import Cover from "assets/cover.png";
 import { COLLECTIONS } from "constants/collections";
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
 
-GoogleAuth.init()
+GoogleAuth.init();
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -315,8 +315,12 @@ export function updateProfileCover(image: File) {
 }
 
 export const loginWithGoogle = () => {
-  return GoogleAuth.signIn()
-  .then(result => {
-    return auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(null, result.authentication.accessToken))
-  })
-}
+  return GoogleAuth.signIn().then((result) => {
+    return auth.signInWithCredential(
+      firebase.auth.GoogleAuthProvider.credential(
+        null,
+        result.authentication.accessToken
+      )
+    );
+  });
+};
