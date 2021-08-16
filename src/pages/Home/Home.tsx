@@ -40,8 +40,8 @@ const Home: React.FC = () => {
         history.push(Routes.DASHBOARD);
       } catch (e) {
         presentToast({
-          message: "Ocurrió un error al iniciar la sesión",
-          duration: 3000,
+          message: `Ocurrió un error al iniciar la sesión de tipo ${e}`,
+          duration: 10000,
           position: "top",
           color: "danger",
         });

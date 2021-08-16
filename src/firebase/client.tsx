@@ -318,7 +318,7 @@ export const loginWithGoogle = () => {
   return GoogleAuth.signIn().then((result) => {
     return auth.signInWithCredential(
       firebase.auth.GoogleAuthProvider.credential(
-        null,
+        result.authentication.idToken,
         result.authentication.accessToken
       )
     );
