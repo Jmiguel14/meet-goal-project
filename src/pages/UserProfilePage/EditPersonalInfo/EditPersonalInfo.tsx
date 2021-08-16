@@ -60,7 +60,6 @@ export const EditPersonalInfo: React.FC = () => {
 
   const onSubmit = async (data: PersonalDataForm) => {
     const { phone, country, city, birth, contract } = data;
-    console.log("data", data);
     const marketTransfer =
       data.marketTransfer === undefined ? "" : data.marketTransfer;
     try {
@@ -113,7 +112,6 @@ export const EditPersonalInfo: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className={styles.back}>
-        {console.log("render")}
         <IonItemDivider color="primary">
           <div className={styles.subtitle}>
             Edita aquí tu Información Personal
@@ -197,9 +195,9 @@ export const EditPersonalInfo: React.FC = () => {
                 clearErrors("contract");
               }}
             >
-              <IonSelectOption value="libre">Libre</IonSelectOption>
-              <IonSelectOption value="prestamo">Préstamo</IonSelectOption>
-              <IonSelectOption value="contratado">Contratado</IonSelectOption>
+              <IonSelectOption value="Libre">Libre</IonSelectOption>
+              <IonSelectOption value="Préstamo">Préstamo</IonSelectOption>
+              <IonSelectOption value="Contratado">Contratado</IonSelectOption>
             </IonSelect>
           </IonItem>
           {errors.contract && (

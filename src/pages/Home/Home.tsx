@@ -7,6 +7,7 @@ import {
   IonButton,
   useIonToast,
   useIonActionSheet,
+  IonText,
 } from "@ionic/react";
 import MeetGoal from "icons/MeetGoal";
 import Carousel from "components/Carousel/Carousel";
@@ -18,6 +19,7 @@ import { useAuth } from "contexts/AuthContext";
 import { useEffect, useState } from "react";
 import firebase from "firebase";
 import { USER_TYPES } from "constants/userTypes";
+import GoogleIcon from "icons/GoogleIcon";
 
 const Home: React.FC = () => {
   const history = useHistory();
@@ -40,8 +42,8 @@ const Home: React.FC = () => {
         history.push(Routes.DASHBOARD);
       } catch (e) {
         presentToast({
-          message: `Ocurrió un error al iniciar la sesión de tipo ${e}`,
-          duration: 10000,
+          message: `Ocurrió un error al iniciar la sesión`,
+          duration: 3000,
           position: "top",
           color: "danger",
         });
@@ -52,6 +54,7 @@ const Home: React.FC = () => {
 
   const selectUserType = async () => {
     present({
+      onWillDismiss: () => setUserType(""),
       buttons: [
         {
           text: USER_TYPES.PLAYER,
@@ -75,6 +78,7 @@ const Home: React.FC = () => {
         },
         {
           text: "Cancelar",
+          role: "cancel",
           handler: () => dismiss(),
         },
       ],
@@ -99,12 +103,16 @@ const Home: React.FC = () => {
           <IonRow className="row">
             <IonCol size="11">
               <IonButton
-                className="button"
+                className="login_with_google_button"
                 strong={true}
+                fill="outline"
                 expand="block"
                 onClick={selectUserType}
               >
-                Iniciar sesión con google
+                <figure className="google_login_icon">
+                  <GoogleIcon />
+                </figure>
+                <IonText>Iniciar sesión con google</IonText>
               </IonButton>
             </IonCol>
             <IonCol size="11">

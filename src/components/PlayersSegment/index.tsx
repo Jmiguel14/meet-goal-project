@@ -63,7 +63,7 @@ const PlayersSegment = () => {
   useEffect(() => {
     const oldPlayers = allPlayers.map((player: Player) => {
       const { name, pospri } = player;
-      const lowerCaseName = name.toLowerCase();
+      const lowerCaseName = name?.toLowerCase();
       const lowerCasePlayerPosition = pospri?.toLowerCase();
       return {
         ...player,

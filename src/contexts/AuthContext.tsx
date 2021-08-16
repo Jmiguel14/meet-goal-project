@@ -87,7 +87,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     const userRef = firestore.doc(`users/${currentUser.uid}`);
 
     const snapshot = await userRef.get();
-    console.log("userPropreties1", userProperties);
     if (!snapshot.exists) {
       const { email, displayName, phoneNumber, photoURL } = currentUser;
       try {
@@ -102,10 +101,8 @@ export const AuthProvider: React.FC = ({ children }) => {
           });
           defaultCover(currentUser.uid);
         } else {
-          console.log("userPropreties2", userProperties);
           if (userProperties) {
             const { name, phone, userType } = userProperties;
-            console.log("userPropreties3", userProperties);
             userRef.set({
               email,
               name,
