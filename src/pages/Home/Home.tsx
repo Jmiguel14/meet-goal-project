@@ -54,7 +54,7 @@ const Home: React.FC = () => {
 
   const selectUserType = async () => {
     present({
-      onWillDismiss: () => setUserType(""),
+      onWillDismiss: () => setTimeout(() => setUserType(""), 15000),
       buttons: [
         {
           text: USER_TYPES.PLAYER,
