@@ -25,9 +25,11 @@ export const PhotoUser: React.FC = () => {
             <IonImg src={data?.coverURL}></IonImg>
           </IonCol>
           <IonCol className="contenedor">
-            <IonAvatar className="avatar">
-              <img src={data?.avatarURL} />
-            </IonAvatar>
+            <div className="avatar">
+              <IonAvatar className="avatar_image">
+                <img src={data?.avatarURL} />
+              </IonAvatar>
+            </div>
           </IonCol>
         </IonCol>
       </IonRow>

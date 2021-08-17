@@ -1,10 +1,15 @@
 .avatar {
   width: 27.5%;
-  height: 26.94444%;
-  left: 150px;
-  top: 184px;
+  height: 100%;
   border-radius: 99px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar_image {
+  width: 90%;
+  height: 100%;
 }
 .imagenes {
   padding: 0px;
@@ -24,6 +29,10 @@
 .contenedor {
   position: absolute;
   top: 66%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40%;
 }
 .fotos-jugador {
   align-items: center;
