@@ -35,19 +35,30 @@ const UpdatePhotos: React.FC = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) {
     const file = event.target.files![0];
-    setTask(updateProfileAvatar(file));
-    setTypePhoto("avatar");
+    if (file !== undefined) {
+      setTask(updateProfileAvatar(file));
+      setTypePhoto("avatar");
+    }
   }
   function handleUploadCover(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files![0];
-    setTask(updateProfileCover(file));
-    setTypePhoto("cover");
+    if (file !== undefined) {
+      setTask(updateProfileCover(file));
+      setTypePhoto("cover");
+    }
   }
 
   useEffect(() => {
     if (task) {
       const onProgress = () => {};
-      const onError = () => {};
+      const onError = () => {
+        present({
+          message: "Error al cambiar la imagen",
+          duration: 3000,
+          position: "top",
+          color: "danger",
+        });
+      };
       const onComplete = () => {
         present({
           message: "Se ha cambiado su foto correctamente",
