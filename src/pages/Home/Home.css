@@ -3,10 +3,21 @@
   text-transform: none;
 }
 
+.login_with_google_button {
+  --border-radius: 10px;
+  text-transform: none;
+  --background: #ffffff;
+}
+
 .login-button {
   --border-radius: 10px;
   text-transform: none;
   --background: #ffffff;
+}
+
+.google_login_icon {
+  padding-right: 10px;
+  margin: 0px;
 }
 
 .logo {

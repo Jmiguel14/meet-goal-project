@@ -46,7 +46,7 @@ export const UserProfile: React.FC = () => {
           </IonLabel>
         </IonCol>
       </IonRow>
-      {data?.userType === USER_TYPES.JUGADOR ? (
+      {data?.userType === USER_TYPES.PLAYER ? (
         <PlayerSegments />
       ) : (
         <ClubSegments />

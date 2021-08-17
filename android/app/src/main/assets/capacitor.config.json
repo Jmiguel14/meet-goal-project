@@ -1,0 +1,16 @@
+{
+	"appId": "com.geomi.meet_goal",
+	"appName": "meet-goal-project",
+	"webDir": "build",
+	"bundledWebRuntime": false,
+	"plugins": {
+		"GoogleAuth": {
+			"scopes": [
+				"profile",
+				"email"
+			],
+			"serverClientId": "1079016242836-t80ckdq5plr94nbijkc4bga55585fk0g.apps.googleusercontent.com",
+			"forceCodeForRefreshToken": true
+		}
+	}
+}

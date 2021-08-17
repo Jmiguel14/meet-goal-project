@@ -61,7 +61,7 @@ const SearchForPlayer: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {currentUserData?.userType === USER_TYPES.JUGADOR ? (
+        {currentUserData?.userType === USER_TYPES.PLAYER ? (
           <>
             <IonRow className={styles.segments}>
               <IonCol size="12">

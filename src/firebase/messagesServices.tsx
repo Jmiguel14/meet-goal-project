@@ -83,7 +83,7 @@ export async function getMyChatsRooms(
     React.SetStateAction<firebase.firestore.DocumentData | undefined>
   >
 ) {
-  if (userType === USER_TYPES.JUGADOR) {
+  if (userType === USER_TYPES.PLAYER) {
     return firestore
       .collection(COLLECTIONS.CHATS)
       .where("playerId", "==", userId)

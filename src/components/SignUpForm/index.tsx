@@ -50,14 +50,14 @@ export const SignUpForm = ({
                 clearErrors("userType");
               }}
             >
-              <IonSelectOption value={USER_TYPES.JUGADOR}>
+              <IonSelectOption value={USER_TYPES.PLAYER}>
                 Jugador
               </IonSelectOption>
               <IonSelectOption value={USER_TYPES.CLUB}>Club</IonSelectOption>
-              <IonSelectOption value={USER_TYPES.ACADEMIA}>
+              <IonSelectOption value={USER_TYPES.ACADEMY}>
                 Académia
               </IonSelectOption>
-              <IonSelectOption value={USER_TYPES.TECNICO}>
+              <IonSelectOption value={USER_TYPES.TECHNICIAN}>
                 Técnico
               </IonSelectOption>
             </IonSelect>

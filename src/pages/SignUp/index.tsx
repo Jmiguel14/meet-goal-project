@@ -75,9 +75,8 @@ const SignUp: React.FC = () => {
       });
 
     try {
-      await signUp(email, password);
+      signUp(email, password);
       setDataUser(data);
-      history.push(Routes.DASHBOARD);
       e?.target.reset();
     } catch {
       present({
@@ -92,9 +91,11 @@ const SignUp: React.FC = () => {
   useEffect(() => {
     if (dataUser) {
       const { name, phone, userType } = dataUser;
-      createUserDocument(currentUser, { name, phone, userType });
+      currentUser &&
+        createUserDocument({ name, phone, userType }) &&
+        history.push(Routes.DASHBOARD);
     }
-  }, [currentUser, dataUser]);
+  }, [dataUser, currentUser]);
 
   return (
     <IonPage>
