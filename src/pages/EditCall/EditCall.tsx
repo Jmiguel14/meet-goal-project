@@ -32,8 +32,6 @@ import * as yup from "yup";
 import { ERROR_MESSAGES } from "constants/errorMessages";
 
 const schema = yup.object().shape({
-  ageRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  posRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
   startDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
   endDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
@@ -80,16 +78,9 @@ const EditCall: React.FC = () => {
   }, [callData]);
 
   const onSubmit = async (data: NewCallDataForm) => {
-    const { ageRequired, posRequired, startDate, endDate, extraDetails } = data;
+    const { startDate, endDate, extraDetails } = data;
     try {
-      await saveCallChanges(
-        id,
-        ageRequired,
-        posRequired,
-        startDate,
-        endDate,
-        extraDetails
-      );
+      await saveCallChanges(id, startDate, endDate, extraDetails);
       present({
         message: "Se edito convocatoria correctamente",
         duration: 3000,
@@ -151,6 +142,7 @@ const EditCall: React.FC = () => {
                   onIonChange={(e) => {
                     clearErrors("ageRequired");
                   }}
+                  disabled={true}
                 >
                   <IonSelectOption value="Prebenjamines">
                     (5-8 años) Prebenjamines
@@ -194,6 +186,7 @@ const EditCall: React.FC = () => {
                   onIonChange={() => {
                     clearErrors("posRequired");
                   }}
+                  disabled={true}
                 >
                   <IonSelectOption value="Portero">Portero</IonSelectOption>
                   <IonSelectOption value="Carrilero Izquierdo">
