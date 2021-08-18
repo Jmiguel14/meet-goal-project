@@ -40,10 +40,10 @@ const ChatRoomDetails = (props: props) => {
       getAChatRoomData(id!, (data) => {
         setChatRoomData(data);
       });
-      return () => {
-        unMounted = true;
-      };
     }
+    return () => {
+      unMounted = true;
+    };
   }, [id]);
 
   useEffect(() => {

@@ -46,19 +46,6 @@ const ChatMessages = () => {
   useEffect(() => {
     let unMounted = false;
     if (!unMounted) {
-      getChatMessages(id!, (data) => {
-        setMessagesList(data);
-      });
-    }
-    scroll.current?.scrollIntoView({ behavior: "smooth" });
-    return () => {
-      unMounted = true;
-    };
-  }, [id]);
-
-  useEffect(() => {
-    let unMounted = false;
-    if (!unMounted) {
       getAChatRoomData(id!, (data) => {
         setChatRoomData(data);
       });
@@ -101,6 +88,13 @@ const ChatMessages = () => {
       unMounted = true;
     };
   }, [chatRoomData, currentUser]);
+
+  useEffect(() => {
+    getChatMessages(id!, (data) => {
+      setMessagesList(data);
+    });
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [id]);
 
   return (
     <IonPage>

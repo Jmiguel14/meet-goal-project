@@ -63,11 +63,13 @@ const CallDetails: React.FC = () => {
   }, [id]);
 
   useEffect(() => {
+    let unsubscribe: any;
     if (callData) {
       const unsubscribe = getOwnCallData(callData?.clubId, (data) => {
         setClubData(data);
       });
     }
+    return () => unsubscribe && unsubscribe();
   }, [callData]);
 
   useEffect(() => {
