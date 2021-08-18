@@ -12,6 +12,7 @@ import {
   IonItemDivider,
   IonLabel,
   IonList,
+  IonNote,
   IonPage,
   IonRow,
   IonText,
@@ -274,6 +275,22 @@ const CallDetails: React.FC = () => {
               Postularme
             </IonButton>
           )
+        ) : (
+          ""
+        )}
+        {currentUserData?.userType === USER_TYPES.CLUB ? (
+          <IonCol>
+            <IonRow className={styles.tips}>
+              <IonNote color="primary">
+                Para seleccionar un jugador toque el botón verde
+              </IonNote>
+            </IonRow>
+            <IonRow className={styles.tips}>
+              <IonNote color="primary">
+                Para descartarlo toque el botón rojo
+              </IonNote>
+            </IonRow>
+          </IonCol>
         ) : (
           ""
         )}

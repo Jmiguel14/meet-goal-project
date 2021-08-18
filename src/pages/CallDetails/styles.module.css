@@ -95,3 +95,8 @@
 .submit_notify {
   margin-top: 10px;
 }
+
+.tips {
+  align-items: center;
+  justify-content: center;
+}
