@@ -77,14 +77,19 @@ const ChatRoomDetails = (props: props) => {
       <Link to={`/tabs/chats/${id}`} className={styles.goChat}>
         <IonCard className={styles.message_details}>
           <IonItem>
-            <IonAvatar slot="start">
+            <IonAvatar slot="start" className={styles.icon_style}>
               <img src={receiverData?.avatarURL}></img>
             </IonAvatar>
             <IonLabel position="stacked">
               <h1 className={styles.userName}>{receiverData?.name}</h1>
             </IonLabel>
             <IonText className={styles.message}>{lastMessage?.message}</IonText>
-            <IonIcon slot="end" icon={caretForward} color="primary"></IonIcon>
+            <IonIcon
+              slot="end"
+              icon={caretForward}
+              color="primary"
+              className={styles.icon_style}
+            ></IonIcon>
           </IonItem>
         </IonCard>
       </Link>
