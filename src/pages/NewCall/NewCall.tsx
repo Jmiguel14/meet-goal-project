@@ -85,7 +85,7 @@ const NewCall: React.FC = () => {
       });
       newNotification(
         currentUser.uid,
-        `${NOTIFYTITLES.NEWCALL} Requieres un ${posRequired} de la categoria ${ageRequired}`,
+        `Una nueva convocatoria se ha registrado. En esta requieres un ${posRequired} de la categoria ${ageRequired}`,
         NOTIFYTITLES.NEWCALL,
         currentUserData?.name,
         posRequired,

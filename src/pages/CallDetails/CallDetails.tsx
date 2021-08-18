@@ -106,7 +106,7 @@ const CallDetails: React.FC = () => {
       });
       newNotification(
         currentUser.uid,
-        `${NOTIFYTITLES.POSTULATION} del ${clubData?.name}. Donde requiere un ${callData?.posRequired} de la categoria ${callData?.ageRequired}`,
+        `Tu postulación a la convocatoria del ${clubData?.name}, donde requiere un ${callData?.posRequired} de la categoria ${callData?.ageRequired} se registro con exito. Espera el cierre y posible notificación. Suerte...`,
         NOTIFYTITLES.POSTULATION,
         clubData?.name,
         callData?.posRequired,
