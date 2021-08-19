@@ -75,6 +75,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "3.0.0",
+    "@ionic/lab": "3.2.10",
     "@types/loadable__component": "^5.13.3",
     "prettier": "^2.3.1"
   },
