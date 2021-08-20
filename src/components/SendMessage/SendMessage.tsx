@@ -69,7 +69,6 @@ const SendMessage = (props: props) => {
                 placeholder="Escriba el mensaje"
                 spellcheck={true}
                 wrap="soft"
-                autoGrow={true}
                 {...register("message")}
                 onClick={(e) => {
                   setActiveInput(false);

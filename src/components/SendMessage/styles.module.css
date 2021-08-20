@@ -14,8 +14,8 @@
   margin-bottom: "-3px";
   border-radius: 15px;
   padding-right: 5px;
-  min-height: fit-content;
   line-height: 85%;
+  padding-bottom: 5px;
 }
 .send_button {
   background-color: #315c79;
