@@ -4,22 +4,11 @@
   width: 100%;
   bottom: 0;
   z-index: 1;
-  background-color: #fafafa;
-  background: transparent;
+  background: rgba(208, 221, 225, 0.55);
   padding: 3px;
   margin-bottom: 2px;
 }
-.message_input {
-  width: 100%;
-  border-color: darkgrey;
-  background-color: #ffffff;
-  margin: 0px !important;
-  border-radius: 15px;
-  padding-right: 5px;
-  line-height: 85%;
-  padding-bottom: 5px;
-  padding-top: 5px;
-}
+
 .send_button {
   background-color: #315c79;
   color: #ffffff;
@@ -30,20 +19,29 @@
   width: 47px;
   height: 47px;
 }
+
 .text_container {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 0px !important;
-  padding-top: 0px !important;
-  padding-left: 3px !important;
-  padding-right: 3px !important;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-end: 5px;
+  --padding-start: 5px;
+  margin-top: 0px;
 }
+
+
 .button_container {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0px !important;
+}
+
+.native-textarea.sc-ion-textarea-md {
+  padding: 0px;
 }

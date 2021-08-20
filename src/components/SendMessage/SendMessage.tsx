@@ -61,10 +61,10 @@ const SendMessage = (props: props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.input_container} slot="bottom">
           <IonRow>
-            <IonCol className={styles.text_container}>
+            <IonCol>
               <IonTextarea
                 typeof="text"
-                className={styles.message_input}
+                className={styles.text_container}
                 disabled={activeInput}
                 placeholder="Escriba el mensaje"
                 spellcheck={true}
