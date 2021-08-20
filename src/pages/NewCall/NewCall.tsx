@@ -78,7 +78,7 @@ const NewCall: React.FC = () => {
         extraDetails
       );
       present({
-        message: "Se agrego su convocatoria correctamente",
+        message: "Se agregó su convocatoria correctamente",
         duration: 3000,
         position: "top",
         color: "success",

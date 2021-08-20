@@ -82,7 +82,7 @@ const EditCall: React.FC = () => {
     try {
       await saveCallChanges(id, startDate, endDate, extraDetails);
       present({
-        message: "Se edito convocatoria correctamente",
+        message: "La convocatoria fue editada correctamente",
         duration: 3000,
         position: "top",
         color: "success",
@@ -90,7 +90,7 @@ const EditCall: React.FC = () => {
       history.goBack();
     } catch {
       present({
-        message: "Error al edtar la convocatoria",
+        message: "Error al editar la convocatoria",
         duration: 3000,
         position: "top",
         color: "danger",

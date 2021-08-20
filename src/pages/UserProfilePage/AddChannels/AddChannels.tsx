@@ -90,7 +90,7 @@ const AddChannels: React.FC = () => {
       try {
         await EditChannelsLinks(facebook, twitter, instagram, youtube, vimeo);
         present({
-          message: "Se ha actualizado la inforamción de tus redes",
+          message: "Se ha actualizado la información de tus redes",
           duration: 3000,
           position: "top",
           color: "success",

@@ -51,7 +51,7 @@ const AddInjury: React.FC = () => {
     try {
       await AddInjuryExperienced(injuryName, recoveryTime, surgery);
       present({
-        message: "Se ha registrado la inforamción ha tu historial médico",
+        message: "Se ha registrado la información ha tu historial médico",
         duration: 3000,
         position: "top",
         color: "success",

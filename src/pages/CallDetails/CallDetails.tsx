@@ -78,7 +78,7 @@ const CallDetails: React.FC = () => {
         if (id === currentUser.uid) {
           setExistPostulation(true);
           present({
-            message: "Ya esta registrado en esta convocatoria",
+            message: "Ya estás registrado en esta convocatoria",
             duration: 3000,
             position: "top",
             color: "danger",
