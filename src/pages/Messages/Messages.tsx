@@ -15,6 +15,7 @@ import { useAuth } from "contexts/AuthContext";
 import { useCurrentUserData } from "hooks/useCurrentUserData";
 import ChatRoomDetails from "components/ChatRoomDetails/ChatRoomDetails";
 import { chatRoom } from "types";
+import SkeletonChats from "components/Skeletons/SkeletonChats";
 
 const Messages: React.FC = () => {
   const { currentUser } = useAuth();
@@ -45,11 +46,17 @@ const Messages: React.FC = () => {
         <IonItemDivider color="primary">
           <div className="title_divider">Buzón de Mensajería</div>
         </IonItemDivider>
-        <IonList>
-          {chatsRoomsList?.map((chatRoom: chatRoom, index: number) => (
-            <ChatRoomDetails id={chatRoom.id} key={index}></ChatRoomDetails>
-          ))}
-        </IonList>
+        {chatsRoomsList ? (
+          <>
+            <IonList>
+              {chatsRoomsList?.map((chatRoom: chatRoom, index: number) => (
+                <ChatRoomDetails id={chatRoom.id} key={index}></ChatRoomDetails>
+              ))}
+            </IonList>
+          </>
+        ) : (
+          <SkeletonChats />
+        )}
       </IonContent>
     </IonPage>
   );
