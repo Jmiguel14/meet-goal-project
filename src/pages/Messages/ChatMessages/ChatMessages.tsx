@@ -105,7 +105,7 @@ const ChatMessages = () => {
               <IonIcon icon={arrowBack}></IonIcon>
             </IonButton>
           </IonButtons>
-          <IonTitle>Chat</IonTitle>
+          <IonTitle>{receiverData?.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent scrollEvents={true} onIonScrollEnd={() => {}}>
