@@ -59,7 +59,7 @@
   height: 70px;
 }
 .extra_container {
-  height: 70px;
+  height: 100px;
 }
 .age_desc {
   font-size: 18px !important;
@@ -78,6 +78,7 @@
   font-size: 16px !important;
   font-style: normal;
   color: #c8aba4;
+  padding-top: 7px;
 }
 
 .endDate {
@@ -93,4 +94,9 @@
 
 .submit_notify {
   margin-top: 10px;
+}
+
+.tips {
+  align-items: center;
+  justify-content: center;
 }

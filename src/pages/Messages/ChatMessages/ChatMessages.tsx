@@ -46,19 +46,6 @@ const ChatMessages = () => {
   useEffect(() => {
     let unMounted = false;
     if (!unMounted) {
-      getChatMessages(id!, (data) => {
-        setMessagesList(data);
-      });
-    }
-    scroll.current?.scrollIntoView({ behavior: "smooth" });
-    return () => {
-      unMounted = true;
-    };
-  }, [id]);
-
-  useEffect(() => {
-    let unMounted = false;
-    if (!unMounted) {
       getAChatRoomData(id!, (data) => {
         setChatRoomData(data);
       });
@@ -102,6 +89,13 @@ const ChatMessages = () => {
     };
   }, [chatRoomData, currentUser]);
 
+  useEffect(() => {
+    getChatMessages(id!, (data) => {
+      setMessagesList(data);
+    });
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [id]);
+
   return (
     <IonPage>
       <IonHeader>
@@ -111,7 +105,7 @@ const ChatMessages = () => {
               <IonIcon icon={arrowBack}></IonIcon>
             </IonButton>
           </IonButtons>
-          <IonTitle>Chat</IonTitle>
+          <IonTitle>{receiverData?.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent scrollEvents={true} onIonScrollEnd={() => {}}>

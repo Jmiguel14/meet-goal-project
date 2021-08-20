@@ -56,7 +56,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
     try {
       await EditSportsGoalsData(totalWins, maxNacGoal, maxIntGoal);
       present({
-        message: "Se agrego el club a tu experiencia",
+        message: "Se agrego la información correctamente",
         duration: 3000,
         position: "top",
         color: "success",

@@ -3,27 +3,30 @@
 }
 .message_box_receiver {
   float: left !important;
-  width: 50%;
-  background-color: #fedcd2;
+  width: 65%;
+  background-color: rgba(153, 255, 152, 0.6);
   color: white;
   border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 10px;
+  line-height: 18px;
 }
 .message_box_sender {
   float: right !important;
-  width: 50%;
-  background-color: #daf0eb;
+  width: 65%;
   color: white !important;
   font-size: 14px;
-  text-align: end;
+  border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
+  border-top-left-radius: 10px;
+  background-color: #daf0eb;
 }
 .message_text {
   white-space: normal !important;
   color: #0e0b16;
-  padding-left: 10px;
 }
 .message_text_container {
-  padding: 3px;
+  padding: 8px;
 }
 .avatar {
   width: 20px;
@@ -38,5 +41,5 @@
   position: relative;
 }
 .messages {
-  padding-bottom: 12% !important;
+  padding-bottom: 14% !important;
 }

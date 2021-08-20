@@ -99,7 +99,7 @@ export const AddClub: React.FC = () => {
         TR
       );
       present({
-        message: "Se agregó el club a tu experiencia",
+        message: "Se agregó un club a tu experiencia",
         duration: 3000,
         position: "top",
         color: "success",

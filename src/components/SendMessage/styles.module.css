@@ -4,25 +4,44 @@
   width: 100%;
   bottom: 0;
   z-index: 1;
-  border-top: 1px solid lightgray;
-  background-color: #fafafa;
-  justify-content: center;
-  margin-top: 10%;
+  background: rgba(208, 221, 225, 0.55);
+  padding: 3px;
+  margin-bottom: 2px;
 }
-.message_input {
-  width: 80%;
-  border-color: darkgrey;
-  background-color: #ffffff;
-  margin-bottom: "-3px";
-}
+
 .send_button {
   background-color: #315c79;
   color: #ffffff;
-  width: 20%;
   text-align: center;
   font-style: normal;
   font-size: 16px;
-  border-radius: 5px;
-  margin: "4px 5% -13px 5%";
-  max-width: 200px;
+  border-radius: 50%;
+  width: 47px;
+  height: 47px;
+}
+
+.text_container {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-end: 5px;
+  --padding-start: 5px;
+  margin-top: 0px;
+}
+
+
+.button_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px !important;
+}
+
+.native-textarea.sc-ion-textarea-md {
+  padding: 0px;
 }

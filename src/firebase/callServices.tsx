@@ -75,8 +75,6 @@ export const getOwnCallData = (
 
 export function saveCallChanges(
   id: string,
-  ageRequired: string,
-  posRequired: string,
   startDate: string,
   endDate: string,
   extraDetails: string
@@ -85,8 +83,6 @@ export function saveCallChanges(
     .collection(COLLECTIONS.CALLS)
     .doc(id)
     .update({
-      ageRequired,
-      posRequired,
       startDate: firebase.firestore.Timestamp.fromDate(new Date(startDate)),
       endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
       extraDetails,

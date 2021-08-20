@@ -53,9 +53,6 @@ const NotificationModal = (props: props) => {
           </IonLabel>
         </IonItem>
         <IonItem className={styles.back} lines="none">
-          <IonLabel position="stacked" className={styles.field}>
-            Mensaje
-          </IonLabel>
           <IonText className={styles.message}>
             {notifyData?.notification}
           </IonText>

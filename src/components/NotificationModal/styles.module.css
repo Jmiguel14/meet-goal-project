@@ -10,11 +10,14 @@
   color: #315c79 !important;
   white-space: normal !important;
   text-align: center !important;
+  font-weight: 600 !important;
 }
 .message {
-  font-weight: bold !important;
+  font-weight: 400 !important;
   font-size: 18px !important;
   font-style: normal !important;
+  padding-top: 10px !important;
+  text-align: justify !important;
 }
 .field {
   font-style: normal !important;

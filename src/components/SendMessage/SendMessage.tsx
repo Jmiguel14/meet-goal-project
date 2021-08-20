@@ -1,4 +1,11 @@
-import { IonIcon, IonInput, IonRow, useIonToast } from "@ionic/react";
+import {
+  IonCol,
+  IonIcon,
+  IonInput,
+  IonRow,
+  IonTextarea,
+  useIonToast,
+} from "@ionic/react";
 import { useAuth } from "contexts/AuthContext";
 import { newMessage } from "firebase/messagesServices";
 import { sendSharp } from "ionicons/icons";
@@ -54,24 +61,29 @@ const SendMessage = (props: props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.input_container} slot="bottom">
           <IonRow>
-            <IonInput
-              type="text"
-              className={styles.message_input}
-              disabled={activeInput}
-              placeholder="Escriba el mensaje"
-              clearInput={true}
-              {...register("message")}
-              onClick={(e) => {
-                setActiveInput(false);
-              }}
-            ></IonInput>
-            <button
-              className={styles.send_button}
-              type="submit"
-              disabled={activeInput}
-            >
-              <IonIcon icon={sendSharp} size="small"></IonIcon>
-            </button>
+            <IonCol>
+              <IonTextarea
+                typeof="text"
+                className={styles.text_container}
+                disabled={activeInput}
+                placeholder="Escriba el mensaje"
+                spellcheck={true}
+                wrap="soft"
+                {...register("message")}
+                onClick={(e) => {
+                  setActiveInput(false);
+                }}
+              ></IonTextarea>
+            </IonCol>
+            <IonCol className={styles.button_container} size="2">
+              <button
+                className={styles.send_button}
+                type="submit"
+                disabled={activeInput}
+              >
+                <IonIcon icon={sendSharp} size="small"></IonIcon>
+              </button>
+            </IonCol>
           </IonRow>
         </div>
       </form>

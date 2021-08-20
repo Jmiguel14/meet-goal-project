@@ -78,14 +78,14 @@ const NewCall: React.FC = () => {
         extraDetails
       );
       present({
-        message: "Se agrego su convocatoria correctamente",
+        message: "Se agregó su convocatoria correctamente",
         duration: 3000,
         position: "top",
         color: "success",
       });
       newNotification(
         currentUser.uid,
-        `${NOTIFYTITLES.NEWCALL} Requieres un ${posRequired} de la categoria ${ageRequired}`,
+        `Una nueva convocatoria se ha registrado. En esta requieres un ${posRequired} de la categoria ${ageRequired}`,
         NOTIFYTITLES.NEWCALL,
         currentUserData?.name,
         posRequired,

@@ -12,6 +12,7 @@ import {
   IonItemDivider,
   IonLabel,
   IonList,
+  IonNote,
   IonPage,
   IonRow,
   IonText,
@@ -62,11 +63,13 @@ const CallDetails: React.FC = () => {
   }, [id]);
 
   useEffect(() => {
+    let unsubscribe: any;
     if (callData) {
       const unsubscribe = getOwnCallData(callData?.clubId, (data) => {
         setClubData(data);
       });
     }
+    return () => unsubscribe && unsubscribe();
   }, [callData]);
 
   useEffect(() => {
@@ -75,7 +78,7 @@ const CallDetails: React.FC = () => {
         if (id === currentUser.uid) {
           setExistPostulation(true);
           present({
-            message: "Ya esta registrado en esta convocatoria",
+            message: "Ya estás registrado en esta convocatoria",
             duration: 3000,
             position: "top",
             color: "danger",
@@ -106,7 +109,7 @@ const CallDetails: React.FC = () => {
       });
       newNotification(
         currentUser.uid,
-        `${NOTIFYTITLES.POSTULATION} del ${clubData?.name}. Donde requiere un ${callData?.posRequired} de la categoria ${callData?.ageRequired}`,
+        `Tu postulación a la convocatoria del ${clubData?.name}, donde requiere un ${callData?.posRequired} de la categoria ${callData?.ageRequired} se registro con exito. Espera el cierre y posible notificación. Suerte...`,
         NOTIFYTITLES.POSTULATION,
         clubData?.name,
         callData?.posRequired,
@@ -274,6 +277,22 @@ const CallDetails: React.FC = () => {
               Postularme
             </IonButton>
           )
+        ) : (
+          ""
+        )}
+        {currentUserData?.userType === USER_TYPES.CLUB ? (
+          <IonCol>
+            <IonRow className={styles.tips}>
+              <IonNote color="primary">
+                Para seleccionar un jugador toque el botón verde
+              </IonNote>
+            </IonRow>
+            <IonRow className={styles.tips}>
+              <IonNote color="primary">
+                Para descartarlo toque el botón rojo
+              </IonNote>
+            </IonRow>
+          </IonCol>
         ) : (
           ""
         )}
