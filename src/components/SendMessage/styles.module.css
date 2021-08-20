@@ -11,7 +11,7 @@
   width: 100%;
   border-color: darkgrey;
   background-color: #ffffff;
-  margin-bottom: "-3px";
+  margin: 0px !important;
   border-radius: 15px;
   padding-right: 5px;
   line-height: 85%;
@@ -24,12 +24,14 @@
   font-style: normal;
   font-size: 16px;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  width: 47px;
+  height: 47px;
 }
 .text_container {
   width: 100%;
-  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-bottom: 0px !important;
   padding-top: 0px !important;
   padding-left: 3px !important;
