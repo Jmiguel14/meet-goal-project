@@ -4,10 +4,7 @@
   width: 100%;
   bottom: 0;
   z-index: 1;
-  border-top: 1px solid lightgray;
   background-color: #fafafa;
-  justify-content: center;
-  margin-top: 10%;
   background: transparent;
 }
 .message_input {
@@ -16,6 +13,9 @@
   background-color: #ffffff;
   margin-bottom: "-3px";
   border-radius: 15px;
+  padding-right: 5px;
+  min-height: fit-content;
+  line-height: 85%;
 }
 .send_button {
   background-color: #315c79;
@@ -24,11 +24,16 @@
   font-style: normal;
   font-size: 16px;
   border-radius: 50%;
-  width: 80%;
-  height: 65%;
+  width: 45px;
+  height: 45px;
 }
 .text_container {
   width: 100%;
+  bottom: 0;
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+  padding-left: 3px !important;
+  padding-right: 3px !important;
 }
 .button_container {
   width: 100%;
