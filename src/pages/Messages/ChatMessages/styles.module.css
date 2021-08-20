@@ -4,7 +4,7 @@
 .message_box_receiver {
   float: left !important;
   width: 65%;
-  background-color: #fedcd2;
+  background-color: rgba(153, 255, 152, 0.6);
   color: white;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -19,7 +19,7 @@
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   border-top-left-radius: 10px;
-  background-color: rgba(153, 255, 152, 0.6);
+  background-color: #daf0eb;
 }
 .message_text {
   white-space: normal !important;
