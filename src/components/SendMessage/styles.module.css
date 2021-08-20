@@ -4,17 +4,16 @@
   width: 100%;
   bottom: 0;
   z-index: 1;
+  border-top: 1px solid lightgray;
   background-color: #fafafa;
   justify-content: center;
-  height: 9%;
+  margin-top: 10%;
 }
 .message_input {
   width: 80%;
   border-color: darkgrey;
   background-color: #ffffff;
-  margin-bottom: "0px";
-  height: 100%;
-  padding: 0px;
+  margin-bottom: "-3px";
 }
 .send_button {
   background-color: #315c79;
