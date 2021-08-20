@@ -6,6 +6,8 @@
   z-index: 1;
   background-color: #fafafa;
   background: transparent;
+  padding: 3px;
+  margin-bottom: 2px;
 }
 .message_input {
   width: 100%;
