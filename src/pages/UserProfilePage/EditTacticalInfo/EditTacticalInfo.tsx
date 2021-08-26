@@ -25,10 +25,29 @@ import * as yup from "yup";
 import styles from "./styles.module.css";
 import { ERROR_MESSAGES } from "constants/errorMessages";
 import { useEffect } from "react";
+import { PLAYER_POSITIONS } from "constants/playerPositions";
 
 const schema = yup.object().shape({
   pospri: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
+
+const PLAYER_POSITIONS_OPTIONS = [
+  { value: PLAYER_POSITIONS.goalkeeper },
+  { value: PLAYER_POSITIONS.leftWingBack },
+  { value: PLAYER_POSITIONS.rightWingBack },
+  { value: PLAYER_POSITIONS.leftBack },
+  { value: PLAYER_POSITIONS.rightBack },
+  { value: PLAYER_POSITIONS.centreBack },
+  { value: PLAYER_POSITIONS.centralDefensiveMidfielder },
+  { value: PLAYER_POSITIONS.centralMidfielder },
+  { value: PLAYER_POSITIONS.centralAttakingMidfielder },
+  { value: PLAYER_POSITIONS.leftMidfielder },
+  { value: PLAYER_POSITIONS.rightMidfielder },
+  { value: PLAYER_POSITIONS.outsideLeft },
+  { value: PLAYER_POSITIONS.outsideRight },
+  { value: PLAYER_POSITIONS.centralStriker },
+  { value: PLAYER_POSITIONS.rightStriker },
+];
 
 const EditTacticalInfo: React.FC = () => {
   const [present] = useIonToast();
@@ -112,49 +131,13 @@ const EditTacticalInfo: React.FC = () => {
                 clearErrors("pospri");
               }}
             >
-              <IonSelectOption value="Portero">Portero</IonSelectOption>
-              <IonSelectOption value="Carrilero Izquierdo">
-                Carrilero Izq.
-              </IonSelectOption>
-              <IonSelectOption value="Carrilero Derecho">
-                Carrilero Der.
-              </IonSelectOption>
-              <IonSelectOption value="Lateral Izquierdo">
-                Lateral Izquierdo
-              </IonSelectOption>
-              <IonSelectOption value="Lateral Derecho">
-                Lateral Derecho
-              </IonSelectOption>
-              <IonSelectOption value="Defensa Central">
-                Defensa Central
-              </IonSelectOption>
-              <IonSelectOption value="Medio Centro Defensivo">
-                Medio Centro Def.
-              </IonSelectOption>
-              <IonSelectOption value="Medio Centro">
-                Medio Centro
-              </IonSelectOption>
-              <IonSelectOption value="Medio Centro Ofensivo">
-                Medio Centro Of.
-              </IonSelectOption>
-              <IonSelectOption value="Medio Izquierdo">
-                Medio Izquierdo
-              </IonSelectOption>
-              <IonSelectOption value="Medio Derecho">
-                Medio Derecho
-              </IonSelectOption>
-              <IonSelectOption value="Segundo Delantero">
-                Segundo Delantero
-              </IonSelectOption>
-              <IonSelectOption value="Centro Delantero">
-                Centro Delantero
-              </IonSelectOption>
-              <IonSelectOption value="Extremo Izquierdo">
-                Ext. Izquierdo
-              </IonSelectOption>
-              <IonSelectOption value="Extremo Derecho">
-                Ext.Derecho
-              </IonSelectOption>
+              {PLAYER_POSITIONS_OPTIONS.map((position, index) => {
+                return (
+                  <IonSelectOption key={index} value={position.value}>
+                    {position.value}
+                  </IonSelectOption>
+                );
+              })}
             </IonSelect>
           </IonItem>
           {errors.pospri?.message && (
@@ -169,21 +152,13 @@ const EditTacticalInfo: React.FC = () => {
               slot="end"
               {...register("possec")}
             >
-              <IonSelectOption value="POR">Portero</IonSelectOption>
-              <IonSelectOption value="CAI">Carrilero Izq.</IonSelectOption>
-              <IonSelectOption value="CAD">Carrilero Der.</IonSelectOption>
-              <IonSelectOption value="LI">Lateral Izquierdo</IonSelectOption>
-              <IonSelectOption value="LD">Lateral Derecho</IonSelectOption>
-              <IonSelectOption value="DFC">Defensa Central</IonSelectOption>
-              <IonSelectOption value="MCD">Medio Centro Def.</IonSelectOption>
-              <IonSelectOption value="MC">Medio Centro</IonSelectOption>
-              <IonSelectOption value="MCO">Medio Centro Of.</IonSelectOption>
-              <IonSelectOption value="MI">Medio Izquierdo</IonSelectOption>
-              <IonSelectOption value="MD">Medio Derecho</IonSelectOption>
-              <IonSelectOption value="SD">Segundo Delantero</IonSelectOption>
-              <IonSelectOption value="DC">Centro Delantero</IonSelectOption>
-              <IonSelectOption value="EI">Ext. Izquierdo</IonSelectOption>
-              <IonSelectOption value="ED">Ext.Derecho</IonSelectOption>
+              {PLAYER_POSITIONS_OPTIONS.map((position, index) => {
+                return (
+                  <IonSelectOption key={index} value={position.value}>
+                    {position.value}
+                  </IonSelectOption>
+                );
+              })}
             </IonSelect>
           </IonItem>
 
