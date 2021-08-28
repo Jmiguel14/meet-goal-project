@@ -123,7 +123,7 @@ const PlayerDashboard: React.FC = () => {
         ) : (
           <SkeletonNews />
         )}
-        {currentUserData?.userType !== USER_TYPES.PLAYER ? (
+        {currentUserData && currentUserData.userType !== USER_TYPES.PLAYER ? (
           <IonFab vertical="bottom" horizontal="end" slot="fixed">
             <IonFabButton routerLink="/tabs/nueva-convocatoria">
               <IonIcon icon={add} />
