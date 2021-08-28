@@ -44,7 +44,7 @@ Mobile App that allows sports clubs to filter their players through calls, and i
 
 - Clone the repo
 - `npm i` or `npm install`
-- `npx cap add android`
+- `ionic cap open android`
 
 ## 🤖 Features
 
@@ -56,15 +56,15 @@ Mobile App that allows sports clubs to filter their players through calls, and i
   ### All users:
 
   - Create an account
-  - Create an account with Google or Facebook: **Pending**
+  - Create an account with Google or Facebook:
   - Login with the account previusly created
   - Reset password
   - Register profile information
   - Update profile information
   - Search players
   - View profile players
-  - View notifications: **Pending**
-  - Send messages: **Pending**
+  - View notifications:
+  - Send and receive messages:
 
   ### Players:
 
@@ -79,7 +79,7 @@ Mobile App that allows sports clubs to filter their players through calls, and i
 
   - Create calls
   - Update calls created
-  - Select players of a call: **Pending**
+  - Select players of a call:
 
 ## 📆 Status
 
