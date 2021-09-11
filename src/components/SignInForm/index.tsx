@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IonRow,
   IonCol,
@@ -7,8 +7,10 @@ import {
   IonNote,
   IonInput,
   IonRouterLink,
+  IonIcon,
 } from "@ionic/react";
 import "./styles.css";
+import { eyeOffOutline, eyeOutline } from "ionicons/icons";
 
 interface ISignInForm {
   register: any;
@@ -23,6 +25,8 @@ export const SignInForm: React.FC<ISignInForm> = ({
   clearErrors,
   errors,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showIconPassword, setShowIconPassword] = useState(false);
   return (
     <form onSubmit={handleSubmit} id="sign-in-form">
       <IonRow>
@@ -47,13 +51,35 @@ export const SignInForm: React.FC<ISignInForm> = ({
             <IonLabel color="medium" position="floating">
               Contraseña
             </IonLabel>
-            <IonInput
-              type="password"
-              {...register("password", { pattern: /^[A-Za-z]+$/i })}
-              onIonChange={() => {
-                clearErrors("password");
-              }}
-            />
+            <IonRow style={{ width: "100%" }}>
+              <IonCol size="10">
+                <IonInput
+                  type={showPassword ? "text" : "password"}
+                  {...register("password", { pattern: /^[A-Za-z]+$/i })}
+                  onIonChange={(e) => {
+                    clearErrors("password");
+                    e.detail.value === ""
+                      ? setShowIconPassword(false)
+                      : setShowIconPassword(true);
+                  }}
+                ></IonInput>
+              </IonCol>
+              <IonCol size="2">
+                {showIconPassword ? (
+                  <IonIcon
+                    size="large"
+                    color="primary"
+                    name={eyeOutline}
+                    src={showPassword ? eyeOutline : eyeOffOutline}
+                    onClick={() => {
+                      setShowPassword((prevState) => !prevState);
+                    }}
+                  ></IonIcon>
+                ) : (
+                  <></>
+                )}
+              </IonCol>
+            </IonRow>
           </IonItem>
           {errors.password && (
             <IonNote color="danger">{errors.password?.message}</IonNote>

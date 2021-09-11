@@ -141,7 +141,7 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoFacebook}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Ej. www.facebook.com/meet-goal-official-page"
+              placeholder="Ej. miguelangel.juradocedeno"
               {...register("facebook")}
             ></IonInput>
           </IonItem>
@@ -150,7 +150,7 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoTwitter}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Ej. www.twitter.com/MeetGoalOfficial"
+              placeholder="Ej. migueljuradoced"
               {...register("twitter")}
             ></IonInput>
           </IonItem>
@@ -159,7 +159,7 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoInstagram}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Ej. www.instagram.com/MeetGoalOfficial"
+              placeholder="Ej. j_miguel14.v"
               {...register("instagram")}
             ></IonInput>
           </IonItem>
@@ -168,7 +168,7 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoYoutube}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Ej. www.youtube.com/channel/UcsqpqcxtErZpw"
+              placeholder="Ej. UCWQBpIaaoNJfGPfqFIYp03g"
               {...register("youtube")}
             ></IonInput>
           </IonItem>
@@ -177,7 +177,7 @@ const AddChannels: React.FC = () => {
               <IonIcon icon={logoVimeo}></IonIcon>
             </IonButton>
             <IonInput
-              placeholder="Ej. www.vimeo.com/user"
+              placeholder="Ej. user150607591"
               {...register("vimeo")}
             ></IonInput>
           </IonItem>

@@ -8,8 +8,11 @@ import {
   IonNote,
   IonInput,
   IonButton,
+  IonIcon,
 } from "@ionic/react";
 import { USER_TYPES } from "constants/userTypes";
+import { eyeOffOutline, eyeOutline } from "ionicons/icons";
+import { useState } from "react";
 import {
   UseFormRegister,
   UseFormHandleSubmit,
@@ -36,6 +39,8 @@ export const SignUpForm = ({
   errors,
   onHandleSubmit,
 }: SignUpFormProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showIconPassword, setShowIconPassword] = useState(false);
   return (
     <form onSubmit={handleSubmit(onHandleSubmit)}>
       <IonRow>
@@ -43,7 +48,7 @@ export const SignUpForm = ({
           <IonItem>
             <IonLabel color="medium">Tipo de usuario</IonLabel>
             <IonSelect
-              okText="Okay"
+              okText="Ok"
               cancelText="Cerrar"
               {...register("userType")}
               onIonChange={() => {
@@ -121,13 +126,35 @@ export const SignUpForm = ({
             <IonLabel color="medium" position="floating">
               Contraseña
             </IonLabel>
-            <IonInput
-              type="password"
-              {...register("password", { pattern: /^[A-Za-z]+$/i })}
-              onIonChange={() => {
-                clearErrors("password");
-              }}
-            />
+            <IonRow style={{ width: "100%" }}>
+              <IonCol size="10">
+                <IonInput
+                  type={showPassword ? "text" : "password"}
+                  {...register("password", { pattern: /^[A-Za-z]+$/i })}
+                  onIonChange={(e) => {
+                    clearErrors("password");
+                    e.detail.value === ""
+                      ? setShowIconPassword(false)
+                      : setShowIconPassword(true);
+                  }}
+                ></IonInput>
+              </IonCol>
+              <IonCol size="2">
+                {showIconPassword ? (
+                  <IonIcon
+                    size="large"
+                    color="primary"
+                    name={eyeOutline}
+                    src={showPassword ? eyeOutline : eyeOffOutline}
+                    onClick={() => {
+                      setShowPassword((prevState) => !prevState);
+                    }}
+                  ></IonIcon>
+                ) : (
+                  <></>
+                )}
+              </IonCol>
+            </IonRow>
           </IonItem>
           {errors.password && (
             <IonNote color="danger">{errors.password?.message}</IonNote>

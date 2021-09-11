@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">meet-goal-project</string>
-    <string name="title_activity_main">meet-goal-project</string>
+    <string name="app_name">Meet Goal</string>
+    <string name="title_activity_main">Meet Goal</string>
     <string name="package_name">com.geomi.meet_goal</string>
     <string name="custom_url_scheme">com.geomi.meet_goal</string>
     <string name="server_client_id">1079016242836-t80ckdq5plr94nbijkc4bga55585fk0g.apps.googleusercontent.com</string>

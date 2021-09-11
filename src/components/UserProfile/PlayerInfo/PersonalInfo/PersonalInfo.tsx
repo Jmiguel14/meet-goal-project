@@ -86,19 +86,24 @@ const PersonalInfo = () => {
           <IonText className={styles.text}>Estado contractual</IonText>
         </IonItem>
       </IonCard>
-      <IonCard className={styles.boxes}>
-        <IonItem href={data?.marketTransfer}>
-          <IonImg
-            src={MarketIcon}
-            slot="start"
-            className="ion-padding-vertical"
-          ></IonImg>
-          <IonLabel position="stacked">
-            <h1 className={styles.info}>MarketTransfer</h1>
-          </IonLabel>
-          <IonText className={styles.text}>Link MarketTransfer</IonText>
-        </IonItem>
-      </IonCard>
+      {data?.marketTransfer ? (
+        <IonCard className={styles.boxes} href={data?.marketTransfer} target="_blank">
+          <IonItem>
+            <IonImg
+              src={MarketIcon}
+              slot="start"
+              className="ion-padding-vertical"
+            ></IonImg>
+            <IonLabel position="stacked">
+              <h1 className={styles.info}>MarketTransfer</h1>
+            </IonLabel>
+            <IonText className={styles.text}>Link MarketTransfer</IonText>
+          </IonItem>
+        </IonCard>
+      ) : (
+        <></>
+      )}
+
       {currentUser.uid === id ? (
         <IonButton
           size="default"

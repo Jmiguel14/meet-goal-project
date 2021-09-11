@@ -134,7 +134,7 @@ const NewCall: React.FC = () => {
               <IonItem className={styles.calls_field}>
                 <IonLabel>Edad requerida</IonLabel>
                 <IonSelect
-                  okText="Okay"
+                  okText="Ok"
                   cancelText="Cerrar"
                   slot="end"
                   {...register("ageRequired")}
@@ -239,6 +239,8 @@ const NewCall: React.FC = () => {
                 <IonItem className={styles.calls_field}>
                   <IonIcon icon={calendarClearOutline} size="small"></IonIcon>
                   <IonDatetime
+                    cancelText="Cancelar"
+                    doneText="Hecho"
                     className={styles.selection}
                     placeholder="Fecha Inicial"
                     itemType="text"
@@ -258,6 +260,8 @@ const NewCall: React.FC = () => {
                 <IonItem className={styles.calls_field}>
                   <IonIcon icon={calendarOutline} size="small"></IonIcon>
                   <IonDatetime
+                    cancelText="Cancelar"
+                    doneText="Hecho"
                     className={styles.selection}
                     placeholder="Fecha Final"
                     itemType="text"
