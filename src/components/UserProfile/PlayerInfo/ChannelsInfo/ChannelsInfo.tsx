@@ -43,7 +43,7 @@ const ChannelsInfo = () => {
           <IonCol>
             {data?.facebook !== undefined && data?.facebook !== "" ? (
               <IonCard
-                href={data?.facebook}
+                href={`https://www.facebook.com/${data?.facebook}`}
                 target="_blank"
                 className={styles.channel_logo_facebook}
               >
@@ -59,7 +59,7 @@ const ChannelsInfo = () => {
           <IonCol>
             {data?.twitter !== undefined && data?.twitter !== "" ? (
               <IonCard
-                href={data?.twitter}
+                href={`https://twitter.com/${data?.twitter}`}
                 target="_blank"
                 className={styles.channel_logo_twitter}
               >
@@ -80,7 +80,7 @@ const ChannelsInfo = () => {
           <IonCol>
             {data?.instagram !== undefined && data?.instagram !== "" ? (
               <IonCard
-                href={data?.instagram}
+                href={`https://www.instagram.com/${data?.instagram}`}
                 target="_blank"
                 className={styles.channel_logo_instagram}
               >
@@ -99,7 +99,7 @@ const ChannelsInfo = () => {
           <IonCol>
             {data?.youtube !== undefined && data?.youtube !== "" ? (
               <IonCard
-                href={data?.youtube}
+                href={`https://www.youtube.com/channel/${data?.youtube}`}
                 target="_blank"
                 className={styles.channel_logo_youtube}
               >
@@ -120,7 +120,7 @@ const ChannelsInfo = () => {
           <IonCol>
             {data?.vimeo !== undefined && data?.vimeo !== "" ? (
               <IonCard
-                href={data?.vimeo}
+                href={`https://vimeo.com/${data?.vimeo}`}
                 target="_blank"
                 className={styles.channel_logo_vimeo}
               >

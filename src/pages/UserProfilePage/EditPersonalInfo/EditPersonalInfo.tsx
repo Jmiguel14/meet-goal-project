@@ -172,6 +172,8 @@ export const EditPersonalInfo: React.FC = () => {
           <IonItem className={styles.personal_data}>
             <IonLabel>F. Nacimiento (Mes/Día/Año)</IonLabel>
             <IonDatetime
+              cancelText='Cancelar'
+              doneText='Hecho'
               itemType="text"
               displayFormat="MMM/DD/YY"
               monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
@@ -188,7 +190,7 @@ export const EditPersonalInfo: React.FC = () => {
           <IonItem className={styles.personal_data}>
             <IonLabel color="medium">Estado Contractual</IonLabel>
             <IonSelect
-              okText="okay"
+              okText="Ok"
               cancelText="Cerrar"
               {...register("contract")}
               onIonChange={() => {
