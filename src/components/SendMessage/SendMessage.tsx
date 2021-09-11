@@ -68,7 +68,6 @@ const SendMessage = (props: props) => {
                 disabled={activeInput}
                 placeholder="Escriba el mensaje"
                 spellcheck={true}
-                wrap="soft"
                 {...register("message")}
                 onClick={(e) => {
                   setActiveInput(false);
