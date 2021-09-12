@@ -64,15 +64,16 @@ const SendMessage = (props: props) => {
             <IonCol>
               <IonTextarea
                 typeof="text"
+                autoGrow={true}
                 className={styles.text_container}
                 disabled={activeInput}
                 placeholder="Escriba el mensaje"
                 spellcheck={true}
-                wrap="soft"
                 {...register("message")}
                 onClick={(e) => {
                   setActiveInput(false);
                 }}
+                wrap='hard'
               ></IonTextarea>
             </IonCol>
             <IonCol className={styles.button_container} size="2">

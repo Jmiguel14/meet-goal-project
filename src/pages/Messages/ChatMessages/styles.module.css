@@ -24,6 +24,7 @@
 .message_text {
   white-space: normal !important;
   color: #0e0b16;
+  font-weight: lighter !important;
 }
 .message_text_container {
   padding: 8px;

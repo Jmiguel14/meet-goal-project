@@ -19,10 +19,10 @@ export const PhotoUser: React.FC = () => {
 
   return (
     <>
-      <IonRow className="profile-photos">
-        <IonCol className="imagenes">
+      <div className="profile-photos">
+        <IonRow className="imagenes">
           <IonCol className="portada">
-            <IonImg src={data?.coverURL}></IonImg>
+            <IonImg src={data?.coverURL} className="cover"></IonImg>
           </IonCol>
           <IonCol className="contenedor">
             <div className="avatar">
@@ -31,8 +31,8 @@ export const PhotoUser: React.FC = () => {
               </IonAvatar>
             </div>
           </IonCol>
-        </IonCol>
-      </IonRow>
+        </IonRow>
+      </div>
       {currentUserData?.userType === USER_TYPES.CLUB &&
       currentUser.uid !== data?.id ? (
         <div className="message">
