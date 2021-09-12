@@ -8,8 +8,10 @@
   justify-content: center;
 }
 .avatar_image {
-  width: 90%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 86px !important;
+  max-height: 100px !important;
 }
 .imagenes {
   padding: 0px;
