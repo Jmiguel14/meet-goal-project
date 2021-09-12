@@ -32,7 +32,7 @@ const PlayersSegment = () => {
   >([]);
 
   const currentUserData = useCurrentUserData();
-
+    
   useEffect(() => {
     const unsubscribe = listtenFirstPlayersBatch(setPlayers, setLastKey);
     return () => unsubscribe && unsubscribe();

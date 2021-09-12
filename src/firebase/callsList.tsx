@@ -50,8 +50,8 @@ export const listtenNextCallsBatch = (
       const newData = snapshot.docs.map((doc) => {
         const data = doc.data();
         const id = doc.id;
-        const { createAt } = data;
-        lastKey = createAt;
+        const { createdAt } = data;
+        lastKey = createdAt;
         return {
           ...data,
           id,
