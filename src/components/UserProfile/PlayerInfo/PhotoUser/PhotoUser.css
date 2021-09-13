@@ -1,5 +1,15 @@
+.contenedor {
+  position: absolute;
+  top: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  width: 100%;
+}
+
 .avatar {
-  width: 27.5%;
+  width: 100%;
   height: 100%;
   border-radius: 99px;
   margin: 0 auto;
@@ -7,12 +17,14 @@
   align-items: center;
   justify-content: center;
 }
+
 .avatar_image {
   width: 100% !important;
   height: 100% !important;
-  max-width: 86px !important;
-  max-height: 100px !important;
+  max-width: 110px !important;
+  max-height: 110px !important;
 }
+
 .imagenes {
   padding: 0px;
   align-items: flex-start;
@@ -32,20 +44,13 @@
   display: flex;
   width: 100%;
 }
-.contenedor {
-  position: absolute;
-  top: 66%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40%;
-}
+
 .fotos-jugador {
   align-items: center;
 }
 
 .profile-photos {
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 .message {
   text-align: center;

@@ -10,7 +10,7 @@ import { useHistory } from "react-router";
 export const PhotoUser: React.FC = () => {
   const history = useHistory();
   const { data, currentUser } = useAuth();
-  const currentUserData = useCurrentUserData();
+  const currentUserData = useCurrentUserData(); 
 
   async function verifyChatRoom() {
     const chatId = await discoveringChatRoom(currentUser.uid, data?.id);
@@ -19,6 +19,9 @@ export const PhotoUser: React.FC = () => {
 
   return (
     <>
+    {
+
+    }
       <div className="profile-photos">
         <IonRow className="imagenes">
           <IonCol className="portada">
