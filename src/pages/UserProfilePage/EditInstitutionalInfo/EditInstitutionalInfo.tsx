@@ -172,8 +172,8 @@ export const EditInstitutionalInfo: React.FC = () => {
           <IonItem className={styles.institutional_data}>
             <IonLabel>F. de Fundación (Mes/Día/Año)</IonLabel>
             <IonDatetime
-              cancelText='Cancelar'
-              doneText='Hecho'
+              cancelText="Cancelar"
+              doneText="Hecho"
               itemType="text"
               displayFormat="MMM/DD/YY"
               monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"

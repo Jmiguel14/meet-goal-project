@@ -73,7 +73,7 @@ const SendMessage = (props: props) => {
                 onClick={(e) => {
                   setActiveInput(false);
                 }}
-                wrap='hard'
+                wrap="hard"
               ></IonTextarea>
             </IonCol>
             <IonCol className={styles.button_container} size="2">

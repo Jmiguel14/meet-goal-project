@@ -87,7 +87,11 @@ const PersonalInfo = () => {
         </IonItem>
       </IonCard>
       {data?.marketTransfer ? (
-        <IonCard className={styles.boxes} href={data?.marketTransfer} target="_blank">
+        <IonCard
+          className={styles.boxes}
+          href={data?.marketTransfer}
+          target="_blank"
+        >
           <IonItem>
             <IonImg
               src={MarketIcon}
