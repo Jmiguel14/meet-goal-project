@@ -1,8 +1,8 @@
 .edit_photos {
-  height: 16px;
+  height: 25px;
   font-size: 14px;
   line-height: 16px;
-  color: #315c79;
+  --background: #ffffff;
 }
 .name {
   font-size: 18px;

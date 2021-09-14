@@ -263,8 +263,8 @@ const EditCall: React.FC = () => {
                 <IonItem className={styles.calls_field}>
                   <IonIcon icon={calendarOutline} size="small"></IonIcon>
                   <IonDatetime
-                    cancelText='Cancelar'
-                    doneText='Hecho'
+                    cancelText="Cancelar"
+                    doneText="Hecho"
                     className={styles.selection}
                     placeholder="Fecha Final"
                     itemType="text"

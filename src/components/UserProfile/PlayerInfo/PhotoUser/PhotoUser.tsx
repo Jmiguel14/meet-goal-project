@@ -19,6 +19,7 @@ export const PhotoUser: React.FC = () => {
 
   return (
     <>
+      {}
       <div className="profile-photos">
         <IonRow className="imagenes">
           <IonCol className="portada">

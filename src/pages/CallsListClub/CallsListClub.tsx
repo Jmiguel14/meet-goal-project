@@ -20,9 +20,7 @@ import {
 } from "@ionic/react";
 import { add, arrowBack } from "ionicons/icons";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import styles from "./styles.module.css";
-import { useAuth } from "contexts/AuthContext";
 import firebase from "firebase/app";
 import { Link } from "react-router-dom";
 import { getCallsData } from "firebase/callServices";
@@ -30,8 +28,6 @@ import { converterDate } from "utils/converterDate";
 import { Routes } from "constants/routes";
 
 const CallsListClub: React.FC = () => {
-  const history = useHistory();
-  const { currentUser } = useAuth();
   const [callsList, setCallList] = useState<firebase.firestore.DocumentData>();
 
   useEffect(() => {
