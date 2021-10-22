@@ -80,8 +80,13 @@ Mobile App that allows sports clubs to filter their players through calls, and i
   - Create calls
   - Update calls created
   - Select players of a call:
+ 
+  ## Resources
+  
+  - [Technical report and manual](https://epnecuador-my.sharepoint.com/:f:/g/personal/freddy_valverde_epn_edu_ec/EoVuQyY8wUJAsxHHFX1rNZMBplWjXnRhmXVBKzrj28WU6g?e=pyVhLL)
+  - [Expicatory video about the app](https://www.youtube.com/watch?v=gxD1nb8Xl8A)
+  
+  ## 📆 Status
 
-## 📆 Status
+  Available on 📱 [Play Store](https://play.google.com/store/apps/details?id=com.geomi.meet_goal)
 
-This app is still being developed, but its develop will have finished by the end of August.
-Coming soon in Play Store 😲
