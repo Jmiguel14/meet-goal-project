@@ -11,6 +11,7 @@ App created using [Ionic](https://ionicframework.com/), [React](https://reactjs.
 - [Technologies](#-technologies)
 - [Setup](#%EF%B8%8F-setup)
 - [Features](#-features)
+- [Resources](#-resources)
 - [Status](#-status)
 
 ## ℹ️ General info
