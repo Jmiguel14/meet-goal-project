@@ -157,7 +157,7 @@ export const SignUpForm = ({
             </IonRow>
           </IonItem>
           {errors.password && (
-            <IonNote color="danger">{errors.password?.message}</IonNote>
+            <IonNote color="primary">{errors.password?.message}</IonNote>
           )}
         </IonCol>
       </IonRow>
