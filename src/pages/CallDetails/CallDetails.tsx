@@ -370,7 +370,9 @@ const CallDetails: React.FC = () => {
               <IonTextarea
                 className={styles.postulant_notify}
                 value={messageNotification}
-                onIonChange={(e) => setMessageNotification(e.detail.value!)}
+                onIonChange={(e) =>
+                  setMessageNotification(e.detail.value!.trim())
+                }
                 placeholder="Registre los detalles que desea notificar a los jugadores seleccionados"
               ></IonTextarea>
             </IonItem>
