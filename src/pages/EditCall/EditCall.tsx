@@ -34,6 +34,7 @@ import { ERROR_MESSAGES } from "constants/errorMessages";
 const schema = yup.object().shape({
   startDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
   endDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  extraDetails: yup.string().trim(),
 });
 
 const EditCall: React.FC = () => {
@@ -294,6 +295,9 @@ const EditCall: React.FC = () => {
                   {...register("extraDetails")}
                 ></IonTextarea>
               </IonItem>
+              {errors.extraDetails?.message && (
+                <IonNote color="danger">{errors.extraDetails?.message}</IonNote>
+              )}
             </IonRow>
           </IonCol>
         </form>
