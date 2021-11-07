@@ -3,7 +3,8 @@ export const ERROR_MESSAGES = {
   POSITIVE: "Debe ser un número positivo",
   EMAIL: "Email no válido",
   NUMBER: "Debe especificar un número",
-  PASSWORD: "Tu contraseña debe tener al menos 8 caracteres, un número, una mayúscula, una minúscula y un caracter especial.",
+  PASSWORD:
+    "Tu contraseña debe tener al menos 8 caracteres, un número, una mayúscula, una minúscula y un caracter especial.",
   MATCH_NAME: "Nombre no válido",
   MIN_NAME_LENGTH: "El nombre debe tener mas de 5 caracteres",
   MAX_NAME_LENGTH: "El nombre excede el número de caracteres",
@@ -14,4 +15,5 @@ export const ERROR_MESSAGES = {
   MATCH_PASSWORD_CAPITAL: "Su contraseña debe contener una mayúscula",
   MATCH_PASSWORD_NUMBER: "Su contraseña debe contener un número",
   MATCH_PASSWORD_SCH: "Su contraseña debe contener un caracter especial",
+  MATCH_WITH_TEXT: "La entrada no es válido",
 };

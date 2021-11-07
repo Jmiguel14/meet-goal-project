@@ -40,6 +40,10 @@ const schema = yup.object().shape({
   posRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
   startDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
   endDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  extraDetails: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_WITH_TEXT),
 });
 
 const NewCall: React.FC = () => {
@@ -289,8 +293,14 @@ const NewCall: React.FC = () => {
                   className={styles.extra}
                   placeholder="Describa aquí detalles extras de la convocatoria"
                   {...register("extraDetails")}
+                  onIonChange={(e) => {
+                    clearErrors("extraDetails");
+                  }}
                 ></IonTextarea>
               </IonItem>
+              {errors.extraDetails?.message && (
+                <IonNote color="danger">{errors.extraDetails?.message}</IonNote>
+              )}
             </IonRow>
           </IonCol>
         </form>

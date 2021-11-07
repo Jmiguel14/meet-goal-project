@@ -26,10 +26,20 @@ import { useAuth } from "contexts/AuthContext";
 const schema = yup.object().shape({
   totalWins: yup
     .number()
-    .typeError(ERROR_MESSAGES.REQUIRED)
-    .required(ERROR_MESSAGES.REQUIRED),
-  maxNacGoal: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  maxIntGoal: yup.string().required(ERROR_MESSAGES.REQUIRED),
+    .typeError(ERROR_MESSAGES.NUMBER)
+    .positive(ERROR_MESSAGES.POSITIVE)
+    .required(ERROR_MESSAGES.REQUIRED)
+    .max(1000, "Número no válido"),
+  maxNacGoal: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_WITH_TEXT)
+    .min(3, ERROR_MESSAGES.MIN_NAME_LENGTH),
+  maxIntGoal: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_WITH_TEXT)
+    .min(3, ERROR_MESSAGES.MIN_NAME_LENGTH),
 });
 
 export const EditSportsGoalsInfo: React.FC = () => {
