@@ -25,17 +25,32 @@ import { Routes } from "constants/routes";
 
 const schema = yup.object().shape({
   userType: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  name: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  name: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(5, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MIN_NAME_LENGTH),
   phone: yup
     .number()
     .typeError(ERROR_MESSAGES.NUMBER)
     .positive(ERROR_MESSAGES.POSITIVE)
-    .required(ERROR_MESSAGES.REQUIRED),
+    .required(ERROR_MESSAGES.REQUIRED)
+    .max(1000000000, "Número válido")
+    .min(100000000, "Número válido"),
   email: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED)
     .email(ERROR_MESSAGES.EMAIL),
-  password: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  password: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_PASSWORD)
+    .min(8, ERROR_MESSAGES.MIN_PASSWORD_LENGTH)
+    .matches(/[a-z]/, ERROR_MESSAGES.MATCH_PASSWORD_LOWER_CASE)
+    .matches(/[A-Z]/, ERROR_MESSAGES.MATCH_PASSWORD_CAPITAL)
+    .matches(/[0-9]/, ERROR_MESSAGES.MATCH_PASSWORD_NUMBER)
+    .matches(/[!@#$%^&*]/, ERROR_MESSAGES.MATCH_PASSWORD_SCH),
 });
 
 const SignUp: React.FC = () => {
@@ -54,6 +69,7 @@ const SignUp: React.FC = () => {
     register,
     handleSubmit,
     clearErrors,
+    setError,
     formState: { errors },
   } = useForm<SignupFormInputs>({
     defaultValues: initialValues,
@@ -65,7 +81,6 @@ const SignUp: React.FC = () => {
     e: React.BaseSyntheticEvent<object, any, any> | undefined
   ) => {
     const { email, password } = data;
-
     if (currentUser)
       return present({
         message: "Ya tiene una sesión activa",
@@ -73,9 +88,9 @@ const SignUp: React.FC = () => {
         position: "top",
         color: "danger",
       });
-
+    console.log({ data });
     try {
-      signUp(email, password);
+      await signUp(email, password);
       setDataUser(data);
       e?.target.reset();
     } catch {
@@ -92,10 +107,17 @@ const SignUp: React.FC = () => {
     if (dataUser) {
       const { name, phone, userType } = dataUser;
       currentUser &&
-        createUserDocument({ name, phone, userType }) &&
-        history.push(Routes.DASHBOARD);
+        createUserDocument({ name, phone, userType }).then(() =>
+          history.push(Routes.DASHBOARD)
+        );
     }
   }, [dataUser, currentUser]);
+
+  useEffect(() => {
+    setError("password", {
+      message: ERROR_MESSAGES.PASSWORD
+    });
+  }, [])
 
   return (
     <IonPage>
