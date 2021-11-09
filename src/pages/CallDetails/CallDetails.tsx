@@ -41,6 +41,7 @@ import {
 } from "firebase/PostulateServices";
 import { newNotification } from "firebase/notificationsServices";
 import { NOTIFYTITLES } from "constants/notificationsTitles";
+import { ERROR_MESSAGES } from "constants/errorMessages";
 
 const CallDetails: React.FC = () => {
   const [present] = useIonToast();
@@ -146,8 +147,8 @@ const CallDetails: React.FC = () => {
   const sendPostulantsNotifications = () => {
     let flag = false;
     if (
-      callData?.postulatedPlayers !== "" ||
-      callData?.postulatedPlayers !== undefined
+      (callData?.postulatedPlayers !== "" && messageNotification !== "") ||
+      (callData?.postulatedPlayers !== undefined && messageNotification !== "")
     ) {
       callData?.postulatedPlayers.map((player: any) => {
         if (player.isSelected) {
@@ -172,10 +173,11 @@ const CallDetails: React.FC = () => {
       });
       CloseCall(callData?.id);
       setMessageNotification("");
-    } else {
+    }
+    if (messageNotification === "") {
       present({
-        message: "Seleccione al menos (1) jugador postulados",
-        duration: 3000,
+        message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+        duration: 1500,
         position: "top",
         color: "danger",
       });
