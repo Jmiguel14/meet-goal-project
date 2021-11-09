@@ -51,6 +51,7 @@ const NewCall: React.FC = () => {
   const { currentUser } = useAuth();
   const currentUserData = useCurrentUserData();
   const history = useHistory();
+  const newDate = new Date().toISOString();
 
   const initialValues = {
     ageRequired: "",
@@ -248,6 +249,7 @@ const NewCall: React.FC = () => {
                     className={styles.selection}
                     placeholder="Fecha Inicial"
                     itemType="text"
+                    min={newDate}
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("startDate")}
@@ -269,6 +271,7 @@ const NewCall: React.FC = () => {
                     className={styles.selection}
                     placeholder="Fecha Final"
                     itemType="text"
+                    min={newDate}
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("endDate")}

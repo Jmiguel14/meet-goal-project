@@ -34,12 +34,10 @@ import { ERROR_MESSAGES } from "constants/errorMessages";
 const schema = yup.object().shape({
   startDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
   endDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  extraDetails: yup
-    .string()
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
-      message: ERROR_MESSAGES.MATCH_WITH_TEXT,
-      excludeEmptyString: true,
-    }),
+  extraDetails: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
 });
 
 const EditCall: React.FC = () => {
@@ -47,6 +45,7 @@ const EditCall: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
   const [callData, setCallData] = useState<firebase.firestore.DocumentData>();
+  const newDate = new Date().toISOString();
 
   useEffect(() => {
     const unsubscribe = getACallData(id, (data) => {
@@ -253,6 +252,7 @@ const EditCall: React.FC = () => {
                     className={styles.selection}
                     placeholder="Fecha Inicial"
                     itemType="text"
+                    min={newDate}
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("startDate")}
@@ -274,6 +274,7 @@ const EditCall: React.FC = () => {
                     className={styles.selection}
                     placeholder="Fecha Final"
                     itemType="text"
+                    min={newDate}
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("endDate")}
