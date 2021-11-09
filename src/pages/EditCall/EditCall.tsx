@@ -34,7 +34,12 @@ import { ERROR_MESSAGES } from "constants/errorMessages";
 const schema = yup.object().shape({
   startDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
   endDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  extraDetails: yup.string().trim(),
+  extraDetails: yup
+    .string()
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+      message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+      excludeEmptyString: true,
+    }),
 });
 
 const EditCall: React.FC = () => {

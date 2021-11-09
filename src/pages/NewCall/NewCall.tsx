@@ -40,7 +40,10 @@ const schema = yup.object().shape({
   posRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
   startDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
   endDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  extraDetails: yup.string().trim(),
+  extraDetails: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
 });
 
 const NewCall: React.FC = () => {
