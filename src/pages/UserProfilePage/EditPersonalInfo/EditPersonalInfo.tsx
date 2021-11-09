@@ -28,10 +28,31 @@ import { PersonalDataForm } from "types";
 import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
-  country: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  city: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  country: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(3, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MAX_NAME_LENGTH),
+  city: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(3, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MAX_NAME_LENGTH),
+  phone: yup
+    .number()
+    .typeError(ERROR_MESSAGES.NUMBER)
+    .positive(ERROR_MESSAGES.POSITIVE)
+    .required(ERROR_MESSAGES.REQUIRED)
+    .max(1000000000, ERROR_MESSAGES.MIN_MAX_PHONE)
+    .min(100000000, ERROR_MESSAGES.MIN_MAX_PHONE),
   birth: yup.string().required(ERROR_MESSAGES.REQUIRED),
   contract: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  marketTransfer: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
 });
 
 export const EditPersonalInfo: React.FC = () => {
@@ -157,7 +178,7 @@ export const EditPersonalInfo: React.FC = () => {
               Teléfono
             </IonLabel>
             <IonInput
-              type="text"
+              type="number"
               clearInput={true}
               {...register("phone")}
               onIonChange={() => {
@@ -175,7 +196,7 @@ export const EditPersonalInfo: React.FC = () => {
               cancelText="Cancelar"
               doneText="Hecho"
               itemType="text"
-              displayFormat="MMM/DD/YY"
+              displayFormat="MMM/DD/YYYY"
               monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
               {...register("birth")}
               onIonChange={() => {
@@ -219,6 +240,9 @@ export const EditPersonalInfo: React.FC = () => {
               }}
             ></IonInput>
           </IonItem>
+          {errors.marketTransfer?.message && (
+            <IonNote color="danger">{errors.marketTransfer?.message}</IonNote>
+          )}
         </form>
       </IonContent>
     </IonPage>

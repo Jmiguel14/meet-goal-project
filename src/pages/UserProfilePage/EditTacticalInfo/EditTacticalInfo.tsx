@@ -29,6 +29,10 @@ import { PLAYER_POSITIONS } from "constants/playerPositions";
 
 const schema = yup.object().shape({
   pospri: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  goals: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
 });
 
 const PLAYER_POSITIONS_OPTIONS = [
@@ -168,6 +172,9 @@ const EditTacticalInfo: React.FC = () => {
             </IonLabel>
             <IonInput {...register("goals")}></IonInput>
           </IonItem>
+          {errors.goals?.message && (
+            <IonNote color="danger">{errors.goals?.message}</IonNote>
+          )}
         </form>
       </IonContent>
     </IonPage>

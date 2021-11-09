@@ -1,3 +1,4 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   IonBackButton,
   IonButton,
@@ -8,6 +9,7 @@ import {
   IonInput,
   IonItem,
   IonItemDivider,
+  IonNote,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -26,6 +28,9 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import styles from "./styles.module.css";
+import * as yup from "yup";
+import { ERROR_MESSAGES } from "constants/errorMessages";
+
 interface ChanelsForm {
   facebook: string;
   twitter: string;
@@ -34,18 +39,33 @@ interface ChanelsForm {
   youtube: string;
 }
 
+const schema = yup.object().shape({
+  facebook: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
+  twitter: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
+  instagram: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
+  vimeo: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
+  youtube: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
+});
+
 const AddChannels: React.FC = () => {
   const [present] = useIonToast();
   const history = useHistory();
   const { currentUser, data } = useAuth();
-
-  const initialValues = {
-    facebook: "",
-    twitter: "",
-    instagram: "",
-    vimeo: "",
-    youtube: "",
-  };
 
   useEffect(() => {
     if (data) {
@@ -66,8 +86,14 @@ const AddChannels: React.FC = () => {
     }
   }, [data]);
 
-  const { handleSubmit, register, setValue } = useForm({
-    defaultValues: initialValues,
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    clearErrors,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data: ChanelsForm) => {
@@ -143,8 +169,14 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. miguelangel.juradocedeno"
               {...register("facebook")}
+              onIonChange={() => {
+                clearErrors("facebook");
+              }}
             ></IonInput>
           </IonItem>
+          {errors.facebook && (
+            <IonNote color="danger">{errors.facebook?.message}</IonNote>
+          )}
           <IonItem className={styles.network}>
             <IonButton slot="start" fill="clear">
               <IonIcon icon={logoTwitter}></IonIcon>
@@ -152,8 +184,14 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. migueljuradoced"
               {...register("twitter")}
+              onIonChange={() => {
+                clearErrors("twitter");
+              }}
             ></IonInput>
           </IonItem>
+          {errors.twitter && (
+            <IonNote color="danger">{errors.twitter?.message}</IonNote>
+          )}
           <IonItem className={styles.network}>
             <IonButton slot="start" fill="clear">
               <IonIcon icon={logoInstagram}></IonIcon>
@@ -161,8 +199,14 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. j_miguel14.v"
               {...register("instagram")}
+              onIonChange={() => {
+                clearErrors("instagram");
+              }}
             ></IonInput>
           </IonItem>
+          {errors.instagram && (
+            <IonNote color="danger">{errors.instagram?.message}</IonNote>
+          )}
           <IonItem className={styles.network}>
             <IonButton slot="start" fill="clear">
               <IonIcon icon={logoYoutube}></IonIcon>
@@ -170,8 +214,14 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. UCWQBpIaaoNJfGPfqFIYp03g"
               {...register("youtube")}
+              onIonChange={() => {
+                clearErrors("youtube");
+              }}
             ></IonInput>
           </IonItem>
+          {errors.youtube && (
+            <IonNote color="danger">{errors.youtube?.message}</IonNote>
+          )}
           <IonItem className={styles.network}>
             <IonButton slot="start" fill="clear">
               <IonIcon icon={logoVimeo}></IonIcon>
@@ -179,8 +229,14 @@ const AddChannels: React.FC = () => {
             <IonInput
               placeholder="Ej. user150607591"
               {...register("vimeo")}
+              onIonChange={() => {
+                clearErrors("vimeo");
+              }}
             ></IonInput>
           </IonItem>
+          {errors.vimeo && (
+            <IonNote color="danger">{errors.vimeo?.message}</IonNote>
+          )}
         </form>
       </IonContent>
     </IonPage>

@@ -25,15 +25,35 @@ import { ClubDataForm } from "types";
 import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
-  clubName: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  country: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  clubName: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(5, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MAX_NAME_LENGTH),
+  country: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(5, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MAX_NAME_LENGTH),
   season: yup
     .number()
     .typeError(ERROR_MESSAGES.NUMBER)
     .positive(ERROR_MESSAGES.POSITIVE)
     .required(ERROR_MESSAGES.REQUIRED),
-  subPlayer: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  catTournament: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  subPlayer: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(5, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MAX_NAME_LENGTH),
+  catTournament: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(5, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MAX_NAME_LENGTH),
   PJ: yup
     .number()
     .typeError(ERROR_MESSAGES.REQUIRED)

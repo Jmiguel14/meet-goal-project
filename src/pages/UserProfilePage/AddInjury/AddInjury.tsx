@@ -26,8 +26,14 @@ import { InjuryDataForm } from "types";
 import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
-  injuryName: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  recoveryTime: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  injuryName: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME),
+  recoveryTime: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME),
 });
 
 const AddInjury: React.FC = () => {
