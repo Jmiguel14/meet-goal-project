@@ -1,7 +1,6 @@
 import {
   IonCol,
   IonIcon,
-  IonInput,
   IonRow,
   IonTextarea,
   useIonToast,
@@ -9,14 +8,24 @@ import {
 import { useAuth } from "contexts/AuthContext";
 import { newMessage } from "firebase/messagesServices";
 import { sendSharp } from "ionicons/icons";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./styles.module.css";
+import { ERROR_MESSAGES } from "constants/errorMessages";
 
 export interface props {
   chatRoomId: string | undefined;
   scroll: any;
 }
+
+const schema = yup.object().shape({
+  message: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_WITH_TEXT),
+});
 
 const SendMessage = (props: props) => {
   const { chatRoomId, scroll } = props;
@@ -24,7 +33,13 @@ const SendMessage = (props: props) => {
   const [present] = useIonToast();
   const [activeInput, setActiveInput] = useState(true);
 
-  const { register, handleSubmit, setValue } = useForm({});
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    clearErrors,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (
     data: any,
@@ -73,9 +88,19 @@ const SendMessage = (props: props) => {
                 onClick={(e) => {
                   setActiveInput(false);
                 }}
+                onIonChange={(e) => {
+                  clearErrors("message");
+                }}
                 wrap="hard"
               ></IonTextarea>
             </IonCol>
+            {errors.message?.message &&
+              present({
+                message: errors.message.message,
+                duration: 1500,
+                position: "top",
+                color: "danger",
+              })}
             <IonCol className={styles.button_container} size="2">
               <button
                 className={styles.send_button}

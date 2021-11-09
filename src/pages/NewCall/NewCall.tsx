@@ -40,6 +40,10 @@ const schema = yup.object().shape({
   posRequired: yup.string().required(ERROR_MESSAGES.REQUIRED),
   startDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
   endDate: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  extraDetails: yup.string().matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, {
+    message: ERROR_MESSAGES.MATCH_WITH_TEXT,
+    excludeEmptyString: true,
+  }),
 });
 
 const NewCall: React.FC = () => {
@@ -47,6 +51,7 @@ const NewCall: React.FC = () => {
   const { currentUser } = useAuth();
   const currentUserData = useCurrentUserData();
   const history = useHistory();
+  const newDate = new Date().toISOString();
 
   const initialValues = {
     ageRequired: "",
@@ -244,6 +249,7 @@ const NewCall: React.FC = () => {
                     className={styles.selection}
                     placeholder="Fecha Inicial"
                     itemType="text"
+                    min={newDate}
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("startDate")}
@@ -265,6 +271,7 @@ const NewCall: React.FC = () => {
                     className={styles.selection}
                     placeholder="Fecha Final"
                     itemType="text"
+                    min={newDate}
                     displayFormat="DD/MMM/YYYY"
                     monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
                     {...register("endDate")}
@@ -289,8 +296,14 @@ const NewCall: React.FC = () => {
                   className={styles.extra}
                   placeholder="Describa aquí detalles extras de la convocatoria"
                   {...register("extraDetails")}
+                  onIonChange={(e) => {
+                    clearErrors("extraDetails");
+                  }}
                 ></IonTextarea>
               </IonItem>
+              {errors.extraDetails?.message && (
+                <IonNote color="danger">{errors.extraDetails?.message}</IonNote>
+              )}
             </IonRow>
           </IonCol>
         </form>

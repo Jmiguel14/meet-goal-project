@@ -26,10 +26,31 @@ import { InstitutionalDataForm } from "types";
 import { useAuth } from "contexts/AuthContext";
 
 const schema = yup.object().shape({
-  socialName: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  country: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  city: yup.string().required(ERROR_MESSAGES.REQUIRED),
-  phone: yup.string().required(ERROR_MESSAGES.REQUIRED),
+  socialName: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(3, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MIN_NAME_LENGTH),
+  country: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(3, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MIN_NAME_LENGTH),
+  city: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
+    .min(3, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .max(30, ERROR_MESSAGES.MIN_NAME_LENGTH),
+  phone: yup
+    .number()
+    .typeError(ERROR_MESSAGES.NUMBER)
+    .positive(ERROR_MESSAGES.POSITIVE)
+    .required(ERROR_MESSAGES.REQUIRED)
+    .max(1000000000, "Número válido")
+    .min(100000000, "Número válido"),
   foundation: yup.string().required(ERROR_MESSAGES.REQUIRED),
 });
 
@@ -175,7 +196,7 @@ export const EditInstitutionalInfo: React.FC = () => {
               cancelText="Cancelar"
               doneText="Hecho"
               itemType="text"
-              displayFormat="MMM/DD/YY"
+              displayFormat="MMM/DD/YYYY"
               monthShortNames="ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, DIC"
               {...register("foundation")}
               onIonChange={() => {
