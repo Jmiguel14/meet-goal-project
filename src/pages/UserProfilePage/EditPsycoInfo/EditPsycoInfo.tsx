@@ -95,7 +95,7 @@ const EditPsycoInfo: React.FC = () => {
           </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className={styles.data_psyco}>
+      <IonContent className={styles.data_psyco}>
         <IonItemDivider color="primary">
           <div className={styles.subtitle}>Selecciona tu Carácter</div>
         </IonItemDivider>

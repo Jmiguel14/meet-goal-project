@@ -198,7 +198,7 @@ const CallDetails: React.FC = () => {
           </IonRow>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent>
         <IonCard className={styles.club_container}>
           <IonItem className={styles.title_club}>
             <IonLabel>

@@ -157,7 +157,7 @@ const AddChannels: React.FC = () => {
           </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className={styles.networks}>
+      <IonContent className={styles.networks}>
         <IonItemDivider color="primary">
           <div className={styles.subtitle}>Pega aquí tus redes sociales</div>
         </IonItemDivider>

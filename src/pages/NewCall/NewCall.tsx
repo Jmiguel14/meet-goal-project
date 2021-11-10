@@ -127,7 +127,7 @@ const NewCall: React.FC = () => {
           </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className={styles.back}>
+      <IonContent className={styles.back}>
         <IonItemDivider color="primary">
           <div className={styles.title_divider}>
             Detalles requeridos de la convocatoria

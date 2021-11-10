@@ -115,25 +115,25 @@ const SignUp: React.FC = () => {
 
   useEffect(() => {
     setError("password", {
-      message: ERROR_MESSAGES.PASSWORD
+      message: ERROR_MESSAGES.PASSWORD,
     });
-  }, [])
+  }, []);
 
   return (
     <IonPage>
+      <IonHeader>
+        <IonToolbar color="light">
+          <IonButtons slot="start" className="back-button">
+            <IonBackButton defaultHref="/" />
+          </IonButtons>
+          <IonRow className="meet-goal-icon">
+            <IonCol size="auto">
+              <MeetGoal width={40} height={40} />
+            </IonCol>
+          </IonRow>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
-        <IonHeader>
-          <IonToolbar color="light">
-            <IonButtons slot="start" className="back-button">
-              <IonBackButton defaultHref="/" />
-            </IonButtons>
-            <IonRow className="meet-goal-icon">
-              <IonCol size="auto">
-                <MeetGoal width={40} height={40} />
-              </IonCol>
-            </IonRow>
-          </IonToolbar>
-        </IonHeader>
         <IonRow className="ion-justify-content-start">
           <IonCol size="7" className="sign-up-text">
             <IonLabel position="fixed">Crear una cuenta</IonLabel>

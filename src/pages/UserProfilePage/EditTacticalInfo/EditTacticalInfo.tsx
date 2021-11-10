@@ -119,7 +119,7 @@ const EditTacticalInfo: React.FC = () => {
           </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className={styles.tactical_data}>
+      <IonContent className={styles.tactical_data}>
         <IonItemDivider color="primary">
           <div className={styles.subtitle}>Editar tu Información Táctica</div>
         </IonItemDivider>
