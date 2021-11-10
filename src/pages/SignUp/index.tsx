@@ -30,14 +30,14 @@ const schema = yup.object().shape({
     .required(ERROR_MESSAGES.REQUIRED)
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH_NAME)
     .min(5, ERROR_MESSAGES.MIN_NAME_LENGTH)
-    .max(30, ERROR_MESSAGES.MIN_NAME_LENGTH),
+    .max(30, ERROR_MESSAGES.MAX_NAME_LENGTH),
   phone: yup
     .number()
     .typeError(ERROR_MESSAGES.NUMBER)
     .positive(ERROR_MESSAGES.POSITIVE)
     .required(ERROR_MESSAGES.REQUIRED)
-    .max(1000000000, "Número válido")
-    .min(100000000, "Número válido"),
+    .max(1000000000, ERROR_MESSAGES.MIN_NAME_LENGTH)
+    .min(100000000, ERROR_MESSAGES.MAX_NAME_LENGTH),
   email: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED)
