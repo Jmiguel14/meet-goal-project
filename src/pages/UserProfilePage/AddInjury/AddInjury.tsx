@@ -96,7 +96,7 @@ const AddInjury: React.FC = () => {
           </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className={styles.new_injury}>
+      <IonContent className={styles.new_injury}>
         <IonItemDivider color="primary">
           <div className={styles.subtitle}>Detalles de la lesión</div>
         </IonItemDivider>

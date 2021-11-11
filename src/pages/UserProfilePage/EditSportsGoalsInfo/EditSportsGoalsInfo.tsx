@@ -104,7 +104,7 @@ export const EditSportsGoalsInfo: React.FC = () => {
           </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen class={styles.back}>
+      <IonContent class={styles.back}>
         <IonItemDivider color="primary">
           <div className={styles.divisor}>Edite aquí sus logros deportivos</div>
         </IonItemDivider>

@@ -121,7 +121,7 @@ export const EditInstitutionalInfo: React.FC = () => {
           </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className={styles.back}>
+      <IonContent className={styles.back}>
         <IonItemDivider color="primary">
           <div className={styles.subtitle}>
             Edite aquí tu Información Institucional

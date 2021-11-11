@@ -56,26 +56,31 @@ const schema = yup.object().shape({
     .max(30, ERROR_MESSAGES.MAX_NAME_LENGTH),
   PJ: yup
     .number()
+    .max(1000000, ERROR_MESSAGES.MAX_NAME_LENGTH)
     .typeError(ERROR_MESSAGES.REQUIRED)
     .positive(ERROR_MESSAGES.POSITIVE)
     .required(ERROR_MESSAGES.REQUIRED),
   G: yup
     .number()
+    .max(1000000, ERROR_MESSAGES.MAX_NAME_LENGTH)
     .typeError(ERROR_MESSAGES.NUMBER)
     .positive(ERROR_MESSAGES.POSITIVE)
     .required(ERROR_MESSAGES.REQUIRED),
   A: yup
     .number()
+    .max(1000000, ERROR_MESSAGES.MAX_NAME_LENGTH)
     .typeError(ERROR_MESSAGES.NUMBER)
     .positive(ERROR_MESSAGES.POSITIVE)
     .required(ERROR_MESSAGES.REQUIRED),
   TA: yup
     .number()
+    .max(1000000, ERROR_MESSAGES.MAX_NAME_LENGTH)
     .typeError(ERROR_MESSAGES.NUMBER)
     .positive(ERROR_MESSAGES.POSITIVE)
     .required(ERROR_MESSAGES.REQUIRED),
   TR: yup
     .number()
+    .max(1000000, ERROR_MESSAGES.MAX_NAME_LENGTH)
     .typeError(ERROR_MESSAGES.NUMBER)
     .positive(ERROR_MESSAGES.POSITIVE)
     .required(ERROR_MESSAGES.REQUIRED),
@@ -138,7 +143,7 @@ export const AddClub: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="light" className={styles.acts}>
+        <IonToolbar color="light">
           <IonButtons slot="start">
             <IonBackButton
               defaultHref={`/tabs/perfil/${currentUser.uid}`}
@@ -158,7 +163,7 @@ export const AddClub: React.FC = () => {
           </button>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen class={styles.new_club}>
+      <IonContent class={styles.new_club}>
         <IonItemDivider color="primary">
           <div className={styles.divisor}>Información del Club y temporada</div>
         </IonItemDivider>
