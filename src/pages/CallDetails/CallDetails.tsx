@@ -161,6 +161,15 @@ const CallDetails: React.FC = () => {
             callData.ageRequired
           );
           flag = true;
+        } else {
+          newNotification(
+            player.playerId,
+            `Los datos de la convocatoria finalizada son: Nombre del club.- ${clubData?.name}. Edad requerida.- ${callData.ageRequired}. Posición Requerida.- ${callData.posRequired}`,
+            NOTIFYTITLES.PLAYERREJECTED,
+            clubData?.name,
+            callData.posRequired,
+            callData.ageRequired
+          );
         }
       });
     }

@@ -87,7 +87,7 @@ const SignIn: React.FC = () => {
             </IonCol>
             <IonCol size="auto">
               <IonRouterLink routerLink="/registrarse">
-                s <IonLabel color="primary">Regístrate</IonLabel>
+                <IonLabel color="primary">Regístrate</IonLabel>
               </IonRouterLink>
             </IonCol>
           </IonRow>
