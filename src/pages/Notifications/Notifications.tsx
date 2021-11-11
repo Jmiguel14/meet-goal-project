@@ -92,6 +92,9 @@ const Notifications: React.FC = () => {
                     {notification.title === NOTIFYTITLES.POSTULATION
                       ? `${notification.title} del ${notification.clubName}`
                       : ""}
+                    {notification.title === NOTIFYTITLES.PLAYERREJECTED
+                      ? `${notification.title} del ${notification.clubName}`
+                      : ""}
                   </h1>
                 </IonLabel>
                 <IonText className={styles.date}>{`${converterDate(

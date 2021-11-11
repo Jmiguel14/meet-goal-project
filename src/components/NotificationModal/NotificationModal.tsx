@@ -15,6 +15,7 @@ import { getNotificationDetails } from "firebase/notificationsServices";
 import CongratPoster from "assets/CongratsPlayerAccepted.png";
 import CallPoster from "assets/NewCallPoster.png";
 import PostulationPoster from "assets/PostulationPoster.png";
+import PlayerRejected from "assets/playerRejected.png";
 import { NOTIFYTITLES } from "constants/notificationsTitles";
 
 export interface props {
@@ -50,6 +51,9 @@ const NotificationModal = (props: props) => {
             {notifyData?.title === NOTIFYTITLES.POSTULATION
               ? `${notifyData?.title}`
               : ""}
+            {notifyData?.title === NOTIFYTITLES.PLAYERREJECTED
+              ? `${notifyData.title}`
+              : ""}
           </IonLabel>
         </IonItem>
         <IonItem className={styles.back} lines="none">
@@ -70,6 +74,14 @@ const NotificationModal = (props: props) => {
         {notifyData?.title === NOTIFYTITLES.POSTULATION ? (
           <IonImg
             src={PostulationPoster}
+            className="ion-padding-vertical"
+          ></IonImg>
+        ) : (
+          ""
+        )}
+        {notifyData?.title === NOTIFYTITLES.PLAYERREJECTED ? (
+          <IonImg
+            src={PlayerRejected}
             className="ion-padding-vertical"
           ></IonImg>
         ) : (
