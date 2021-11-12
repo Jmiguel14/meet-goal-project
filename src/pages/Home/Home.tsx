@@ -41,8 +41,9 @@ const Home: React.FC = () => {
         setUserCredential(userCredential);
         history.push(Routes.DASHBOARD);
       } catch (e) {
+        console.log({e})
         presentToast({
-          message: `Ocurrió un error al iniciar la sesión`,
+          message: `Ocurrió un error al iniciar la sesión de tipo ${JSON.stringify(e)}`,
           duration: 3000,
           position: "top",
           color: "danger",
